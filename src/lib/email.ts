@@ -1,6 +1,8 @@
 import { prismaClient } from '$lib/db';
 import type { Email as DatabaseEmail } from '@prisma/client';
 import { generateRandomString } from 'lucia-auth';
+import { ROOT_URL } from '$env/static/private';
+
 
 const sendEmail = async (emailAddress: string, subject: string, content: string) => {
 	await prismaClient.email.create({
@@ -18,14 +20,14 @@ export const sendEmailVerificationEmail = async (
 	emailAddress: string,
 	verificationToken: string
 ) => {
-	const verificationLink = `http://localhost:5173/email-verification/${verificationToken}`;
+	const verificationLink = `${ROOT_URL}/email-verification/${verificationToken}`;
 	const emailContent = `Please verify your email by clicking the link below:<br/><br/>
 <a href="${verificationLink}">${verificationLink}</a>`;
 	await sendEmail(emailAddress, 'Email verification', emailContent);
 };
 
 export const sendPasswordResetEmail = async (emailAddress: string, resetToken: string) => {
-	const resetLink = `http://localhost:5173/password-reset/${resetToken}`;
+	const resetLink = `${ROOT_URL}/password-reset/${resetToken}`;
 	const emailContent = `Please reset your password via the link below:<br/><br/>
     
 <a href="${resetLink}">${resetLink}</a>`;

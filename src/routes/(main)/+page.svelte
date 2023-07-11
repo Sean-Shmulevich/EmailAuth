@@ -71,7 +71,7 @@
     }
 </script>
 
-<h1>Welcome, user</h1>
+<h1>Welcome, user {data.msg}</h1>
 <p>Your email is {data.user.email}</p>
 <form method="post" use:enhance>
 	<input type="submit" value="Sign out" />

@@ -12,7 +12,10 @@ export const auth = lucia({
 		return {
 			userId: userData.id,
 			email: userData.email,
-			emailVerified: userData.email_verified
+			emailVerified: userData.email_verified,
+			adminVerified: userData.admin_verified,
+			isAdmin: userData.is_admin
+
 		};
 	}
 });

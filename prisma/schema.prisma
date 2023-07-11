@@ -15,6 +15,8 @@ model AuthUser {
   id             String        @id @unique
   email          String        @unique
   email_verified Boolean
+  admin_verified Boolean
+  is_admin       Boolean
   auth_session   AuthSession[]
   auth_key       AuthKey[]
 

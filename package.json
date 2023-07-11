@@ -43,6 +43,7 @@
 		"@sveltejs/adapter-vercel": "^3.0.1",
 		"@vitejs/plugin-basic-ssl": "^1.0.1",
 		"aws-sdk": "^2.1414.0",
+		"bcryptjs": "^2.4.3",
 		"filedrop-svelte": "^0.1.2",
 		"lucia-auth": "^1.0.0"
 	}

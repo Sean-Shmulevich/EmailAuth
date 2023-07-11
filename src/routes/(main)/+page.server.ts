@@ -11,8 +11,12 @@ export const load: PageServerLoad = async ({ locals }) => {
         object.created = shortDate(object.created)
     }
 	const { user } = await locals.auth.validateUser();
+
 	if (!user) {
 		throw redirect(302, '/login');
+	}
+	if(user.isAdmin) {
+		throw redirect(302, '/approve-users');
 	}
 	if (!user.emailVerified) {
 		throw redirect(302, '/email-verification');

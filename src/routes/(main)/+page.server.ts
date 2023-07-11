@@ -19,9 +19,9 @@ export const load: PageServerLoad = async ({ locals }) => {
 	//only run this if the user is logged in and not the admin
 	const objects = await prismaClient.object.findMany();
 
-	for (const object of objects) {
-		object.created = shortDate(object.created);
-	}
+	// for (const object of objects) {
+	// 	object.created = shortDate(object.created);
+	// }
 
 	if (!user.adminVerified) {
 		return {
@@ -37,7 +37,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 	};
 };
 
-function shortDate(date) {
+function shortDate(date: any) {
 	//takes ISO date format and returns yyyy-mm-dd
 	if (!date) {
 		return null;

@@ -6,6 +6,7 @@ import {prismaClient} from '$lib/db';
 export const load: PageServerLoad = async ({ locals }) => {
 	const objects = await prismaClient.object.findMany();
 
+
     for (const object of objects) {
         object.created = shortDate(object.created)
     }

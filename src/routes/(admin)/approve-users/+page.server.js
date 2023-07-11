@@ -1,3 +1,4 @@
+// @ts-nocheck
 //take a list of all users that tried to sign up and display a button on the ui to update it on the database.
 import { prismaClient } from '$lib/db';
 import { Prisma } from '@prisma/client';
@@ -45,7 +46,6 @@ async function verifyUser(email) {
 // });
 export const actions = {
     verify: async ({ request, locals }) => {
-        console.log("first");
         const formData = await request.formData();
         const email = formData.get('email')?.toString() ?? '';
         if (email === null /* ||    !emailRegex.test(email) */) {
@@ -70,7 +70,6 @@ export const actions = {
 
     },
     logout: async ({ locals }) => {
-        console.log("second");
         const session = await locals.auth.validate();
         if (!session) return null;
         await auth.invalidateSession(session.sessionId);

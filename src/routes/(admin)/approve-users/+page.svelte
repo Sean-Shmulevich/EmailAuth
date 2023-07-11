@@ -5,7 +5,6 @@
 	 * @type {any}
 	 */
 	export let data;
-	console.log(data.allUsers);
 </script>
 
 <h1 class="text-center text-6xl">Admin approve users</h1>

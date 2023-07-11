@@ -1,10 +1,27 @@
 import { prismaClient } from '$lib/db';
 import type { Email as DatabaseEmail } from '@prisma/client';
 import { generateRandomString } from 'lucia-auth';
-import { ROOT_URL } from '$env/static/private';
+import sgMail from '@sendgrid/mail';
+import { SEND_GRID_API, ROOT_URL } from '$env/static/private';
 
+sgMail.setApiKey(SEND_GRID_API);
 
-const sendEmail = async (emailAddress: string, subject: string, content: string) => {
+export const sendEmail = async (emailAddress: string, subject: string, content: string) => {
+	const msg = {
+		to: `${emailAddress}`, // Change to your recipient
+		from: 'seanshmulevich@gmail.com', // Change to your verified sender
+		subject: 'Sending with SendGrid is Fun',
+		text: 'and easy to do anywhere, even with Node.js',
+		html: `<strong>and easy to do anywhere, even with Node.js</strong> ${content}`
+	};
+	sgMail
+		.send(msg)
+		.then(() => {
+			console.log('Email sent');
+		})
+		.catch((error) => {
+			console.error(error);
+		});
 	await prismaClient.email.create({
 		data: {
 			id: generateRandomString(8),

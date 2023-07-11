@@ -12,7 +12,6 @@
 	<body>
 		<header class="px-4 fixed top-0 flex w-full place-content-between py-4 place-items-center">
 			<a href="/" class="text-xl font-semibold">Lucia Demo</a>
-			<a href="/email" class="hover:underline text-indigo-500" target="_blank">Open mailbox</a>
 		</header>
 		<main class="mx-auto max-w-sm px-4 py-16">
 			<slot />

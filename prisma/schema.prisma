@@ -53,3 +53,12 @@ model Email {
 
   @@map("email")
 }
+
+model object {
+  id        String    @id @unique(map: "id") @default("1")
+  created   DateTime? @default(now())
+  file_name String?
+  file_size Int?
+  file_type String?
+}
+

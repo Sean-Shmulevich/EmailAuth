@@ -15,9 +15,8 @@
 		console.log(user);
 	};
 
-    import ImageCropper from './ImageCropper.svelte';
-    let isModalOpen = false;
-
+	import ImageCropper from './ImageCropper.svelte';
+	let isModalOpen = false;
 </script>
 
 <div
@@ -28,32 +27,60 @@
 		class="profile-card flex flex-col bg-gray-800 shadow overflow-hidden mt-10 rounded-lg max-w-3xl mb-10 w-full p-6"
 	>
 		<form on:submit|preventDefault={updateProfile} class="w-full">
-            <!-- <button on:click={openModal}>Upload and Crop Image</button> -->
+			<!-- <button on:click={openModal}>Upload and Crop Image</button> -->
 
-<ImageCropper bind:open={isModalOpen} />
+			<ImageCropper bind:open={isModalOpen} />
 
-			
 			<div class="mb-4">
 				<label class="block text-gray-300 text-sm font-bold mb-2" for="image">
 					Main Profile Picture
 				</label>
 				<p class="text-gray-500 text-xs mb-2">Please upload a profile picture.</p>
-                <button on:click={() => {
-                    isModalOpen = true;
-                }}>Upload Image</button>
+				<button
+					on:click={() => {
+						isModalOpen = true;
+					}}>Upload Image</button
+				>
 			</div>
 			<div class="mb-4">
 				<label class="block text-gray-300 text-sm font-bold mb-2" for="image">
 					Additional Profile Images
 				</label>
 				<p class="text-gray-500 text-xs mb-2">Please upload a profile picture.</p>
-				<input
-					class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-					id="image"
-					type="file"
-					accept="image/*"
-					bind:files={user.image}
-				/>
+				<div class="grid grid-cols-2 gap-12 p-10">
+					<button
+						class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300"
+						>Button 1</button
+					>
+					<button
+						class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300"
+						>Button 2</button
+					>
+					<button
+						class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300"
+						>Button 3</button
+					>
+					<button
+						class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300"
+						>Button 4</button
+					>
+					<button
+						class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300"
+						>Button 5</button
+					>
+					<button
+						class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300"
+						>Button 6</button
+					>
+					<button
+						class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300"
+						>Button 7</button
+					>
+					<button
+						class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300"
+						>Button 8</button
+					>
+				</div>
 			</div>
 			<div class="mb-4">
 				<label class="block text-gray-300 text-sm font-bold mb-2" for="name"> Name </label>
@@ -131,6 +158,7 @@
 		border: solid;
 		overflow: hidden;
 	}
+
 
 	.prof-pic {
 		position: absolute;

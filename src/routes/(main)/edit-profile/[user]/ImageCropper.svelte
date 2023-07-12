@@ -67,39 +67,41 @@
 <div
 	class="fixed inset-1/2 w-3/4 h-3/4 bg-gray-500 rounded-xl p-10 transform -translate-x-1/2 -translate-y-1/2 overflow-y-scroll {!open
 		? 'nah'
-		: ''} border-2 border-white"
+		: ''} border-2 border-white flex flex-col items-center justify-center"
 >
-	<div class="flex justify-between -mt-5 mb-5">
-		<h2 class="font-bold text-xl">image upload</h2>
+	<div class="flex justify-between w-full mb-5">
+		<h2 class="font-bold text-2xl text-center w-full">Image Upload</h2>
 		<button
 			type="button"
 			on:click={() => {
 				open = !open;
 				reset();
 			}}
+			class="btn close-button"
 		>
-			<p class="text-2xl hover:text-red-700 text-black font-bold -mr-8 -mt-4">X</p>
+			<p class="text-2xl hover:text-red-700 text-black font-bold">X</p>
 		</button>
 	</div>
 	{#if !image}
-		<h2>Upload a picture for cropping?</h2>
+		<h2 class="font-bold text-xl mb-3">Upload a picture for cropping?</h2>
 		<input
 			type="file"
 			accept=".jpg, .jpeg, .png"
 			on:change={(e) => onFileSelected(e)}
 			bind:this={fileinput}
+			class="input"
 		/>
 	{:else}
-		<h2>svelte-easy-crop</h2>
+		<h2 class="font-bold text-xl mb-3">svelte-easy-crop</h2>
 		<div style="position: relative; width: 100%; height: 300px;">
 			<Cropper {image} bind:crop bind:zoom on:cropcomplete={previewCrop} {aspect} />
 		</div>
-		<h2>Preview</h2>
+		<h2 class="font-bold text-xl mb-3">Preview</h2>
 		<div class="prof-pic-wrapper" style="height: {width}px; width: {height}px;">
 			<img bind:this={profilePicture} class="prof-pic" src={image} alt="Profile example" {style} />
 		</div>
 		{#if croppedImage}
-			<h2>Cropped Output</h2>
+			<h2 class="font-bold text-xl mb-3">Cropped Output</h2>
 			<img src={croppedImage} style="width:{width}px;height:{height}px" alt="Cropped profile" /><br
 			/>
 			<button
@@ -111,21 +113,24 @@
 					image = null;
 					square = false;
 					open = !open;
-				}}>Submit</button
+				}}
+				class="btn">Submit</button
 			>
 		{:else}
 			<br /><button
 				type="button"
 				on:click={async () => {
 					croppedImage = await getCroppedImg(image, pixelCrop);
-				}}>Crop!</button
+				}}
+				class="btn">Crop!</button
 			>
 		{/if}
 		<button
 			type="button"
 			on:click={() => {
 				reset();
-			}}>Start over?</button
+			}}
+			class="btn">Start Over</button
 		>
 	{/if}
 </div>
@@ -143,5 +148,42 @@
 	}
 	.nah {
 		display: none;
+	}
+	.input {
+		background-color: #222;
+		border: none;
+		color: #fff;
+		padding: 1em;
+		width: 100%;
+		border-radius: 0.25rem;
+		margin-bottom: 1rem;
+		font-size: 1.2rem;
+	}
+	.input:focus {
+		outline: none;
+		box-shadow: 0 0 0 3px rgba(46, 184, 0, 0.5);
+	}
+	.btn {
+		background: linear-gradient(90deg, rgba(46, 184, 0, 1) 0%, rgba(46, 163, 192, 1) 100%);
+		color: white;
+		border: none;
+		padding: 10px 20px;
+		border-radius: 5px;
+		font-size: 1.2rem;
+		cursor: pointer;
+		margin-top: 1rem;
+		margin-bottom: 1rem;
+		transition: background 0.5s ease;
+	}
+	.btn:hover {
+		background: linear-gradient(90deg, rgba(46, 184, 0, 1) 50%, rgba(46, 163, 192, 1) 50%);
+	}
+	.close-button {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		padding: 0;
+		margin: 0;
+		background: transparent;
 	}
 </style>

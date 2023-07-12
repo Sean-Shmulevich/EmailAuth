@@ -1,26 +1,6 @@
 <script>
 	// @ts-nocheck
 
-	let user = {
-		name: '',
-		sport: '',
-		college: '',
-		year: '',
-		bio: '',
-		image: ''
-	};
-
-	const updateProfile = () => {
-		// update the profile
-		console.log(user);
-	};
-
-	import ImageCropper from './ImageCropper.svelte';
-	let isModalOpen = false;
-	let croppedImage = null;
-
-	let currImage = null;
-
 	let images = {
 		'main-image': '',
 		image1: '',
@@ -33,6 +13,41 @@
 		image8: ''
 	};
 
+	let user = {
+		name: '',
+		sport: '',
+		college: '',
+		year: '',
+		bio: '',
+		image: ''
+	};
+
+	let quill;
+	let editor;
+	let pendingContents = null;
+
+	export const snapshot../$types.js = {
+		capture: () => {
+			return user;
+		},
+		restore: (data) => {
+			user = data;
+			pendingContents = user.bio;
+		}
+	};
+
+	const updateProfile = () => {
+		// update the profile
+		console.log(user);
+	};
+
+	import ImageCropper from './ImageCropper.svelte';
+
+	let isModalOpen = false;
+	let croppedImage = null;
+
+	let currImage = null;
+
 	//this code is ran when the clild compnent finishes cropping the image and returns a blob with the cropped image.
 	$: if (croppedImage !== null && currImage !== null) {
 		images[currImage] = croppedImage;
@@ -44,25 +59,57 @@
 	const addNewButton = () => {
 		if (buttons.length < 8) {
 			const currButton = buttons[buttons.length - 1];
-			if(images[currButton] === ''){
+			if (images[currButton] === '') {
 				return;
 			}
 			buttons = [...buttons, `image${buttons.length + 1}`];
 		}
 	};
 
-	let squareInput = false; 
+	let squareInput = false;
+
+	let Quill;
+	import { onMount } from 'svelte';
+
+	//variabe for quill to save the current state of the html content
+	let htmlContent = '';
+
+
+	onMount(async () => {
+		if (typeof window !== 'undefined') {
+			const module = await import('quill');
+			Quill = module.default;
+
+			quill = new Quill(editor, {
+				theme: 'snow'
+			});
+
+			quill.on('text-change', function (delta, oldDelta, source) {
+				user.bio = quill.getContents();
+				htmlContent = quill.root.innerHTML;
+				console.log(htmlContent);
+			});
+
+			// If we have contents that need to be set, set them now.
+			if (pendingContents) {
+				quill.setContents(pendingContents);
+				pendingContents = null; // We've set the contents, so we can clear the pending contents.
+			}
+		}
+	});
 </script>
 
+<!-- Include Quill's CSS on your page -->
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" />
 <div
 	class="mt-12 bg-gray-900 text-white flex flex-col items-center text-center justify-center space-y-8"
 	style="min-height: calc(100vh - 48px);"
 >
 	<h2 class="text-2xl mt-10">Edit Profile</h2>
 	<div
-		class="profile-card flex flex-col bg-gray-800 shadow overflow-hidden mt-10 rounded-lg max-w-3xl mb-10 w-full p-6"
+		class="profile-card flex flex-col bg-gray-800 shadow overflow-hidden mt-10 rounded-lg max-w-5xl mb-10 w-full p-6"
 	>
-		<form on:submit|preventDefault={updateProfile} class="w-full">
+		<form method="POST" on:submit|preventDefault={updateProfile} class="w-full">
 			<!-- <button on:click={openModal}>Upload and Crop Image</button> -->
 
 			<ImageCropper bind:croppedImage bind:square={squareInput} bind:open={isModalOpen} />
@@ -73,20 +120,24 @@
 				</label>
 				<p class="text-gray-500 text-xs mb-2">Please upload a profile picture.</p>
 				<button
-					class="{(images['main-image'] !== "") ? 'nah': ''} text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+					class="{images['main-image'] !== ''
+						? 'nah'
+						: ''} text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
 					on:click={() => {
 						squareInput = true;
 						isModalOpen = true;
 						currImage = 'main-image';
-					}}>Upload Image </button
-				>
+					}}
+					>Upload Image
+				</button>
 				{#if images['main-image'] !== ''}
-				<h2 class="text-2xl">Main Image</h2>
+					<h2 class="text-2xl">Main Image</h2>
 					<img src={images['main-image']} alt="Profile example" class="w-1/2 mx-auto" />
 					<button
 						on:click={() => {
 							images['main-image'] = '';
 							isModalOpen = true;
+							squareInput = true;
 							currImage = 'main-image';
 						}}>Change Image</button
 					>
@@ -101,14 +152,25 @@
 					{#each buttons as button (button)}
 						<button
 							disabled={images[button] !== ''}
-							class="{(images[button] !== "") ? 'nah': ''} text-white w-full bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+							class="{images[button] !== ''
+								? 'nah'
+								: ''} text-white w-full bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
 							on:click={() => {
 								isModalOpen = true;
 								currImage = button;
-							}}>Upload {button.charAt(0).toUpperCase() + button.slice(1, button.length - 1) + ' ' + button.slice(button.length - 1)}</button
+							}}
+							>Upload {button.charAt(0).toUpperCase() +
+								button.slice(1, button.length - 1) +
+								' ' +
+								button.slice(button.length - 1)}</button
 						>
 						{#if images[button] !== ''}
-							<h2 class="text-2xl">{button.charAt(0).toUpperCase() + button.slice(1, button.length - 1) + ' ' + button.slice(button.length - 1)}</h2>
+							<h2 class="text-2xl">
+								{button.charAt(0).toUpperCase() +
+									button.slice(1, button.length - 1) +
+									' ' +
+									button.slice(button.length - 1)}
+							</h2>
 							<img src={images[button]} alt="Profile example" class="w-1/2 mx-auto" />
 							<button
 								on:click={() => {
@@ -190,12 +252,13 @@
 			<div class="mb-4">
 				<label class="block text-gray-300 text-sm font-bold mb-2" for="bio"> Bio </label>
 				<p class="text-gray-500 text-xs mb-2">Tell us a little about yourself.</p>
-				<textarea
-					class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+				<div
 					id="bio"
-					placeholder="Your bio here"
-					bind:value={user.bio}
-				/>
+					bind:this={editor}
+					class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none bg-white focus:shadow-outline"
+				>
+					{user.bio}
+				</div>
 			</div>
 
 			<div class="flex items-center justify-between">
@@ -211,7 +274,7 @@
 </div>
 
 <style>
-	.nah{
+	.nah {
 		display: none;
 	}
 </style>

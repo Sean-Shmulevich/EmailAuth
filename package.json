@@ -45,7 +45,10 @@
 		"aws-sdk": "^2.1414.0",
 		"bcryptjs": "^2.4.3",
 		"filedrop-svelte": "^0.1.2",
+		"framework7-svelte": "^8.2.0",
 		"lucia-auth": "^1.0.0",
+		"quill": "^1.3.7",
+		"skeleton-elements": "^4.0.1",
 		"svelte-easy-crop": "^2.0.1"
 	}
 }

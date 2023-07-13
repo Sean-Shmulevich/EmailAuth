@@ -6,34 +6,36 @@ import { prismaClient } from '$lib/db';
 export const load: PageServerLoad = async ({ locals }) => {
 	const { user } = await locals.auth.validateUser();
 
+	//if there is no user return nothing to the frontend
+	//if there is a user that is email verified but not admin verified return the user the menu will allow uers to edit profile and logout only
+	//if there is a user that is email verified and admin verified return the user the menu will allow users to edit profile, logout, and view deals, and past offers 
 	if (!user) {
-		throw redirect(302, '/login');
+		return;
 	}
-	if (user.isAdmin) {
-		throw redirect(302, '/approve-users');
-	}
+	// if (user.isAdmin) {
+	// 	throw redirect(302, '/approve-users');
+	// }
+
+	//if the user is here it means they tried to create an account but their are not emailVerified yet and they cant do anything
 	if (!user.emailVerified) {
 		throw redirect(302, '/email-verification');
 	}
 
 	//only run this if the user is logged in and not the admin
-	const objects = await prismaClient.object.findMany();
-
 	// for (const object of objects) {
 	// 	object.created = shortDate(object.created);
 	// }
 
 	if (!user.adminVerified) {
+		//if the code execution comes here then the user is definitely logged in and email verified but not admin verified
 		return {
 			msg: 'still waiting on approval',
 			user,
-			objects
 		};
 	}
 	return {
 		msg: 'fully authenticated',
 		user,
-		objects
 	};
 };
 

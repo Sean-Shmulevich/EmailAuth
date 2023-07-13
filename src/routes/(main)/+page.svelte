@@ -7,21 +7,18 @@
 
 	import { invalidateAll } from '$app/navigation';
 	import { filedrop } from 'filedrop-svelte';
-	let animate;
-	let stopAnimation;
+	import Animation from './animation.js';
+	let animation = new Animation();
 
 	onDestroy(async () => {
-		const module = await import('./animation.js');
-		stopAnimation = module['stopAnimation'];
-		stopAnimation();
+		console.log('destroyed');
+		await animation.delete();
+		// await stopAnimation(window);
 	});
 
 	onMount(async () => {
-		const module = await import('./animation.js');
-		console.log(module);
-		animate = module.default;
-		stopAnimation = module['stopAnimation'];
-		animate();
+		// console.log(animate.start());	
+		await animation.start();
 	});
 
 </script>

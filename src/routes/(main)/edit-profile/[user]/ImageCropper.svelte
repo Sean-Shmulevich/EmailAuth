@@ -3,6 +3,11 @@
 	import getCroppedImg from './canvasUtils';
 	import { filedrop } from 'filedrop-svelte';
 	import { invalidateAll } from '$app/navigation';
+	import { createEventDispatcher } from 'svelte';
+
+	const dispatch = createEventDispatcher();
+
+
 
 	let crop = { x: 0, y: 0 };
 	let zoom = 1;
@@ -12,6 +17,13 @@
 
 	export let open;
 	export let croppedImage;
+
+	function cropSubmit() {
+		dispatch('cropSubmit', {
+			text: 'cropSubmitted',
+			file: croppedImage
+		});
+	}
 
 	export let square;
 	let aspect;
@@ -92,7 +104,6 @@
 			class="input"
 		/>
 	{:else}
-		<h2 class="font-bold text-xl mb-3">svelte-easy-crop</h2>
 		<div style="position: relative; width: 100%; height: 300px;">
 			<Cropper {image} bind:crop bind:zoom on:cropcomplete={previewCrop} {aspect} />
 		</div>
@@ -102,14 +113,15 @@
 		</div>
 		{#if croppedImage}
 			<h2 class="font-bold text-xl mb-3">Cropped Output</h2>
-			<img src={croppedImage} style="width:{width}px;height:{height}px" alt="Cropped profile" /><br
+			<!-- URL.createObjectURL(croppedImage) turns the file type into a temporary blob that can be seen right away -->
+			<img src={URL.createObjectURL(croppedImage)} style="width:{width}px;height:{height}px" alt="Cropped profile" /><br
 			/>
 			<button
 				type="button"
 				on:click={() => {
-					reset();
+					cropSubmit();
 					console.log(croppedImage);
-					croppedImage = null;
+					// croppedImage = null;
 					image = null;
 					square = false;
 					open = !open;

@@ -7,9 +7,19 @@
 	let presignUrl = '/api/presign';
 	let s3 = '/api/s3object';
 
-	let images = {};
+	let images = {
+		'main-image': '',
+		image1: '',
+		image2: '',
+		image3: '',
+		image4: '',
+		image5: '',
+		image6: '',
+		image7: '',
+		image8: ''
+	};
 	for (let i = 0; i < data.objects.length; i++) {
-		if(i > 1){
+		if(i > 1 && i < data.objects.length){
 			//create more buttons if there are more than 2 images
 			buttons.push(`image${i}`);
 		}
@@ -64,16 +74,14 @@
 
 	//this code is ran when the clild compnent finishes cropping the image and returns a blob with the cropped image.
 	$: if (croppedImage !== null && currImage !== null) {
-		images[currImage] = croppedImage;
-		// its expecting file input
-		upload(croppedImage);
+		images[currImage] = URL.createObjectURL(croppedImage);
 		// console.log(images);
 	}
 
 	const addNewButton = () => {
 		if (buttons.length < 8) {
 			const currButton = buttons[buttons.length - 1];
-			if (images[currButton] === '') {
+			if (images[currButton] === '' || images[currButton] === undefined) {
 				return;
 			}
 			buttons = [...buttons, `image${buttons.length + 1}`];
@@ -103,7 +111,14 @@
 		}
 	});
 
+	function handleSubmit(event) {
+		upload(croppedImage);
+		croppedImage = null;
+		alert(event.detail.text);
+	}
+
 	async function upload(file) {
+		console.log("uploaded");
 		// Get presigned POST URL and form fields
 		let { url, fields } = await fetch(`${presignUrl}?fileType=${file.type}`)
 			.then((response) => response.json())
@@ -156,7 +171,7 @@
 		<form method="POST" on:submit|preventDefault={updateProfile} class="w-full">
 			<!-- <button on:click={openModal}>Upload and Crop Image</button> -->
 
-			<ImageCropper bind:croppedImage bind:square={squareInput} bind:open={isModalOpen} />
+			<ImageCropper on:cropSubmit={handleSubmit} bind:croppedImage bind:square={squareInput} bind:open={isModalOpen} />
 
 			<div class="mb-4">
 				<label class="block text-gray-300 text-sm font-bold mb-2" for="image">

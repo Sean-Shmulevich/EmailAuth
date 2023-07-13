@@ -13,6 +13,7 @@
 		setTimeout(() => {
 			showMessage = false;
 		}, 3000);
+		showMessage = true;
 	}
 
 	function htmlToDelta(html) {

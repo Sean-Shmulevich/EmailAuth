@@ -56,21 +56,32 @@ export const actions = {
 
 	// }
 	update: async ({ request, locals }) => {
-		console.log('HELLLELLELEL');
 		const { user } = await locals.auth.validateUser();
+
 
 		let userId = user.userId;
 		const formData = await request.formData();
-		console.log(formData);
 		let name = formData.get('name');
 		let sport = formData.get('sport');
 		let college = formData.get('college');
 		let year = formData.get('year');
-		let bio = "formData.get('bio'h)";
+		let bio = formData.get("bio");
 
+		console.log(formData);
 		// If user does not exist, throw an error
 		//TODO change this to sveltekit fail
 		if (!user) throw new Error('User not found');
+
+		let missingFields = [];
+		if (!name) missingFields.push('name');
+		if (!sport) missingFields.push('sport');
+		if (!college) missingFields.push('college');
+		if (!year) missingFields.push('year');
+		if (!bio) missingFields.push('bio');
+
+		if (missingFields.length) {
+			return { message: `Please fill out the following fields: ${missingFields.join(', ')}`, user:{name, sport, college, year, bio} };
+		}
 
 		// If user exists, create a profile
 		const profile = await prismaClient.profile.upsert({
@@ -91,6 +102,11 @@ export const actions = {
 				bio: bio
 			}
 		});
+
+		return {
+			message: 'Profile updated successfully',
+			user:{name, sport, college, year, bio}
+		}
 	},
 	logout: async ({ locals }) => {
 		const session = await locals.auth.validate();

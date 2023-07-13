@@ -3,6 +3,7 @@
 	import ImageCropper from './ImageCropper.svelte';
 	import { enhance } from '$app/forms';
 	export let data;
+	export let form;
 
 	let buttons = ['image1'];
 	let presignUrl = '/api/presign';
@@ -43,7 +44,9 @@
 		bio: '',
 		image: ''
 	};
-
+	$: if (form && form.user) {
+		user = { ...user, ...form.user };
+	}
 	let quill;
 	let editor;
 	let pendingContents = null;
@@ -62,7 +65,7 @@
 
 	export const snapshot = {
 		capture: () => {
-			return {user, deltaContent};
+			return { user, deltaContent };
 		},
 		restore: (data) => {
 			user = data.user;
@@ -101,7 +104,7 @@
 			});
 
 			quill.on('text-change', function (delta, oldDelta, source) {
-				user.bio = quill.root.innerHTML; 
+				user.bio = quill.root.innerHTML;
 				deltaContent = quill.getContents();
 				// console.log(user.bio);
 			});
@@ -179,7 +182,7 @@
 	<div
 		class="profile-card flex flex-col bg-gray-800 shadow overflow-hidden mt-10 rounded-lg max-w-5xl mb-10 w-full p-6"
 	>
-		<form method="POST" action="?/update" use:enhance  class="w-full">
+		<form method="POST" action="?/update" use:enhance class="w-full">
 			<!-- <button on:click={openModal}>Upload and Crop Image</button> -->
 
 			<ImageCropper
@@ -332,9 +335,16 @@
 			<div class="mb-4">
 				<label class="block text-gray-300 text-sm font-bold mb-2" for="bio"> Bio </label>
 				<p class="text-gray-500 text-xs mb-2">Tell us a little about yourself.</p>
-				<div
-					name=bio	
+				<!-- JANKY way of getting the user.bio into form data -->
+				<input
+					class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+					style="display: none;"
+					name="bio"
 					id="bio"
+					type="text"
+					bind:value={user.bio}
+				/>
+				<div
 					bind:this={editor}
 					class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none bg-white focus:shadow-outline"
 				>
@@ -351,6 +361,9 @@
 				</button>
 			</div>
 		</form>
+		{#if form?.message}
+			<p class="error">{form.message}</p>
+		{/if}
 	</div>
 </div>
 

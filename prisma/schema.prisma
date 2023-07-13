@@ -65,6 +65,7 @@ model object {
   file_name String?
   file_size Int?
   file_type String?
+  image_number Int      @default(1)  // new field
   authUser  AuthUser  @relation(fields: [userId], references: [id])
   userId    String
 

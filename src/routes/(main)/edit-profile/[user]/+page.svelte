@@ -19,16 +19,18 @@
 		image8: ''
 	};
 	for (let i = 0; i < data.objects.length; i++) {
-		if(i > 1 && i < data.objects.length){
-			//create more buttons if there are more than 2 images
-			buttons.push(`image${i}`);
-		}
-		//get urls from aws
-		if (i === 0) {
-			images['main-image'] = `${s3 + '/' + encodeURIComponent(data.objects[i].id)}`;
-		} else if (i <= 8) {
-			images[`image${i}`] = `${s3 + '/' + encodeURIComponent(data.objects[i].id)}`;
+		let imgNum = data.objects[i].image_number;
 
+		if (imgNum > 1 && imgNum < data.objects.length) {
+			// create more buttons if there are more than 2 images
+			buttons.push(`image${imgNum}`);
+		}
+
+		// get urls from aws
+		if (imgNum === 0) {
+			images['main-image'] = `${s3 + '/' + encodeURIComponent(data.objects[i].id)}`;
+		} else if (imgNum <= 8) {
+			images[`image${imgNum}`] = `${s3 + '/' + encodeURIComponent(data.objects[i].id)}`;
 		}
 	}
 
@@ -113,12 +115,12 @@
 
 	function handleSubmit(event) {
 		upload(croppedImage);
+		images = { ...images };
 		croppedImage = null;
-		alert(event.detail.text);
 	}
 
 	async function upload(file) {
-		console.log("uploaded");
+		console.log('uploaded');
 		// Get presigned POST URL and form fields
 		let { url, fields } = await fetch(`${presignUrl}?fileType=${file.type}`)
 			.then((response) => response.json())
@@ -136,6 +138,7 @@
 		// Send the POST request
 		try {
 			await fetch(url, { method: 'POST', body: form });
+			images = { ...images };
 		} catch (error) {
 			console.log(error);
 			return false;
@@ -147,6 +150,13 @@
 		form.append('fileName', file.name);
 		form.append('fileSize', file.size);
 		form.append('fileType', file.type);
+
+		//!!!
+		//Turn index into a key arry and find the index of the current Image when uploaded
+		const keys = Object.keys(images); // convert keys to an array
+		const index = keys.indexOf(currImage); // find index of 'age'
+		console.log(index);
+		form.append('position', index);
 		try {
 			await fetch(s3 + '/' + encodeURIComponent(fields.key), { method: 'POST', body: form });
 		} catch (error) {
@@ -171,7 +181,12 @@
 		<form method="POST" on:submit|preventDefault={updateProfile} class="w-full">
 			<!-- <button on:click={openModal}>Upload and Crop Image</button> -->
 
-			<ImageCropper on:cropSubmit={handleSubmit} bind:croppedImage bind:square={squareInput} bind:open={isModalOpen} />
+			<ImageCropper
+				on:cropSubmit={handleSubmit}
+				bind:croppedImage
+				bind:square={squareInput}
+				bind:open={isModalOpen}
+			/>
 
 			<div class="mb-4">
 				<label class="block text-gray-300 text-sm font-bold mb-2" for="image">
@@ -197,6 +212,7 @@
 							images['main-image'] = '';
 							isModalOpen = true;
 							squareInput = true;
+							//!!!
 							currImage = 'main-image';
 						}}>Change Image</button
 					>

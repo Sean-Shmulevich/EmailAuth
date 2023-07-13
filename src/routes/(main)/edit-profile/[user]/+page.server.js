@@ -6,8 +6,6 @@ import { fail, redirect } from '@sveltejs/kit';
 import { auth } from '$lib/lucia';
 import { sendEmail } from '$lib/email';
 
-
-
 async function getUser(userId) {
 	const user = await prismaClient.authUser.findUnique({
 		where: {
@@ -21,13 +19,17 @@ async function getUser(userId) {
 export const load = async ({ params, locals }) => {
 	const { user } = await locals.auth.validateUser();
 
-    const objects = await prismaClient.object.findMany();
+	const objects = await prismaClient.object.findMany({
+		where: {
+			userId: user.userId
+		}
+	});
 
 	const paramUserId = params.user;
-    console.log(user);
+	console.log(user);
 
-    // user.isAdmin===false ||
-    //do not allow edit access to anybody except the user whos profile it is.
+	// user.isAdmin===false ||
+	//do not allow edit access to anybody except the user whos profile it is.
 	if (!user || user.userId !== paramUserId) {
 		throw redirect(302, '/');
 	}
@@ -37,7 +39,7 @@ export const load = async ({ params, locals }) => {
 	const currUser = await getUser(paramUserId);
 	return {
 		currUser,
-        objects
+		objects
 	};
 };
 

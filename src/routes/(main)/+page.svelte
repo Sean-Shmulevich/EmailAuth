@@ -1,78 +1,29 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import type { PageData } from './$types';
-	import { onMount } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
 
 	export let data: PageData;
 
 	import { invalidateAll } from '$app/navigation';
 	import { filedrop } from 'filedrop-svelte';
-	import animate from './animation.js';
+	let animate;
+	let stopAnimation;
 
-	onMount(() => {
+	onDestroy(async () => {
+		const module = await import('./animation.js');
+		stopAnimation = module['stopAnimation'];
+		stopAnimation();
+	});
+
+	onMount(async () => {
+		const module = await import('./animation.js');
+		console.log(module);
+		animate = module.default;
+		stopAnimation = module['stopAnimation'];
 		animate();
 	});
 
-	$: objects = data.objects;
-
-	let presignUrl = '/api/presign';
-	let s3 = '/api/s3object';
-
-	let files: any[] = [];
-	let loading: any;
-	let filedropOptions = { disabled: loading, fileLimit: 50, maxSize: 52428800 }; // max size of 50 mb
-
-	async function upload(file: any) {
-		// Get presigned POST URL and form fields
-		let { url, fields } = await fetch(`${presignUrl}?fileType=${file.type}`)
-			.then((response) => response.json())
-			.catch((error) => {
-				console.log(error);
-				return false;
-			});
-
-		// Build a form for the request body
-		let form = new FormData();
-		Object.keys(fields).forEach((key) => form.append(key, fields[key]));
-		form.append('file', file);
-		form.append('Content-Type', file.type);
-
-		// Send the POST request
-		try {
-			await fetch(url, { method: 'POST', body: form });
-		} catch (error) {
-			console.log(error);
-			return false;
-		}
-
-		// Save the document in the db using the api
-		form = new FormData();
-		form.append('objectId', fields.key); // fields.key is same as id
-		form.append('fileName', file.name);
-		form.append('fileSize', file.size);
-		form.append('fileType', file.type);
-		try {
-			await fetch(s3 + '/' + encodeURIComponent(fields.key), { method: 'POST', body: form });
-		} catch (error) {
-			console.log(error);
-			return false;
-		}
-
-		return fields.key;
-	}
-
-	async function handleDrop(e) {
-		if (loading) return false;
-		loading = true;
-		files = e.detail.files.accepted;
-		for (let file of files) {
-			await upload(file);
-			files = files.slice(1);
-		}
-		files = [];
-		await invalidateAll();
-		loading = false;
-	}
 </script>
 
 <!-- <h1>Welcome, user {data.msg}</h1>

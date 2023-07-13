@@ -8,17 +8,17 @@
 	import { invalidateAll } from '$app/navigation';
 	import { filedrop } from 'filedrop-svelte';
 	import Animation from './animation.js';
-	let animation = new Animation();
+	// let animation = new Animation();
 
 	onDestroy(async () => {
 		console.log('destroyed');
-		await animation.delete();
+		// await animation.delete();
 		// await stopAnimation(window);
 	});
 
 	onMount(async () => {
 		// console.log(animate.start());	
-		await animation.start();
+		// await animation.start();
 	});
 
 </script>
@@ -48,7 +48,7 @@
 			<span class="ml-3 text-3xl gold">DapUp</span>
 		</a>
 		<nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-			<span class="mr-6 text-gray-300">Login: </span>
+			<span class="mr-6 text-gray-300">Login/Sign Up: </span>
 			<a
 				href="/login"
 				class="mr-10 hover:bg-gray-300 hover:text-gray-500 bg-gray-500 text-white font-semibold inline-flex items-center mr-5 px-4 py-2 rounded-full

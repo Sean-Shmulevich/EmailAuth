@@ -57,15 +57,15 @@
 	import { onMount } from 'svelte';
 
 	//variabe for quill to save the current state of the html content
-	let htmlContent = '';
+	let deltaContent = '';
 
 	export const snapshot = {
 		capture: () => {
-			return user;
+			return {user, deltaContent};
 		},
 		restore: (data) => {
-			user = data;
-			pendingContents = user.bio;
+			user = data.user;
+			pendingContents = data.deltaContent;
 		}
 	};
 
@@ -100,9 +100,9 @@
 			});
 
 			quill.on('text-change', function (delta, oldDelta, source) {
-				user.bio = quill.getContents();
-				htmlContent = quill.root.innerHTML;
-				console.log(htmlContent);
+				user.bio = quill.root.innerHTML; 
+				deltaContent = quill.getContents();
+				console.log(user.bio);
 			});
 
 			// If we have contents that need to be set, set them now.
@@ -178,7 +178,7 @@
 	<div
 		class="profile-card flex flex-col bg-gray-800 shadow overflow-hidden mt-10 rounded-lg max-w-5xl mb-10 w-full p-6"
 	>
-		<form method="POST" on:submit|preventDefault={updateProfile} class="w-full">
+		<form method="POST" action="?/verify" on:submit|preventDefault={updateProfile} class="w-full">
 			<!-- <button on:click={openModal}>Upload and Crop Image</button> -->
 
 			<ImageCropper
@@ -332,7 +332,7 @@
 					bind:this={editor}
 					class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none bg-white focus:shadow-outline"
 				>
-					{user.bio}
+					{deltaContent}
 				</div>
 			</div>
 

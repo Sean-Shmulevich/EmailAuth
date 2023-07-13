@@ -69,28 +69,32 @@ async function verifyUser(email) {
 //     },
 // });
 export const actions = {
+	// default: async ({ request, locals }) => {
+		
+	// }
 	verify: async ({ request, locals }) => {
 		const formData = await request.formData();
-		const email = formData.get('email')?.toString() ?? '';
-		if (email === null /* ||    !emailRegex.test(email) */) {
-			console.log('email is null or not valid');
-		}
-		try {
-			verifyUser(email);
-			//edit user
-			// await sendEmailVerificationEmail(user.email, token.toString());
-		} catch (e) {
-			if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === 'P2002') {
-				return fail(400, {
-					message: 'Email is already taken',
-					email
-				});
-			}
-			return fail(500, {
-				message: 'An unknown error occurred',
-				email
-			});
-		}
+		console.log(formData);
+		// const email = formData.get('email')?.toString() ?? '';
+		// if (email === null /* ||    !emailRegex.test(email) */) {
+		// 	console.log('email is null or not valid');
+		// }
+		// try {
+		// 	verifyUser(email);
+		// 	//edit user
+		// 	// await sendEmailVerificationEmail(user.email, token.toString());
+		// } catch (e) {
+		// 	if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === 'P2002') {
+		// 		return fail(400, {
+		// 			message: 'Email is already taken',
+		// 			email
+		// 		});
+		// 	}
+		// 	return fail(500, {
+		// 		message: 'An unknown error occurred',
+		// 		email
+		// 	});
+		// }
 	},
 	logout: async ({ locals }) => {
 		const session = await locals.auth.validate();

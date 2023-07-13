@@ -4,10 +4,11 @@
 generator client {
   provider = "prisma-client-js"
 }
+
 datasource db {
-  provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  provider          = "postgresql"
+  url               = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl         = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
   shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING") // used for migrations
 }
 
@@ -17,8 +18,10 @@ model AuthUser {
   email_verified Boolean
   admin_verified Boolean
   is_admin       Boolean
+  profile        Profile?
   auth_session   AuthSession[]
   auth_key       AuthKey[]
+  object         object[]
 
   @@map("auth_user")
 }
@@ -62,5 +65,20 @@ model object {
   file_name String?
   file_size Int?
   file_type String?
+  authUser  AuthUser  @relation(fields: [userId], references: [id])
+  userId    String
+
+  @@map("object")
 }
 
+model Profile {
+  user_id   String    @id
+  name      String
+  sport     String
+  college   String
+  year      String
+  bio       String
+  auth_user AuthUser? @relation(fields: [user_id], references: [id])
+
+  @@map("profile")
+}

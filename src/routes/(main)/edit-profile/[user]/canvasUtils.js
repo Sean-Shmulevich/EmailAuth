@@ -5,6 +5,7 @@ export const createImage = (url) =>
 		image.addEventListener('error', (error) => reject(error));
 		image.setAttribute('crossOrigin', 'anonymous'); // needed to avoid cross-origin issues on CodeSandbox
 		image.src = url;
+		
 	});
 
 export function getRadianAngle(degreeValue) {
@@ -74,8 +75,8 @@ export default async function getCroppedImg(
 
 	// As a blob
 	return new Promise((resolve, reject) => {
-		canvas.toBlob((file) => {
-			resolve(URL.createObjectURL(file));
+		canvas.toBlob((blob) => {
+			resolve(blob);
 		}, 'image/jpeg');
 	});
 }

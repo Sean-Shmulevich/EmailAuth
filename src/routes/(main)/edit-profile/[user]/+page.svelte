@@ -1,17 +1,26 @@
 <script>
 	// @ts-nocheck
+	import ImageCropper from './ImageCropper.svelte';
+	export let data;
 
-	let images = {
-		'main-image': '',
-		image1: '',
-		image2: '',
-		image3: '',
-		image4: '',
-		image5: '',
-		image6: '',
-		image7: '',
-		image8: ''
-	};
+	let buttons = ['image1'];
+	let presignUrl = '/api/presign';
+	let s3 = '/api/s3object';
+
+	let images = {};
+	for (let i = 0; i < data.objects.length; i++) {
+		if(i > 1){
+			//create more buttons if there are more than 2 images
+			buttons.push(`image${i}`);
+		}
+		//get urls from aws
+		if (i === 0) {
+			images['main-image'] = `${s3 + '/' + encodeURIComponent(data.objects[i].id)}`;
+		} else if (i <= 8) {
+			images[`image${i}`] = `${s3 + '/' + encodeURIComponent(data.objects[i].id)}`;
+
+		}
+	}
 
 	let user = {
 		name: '',
@@ -26,7 +35,19 @@
 	let editor;
 	let pendingContents = null;
 
-	export const snapshot../$types.js = {
+	let isModalOpen = false;
+	let croppedImage = null;
+	let currImage = null;
+
+	let squareInput = false;
+
+	let Quill;
+	import { onMount } from 'svelte';
+
+	//variabe for quill to save the current state of the html content
+	let htmlContent = '';
+
+	export const snapshot = {
 		capture: () => {
 			return user;
 		},
@@ -41,20 +62,13 @@
 		console.log(user);
 	};
 
-	import ImageCropper from './ImageCropper.svelte';
-
-	let isModalOpen = false;
-	let croppedImage = null;
-
-	let currImage = null;
-
 	//this code is ran when the clild compnent finishes cropping the image and returns a blob with the cropped image.
 	$: if (croppedImage !== null && currImage !== null) {
 		images[currImage] = croppedImage;
-		console.log(images);
+		// its expecting file input
+		upload(croppedImage);
+		// console.log(images);
 	}
-
-	let buttons = ['image1'];
 
 	const addNewButton = () => {
 		if (buttons.length < 8) {
@@ -65,15 +79,6 @@
 			buttons = [...buttons, `image${buttons.length + 1}`];
 		}
 	};
-
-	let squareInput = false;
-
-	let Quill;
-	import { onMount } from 'svelte';
-
-	//variabe for quill to save the current state of the html content
-	let htmlContent = '';
-
 
 	onMount(async () => {
 		if (typeof window !== 'undefined') {
@@ -97,6 +102,45 @@
 			}
 		}
 	});
+
+	async function upload(file) {
+		// Get presigned POST URL and form fields
+		let { url, fields } = await fetch(`${presignUrl}?fileType=${file.type}`)
+			.then((response) => response.json())
+			.catch((error) => {
+				console.log(error);
+				return false;
+			});
+
+		// Build a form for the request body
+		let form = new FormData();
+		Object.keys(fields).forEach((key) => form.append(key, fields[key]));
+		form.append('file', file);
+		form.append('Content-Type', file.type);
+
+		// Send the POST request
+		try {
+			await fetch(url, { method: 'POST', body: form });
+		} catch (error) {
+			console.log(error);
+			return false;
+		}
+
+		// Save the document in the db using the api
+		form = new FormData();
+		form.append('objectId', fields.key); // fields.key is same as id
+		form.append('fileName', file.name);
+		form.append('fileSize', file.size);
+		form.append('fileType', file.type);
+		try {
+			await fetch(s3 + '/' + encodeURIComponent(fields.key), { method: 'POST', body: form });
+		} catch (error) {
+			console.log(error);
+			return false;
+		}
+
+		return fields.key;
+	}
 </script>
 
 <!-- Include Quill's CSS on your page -->

@@ -1,6 +1,7 @@
 import AWS from 'aws-sdk'
 import { DeleteObjectCommand, S3Client } from '@aws-sdk/client-s3'
 import {prismaClient} from '$lib/db'
+import { auth } from '$lib/lucia';
 import { error } from '@sveltejs/kit'
 
 import { S3_BUCKET } from '$env/static/private'
@@ -25,9 +26,14 @@ export async function DELETE ({ params, locals }) {
 }
 
 export async function POST({ request, locals }) {
+    //TODO: add check to make sure this user has permission to add this object with lucia maybe
     //if (!locals.authorized) { throw error(401, 'unauthorized') }
     // called after user has done presigned post.  
     // add object to db
+    const { user } = await locals.auth.validateUser();
+
+    if(!user) { throw error(401, 'unauthorized') }
+
     const data = await request.formData()
     if (!data.get('fileName') || !data.get('fileType') || !data.get('fileSize') || !data.get('objectId')) { throw error(500, 'bad format') }
     let document
@@ -38,6 +44,7 @@ export async function POST({ request, locals }) {
                 file_name: data.get('fileName'),
                 file_size: parseInt(data.get('fileSize')),
                 file_type: data.get('fileType'),
+                userId: user.userId
             }
         })
     } catch (error) {

@@ -4,6 +4,20 @@
 	import { enhance } from '$app/forms';
 	export let data;
 	export let form;
+	import Delta from 'quill-delta';
+
+	function htmlToDelta(html) {
+		const quill = new Quill(document.createElement('div'));
+		const clipboard = quill.getModule('clipboard');
+
+		// Set the HTML content to the clipboard module
+		clipboard.container.innerHTML = html;
+
+		// Get the delta representation of the HTML content
+		const delta = clipboard.convert();
+
+		return delta;
+	}
 
 	let buttons = ['image1'];
 	let presignUrl = '/api/presign';
@@ -44,9 +58,14 @@
 		bio: '',
 		image: ''
 	};
-	$: if (form && form.user) {
-		user = { ...user, ...form.user };
+
+	function loadUser() {
+		// console.log('Loading user');
+		// if (form && form.user) {
+		// 	user = { ...user, ...form.user };
+		// }
 	}
+
 	let quill;
 	let editor;
 	let pendingContents = null;
@@ -72,6 +91,10 @@
 			pendingContents = data.deltaContent;
 		}
 	};
+
+	// $: if (form && form.user) {
+	// 	user = { ...user, ...form.user };
+	// }
 
 	const updateProfile = () => {
 		// update the profile
@@ -108,6 +131,12 @@
 				deltaContent = quill.getContents();
 				// console.log(user.bio);
 			});
+
+			if (data.currUserProfile) {
+				console.log(data.currUserProfile);
+				user = { ...user, ...data.currUserProfile };
+				deltaContent = htmlToDelta(user.bio);
+			}
 
 			// If we have contents that need to be set, set them now.
 			if (pendingContents) {
@@ -182,7 +211,17 @@
 	<div
 		class="profile-card flex flex-col bg-gray-800 shadow overflow-hidden mt-10 rounded-lg max-w-5xl mb-10 w-full p-6"
 	>
-		<form method="POST" action="?/update" use:enhance class="w-full">
+		<form
+			method="POST"
+			action="?/update"
+			on:submit={loadUser}
+			use:enhance={() => {
+				return async ({ update }) => {
+					await update({ reset: false });
+				};
+			}}
+			class="w-full"
+		>
 			<!-- <button on:click={openModal}>Upload and Crop Image</button> -->
 
 			<ImageCropper

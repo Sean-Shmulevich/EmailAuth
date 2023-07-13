@@ -6,14 +6,14 @@ import { fail, redirect } from '@sveltejs/kit';
 import { auth } from '$lib/lucia';
 import { sendEmail } from '$lib/email';
 
-async function getUser(userId) {
-	const user = await prismaClient.authUser.findUnique({
+async function getUserProfile(userId) {
+	const profile = await prismaClient.profile.findUnique({
 		where: {
-			id: userId
+			user_id: userId
 		}
 	});
 
-	return user;
+	return profile;
 }
 
 export const load = async ({ params, locals }) => {
@@ -39,9 +39,9 @@ export const load = async ({ params, locals }) => {
 	//should users be able to see other peoples profiles or should it just be buisnesses and the admin?
 	//well if I dont directly link to the users it will be fine how it is now but I still need to query the information
 
-	const currUser = await getUser(paramUserId);
+	const currUserProfile = await getUserProfile(paramUserId);
 	return {
-		currUser,
+		currUserProfile,
 		objects
 	};
 };
@@ -58,14 +58,13 @@ export const actions = {
 	update: async ({ request, locals }) => {
 		const { user } = await locals.auth.validateUser();
 
-
 		let userId = user.userId;
 		const formData = await request.formData();
 		let name = formData.get('name');
 		let sport = formData.get('sport');
 		let college = formData.get('college');
 		let year = formData.get('year');
-		let bio = formData.get("bio");
+		let bio = formData.get('bio');
 
 		console.log(formData);
 		// If user does not exist, throw an error
@@ -80,7 +79,10 @@ export const actions = {
 		if (!bio) missingFields.push('bio');
 
 		if (missingFields.length) {
-			return { message: `Please fill out the following fields: ${missingFields.join(', ')}`, user:{name, sport, college, year, bio} };
+			return {
+				message: `Please fill out the following fields: ${missingFields.join(', ')}`,
+				user: { name, sport, college, year, bio }
+			};
 		}
 
 		// If user exists, create a profile
@@ -105,8 +107,8 @@ export const actions = {
 
 		return {
 			message: 'Profile updated successfully',
-			user:{name, sport, college, year, bio}
-		}
+			user: { name, sport, college, year, bio }
+		};
 	},
 	logout: async ({ locals }) => {
 		const session = await locals.auth.validate();

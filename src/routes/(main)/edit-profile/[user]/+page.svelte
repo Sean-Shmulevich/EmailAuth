@@ -6,6 +6,15 @@
 	export let form;
 	import Delta from 'quill-delta';
 
+	// Show the message for 3 seconds
+	let showMessage = true;
+
+	$: if (form?.message) {
+		setTimeout(() => {
+			showMessage = false;
+		}, 3000);
+	}
+
 	function htmlToDelta(html) {
 		const quill = new Quill(document.createElement('div'));
 		const clipboard = quill.getModule('clipboard');
@@ -400,7 +409,7 @@
 				</button>
 			</div>
 		</form>
-		{#if form?.message}
+		{#if form?.message && showMessage}
 			<p class="error">{form.message}</p>
 		{/if}
 	</div>

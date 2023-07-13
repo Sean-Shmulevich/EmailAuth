@@ -66,7 +66,7 @@ export const actions = {
 		let year = formData.get('year');
 		let bio = formData.get('bio');
 
-		console.log(formData);
+		// console.log(formData);
 		// If user does not exist, throw an error
 		//TODO change this to sveltekit fail
 		if (!user) throw new Error('User not found');

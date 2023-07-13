@@ -22,6 +22,9 @@ export const load = async ({ params, locals }) => {
 	const objects = await prismaClient.object.findMany({
 		where: {
 			userId: user.userId
+		},
+		orderBy: {
+			image_number: 'asc'
 		}
 	});
 

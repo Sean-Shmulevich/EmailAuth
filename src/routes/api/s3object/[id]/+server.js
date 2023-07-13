@@ -50,6 +50,9 @@ export async function POST({ request, locals }) {
 	try {
 		// Get existing image details from the database
 		const position = parseInt(data.get('position'));
+        //if I make multiple users will it 
+        // - find the object with the first image_number for a specific user?
+        // - find the first object with that existing image number?
 		const existingImage = await prismaClient.object.findFirst({
 			where: {
 				userId: user.userId,

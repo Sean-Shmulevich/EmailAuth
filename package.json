@@ -50,6 +50,7 @@
 		"quill": "^1.3.7",
 		"quill-delta": "^5.1.0",
 		"skeleton-elements": "^4.0.1",
-		"svelte-easy-crop": "^2.0.1"
+		"svelte-easy-crop": "^2.0.1",
+		"three": "^0.154.0"
 	}
 }

@@ -1,9 +1,11 @@
 <script>
-// @ts-nocheck
+	// @ts-nocheck
 
 	import { fade } from 'svelte/transition';
+	import { afterUpdate } from 'svelte';
+
 	export let data;
-    let s3 = '/api/s3object';
+	let s3 = '/api/s3object';
 
 	let user = {
 		name: 'John Doe',
@@ -25,53 +27,96 @@
 
 	for (let i = 0; i < data.objects.length; i++) {
 		let imgNum = data.objects[i].image_number;
-
-        images[imgNum] = `${s3 + '/' + encodeURIComponent(data.objects[i].id)}`;
+		images[imgNum] = `${s3 + '/' + encodeURIComponent(data.objects[i].id)}`;
 	}
 
-	const nextImage = () => {
-		index = (index + 1) % images.length;
-	};
+	let currentImage = images[index];
+	let nextImage = null;
+	let transitioning = false;
 
-	const previousImage = () => {
-		index = (index - 1 + images.length) % images.length;
+	const transitionDuration = 500;
+	const transitionDelay = 100;
+
+	const switchImage = () => {
+		if (transitioning) return;
+
+		nextImage = images[(index + 1) % images.length];
+		index = (index + 1) % images.length;
+
+		transitioning = true;
+
+		setTimeout(() => {
+			currentImage = nextImage;
+			nextImage = null;
+		}, transitionDuration);
+
+		setTimeout(() => {
+			transitioning = false;
+		}, transitionDuration + transitionDelay);
 	};
 
 	let update = false;
-	$: index, (update = true);
+	$: {
+		update = true;
+		afterUpdate(() => {
+			update = false;
+		});
+	}
 </script>
 
 <div
-	class="mt-12 bg-gray-900 text-white flex flex-col items-center justify-center space-y-8"
+	class="bg-gray-900 text-white flex flex-col items-center justify-center space-y-8"
 	style="min-height: calc(100vh - 48px);"
 >
 	<div
-		class="profile-card flex flex-col md:flex-row bg-gray-800 shadow overflow-hidden mt-10 rounded-lg max-w-7xl w-full p-6"
+		class="profile-card flex flex-col md:flex-row bg-gray-800 shadow rounded-lg max-w-7xl w-full p-6 overflow-hidden"
 	>
-		<div class="image w-full md:w-1/2 relative">
-			{#each images as img, i (img)}
-				{#if i === index}
+		<div class="image w-3/4 md:w-[43%] relative">
+			{#if update}
+				{#if transitioning}
 					<img
-						src={img}
-						alt="Image description"
+						src={currentImage}
+						alt="Current image"
 						class="object-cover h-full w-full rounded-lgx"
-						in:fade={{ duration: 500 }}
+					/>
+					<img
+						src={nextImage}
+						alt="Next image"
+						class="object-cover h-full w-full rounded-lgx"
+					/>
+				{:else}
+					<img
+						src={currentImage}
+						alt="Current image"
+						class="object-cover h-full w-full rounded-lgx"
 					/>
 				{/if}
-			{/each}
+			{:else}
+				<img
+					src={currentImage}
+					alt="Current image"
+					class="object-cover h-full w-full rounded-lgx"
+				/>
+			{/if}
 
 			<div class="absolute top-1/2 transform -translate-y-1/2 left-3">
 				<button
 					class="bg-transparent text-white text-4xl font-semibold hover:text-gray-300 transition-colors duration-200"
-					on:click={previousImage}>&lt;</button
+					on:click={switchImage}
+					disabled={transitioning}
 				>
+					&lt;
+				</button>
 			</div>
 
 			<div class="absolute top-1/2 transform -translate-y-1/2 right-3">
 				<button
 					class="bg-transparent text-white text-4xl font-semibold hover:text-gray-300 transition-colors duration-200"
-					on:click={nextImage}>&gt;</button
+					on:click={switchImage}
+					disabled={transitioning}
 				>
+					&gt;
+				</button>
 			</div>
 
 			<div
@@ -85,6 +130,7 @@
 							? 'scale-150 opacity-100'
 							: ''}"
 						on:click={() => (index = i)}
+                        disabled
 					/>
 				{/each}
 			</div>
@@ -100,14 +146,6 @@
 				<p class="mt-2 text-base text-gray-400">
 					{@html user.bio}
 				</p>
-				<!-- <h4 class="text-lg leading-6 mt-5 font-medium text-white">What I am looking for</h4>
-                <p class="mt-2 text-base text-gray-400">
-                    {user.bio}
-                </p>
-                <h4 class="text-lg leading-6 mt-5 font-medium text-white">Previous Deals</h4>
-                <p class="mt-2 text-base text-gray-400">
-                    {user.bio}
-                </p> -->
 			</div>
 			<div class="flex flex-row items-center justify-between mt-5 bottom-0 info-container">
 				<div class="flex items-center text-sm leading-5 text-gray-400 info-item">

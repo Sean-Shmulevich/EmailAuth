@@ -10,10 +10,7 @@
 		<title>Demo mailbox</title>
 	</head>
 	<body>
-		<header class="px-4 py-4 bg-white mb-12 fixed top-0 flex w-full place-content-between place-items-center z-10">
-			<a href="/" class="text-xl font-semibold">Lucia Demo</a>
-		</header>
-		<main class="mx-auto block mt-20">
+		<main>
 			<slot />
 		</main>
 	</body>

@@ -77,7 +77,7 @@
 </script>
 
 <div
-	class="fixed inset-1/2 w-3/4 h-3/4 bg-gray-500 rounded-xl p-10 transform -translate-x-1/2 -translate-y-1/2 overflow-y-scroll {!open
+	class="fixed inset-1/2 w-3/4 h-3/4 bg-gray-500 rounded-xl p-10 transform -translate-x-1/2 -translate-y-1/2 overflow-y-scroll z-10 {!open
 		? 'nah'
 		: ''} border-2 border-white flex flex-col items-center justify-center"
 >

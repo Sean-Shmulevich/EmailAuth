@@ -17,7 +17,7 @@
 	}
 
 	function htmlToDelta(html) {
-		const quill = new Quill(document.createElement('div'));
+		const quill = new Quill(document.createElement('pre'));
 		const clipboard = quill.getModule('clipboard');
 
 		// Set the HTML content to the clipboard module
@@ -145,7 +145,9 @@
 			if (data.currUserProfile) {
 				console.log(data.currUserProfile);
 				user = { ...user, ...data.currUserProfile };
-				deltaContent = htmlToDelta(user.bio);
+				deltaContent = htmlToDelta(data.currUserProfile.bio);
+				deltaContent = deltaContent;
+				quill.setContents(deltaContent);
 			}
 
 			// If we have contents that need to be set, set them now.
@@ -395,7 +397,7 @@
 				/>
 				<div
 					bind:this={editor}
-					class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none bg-white focus:shadow-outline"
+					class="shadow appearance-none border z-0 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none bg-white focus:shadow-outline"
 				>
 					{deltaContent}
 				</div>

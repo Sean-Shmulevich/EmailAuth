@@ -1,6 +1,7 @@
 <script>
 	// @ts-nocheck
 	import ImageCropper from './ImageCropper.svelte';
+	import { enhance } from '$app/forms';
 	export let data;
 
 	let buttons = ['image1'];
@@ -71,7 +72,7 @@
 
 	const updateProfile = () => {
 		// update the profile
-		console.log(user);
+		// console.log(user);
 	};
 
 	//this code is ran when the clild compnent finishes cropping the image and returns a blob with the cropped image.
@@ -102,7 +103,7 @@
 			quill.on('text-change', function (delta, oldDelta, source) {
 				user.bio = quill.root.innerHTML; 
 				deltaContent = quill.getContents();
-				console.log(user.bio);
+				// console.log(user.bio);
 			});
 
 			// If we have contents that need to be set, set them now.
@@ -178,7 +179,7 @@
 	<div
 		class="profile-card flex flex-col bg-gray-800 shadow overflow-hidden mt-10 rounded-lg max-w-5xl mb-10 w-full p-6"
 	>
-		<form method="POST" action="?/verify" on:submit|preventDefault={updateProfile} class="w-full">
+		<form method="POST" action="?/update" use:enhance  class="w-full">
 			<!-- <button on:click={openModal}>Upload and Crop Image</button> -->
 
 			<ImageCropper
@@ -286,6 +287,7 @@
 				<input
 					class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 					id="name"
+					name="name"
 					type="text"
 					placeholder="John Doe"
 					bind:value={user.name}
@@ -297,6 +299,7 @@
 				<input
 					class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 					id="sport"
+					name="sport"
 					type="text"
 					placeholder="Basketball"
 					bind:value={user.sport}
@@ -307,6 +310,7 @@
 				<p class="text-gray-500 text-xs mb-2">Where did you go to college?</p>
 				<input
 					class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+					name="college"
 					id="college"
 					type="text"
 					placeholder="Harvard University"
@@ -318,6 +322,7 @@
 				<p class="text-gray-500 text-xs mb-2">Which year did you graduate?</p>
 				<input
 					class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+					name="year"
 					id="year"
 					type="text"
 					placeholder="2018"
@@ -328,6 +333,7 @@
 				<label class="block text-gray-300 text-sm font-bold mb-2" for="bio"> Bio </label>
 				<p class="text-gray-500 text-xs mb-2">Tell us a little about yourself.</p>
 				<div
+					name=bio	
 					id="bio"
 					bind:this={editor}
 					class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none bg-white focus:shadow-outline"

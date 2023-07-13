@@ -29,7 +29,7 @@ export const load = async ({ params, locals }) => {
 	});
 
 	const paramUserId = params.user;
-	console.log(user);
+	// console.log(user);
 
 	// user.isAdmin===false ||
 	//do not allow edit access to anybody except the user whos profile it is.
@@ -46,23 +46,6 @@ export const load = async ({ params, locals }) => {
 	};
 };
 
-async function verifyUser(email) {
-	const updatedUser = await prismaClient.authUser.update({
-		where: {
-			email: email
-		},
-		data: {
-			admin_verified: true
-		}
-	});
-	sendEmail(
-		email,
-		'Your account has been verified',
-		'Your account has been verified by the admin. You can now login to your account.'
-	);
-	return updatedUser;
-}
-
 // const authUser = await prismaClient.authUser.findUnique({
 //     where: {
 //       email: email,
@@ -70,31 +53,44 @@ async function verifyUser(email) {
 // });
 export const actions = {
 	// default: async ({ request, locals }) => {
-		
+
 	// }
-	verify: async ({ request, locals }) => {
+	update: async ({ request, locals }) => {
+		console.log('HELLLELLELEL');
+		const { user } = await locals.auth.validateUser();
+
+		let userId = user.userId;
 		const formData = await request.formData();
 		console.log(formData);
-		// const email = formData.get('email')?.toString() ?? '';
-		// if (email === null /* ||    !emailRegex.test(email) */) {
-		// 	console.log('email is null or not valid');
-		// }
-		// try {
-		// 	verifyUser(email);
-		// 	//edit user
-		// 	// await sendEmailVerificationEmail(user.email, token.toString());
-		// } catch (e) {
-		// 	if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === 'P2002') {
-		// 		return fail(400, {
-		// 			message: 'Email is already taken',
-		// 			email
-		// 		});
-		// 	}
-		// 	return fail(500, {
-		// 		message: 'An unknown error occurred',
-		// 		email
-		// 	});
-		// }
+		let name = formData.get('name');
+		let sport = formData.get('sport');
+		let college = formData.get('college');
+		let year = formData.get('year');
+		let bio = "formData.get('bio'h)";
+
+		// If user does not exist, throw an error
+		//TODO change this to sveltekit fail
+		if (!user) throw new Error('User not found');
+
+		// If user exists, create a profile
+		const profile = await prismaClient.profile.upsert({
+			where: { user_id: userId },
+			create: {
+				name: name,
+				sport: sport,
+				college: college,
+				year: year,
+				bio: bio,
+				user_id: userId
+			},
+			update: {
+				name: name,
+				sport: sport,
+				college: college,
+				year: year,
+				bio: bio
+			}
+		});
 	},
 	logout: async ({ locals }) => {
 		const session = await locals.auth.validate();

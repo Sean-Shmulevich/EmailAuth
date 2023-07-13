@@ -35,9 +35,9 @@
 	:global(main p.error) {
 		@apply text-sm text-red-400;
 	}
-	:global(main a) {
+	/* :global(main a) {
 		@apply mx-auto block w-fit text-indigo-500  hover:underline;
-	}
+	} */
 	:global(form) {
 		@apply my-2;
 	}

@@ -2,8 +2,10 @@
 	import { enhance } from '$app/forms';
 	import type { PageData } from './$types';
 	import { onMount, onDestroy } from 'svelte';
+	import { Button, Dropdown, DropdownItem, Chevron, Avatar } from 'flowbite-svelte';
 
 	export let data: PageData;
+	console.log(data.user);
 
 	import { invalidateAll } from '$app/navigation';
 	import { filedrop } from 'filedrop-svelte';
@@ -17,10 +19,9 @@
 	});
 
 	onMount(async () => {
-		// console.log(animate.start());	
+		// console.log(animate.start());
 		// await animation.start();
 	});
-
 </script>
 
 <!-- <h1>Welcome, user {data.msg}</h1>
@@ -48,23 +49,42 @@
 			<span class="ml-3 text-3xl gold">DapUp</span>
 		</a>
 		<nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-			<span class="mr-6 text-gray-300">Login/Sign Up: </span>
-			<a
-				href="/login"
-				class="mr-10 hover:bg-gray-300 hover:text-gray-500 bg-gray-500 text-white font-semibold inline-flex items-center mr-5 px-4 py-2 rounded-full
-          
-          bg-gray-500 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30
-          "
-			>
-				Athletes
-			</a>
+			{#if data.msg === 'not authenticated'}
+				<span class="mr-6 text-gray-300">Login/Sign Up: </span>
+				<a
+					href="/login"
+					class="mr-10 hover:bg-gray-300 hover:text-gray-500 bg-gray-500 text-white font-semibold inline-flex items-center mr-5 px-4 py-2 rounded-full bg-gray-500 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30"
+				>
+					Athletes
+				</a>
 
-			<a
-				href="login"
-				class="hover:text-gray-500 hover:bg-gray-300 bg-gray-500 text-white font-semibold inline-flex items-center px-4 py-2 rounded-full bg-grey-400 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30"
-			>
-				Brands
-			</a>
+				<a
+					href="login"
+					class="hover:text-gray-500 hover:bg-gray-300 bg-gray-500 text-white font-semibold inline-flex items-center px-4 py-2 rounded-full bg-grey-400 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30"
+				>
+					Brands
+				</a>
+			<!-- if data.msg === 'email authenticated' -->
+			{:else }
+				<Button pill class="bg-black !p-1" id="avatar_with_name">
+					<Avatar src="/images/profile-picture-3.webp" class="mr-2" />
+					{data.user.email}
+				</Button>
+				<Dropdown inline triggeredBy="#avatar_with_name">
+					<!-- <div slot="header" class="px-4 py-2">
+						<span class="block text-sm text-gray-900 dark:text-white"> Bonnie Green </span>
+						<span class="block truncate text-sm font-medium"> name@flowbite.com </span>
+					</div> -->
+					<DropdownItem href="/user-profile/{data.user.userId}">View Profile</DropdownItem>
+					<DropdownItem href="/edit-profile/{data.user.userId}">Edit Profile</DropdownItem>
+					{#if data.msg === 'fully authenticated'}
+						<h1>hello</h1>
+					{/if}
+					<form method="post" use:enhance>
+						<DropdownItem type="submit" slot="footer">Sign out</DropdownItem>
+					</form>
+				</Dropdown>
+			{/if}
 		</nav>
 	</div>
 </header>
@@ -72,8 +92,8 @@
 <section class="text-white body-font mx-0 mt-36" style="height:75vh">
 	<div class="container mx-auto flex px-5 py-24 items-center justify-center">
 		<div class="text-center lg:w-full xl:w-full">
-			<h1 class="text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-bold leading-tight mb-8">
-				A Manchester branding agency helping clients to find enlightenment
+			<h1 class="text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-bold leading-tight mb-8 text-black">
+				Connecting college athletes with brands
 			</h1>
 
 			<div style="height:20vh" />

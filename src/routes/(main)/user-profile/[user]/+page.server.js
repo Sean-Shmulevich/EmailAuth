@@ -13,6 +13,10 @@ async function getUserProfile(userId) {
 		}
 	});
 
+	if (!profile) {
+		return false;
+	}
+
 	return profile;
 }
 
@@ -40,6 +44,10 @@ export const load = async ({ params, locals }) => {
 	//well if I dont directly link to the users it will be fine how it is now but I still need to query the information
 
 	const currUserProfile = await getUserProfile(paramUserId);
+	if(currUserProfile === false){
+		//TODO maybe throw error instead
+		throw redirect(302, '/');
+	}
 	return {
 		currUserProfile,
 		objects

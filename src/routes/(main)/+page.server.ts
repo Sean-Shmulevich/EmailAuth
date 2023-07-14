@@ -8,9 +8,9 @@ export const load: PageServerLoad = async ({ locals }) => {
 
 	//if there is no user return nothing to the frontend
 	//if there is a user that is email verified but not admin verified return the user the menu will allow uers to edit profile and logout only
-	//if there is a user that is email verified and admin verified return the user the menu will allow users to edit profile, logout, and view deals, and past offers 
+	//if there is a user that is email verified and admin verified return the user the menu will allow users to edit profile, logout, and view deals, and past offers
 	if (!user) {
-		return;
+		return { msg: 'not authenticated', user: null };
 	}
 	// if (user.isAdmin) {
 	// 	throw redirect(302, '/approve-users');
@@ -29,13 +29,13 @@ export const load: PageServerLoad = async ({ locals }) => {
 	if (!user.adminVerified) {
 		//if the code execution comes here then the user is definitely logged in and email verified but not admin verified
 		return {
-			msg: 'still waiting on approval',
-			user,
+			msg: 'email authenticated',
+			user
 		};
 	}
 	return {
 		msg: 'fully authenticated',
-		user,
+		user
 	};
 };
 

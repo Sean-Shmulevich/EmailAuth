@@ -64,21 +64,25 @@
 				>
 					Brands
 				</a>
-			<!-- if data.msg === 'email authenticated' -->
-			{:else }
+				<!-- if data.msg === 'email authenticated' -->
+			{:else}
 				<Button pill class="bg-black !p-1" id="avatar_with_name">
-					<Avatar src="/images/profile-picture-3.webp" class="mr-2" />
+					<Avatar src="https://arkansasrazorbacks.com/wp-content/uploads/2021/12/Ayden-Owens-MTR-2021-22.jpg" class="mr-2" />
 					{data.user.email}
 				</Button>
 				<Dropdown inline triggeredBy="#avatar_with_name">
-					<!-- <div slot="header" class="px-4 py-2">
-						<span class="block text-sm text-gray-900 dark:text-white"> Bonnie Green </span>
-						<span class="block truncate text-sm font-medium"> name@flowbite.com </span>
-					</div> -->
-					<DropdownItem href="/user-profile/{data.user.userId}">View Profile</DropdownItem>
-					<DropdownItem href="/edit-profile/{data.user.userId}">Edit Profile</DropdownItem>
+					<div slot="header" class="px-4 py-2 bg-blue-500">
+						{#if data.msg === 'email authenticated'}
+							<span class="block text-sm  text-gray-900 ">
+								Waiting on verification
+							</span>
+						{/if}
+					</div>
+
+					<DropdownItem class="text-center" href="/user-profile/{data.user.userId}">View Profile</DropdownItem>
+					<DropdownItem class="text-center" href="/edit-profile/{data.user.userId}">Edit Profile</DropdownItem>
 					{#if data.msg === 'fully authenticated'}
-						<h1>hello</h1>
+						<h1>hello user is admin authenticated</h1>
 					{/if}
 					<form method="post" use:enhance>
 						<DropdownItem type="submit" slot="footer">Sign out</DropdownItem>
@@ -92,7 +96,9 @@
 <section class="text-white body-font mx-0 mt-36" style="height:75vh">
 	<div class="container mx-auto flex px-5 py-24 items-center justify-center">
 		<div class="text-center lg:w-full xl:w-full">
-			<h1 class="text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-bold leading-tight mb-8 text-black">
+			<h1
+				class="text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-bold leading-tight mb-8 text-black"
+			>
 				Connecting college athletes with brands
 			</h1>
 

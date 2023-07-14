@@ -23,16 +23,17 @@ async function getUserProfile(userId) {
 export const load = async ({ params, locals }) => {
 	const { user } = await locals.auth.validateUser();
 
+	const paramUserId = params.user;
+
 	const objects = await prismaClient.object.findMany({
 		where: {
-			userId: user.userId
+			userId: paramUserId
 		},
 		orderBy: {
 			image_number: 'asc'
 		}
 	});
 
-	const paramUserId = params.user;
 	// console.log(user);
 
 	// user.isAdmin===false ||

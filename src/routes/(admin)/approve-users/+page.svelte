@@ -23,6 +23,7 @@
 				<h2 class="text-xl font-bold mb-2">{user.email}</h2>
 				<p>Email Verified: {user.email_verified ? 'Yes' : 'No'}</p>
 				<p>Admin Verified: {user.admin_verified ? 'Yes' : 'No'}</p>
+				<a class="text-blue-500 underline" href="/user-profile/{user.id}">profile link</a>
 			</div>
 			<form method="post" action="?/verify" use:enhance>
 				<input id="email" name="email" value={user.email} /><br />

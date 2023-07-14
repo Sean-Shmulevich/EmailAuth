@@ -216,7 +216,7 @@
 <!-- Include Quill's CSS on your page -->
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" />
 <div
-	class="mt-12 bg-gray-900 text-white flex flex-col items-center text-center justify-center space-y-8"
+	class="bg-gray-900 text-white flex flex-col items-center text-center justify-center space-y-8"
 	style="min-height: calc(100vh - 48px);"
 >
 	<h2 class="text-2xl mt-10">Edit Profile</h2>

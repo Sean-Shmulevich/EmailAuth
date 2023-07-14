@@ -13,8 +13,7 @@
 		college: 'Harvard',
 		year: 'Sophomore',
 		bio: 'A highly committed athlete with a passion for basketball...A highly committed athlete with a passion for basketball.. A highly committed athlete with a passion for basketball.. A highly committed athlete with a passion for basketball..',
-		photo:
-			'https://arkansasrazorbacks.com/wp-content/uploads/2022/10/Ayden-Owens-Delerme-MTR-2022-23.jpg' // Replace with actual image path
+		photo: 'https://arkansasrazorbacks.com/wp-content/uploads/2022/10/Ayden-Owens-Delerme-MTR-2022-23.jpg' // Replace with actual image path
 	};
 	user = { ...user, ...data.currUserProfile };
 
@@ -64,7 +63,7 @@
 
 <div
 	class="bg-gray-900 text-white flex flex-col items-center justify-center space-y-8"
-	style="min-height: calc(100vh - 48px);"
+	style="min-height: 100vh;"
 >
 	<div
 		class="profile-card flex flex-col md:flex-row bg-gray-800 shadow rounded-lg max-w-7xl w-full p-6 overflow-hidden"
@@ -156,11 +155,10 @@
 					</svg>
 					{user.sport}
 				</div>
-				<div class="flex items-center text-sm leading-5 text-gray-400 info-item">
+				<div class="flex items-center text-sm text-center leading-5 text-gray-400 info-item">
 					<svg class="flex-shrink-0 mr-1.5 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
 						<path
-							fill-rule="evenodd"
-							d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 00-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 10.586V6z"
+							fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 00-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 10.586V6z"
 							clip-rule="evenodd"
 						/>
 					</svg>

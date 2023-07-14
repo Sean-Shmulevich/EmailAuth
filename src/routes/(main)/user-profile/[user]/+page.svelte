@@ -4,23 +4,23 @@
 	import { fade } from 'svelte/transition';
 	import { afterUpdate } from 'svelte';
 
+	let defaultImage = "https://arkansasrazorbacks.com/wp-content/uploads/2022/10/Ayden-Owens-Delerme-MTR-2022-23.jpg";
+
 	export let data;
 	let s3 = '/api/s3object';
 
 	let user = {
-		name: 'John Doe',
-		sport: 'Basketball',
-		college: 'Harvard',
-		year: 'Sophomore',
-		bio: 'A highly committed athlete with a passion for basketball...A highly committed athlete with a passion for basketball.. A highly committed athlete with a passion for basketball.. A highly committed athlete with a passion for basketball..',
-		photo: 'https://arkansasrazorbacks.com/wp-content/uploads/2022/10/Ayden-Owens-Delerme-MTR-2022-23.jpg' // Replace with actual image path
+		name: 'Profile empty',
+		sport: 'empty',
+		college: 'empty',
+		year: 'empty',
+		bio: 'empty',
 	};
+
 	user = { ...user, ...data.currUserProfile };
 
 	let index = 0;
-	let images = [
-
-	];
+	let images = [ defaultImage ];
 
 	for (let i = 0; i < data.objects.length; i++) {
 		let imgNum = data.objects[i].image_number;

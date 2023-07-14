@@ -20,9 +20,7 @@
 
 	let index = 0;
 	let images = [
-		'https://arkansasrazorbacks.com/wp-content/uploads/2022/10/Ayden-Owens-Delerme-MTR-2022-23.jpg',
-		'https://email-auth-ecru.vercel.app/api/s3object/1689111570448fbb604f8953c4eec93a9159c2ec56000',
-		'https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/the-green-forest-square-bill-wakeley.jpg'
+
 	];
 
 	for (let i = 0; i < data.objects.length; i++) {

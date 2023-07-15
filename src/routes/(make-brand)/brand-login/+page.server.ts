@@ -8,6 +8,8 @@ import type { PageServerLoad, Actions } from './$types';
 export const load: PageServerLoad = async ({ locals }) => {
 	const { user } = await locals.auth.validateUser();
 	if (user) {
+		//TODO send some data with this redirect to signify that it is happening
+		if(!user.isBrand) throw redirect(302, '/login');
 		if (!user.emailVerified) throw redirect(302, '/email-verification');
 		throw redirect(302, '/');
 	}

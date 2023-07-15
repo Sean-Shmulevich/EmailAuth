@@ -17,25 +17,15 @@ model AuthUser {
   email          String        @unique
   email_verified Boolean
   admin_verified Boolean
-  is_brand       Boolean
+  is_brand       Boolean       @default(false)
   is_admin       Boolean
   profile        Profile?
-  brand_profile        BrandProfile?
+  brand_profile  BrandProfile?
   auth_session   AuthSession[]
   auth_key       AuthKey[]
   object         object[]
 
   @@map("auth_user")
-}
-
-model BrandProfile {
-  user_id    String     @id
-  name       String
-  sport      String
-  college    String
-  year       String
-  bio        String
-  auth_brand AuthUser? @relation(fields: [user_id], references: [id])
 }
 
 model AuthSession {
@@ -62,14 +52,14 @@ model AuthKey {
 }
 
 model object {
-  id        String    @id @unique(map: "id") @default("1")
-  created   DateTime? @default(now())
-  file_name String?
-  file_size Int?
-  file_type String?
-  image_number Int      @default(1)  // new field
-  authUser  AuthUser  @relation(fields: [userId], references: [id])
-  userId    String
+  id           String    @id @unique(map: "id") @default("1")
+  created      DateTime? @default(now())
+  file_name    String?
+  file_size    Int?
+  file_type    String?
+  image_number Int       @default(1) // new field
+  authUser     AuthUser  @relation(fields: [userId], references: [id])
+  userId       String
 
   @@map("object")
 }
@@ -84,4 +74,14 @@ model Profile {
   auth_user AuthUser? @relation(fields: [user_id], references: [id])
 
   @@map("profile")
+}
+
+model BrandProfile {
+  user_id    String    @id
+  name       String
+  sport      String
+  college    String
+  year       String
+  bio        String
+  auth_brand AuthUser? @relation(fields: [user_id], references: [id])
 }

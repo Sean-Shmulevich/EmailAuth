@@ -26,56 +26,60 @@ model AuthUser {
   @@map("auth_user")
 }
 
-// model AuthBrand {
-//   id             String        @id @unique
-//   email          String        @unique
-//   email_verified Boolean
-//   admin_verified Boolean
-//   name           String
-//   location       String
-//   industry       String
-//   size           String
-//   goals          String
-//   profile        BrandProfile?
-//   auth_session   AuthSession[]
-//   auth_key       AuthKey[]
-//   object         object[]
-// }
+model AuthBrand {
+  id             String        @id @unique
+  email          String        @unique
+  email_verified Boolean
+  admin_verified Boolean
+  name           String
+  location       String
+  industry       String
+  size           String
+  goals          String
+  profile        BrandProfile?
+  auth_session   AuthSession[]
+  auth_key       AuthKey[]
+  object         object[]
+}
 
-// model BrandProfile {
-//   user_id    String     @id
-//   name       String
-//   sport      String
-//   college    String
-//   year       String
-//   bio        String
-//   auth_brand AuthBrand? @relation(fields: [user_id], references: [id])
-// }
+model BrandProfile {
+  user_id    String     @id
+  name       String
+  sport      String
+  college    String
+  year       String
+  bio        String
+  auth_brand AuthBrand? @relation(fields: [user_id], references: [id])
+}
 
 model AuthSession {
   id             String     @id @unique
-  user_id        String
+  user_id        String?
+  authBrandId    String?
   active_expires BigInt
   idle_expires   BigInt
-  auth_user      AuthUser   @relation(references: [id], fields: [user_id], onDelete: Cascade)
-  // AuthBrand      AuthBrand? @relation(fields: [authBrandId], references: [id])
-  authBrandId    String?
+  auth_user      AuthUser?  @relation(references: [id], fields: [user_id], onDelete: Cascade)
+  auth_brand     AuthBrand? @relation(fields: [authBrandId], references: [id])
 
   @@index([user_id])
+  @@index([authBrandId])
+  @@unique([user_id, authBrandId])
   @@map("auth_session")
 }
 
 model AuthKey {
   id              String     @id @unique
   hashed_password String?
-  user_id         String
+  user_id         String?
+  authBrandId     String?
   primary_key     Boolean
   expires         BigInt?
-  auth_user       AuthUser   @relation(references: [id], fields: [user_id], onDelete: Cascade)
-  // AuthBrand       AuthBrand? @relation(fields: [authBrandId], references: [id])
-  authBrandId     String?
+  auth_user       AuthUser?  @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  auth_brand      AuthBrand? @relation(fields: [authBrandId], references: [id])
 
   @@index([user_id])
+  @@index([authBrandId])
+  @@unique([user_id, authBrandId])
   @@map("auth_key")
 }
 
@@ -96,12 +100,16 @@ model object {
   file_size    Int?
   file_type    String?
   image_number Int        @default(1) // new field
-  authUser     AuthUser   @relation(fields: [userId], references: [id])
-  userId       String
-  // AuthBrand    AuthBrand? @relation(fields: [authBrandId], references: [id])
+  userId       String?
   authBrandId  String?
 
+  @@index([userId])
+  @@index([authBrandId])
   @@map("object")
+  @@unique([userId, authBrandId], name: "UniqueUserOrBrand")
+  
+  authUser     AuthUser?  @relation(fields: [userId], references: [id])
+  authBrand    AuthBrand? @relation(fields: [authBrandId], references: [id])
 }
 
 model Profile {

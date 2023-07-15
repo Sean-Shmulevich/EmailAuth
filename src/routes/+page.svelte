@@ -5,7 +5,7 @@
 	import { Button, Dropdown, DropdownItem, Chevron, Avatar } from 'flowbite-svelte';
 
 	export let data: PageData;
-	console.log(data.user);
+	// console.log(data.user);
 
 	import { invalidateAll } from '$app/navigation';
 	import { filedrop } from 'filedrop-svelte';

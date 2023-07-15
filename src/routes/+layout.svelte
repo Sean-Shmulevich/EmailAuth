@@ -16,10 +16,11 @@
 		<title>Demo mailbox</title>
 	</head>
 	<body>
-		<header class="w-full body-font bg-blue-300 fixed">
+		<!-- TODO make it fixed if we want it to be sticky -->
+		<header class="w-full body-font bg-blue-300 absolute top-0">
 			<div class="container sticky mx-auto flex flex-wrap pt-5 flex-col md:flex-row items-center">
 				<!-- svelte-ignore a11y-missing-attribute -->
-				<a class="flex title-font font-mediums items-center text-white mb-4 md:mb-0" style="margin-top:-18px">
+				<a href="/" class="flex title-font font-mediums items-center text-white mb-4 md:mb-0" style="margin-top:-18px">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						fill="none"
@@ -91,7 +92,8 @@
 
 <style lang="postcss">
 	:global(main h1) {
-		@apply mb-2 w-full text-3xl font-semibold;
+		/* TODO this styles could be problematic */
+		@apply  lg:mt-20 md:mt-24 sm:mt-28 mt-32  mb-2 w-full text-3xl font-semibold;
 	}
 	:global(main label) {
 		@apply mb-1 w-full text-sm font-medium;

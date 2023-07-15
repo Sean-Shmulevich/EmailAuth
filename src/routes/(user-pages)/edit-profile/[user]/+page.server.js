@@ -30,7 +30,7 @@ export const load = async ({ params, locals }) => {
 
 	// user.isAdmin===false ||
 	//throw redirect if there is no user or if the user is not the same as the user in the url/search route
-	console.log(user);
+	// console.log(user);
 	if (!user || user.userId !== paramUserId || !user.emailVerified) {
 		throw redirect(302, '/');
 	}

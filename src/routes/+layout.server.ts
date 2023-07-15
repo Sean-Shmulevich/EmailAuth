@@ -12,20 +12,6 @@ export const load: PageServerLoad = async ({ locals }) => {
 	if (!user) {
 		return { msg: 'not authenticated', user: null };
 	}
-	if (user.isAdmin) {
-		throw redirect(302, '/approve-users');
-	}
-
-	//if the user is here it means they tried to create an account but their are not emailVerified yet and they cant do anything
-	if (!user.emailVerified) {
-		throw redirect(302, '/email-verification');
-	}
-
-	//only run this if the user is logged in and not the admin
-	// for (const object of objects) {
-	// 	object.created = shortDate(object.created);
-	// }
-
 	if (!user.adminVerified) {
 		//if the code execution comes here then the user is definitely logged in and email verified but not admin verified
 		return {

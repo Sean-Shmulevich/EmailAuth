@@ -5,6 +5,7 @@ import { fail, redirect } from '@sveltejs/kit';
 import { auth } from '$lib/lucia';
 import { sendEmail } from '$lib/email';
 
+// get a profile by of a specific user by their userID
 async function getUserProfile(userId) {
 	const profile = await prismaClient.profile.findUnique({
 		where: {
@@ -15,9 +16,13 @@ async function getUserProfile(userId) {
 	return profile;
 }
 
+// load images assicated with a specific user by the user id of the current page user
+// load them in ascending order
 export const load = async ({ params, locals }) => {
+	//current app user
 	const { user } = await locals.auth.validateUser();
 
+	//load in user objects
 	const objects = await prismaClient.object.findMany({
 		where: {
 			userId: user.userId
@@ -27,21 +32,28 @@ export const load = async ({ params, locals }) => {
 		}
 	});
 
+	//the id of the user in the search route
+	//chat gpt told me that userID should be both unique and non sensitive
 	const paramUserId = params.user;
 	// console.log(user);
 
 	// user.isAdmin===false ||
-	//do not allow edit access to anybody except the user whos profile it is.
+	//throw redirect if there is no user or if the user is not the same as the user in the url/search route
 	if (!user || user.userId !== paramUserId) {
 		throw redirect(302, '/');
 	}
-	//should users be able to see other peoples profiles or should it just be buisnesses and the admin?
-	//well if I dont directly link to the users it will be fine how it is now but I still need to query the information
 
+	//get user profile
+	//i could use either paramUserId or user.userId because
+	//the 'if statement' above makes sure that they are the same
 	const currUserProfile = await getUserProfile(paramUserId);
+
+	console.log(currUserProfile,objects);
+
+	//objects is an empty array if there is nothing in it
 	return {
-		currUserProfile,
-		objects
+		currUserProfile: currUserProfile || null,
+		objects: objects 
 	};
 };
 
@@ -59,11 +71,11 @@ export const actions = {
 
 		let userId = user.userId;
 		const formData = await request.formData();
-		let name = formData.get('name');
-		let sport = formData.get('sport');
-		let college = formData.get('college');
-		let year = formData.get('year');
-		let bio = formData.get('bio');
+		let name = formData.get('name')?.toString();
+		let sport = formData.get('sport')?.toString();
+		let college = formData.get('college')?.toString();
+		let year = formData.get('year')?.toString();
+		let bio = formData.get('bio')?.toString();
 
 		// console.log(formData);
 		// If user does not exist, throw an error
@@ -104,6 +116,8 @@ export const actions = {
 			}
 		});
 
+
+		// I mean i could just return the profile
 		return {
 			message: 'Profile updated successfully',
 			user: { name, sport, college, year, bio }

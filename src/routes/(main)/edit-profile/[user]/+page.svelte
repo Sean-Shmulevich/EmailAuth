@@ -1,12 +1,141 @@
 <script>
+	//TODO - add text limits to the textboxes
+	//TODO - file.name is not coming through
+	//	its probably becauase of imagecropper.svelte or canvasUtils.js
+	//check type of input and make sure it is correct
 	// @ts-nocheck
 	import ImageCropper from './ImageCropper.svelte';
 	import { enhance } from '$app/forms';
 	export let data;
 	export let form;
 	import Delta from 'quill-delta';
+	import { onMount } from 'svelte';
 
-	// Show the message for 3 seconds
+	let presignUrl = '/api/presign';
+	let s3 = '/api/s3object';
+
+	//dynamically load quill on mount
+	let quill;
+	let editor;
+	let Quill;
+
+	let buttons = ['image1'];
+	let images = {
+		'main-image': '',
+		image1: '',
+		image2: '',
+		image3: '',
+		image4: '',
+		image5: '',
+		image6: '',
+		image7: '',
+		image8: ''
+	};
+
+	let user = {
+		name: '',
+		sport: '',
+		college: '',
+		year: '',
+		bio: '',
+		image: ''
+	};
+
+
+	// If we don't have the editor yet, we'll save the contents here.
+	let pendingContents = null;
+
+	// upload window open or closed 
+	let isModalOpen = false;
+	//Image after cropping
+	let croppedImage = null;
+	//basically a parameter to the ImageCropper.svelte component to change the crop aspect ratio and other associated values
+	let squareInput = false;
+
+	//the current image being modified in the images object
+	let currImage = null;
+
+	//variabe for quill to save the current state of the html content
+	let deltaContent = '';
+
+
+	onMount(async () => {
+		if (typeof window !== 'undefined') {
+			//import quill
+			const module = await import('quill');
+			Quill = module.default;
+
+			//set options for quill editor
+			quill = new Quill(editor, {
+				theme: 'snow'
+			});
+
+			// If we have pending contents, set them now.
+			quill.on('text-change', function (delta, oldDelta, source) {
+				//keep track of user.bio HTML so it can be sent to the db as part of the user object
+				user.bio = quill.root.innerHTML;
+				//keep track of user.bio delta so it can be sent with quill.setContents(deltaContent)
+				deltaContent = quill.getContents();
+				// console.log(user.bio);
+			});
+
+			//a user profile already exists i.e. the page.server.js found an existing user profile
+			if (data.currUserProfile) {
+				console.log(data.currUserProfile);
+				//set the user data fields from the fetched data of the user profile from the db
+				user = { ...user, ...data.currUserProfile };
+
+				//get the bio html from the db convert it to delta and set the quill editor
+				deltaContent = htmlToDelta(data.currUserProfile.bio);
+				deltaContent = deltaContent;
+				quill.setContents(deltaContent);
+			}
+
+			//persist the bio
+			// If we have contents that need to be set, set them now.
+			if (pendingContents) {
+				quill.setContents(pendingContents);
+				pendingContents = null; // We've set the contents, so we can clear the pending contents.
+			}
+		}
+	});
+
+	// restore when somebody navigates away from the page 
+	export const snapshot = {
+		capture: () => {
+			return { user, deltaContent };
+		},
+		restore: (data) => {
+			user = data.user;
+			//load in delta content from the snapshot
+			pendingContents = data.deltaContent;
+		}
+	};
+
+	//load in the images from the db
+	for (let i = 0; i < data.objects.length; i++) {
+		let imgNum = data.objects[i].image_number;
+
+		
+
+		// get urls from aws and load them into the images array
+		if (imgNum === 0) {
+			images['main-image'] = `${s3 + '/' + encodeURIComponent(data.objects[i].id)}`;
+		} else if (imgNum <= 8) {
+			images[`image${imgNum}`] = `${s3 + '/' + encodeURIComponent(data.objects[i].id)}`;
+			//the first one is already in the buttons list
+			buttons.push(`image${imgNum}`);
+		}
+	}
+
+	//this code is ran when the clild compnent finishes cropping the image and returns a blob with the cropped image.
+	$: if (croppedImage !== null && currImage !== null) {
+		//create a temporary blob object in the browser so the crop preview can be displayed
+		images[currImage] = URL.createObjectURL(croppedImage);
+		// console.log(images);
+	}
+
+	// Show the 'uploaded message' or the 'forgot to input message' for 3 seconds
 	let showMessage = true;
 
 	$: if (form?.message) {
@@ -16,6 +145,7 @@
 		showMessage = true;
 	}
 
+	// Convert HTML to Delta helper function
 	function htmlToDelta(html) {
 		const quill = new Quill(document.createElement('pre'));
 		const clipboard = quill.getModule('clipboard');
@@ -29,94 +159,11 @@
 		return delta;
 	}
 
-	let buttons = ['image1'];
-	let presignUrl = '/api/presign';
-	let s3 = '/api/s3object';
-
-	let images = {
-		'main-image': '',
-		image1: '',
-		image2: '',
-		image3: '',
-		image4: '',
-		image5: '',
-		image6: '',
-		image7: '',
-		image8: ''
-	};
-	for (let i = 0; i < data.objects.length; i++) {
-		let imgNum = data.objects[i].image_number;
-
-		if (imgNum > 1 && imgNum < data.objects.length) {
-			// create more buttons if there are more than 2 images
-			buttons.push(`image${imgNum}`);
-		}
-
-		// get urls from aws
-		if (imgNum === 0) {
-			images['main-image'] = `${s3 + '/' + encodeURIComponent(data.objects[i].id)}`;
-		} else if (imgNum <= 8) {
-			images[`image${imgNum}`] = `${s3 + '/' + encodeURIComponent(data.objects[i].id)}`;
-		}
-	}
-
-	let user = {
-		name: '',
-		sport: '',
-		college: '',
-		year: '',
-		bio: '',
-		image: ''
-	};
-
-	function loadUser() {
-		// console.log('Loading user');
-		// if (form && form.user) {
-		// 	user = { ...user, ...form.user };
-		// }
-	}
-
-	let quill;
-	let editor;
-	let pendingContents = null;
-
-	let isModalOpen = false;
-	let croppedImage = null;
-	let currImage = null;
-
-	let squareInput = false;
-
-	let Quill;
-	import { onMount } from 'svelte';
-
-	//variabe for quill to save the current state of the html content
-	let deltaContent = '';
-
-	export const snapshot = {
-		capture: () => {
-			return { user, deltaContent };
-		},
-		restore: (data) => {
-			user = data.user;
-			pendingContents = data.deltaContent;
-		}
-	};
-
 	// $: if (form && form.user) {
 	// 	user = { ...user, ...form.user };
 	// }
 
-	const updateProfile = () => {
-		// update the profile
-		// console.log(user);
-	};
-
-	//this code is ran when the clild compnent finishes cropping the image and returns a blob with the cropped image.
-	$: if (croppedImage !== null && currImage !== null) {
-		images[currImage] = URL.createObjectURL(croppedImage);
-		// console.log(images);
-	}
-
+	//add new ui button
 	const addNewButton = () => {
 		if (buttons.length < 8) {
 			const currButton = buttons[buttons.length - 1];
@@ -127,45 +174,16 @@
 		}
 	};
 
-	onMount(async () => {
-		if (typeof window !== 'undefined') {
-			const module = await import('quill');
-			Quill = module.default;
-
-			quill = new Quill(editor, {
-				theme: 'snow'
-			});
-
-			quill.on('text-change', function (delta, oldDelta, source) {
-				user.bio = quill.root.innerHTML;
-				deltaContent = quill.getContents();
-				// console.log(user.bio);
-			});
-
-			if (data.currUserProfile) {
-				console.log(data.currUserProfile);
-				user = { ...user, ...data.currUserProfile };
-				deltaContent = htmlToDelta(data.currUserProfile.bio);
-				deltaContent = deltaContent;
-				quill.setContents(deltaContent);
-			}
-
-			// If we have contents that need to be set, set them now.
-			if (pendingContents) {
-				quill.setContents(pendingContents);
-				pendingContents = null; // We've set the contents, so we can clear the pending contents.
-			}
-		}
-	});
-
+	//listen to submit image dispatch from child component
+	//upload the image only when submit is pressed
 	function handleSubmit(event) {
 		upload(croppedImage);
 		images = { ...images };
 		croppedImage = null;
 	}
 
+	//upload the file to aws s3	
 	async function upload(file) {
-		console.log('uploaded');
 		// Get presigned POST URL and form fields
 		let { url, fields } = await fetch(`${presignUrl}?fileType=${file.type}`)
 			.then((response) => response.json())
@@ -217,10 +235,12 @@
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" />
 <div class="bg-gray-900 text-white flex flex-col items-center text-center justify-center space-y-8">
 	<h2 class="text-2xl mt-10">Edit Profile</h2>
-	<div class="profile-card flex flex-col bg-gray-800 shadow overflow-hidden mt-10 rounded-lg max-w-5xl mb-10 w-full p-6">
-		<form method="POST"
+	<div
+		class="profile-card flex flex-col bg-gray-800 shadow overflow-hidden mt-10 rounded-lg max-w-5xl mb-10 w-full p-6"
+	>
+		<form
+			method="POST"
 			action="?/update"
-			on:submit={loadUser}
 			use:enhance={() => {
 				return async ({ update }) => {
 					await update({ reset: false });

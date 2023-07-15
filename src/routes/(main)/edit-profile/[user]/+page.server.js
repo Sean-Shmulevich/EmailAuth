@@ -1,4 +1,3 @@
-// @ts-nocheck
 //take a list of all users that tried to sign up and display a button on the ui to update it on the database.
 import { prismaClient } from '$lib/db';
 import { Prisma } from '@prisma/client';

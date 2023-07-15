@@ -46,6 +46,9 @@ export const load = async ({ params, locals }) => {
 
 	const currUserProfile = await getUserProfile(paramUserId);
 
+	// //the current user is the same as the one
+	// if(user.userId === paramUserId)
+
 	//the user profile has not been created yet
 	return {
 		currUserProfile: currUserProfile || null,

@@ -28,7 +28,8 @@ export const load = async ({ params, locals }) => {
 
 	// user.isAdmin===false ||
 	//any users of the app that are logged in can see anybodys profile
-	if (!user) {
+	// if a user is not email verified then they should not be able to see any profiles
+	if (!user || !user.emailVerified) {
 		throw redirect(302, '/');
 	}
 
@@ -54,9 +55,3 @@ export const load = async ({ params, locals }) => {
 		objects: objects || null
 	};
 };
-
-// const authUser = await prismaClient.authUser.findUnique({
-//     where: {
-//       email: email,
-//     },
-// });

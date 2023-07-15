@@ -23,6 +23,18 @@ export const load = async ({ params, locals }) => {
 	//current app user
 	const { user } = await locals.auth.validateUser();
 
+	//the id of the user in the search route
+	//chat gpt told me that userID should be both unique and non sensitive
+	const paramUserId = params.user;
+	// console.log(user);
+
+	// user.isAdmin===false ||
+	//throw redirect if there is no user or if the user is not the same as the user in the url/search route
+	console.log(user);
+	if (!user || user.userId !== paramUserId || !user.emailVerified) {
+		throw redirect(302, '/');
+	}
+
 	//load in user objects
 	const objects = await prismaClient.object.findMany({
 		where: {
@@ -33,16 +45,7 @@ export const load = async ({ params, locals }) => {
 		}
 	});
 
-	//the id of the user in the search route
-	//chat gpt told me that userID should be both unique and non sensitive
-	const paramUserId = params.user;
-	// console.log(user);
 
-	// user.isAdmin===false ||
-	//throw redirect if there is no user or if the user is not the same as the user in the url/search route
-	if (!user || user.userId !== paramUserId) {
-		throw redirect(302, '/');
-	}
 
 	//get user profile
 	//i could use either paramUserId or user.userId because

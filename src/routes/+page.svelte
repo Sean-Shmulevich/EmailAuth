@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import type { PageData } from './$types';
+	import type { PageData } from './(make-user)/$types';
 	import { onMount, onDestroy } from 'svelte';
 	import { Button, Dropdown, DropdownItem, Chevron, Avatar } from 'flowbite-svelte';
 
@@ -9,7 +9,7 @@
 
 	import { invalidateAll } from '$app/navigation';
 	import { filedrop } from 'filedrop-svelte';
-	import Animation from './animation.js';
+	import Animation from './(make-user)/animation.js';
 	// let animation = new Animation();
 
 	onDestroy(async () => {

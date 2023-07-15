@@ -1,9 +1,12 @@
 <script>
+	//TODO-animation
 	// @ts-nocheck
 
 	import { fade } from 'svelte/transition';
 	import { afterUpdate } from 'svelte';
 
+	// default image for profiles without any uploaded images yet.
+	//TODO change default image
 	let defaultImage = "https://arkansasrazorbacks.com/wp-content/uploads/2022/10/Ayden-Owens-Delerme-MTR-2022-23.jpg";
 
 	export let data;
@@ -16,9 +19,10 @@
 		year: 'empty',
 		bio: 'empty',
 	};
-
+	//set the user data to the data from the database from load in +page.server.ts
 	user = { ...user, ...data.currUserProfile };
 
+	//index keeps track of the current image in the slidedeck
 	let index = 0;
 	let images = [ defaultImage ];
 
@@ -51,6 +55,8 @@
 			transitioning = false;
 		}, transitionDuration + transitionDelay);
 	};
+
+	//this tries to make the animation right not working
 
 	let update = false;
 	$: {

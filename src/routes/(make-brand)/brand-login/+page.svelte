@@ -17,4 +17,4 @@
 	<p class="error">{form.message}</p>
 {/if}
 <a href="/password-reset">Forgot password?</a>
-<a href="/signup">Create an account</a>
+<a href="/brand-signup">Create an account</a>

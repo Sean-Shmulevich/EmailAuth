@@ -8,11 +8,9 @@ export const load: PageServerLoad = async ({ locals }) => {
 	const { user } = await locals.auth.validateUser();
 
 	if (!user) {
-		console.log("/email verification");
 		throw redirect(302, '/login');
 	}
 	if (user.emailVerified) {
-		console.log("/email verification");
 		throw redirect(302, '/');
 	}
 	return {

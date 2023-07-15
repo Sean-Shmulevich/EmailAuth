@@ -1,27 +1,21 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
 	import type { PageData } from './(make-user)/$types';
-	import { onMount, onDestroy } from 'svelte';
-	import { Button, Dropdown, DropdownItem, Chevron, Avatar } from 'flowbite-svelte';
 
 	export let data: PageData;
 	// console.log(data.user);
 
-	import { invalidateAll } from '$app/navigation';
-	import { filedrop } from 'filedrop-svelte';
-	import Animation from './(make-user)/animation.js';
 	// let animation = new Animation();
 
-	onDestroy(async () => {
-		console.log('destroyed');
-		// await animation.delete();
-		// await stopAnimation(window);
-	});
+	// onDestroy(async () => {
+	// 	console.log('destroyed');
+	// 	await animation.delete();
+	// 	await stopAnimation(window);
+	// });
 
-	onMount(async () => {
-		// console.log(animate.start());
-		// await animation.start();
-	});
+	// onMount(async () => {
+	// 	console.log(animate.start());
+	// 	await animation.start();
+	// });
 </script>
 
 <!-- <h1>Welcome, user {data.msg}</h1>

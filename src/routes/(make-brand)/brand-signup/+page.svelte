@@ -18,4 +18,4 @@
 {#if form?.message}
 	<p class="error">{form.message}</p>
 {/if}
-<a href="/login">Sign in</a>
+<a href="/brand-login">Sign in</a>

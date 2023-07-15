@@ -55,3 +55,13 @@ export const load = async ({ params, locals }) => {
 		objects: objects || null
 	};
 };
+
+export const actions = {
+	logout: async ({ locals }) => {
+		const session = await locals.auth.validate();
+		if (!session) return null;
+		await auth.invalidateSession(session.sessionId);
+		locals.auth.setSession(null);
+	}
+};
+

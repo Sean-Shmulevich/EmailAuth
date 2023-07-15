@@ -218,7 +218,6 @@
 		//Turn index into a key arry and find the index of the current Image when uploaded
 		const keys = Object.keys(images); // convert keys to an array
 		const index = keys.indexOf(currImage); // find index of 'age'
-		console.log(index);
 		form.append('position', index);
 		try {
 			await fetch(s3 + '/' + encodeURIComponent(fields.key), { method: 'POST', body: form });

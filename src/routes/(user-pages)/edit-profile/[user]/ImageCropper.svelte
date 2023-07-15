@@ -29,6 +29,7 @@
 	let aspect;
 	let width;
 	let height;
+	//this reactive block Im not sure if it needs to be in the block
 	$: {
 		if (square) {
 			aspect = 1;
@@ -49,9 +50,6 @@
 
 	let profilePicture, style;
 
-	async function cropImage() {
-		croppedImage = await getCroppedImg(image, pixelCrop);
-	}
 
 	function previewCrop(e) {
 		pixelCrop = e.detail.pixels;

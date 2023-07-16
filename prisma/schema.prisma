@@ -93,5 +93,7 @@ model BrandProfile {
   industry   String
   size       String
   goals      String
-  auth_brand AuthUser? @relation(fields: [user_id], references: [id])
+  auth_user AuthUser? @relation(fields: [user_id], references: [id])
+
+  @@map("brand_profile")
 }

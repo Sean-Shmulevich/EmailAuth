@@ -8,15 +8,22 @@ import { prismaClient } from '$lib/db';
 
 export const load: PageServerLoad = async ({ locals }) => {
 	const { user } = await locals.auth.validateUser();
+
+	//If there is already a user logged in they should be sent to the home page because the homepage will decide where to send them
+	//but if the user exists but their email is not verified they should be sent to the email verification page
+	//otherwise they are at least an email verified user
 	if (user) {
 		if (!user.emailVerified) throw redirect(302, '/email-verification');
+		//if the user is not the admin the root page decides where to send them.
 		throw redirect(302, '/');
 	}
 };
 
 export const actions: Actions = {
 	default: async ({ request, locals }) => {
-
+		// if(!user.isAdmin){
+		// 	throw redirect(302, '/');	
+		// }
 
 		const formData = await request.formData();
 		const email = formData.get('email')?.toString() ?? '';
@@ -26,9 +33,9 @@ export const actions: Actions = {
 				email: email,
 			},
 		});
-		if(!user || user.is_brand || user.is_admin){
+		if(!user || !user.is_admin){
 			return fail(400, {
-				message: 'wrong login try another one',
+				message: 'Not admin user',
 				email
 			});
 		}
@@ -69,6 +76,6 @@ export const actions: Actions = {
 				email
 			});
 		}
-		throw redirect(302, '/');
+		throw redirect(302, '/admin/approve-users');
 	}
 };

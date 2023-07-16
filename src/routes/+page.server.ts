@@ -13,7 +13,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 		return { msg: 'not authenticated', user: null };
 	}
 	if (user.isAdmin) {
-		throw redirect(302, '/approve-users');
+		throw redirect(302, '/admin/approve-users');
 	}
 
 	//if the user is here it means they tried to create an account but their are not emailVerified yet and they cant do anything

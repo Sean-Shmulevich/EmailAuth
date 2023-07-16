@@ -73,6 +73,7 @@ async function verifyUser(email) {
 // });
 export const actions = {
     verify: async ({ request, locals }) => {
+        //TODO verify user post request here
         const formData = await request.formData();
         const email = formData.get('email')?.toString() ?? '';
         if (email === null /* ||    !emailRegex.test(email) */) {

@@ -4,6 +4,7 @@ import { LuciaError } from 'lucia-auth';
 import { fail, redirect } from '@sveltejs/kit';
 
 import type { PageServerLoad, Actions } from './$types';
+import { prismaClient } from '$lib/db';
 
 export const load: PageServerLoad = async ({ locals }) => {
 	const { user } = await locals.auth.validateUser();
@@ -19,6 +20,18 @@ export const actions: Actions = {
 	default: async ({ request, locals }) => {
 		const formData = await request.formData();
 		const email = formData.get('email')?.toString() ?? '';
+		
+		const user = await prismaClient.authUser.findUnique({
+			where: {
+				email: email,
+			},
+		});
+		if(!user || !user.is_brand || user.is_admin){
+			return fail(400, {
+				message: 'Not brand user',
+				email
+			});
+		}
 		if (email === null || !emailRegex.test(email)) {
 			return fail(400, {
 				message: 'Incorrect email or password',

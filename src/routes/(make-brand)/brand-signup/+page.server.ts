@@ -49,6 +49,8 @@ export const actions: Actions = {
 				}
 			});
 
+			const session = await auth.createSession(user.userId);
+			locals.auth.setSession(session);
 			// Create the BrandProfile
 			await prismaClient.brandProfile.create({
 				data: {
@@ -60,8 +62,6 @@ export const actions: Actions = {
 					goals: formData.get('goals')?.toString() ?? ''
 				}
 			});
-			const session = await auth.createSession(user.userId);
-			locals.auth.setSession(session);
 			const token = await emailVerificationToken.issue(user.userId);
 			await sendEmailVerificationEmail(user.email, token.toString());
 		} catch (e) {

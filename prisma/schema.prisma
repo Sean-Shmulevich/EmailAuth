@@ -17,8 +17,8 @@ model AuthUser {
   email          String        @unique
   email_verified Boolean
   admin_verified Boolean
-  is_brand       Boolean       @default(false)
   is_admin       Boolean
+  is_brand       Boolean
   profile        Profile?
   brand_profile  BrandProfile?
   auth_session   AuthSession[]

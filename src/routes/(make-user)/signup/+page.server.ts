@@ -43,7 +43,8 @@ export const actions: Actions = {
 					email,
 					email_verified: false,
 					admin_verified: false,
-					is_admin: false
+					is_admin: false,
+					is_brand: false,
 				}
 			});
 			const session = await auth.createSession(user.userId);

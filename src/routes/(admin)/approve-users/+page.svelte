@@ -23,7 +23,7 @@
 				<a class="text-blue-500 underline" href="/user-profile/{user.id}">profile link</a>
 			</div>
 			<form method="post" action="?/verify" use:enhance>
-				<input id="email" name="email" disabled value={user.email} /><br />
+				<input id="email" name="email" hidden value={user.email} />
 
 				<button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded"> Button </button>
 			</form>

@@ -8,8 +8,8 @@ import { sendEmail } from '$lib/email';
 async function getAllUsers() {
 	const users = await prismaClient.authUser.findMany({
 		where: {
-			is_admin: false, 
-            is_brand: false,
+			is_admin: false,
+			is_brand: false,
 			email_verified: true,
 			admin_verified: false
 		}
@@ -34,16 +34,14 @@ export const load = async ({ locals }) => {
 async function verifyUser(email) {
 	const updatedUser = await prismaClient.authUser.update({
 		where: {
-			email: email,
+			email: email
 		},
 		data: {
 			admin_verified: true
 		}
 	});
 	//I think this is impossible to happen but safe
-	if (!updatedUser) {
-		return fail(400, { 'user not found': email });
-	}
+
 	sendEmail(
 		email,
 		'Your account has been verified',
@@ -61,8 +59,13 @@ export const actions = {
 	verify: async ({ request, locals }) => {
 		const formData = await request.formData();
 		const email = formData.get('email')?.toString() ?? '';
+		console.log('email', email);
 		if (email === null /* ||    !emailRegex.test(email) */) {
 			console.log('email is null or not valid');
+			return fail(400, {
+				message: 'email is null or not valid',
+				email
+			});
 		}
 		try {
 			verifyUser(email);

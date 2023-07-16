@@ -6,10 +6,16 @@ import { auth } from '$lib/lucia';
 import { sendEmail } from '$lib/email';
 
 
-async function getAllUsers() {
-    const users = await prismaClient.authUser.findMany();
+async function getAllBrands() {
+	const brands = await prismaClient.authUser.findMany({
+		where: {
+			is_admin: false, 
+            is_brand: true 
+		}
+	});
 
-    return users;
+	return brands;
+
 }
 
 export const load = async ({ locals }) => {
@@ -19,27 +25,25 @@ export const load = async ({ locals }) => {
         throw redirect(302, '/');
     }
 
-    const allUsers = getAllUsers();
+    const allBrands = await getAllBrands();
     return {
-        allUsers,
+        allBrands,
     }
 }
 
 async function verifyUser(email) {
-	const updatedUser = await prismaClient.authUser.updateMany({
+	const updatedUser = await prismaClient.authUser.update({
 		where: {
-			email: email,
-			is_admin: false, 
-            is_brand: true 
+			email: email
 		},
 		data: {
 			admin_verified: true
 		}
 	});
 	//I think this is impossible to happen but safe
-	if (!updatedUser) {
-		return fail(400, { 'user not found': email });
-	}
+	// if (!updatedUser) {
+		// return fail(400, { 'user not found': email });
+	// }
     sendEmail(email, "Your account has been verified", "Your account has been verified by the admin. You can now login to your account.");
     return updatedUser;
 }

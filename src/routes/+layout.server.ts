@@ -7,7 +7,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 	//if there is no user return nothing to the frontend
 	//if there is a user that is email verified but not admin verified return the user the menu will allow uers to edit profile and logout only
 	//if there is a user that is email verified and admin verified return the user the menu will allow users to edit profile, logout, and view deals, and past offers
-	if (!user) {
+	if (!user || !user.emailVerified) {
 		return { msg: 'not authenticated', user: null };
 	}
 	if (!user.adminVerified) {

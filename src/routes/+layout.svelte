@@ -1,8 +1,8 @@
 <script lang="ts">
 	import '../app.css';
 	import { enhance } from '$app/forms';
-	import type { PageData } from './(make-user)/$types';
-	import { onMount, onDestroy } from 'svelte';
+	import type { PageData } from './$types';
+	// import { onMount, onDestroy } from 'svelte';
 	import { Button, Dropdown, DropdownItem, Chevron, Avatar } from 'flowbite-svelte';
 
 	export let data: PageData;

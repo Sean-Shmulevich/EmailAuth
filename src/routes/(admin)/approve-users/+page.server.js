@@ -6,7 +6,12 @@ import { auth } from '$lib/lucia';
 import { sendEmail } from '$lib/email';
 
 async function getAllUsers() {
-	const users = await prismaClient.authUser.findMany();
+	const users = await prismaClient.authUser.findMany({
+		where: {
+			is_admin: false, 
+            is_brand: false
+		}
+	});
 
 	return users;
 }
@@ -25,11 +30,9 @@ export const load = async ({ locals }) => {
 };
 
 async function verifyUser(email) {
-	const updatedUser = await prismaClient.authUser.updateMany({
+	const updatedUser = await prismaClient.authUser.update({
 		where: {
 			email: email,
-			is_admin: false, 
-            is_brand: false
 		},
 		data: {
 			admin_verified: true

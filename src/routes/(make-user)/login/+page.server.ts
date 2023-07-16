@@ -47,6 +47,7 @@ export const actions: Actions = {
 					email
 				});
 			}
+			console.log(e);
 			return fail(400, {
 				message: 'An unknown error occurred',
 				email

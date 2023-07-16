@@ -9,7 +9,8 @@ async function getAllUsers() {
 	const users = await prismaClient.authUser.findMany({
 		where: {
 			is_admin: false, 
-            is_brand: false
+            is_brand: false,
+			email_verified: true,
 		}
 	});
 

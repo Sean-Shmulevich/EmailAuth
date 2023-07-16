@@ -6,6 +6,7 @@ import { LuciaError } from 'lucia-auth';
 import { Prisma } from '@prisma/client';
 
 import type { PageServerLoad, Actions } from './$types';
+import { prismaClient } from '$lib/db';
 
 export const load: PageServerLoad = async ({ locals }) => {
 	const { user } = await locals.auth.validateUser();
@@ -44,7 +45,19 @@ export const actions: Actions = {
 					email_verified: false,
 					admin_verified: false,
 					is_admin: false,
-					is_brand: true 
+					is_brand: true
+				}
+			});
+
+			// Create the BrandProfile
+			await prismaClient.brandProfile.create({
+				data: {
+					user_id: user.userId,
+					name: formData.get('name')?.toString() ?? '',
+					location: formData.get('location')?.toString() ?? '',
+					industry: formData.get('industry')?.toString() ?? '',
+					size: formData.get('size')?.toString() ?? '',
+					goals: formData.get('goals')?.toString() ?? ''
 				}
 			});
 			const session = await auth.createSession(user.userId);

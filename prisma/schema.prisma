@@ -89,9 +89,9 @@ model Email {
 model BrandProfile {
   user_id    String    @id
   name       String
-  sport      String
-  college    String
-  year       String
-  bio        String
+  location   String
+  industry   String
+  size       String
+  goals      String
   auth_brand AuthUser? @relation(fields: [user_id], references: [id])
 }

@@ -11,6 +11,7 @@ async function getAllUsers() {
 			is_admin: false, 
             is_brand: false,
 			email_verified: true,
+			admin_verified: false
 		}
 	});
 

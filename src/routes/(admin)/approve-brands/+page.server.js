@@ -12,6 +12,7 @@ async function getAllBrands() {
 			is_admin: false, 
             is_brand: true,
             email_verified: true,
+            admin_verified: false
 		}
 	});
 

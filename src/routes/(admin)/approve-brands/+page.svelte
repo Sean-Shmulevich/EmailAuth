@@ -11,10 +11,6 @@
 
 <div class="mx-24 mt-10">
 
-	<form method="post" action="?/logout" use:enhance>
-		<input type="submit" value="Sign out" />
-	</form>
-
 	<a href="/approve-users">approve users</a>
 	
 

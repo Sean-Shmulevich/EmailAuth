@@ -15,9 +15,9 @@
 		<meta name="viewport" content="width=device-width" />
 		<title>Demo mailbox</title>
 	</head>
-	<body>
+	<body class="bg-gray-900 h-[100vh]">
 		<!-- TODO make it fixed if we want it to be sticky -->
-		<header class="w-full body-font bg-blue-300 absolute top-0">
+		<header class="w-full body-font bg-blue-300 ">
 			<div class="container sticky mx-auto flex flex-wrap pt-5 flex-col md:flex-row items-center">
 				<!-- svelte-ignore a11y-missing-attribute -->
 				<a
@@ -101,7 +101,7 @@
 				</nav>
 			</div>
 		</header>
-		<main>
+		<main class="">
 			<slot />
 		</main>
 	</body>

@@ -87,13 +87,15 @@ model Email {
 }
 
 model BrandProfile {
-  user_id    String    @id
-  name       String
-  location   String
-  industry   String
-  size       String
-  goals      String
-  auth_user AuthUser? @relation(fields: [user_id], references: [id])
+  user_id          String    @id
+  name             String
+  location         String
+  industry         String
+  size             String
+  goals            String
+  socialMediaLinks String[]
+  bio              String?
+  auth_user        AuthUser? @relation(fields: [user_id], references: [id])
 
   @@map("brand_profile")
 }

@@ -20,6 +20,19 @@ async function getAllBrands() {
 
 }
 
+async function getApprovedBrands() {
+	const users = await prismaClient.authUser.findMany({
+		where: {
+			is_admin: false,
+			is_brand: false,
+			email_verified: true,
+			admin_verified: true 
+		}
+	});
+
+	return users;
+}
+
 export const load = async ({ locals }) => {
     const { user } = await locals.auth.validateUser();
 
@@ -28,8 +41,10 @@ export const load = async ({ locals }) => {
     }
 
     const allBrands = await getAllBrands();
+    const approvedBrands = getApprovedBrands();
     return {
         allBrands,
+        approvedBrands
     }
 }
 

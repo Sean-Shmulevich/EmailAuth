@@ -18,6 +18,19 @@ async function getAllUsers() {
 	return users;
 }
 
+async function getApprovedUsers() {
+	const users = await prismaClient.authUser.findMany({
+		where: {
+			is_admin: false,
+			is_brand: false,
+			email_verified: true,
+			admin_verified: true 
+		}
+	});
+
+	return users;
+}
+
 export const load = async ({ locals }) => {
 	const { user } = await locals.auth.validateUser();
 
@@ -26,8 +39,10 @@ export const load = async ({ locals }) => {
 	}
 
 	const allUsers = getAllUsers();
+	const approvedUsers = getApprovedUsers();
 	return {
-		allUsers
+		allUsers,
+		approvedUsers
 	};
 };
 

@@ -7,6 +7,7 @@ import { sendEmail } from '$lib/email';
 
 
 async function getAllBrands() {
+
 	const brands = await prismaClient.authUser.findMany({
 		where: {
 			is_admin: false, 

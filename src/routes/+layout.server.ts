@@ -14,6 +14,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 		//if the code execution comes here then the user is definitely logged in and email verified but not admin verified
 		return {
 			msg: 'email authenticated',
+			// !!! returning user might be dangerous
 			user
 		};
 	}

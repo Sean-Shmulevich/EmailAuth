@@ -20,7 +20,11 @@
 		<header class="w-full body-font bg-blue-300 absolute top-0">
 			<div class="container sticky mx-auto flex flex-wrap pt-5 flex-col md:flex-row items-center">
 				<!-- svelte-ignore a11y-missing-attribute -->
-				<a href="/" class="flex title-font font-mediums items-center text-white mb-4 md:mb-0" style="margin-top:-18px">
+				<a
+					href="/"
+					class="flex title-font font-mediums items-center text-white mb-4 md:mb-0"
+					style="margin-top:-18px"
+				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						fill="none"
@@ -35,7 +39,10 @@
 					</svg>
 					<span class="ml-3 text-3xl gold">DapUp</span>
 				</a>
-				<nav class="md:ml-auto flex flex-wrap items-center text-base justify-center" style="margin-bottom:18px">
+				<nav
+					class="md:ml-auto flex flex-wrap items-center text-base justify-center"
+					style="margin-bottom:18px"
+				>
 					{#if data.msg === 'not authenticated'}
 						<span class="mr-6 text-gray-300">Login/Sign Up: </span>
 						<a
@@ -67,12 +74,22 @@
 								{/if}
 							</div>
 
-							<DropdownItem class="text-center" href="/user-profile/{data.user.userId}"
-								>View Profile</DropdownItem
-							>
-							<DropdownItem class="text-center" href="/edit-profile/{data.user.userId}"
-								>Edit Profile</DropdownItem
-							>
+							{#if !data.user.isBrand}
+								<DropdownItem class="text-center" href="/user-profile/{data.user.userId}"
+									>View Profile</DropdownItem
+								>
+								<DropdownItem class="text-center" href="/edit-profile/{data.user.userId}"
+									>Edit Profile</DropdownItem
+								>
+							{:else}
+								<DropdownItem class="text-center" href="/brand-profile/{data.user.userId}"
+									>View Profile</DropdownItem
+								>
+								<DropdownItem class="text-center" href="/brand-edit-profile/{data.user.userId}"
+									>Edit Profile</DropdownItem
+								>
+							{/if}
+
 							{#if data.msg === 'fully authenticated'}
 								<h1>hello user is admin authenticated</h1>
 							{/if}
@@ -93,7 +110,7 @@
 <style lang="postcss">
 	:global(main h1) {
 		/* TODO this styles could be problematic */
-		@apply  lg:mt-20 md:mt-24 sm:mt-28 mt-32  mb-2 w-full text-3xl font-semibold;
+		@apply lg:mt-20 md:mt-24 sm:mt-28 mt-32  mb-2 w-full text-3xl font-semibold;
 	}
 	:global(main label) {
 		@apply mb-1 w-full text-sm font-medium;

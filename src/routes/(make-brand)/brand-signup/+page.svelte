@@ -26,7 +26,7 @@
 		const formData = new FormData(formElement);
 		const fieldValue = formData.get(currQuestion);
 		responses[currIndex] = fieldValue;
-		console.log(fieldValue); // Do something with the form data
+		// console.log(fieldValue); // Do something with the form data
 
 		// Clear the input
 		formElement.reset();

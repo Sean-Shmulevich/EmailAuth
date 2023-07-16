@@ -5,7 +5,7 @@
 	 * @type {any}
 	 */
 	export let data;
-	console.log(data.allBrands);
+	// console.log(data.allBrands);
 </script>
 
 <h1 class="text-center text-6xl">Admin approve brands</h1>

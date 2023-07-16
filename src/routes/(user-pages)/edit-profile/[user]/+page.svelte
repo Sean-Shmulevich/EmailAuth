@@ -81,7 +81,7 @@
 
 			//a user profile already exists i.e. the page.server.js found an existing user profile
 			if (data.currUserProfile) {
-				console.log(data.currUserProfile);
+				// console.log(data.currUserProfile);
 				//set the user data fields from the fetched data of the user profile from the db
 				user = { ...user, ...data.currUserProfile };
 

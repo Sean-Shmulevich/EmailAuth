@@ -52,7 +52,7 @@ export const load = async ({ params, locals }) => {
 	//the 'if statement' above makes sure that they are the same
 	const currUserProfile = await getUserProfile(paramUserId);
 
-	console.log(currUserProfile,objects);
+	// console.log(currUserProfile,objects);
 
 	//objects is an empty array if there is nothing in it
 	return {

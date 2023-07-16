@@ -17,7 +17,7 @@
 	<h2 class="text-4xl text-center">Users waiting for approval</h2>
 	{#if data.allUsers.length === 0}
 		<div class="p-5 my-4 mx-auto text-center rounded-xl w-48 bg-gray-400">
-			<p class="text-2xl">No brands waiting for approval</p>
+			<p class="text-2xl">No users waiting for approval</p>
 		</div>
 	{/if}
 

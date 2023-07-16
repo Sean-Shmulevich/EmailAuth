@@ -18,15 +18,24 @@ const load = async ({ locals }) => {
   };
 };
 async function verifyUser(email) {
-  const updatedUser = await prismaClient.authUser.update({
+  const updatedUser = await prismaClient.authUser.updateMany({
     where: {
-      email
+      email,
+      is_admin: false,
+      is_brand: false
     },
     data: {
       admin_verified: true
     }
   });
-  sendEmail(email, "Your account has been verified", "Your account has been verified by the admin. You can now login to your account.");
+  if (!updatedUser) {
+    return fail(400, { "user not found": email });
+  }
+  sendEmail(
+    email,
+    "Your account has been verified",
+    "Your account has been verified by the admin. You can now login to your account."
+  );
   return updatedUser;
 }
 const actions = {

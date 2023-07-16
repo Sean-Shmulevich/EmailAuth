@@ -49,9 +49,6 @@ function get_current_component() {
     throw new Error("Function called outside component initialization");
   return current_component;
 }
-function onDestroy(fn) {
-  get_current_component().$$.on_destroy.push(fn);
-}
 function createEventDispatcher() {
   const component = get_current_component();
   return (type, detail, { cancelable = false } = {}) => {
@@ -255,24 +252,23 @@ function style_object_to_string(style_object) {
 }
 export {
   setContext as a,
-  subscribe as b,
+  compute_rest_props as b,
   create_ssr_component as c,
-  each as d,
-  escape as e,
-  add_attribute as f,
-  getContext as g,
-  compute_rest_props as h,
-  spread as i,
-  escape_object as j,
-  escape_attribute_value as k,
-  is_void as l,
+  spread as d,
+  escape_object as e,
+  escape_attribute_value as f,
+  add_attribute as g,
+  compute_slots as h,
+  is_void as i,
+  escape as j,
+  getContext as k,
+  get_current_component as l,
   missing_component as m,
   noop as n,
-  compute_slots as o,
-  get_current_component as p,
-  globals as q,
-  onDestroy as r,
+  globals as o,
+  subscribe as p,
+  each as q,
+  createEventDispatcher as r,
   safe_not_equal as s,
-  createEventDispatcher as t,
   validate_component as v
 };

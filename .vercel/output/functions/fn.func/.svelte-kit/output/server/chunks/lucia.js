@@ -1129,7 +1129,8 @@ const auth = lucia({
       email: userData.email,
       emailVerified: userData.email_verified,
       adminVerified: userData.admin_verified,
-      isAdmin: userData.is_admin
+      isAdmin: userData.is_admin,
+      isBrand: userData.is_brand
     };
   }
 });

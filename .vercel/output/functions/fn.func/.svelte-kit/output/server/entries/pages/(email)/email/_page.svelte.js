@@ -1,4 +1,4 @@
-import { c as create_ssr_component, f as add_attribute, d as each, e as escape } from "../../../../chunks/index2.js";
+import { c as create_ssr_component, g as add_attribute, q as each, j as escape } from "../../../../chunks/index2.js";
 import "devalue";
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { data } = $$props;

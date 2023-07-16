@@ -76,6 +76,16 @@ model Profile {
   @@map("profile")
 }
 
+model Email {
+  id            String   @id @unique
+  subject       String
+  email_address String
+  date_sent     DateTime
+  content       String
+
+  @@map("email")
+}
+
 model BrandProfile {
   user_id    String    @id
   name       String

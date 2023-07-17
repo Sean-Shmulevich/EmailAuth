@@ -28,17 +28,18 @@
 
 	//set the user data to the data from the database from load in +page.server.ts
 	user = { ...user, ...data.currUserProfile };
+	let loaded = false;
 
 	onMount(async () => {
 		if (typeof window !== 'undefined') {
 			const module = await import('quill');
 			Quill = module.default;
 			quill = new Quill(document.createElement('div'));
-			console.log("here")
-			if (data.currUserProfile) {
-				user.goals = deltaToHtml(data.currUserProfile.goals, quill);
-				user.bio = deltaToHtml(data.currUserProfile.bio, quill);
-			}
+		}
+		if (data.currUserProfile) {
+			user.goals = deltaToHtml(data.currUserProfile.goals, quill);
+			user.bio = deltaToHtml(data.currUserProfile.bio, quill);
+			loaded = true;
 			user = user;
 		}
 	});
@@ -133,11 +134,15 @@
 			<h2 class="text-6xl mb-2 -mt-4">{user.name}</h2>
 			<div class="flex-grow mb-2 border border-red-100 rounded-xl block w-full h-fit p-5">
 				<h4 class="text-lg leading-6 font-medium text-white">Biography</h4>
-				<p class="mt-2 text-base break-words text-gray-400">{@html user.bio}</p>
+				{#if loaded}
+					<p class="mt-2 text-base break-words text-gray-400">{@html user.bio}</p>
+				{/if}
 			</div>
 			<div class="flex-grow mb-2 border border-red-100 rounded-xl block w-full h-fit p-5">
 				<h4 class="text-lg leading-6 font-medium text-white">Company goals</h4>
-				<p class="mt-2 text-base break-words text-gray-400">{@html user.goals}</p>
+				{#if loaded}
+					<p class="mt-2 text-base break-words text-gray-400">{@html user.goals}</p>
+				{/if}
 			</div>
 			<!-- <div class="overflow-y-auto overflow-wrap break-word">
 			</div> -->

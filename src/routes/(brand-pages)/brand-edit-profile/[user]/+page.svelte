@@ -19,7 +19,7 @@
 	let editor;
 	let Quill;
 
-	let buttons = ['image1'];
+	let buttons = [];
 	let images = {
 		'main-image': '',
 		image1: '',
@@ -33,12 +33,12 @@
 	};
 
 	let user = {
-		name: '',
-		sport: '',
-		college: '',
-		year: '',
-		bio: '',
-		image: ''
+		name: 'Profile empty',
+		location: 'empty',
+		industry: 'empty',
+		size: 'empty',
+		goals: 'empty',
+		bio: 'empty'
 	};
 
 
@@ -113,6 +113,7 @@
 	};
 
 	//load in the images from the db
+	console.log(data.objects);
 	for (let i = 0; i < data.objects.length; i++) {
 		let imgNum = data.objects[i].image_number;
 
@@ -126,6 +127,7 @@
 			//the first one is already in the buttons list
 			buttons.push(`image${imgNum}`);
 		}
+		console.log(buttons);
 	}
 
 	//this code is ran when the clild compnent finishes cropping the image and returns a blob with the cropped image.
@@ -178,6 +180,7 @@
 	//upload the image only when submit is pressed
 	function handleSubmit(event) {
 		upload(croppedImage);
+		console.log("run");
 		images = { ...images };
 		croppedImage = null;
 	}
@@ -221,6 +224,7 @@
 		form.append('position', index);
 		try {
 			await fetch(s3 + '/' + encodeURIComponent(fields.key), { method: 'POST', body: form });
+			images = { ...images };
 		} catch (error) {
 			console.log(error);
 			return false;
@@ -348,54 +352,21 @@
 					{/if}
 				</div>
 			</div>
+
 			<div class="mb-4">
-				<label class="block text-gray-300 text-sm font-bold mb-2" for="name"> Name </label>
-				<p class="text-gray-500 text-xs mb-2">Please enter your full name.</p>
+				<label class="block text-gray-300 text-sm font-bold mb-2" for="sport">Company Size</label>
+				<p class="text-gray-500 text-xs mb-2">What is your companies approximate size</p>
 				<input
 					class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-					id="name"
-					name="name"
+					id="size"
+					name="size"
 					type="text"
-					placeholder="John Doe"
-					bind:value={user.name}
+					placeholder="1-10"
+					bind:value={user.size}
 				/>
 			</div>
-			<div class="mb-4">
-				<label class="block text-gray-300 text-sm font-bold mb-2" for="sport"> Sport </label>
-				<p class="text-gray-500 text-xs mb-2">What is your primary sport?</p>
-				<input
-					class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-					id="sport"
-					name="sport"
-					type="text"
-					placeholder="Basketball"
-					bind:value={user.sport}
-				/>
-			</div>
-			<div class="mb-4">
-				<label class="block text-gray-300 text-sm font-bold mb-2" for="college"> College </label>
-				<p class="text-gray-500 text-xs mb-2">Where did you go to college?</p>
-				<input
-					class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-					name="college"
-					id="college"
-					type="text"
-					placeholder="Harvard University"
-					bind:value={user.college}
-				/>
-			</div>
-			<div class="mb-4">
-				<label class="block text-gray-300 text-sm font-bold mb-2" for="year"> Year </label>
-				<p class="text-gray-500 text-xs mb-2">Which year did you graduate?</p>
-				<input
-					class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-					name="year"
-					id="year"
-					type="text"
-					placeholder="2018"
-					bind:value={user.year}
-				/>
-			</div>
+
+
 			<div class="mb-4">
 				<label class="block text-gray-300 text-sm font-bold mb-2" for="bio"> Bio </label>
 				<p class="text-gray-500 text-xs mb-2">Tell us a little about yourself.</p>

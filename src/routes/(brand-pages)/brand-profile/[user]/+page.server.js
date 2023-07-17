@@ -41,6 +41,8 @@ export const load = async ({ params, locals }) => {
 			image_number: 'asc'
 		}
 	});
+
+	console.log("objects",objects);
 	//should users be able to see other peoples profiles or should it just be buisnesses and the admin?
 	//well if I dont directly link to the users it will be fine how it is now but I still need to query the information
 

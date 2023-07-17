@@ -292,7 +292,7 @@
 				</label>
 				<p class="text-gray-500 text-xs mb-2">Please upload a profile picture.</p>
 				<div class="space-y-4 p-10">
-					{#each buttons as button (button)}
+					{#each buttons as button }
 						<button
 							disabled={images[button] !== ''}
 							class="{images[button] !== ''

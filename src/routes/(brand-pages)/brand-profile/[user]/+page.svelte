@@ -31,60 +31,36 @@
 	let index = 0;
 	let images = [defaultImage];
 
-	for (let i = 0; i < data.objects.length; i++) {
-		let imgNum = data.objects[i].image_number;
-		images[imgNum] = `${s3 + '/' + encodeURIComponent(data.objects[i].id)}`;
+	//start from the first image
+	for (let i = 0; i < data.objects.length-1; i++) {
+		images[i] = `${s3 + '/' + encodeURIComponent(data.objects[i+1].id)}`;
 	}
-
+	console.log(images);
 	let currentImage = images[index];
-	let nextImage = null;
-	let transitioning = false;
-
-	const transitionDuration = 500;
-	const transitionDelay = 100;
-
-	const switchImage = () => {
-		if (transitioning) return;
-
-		nextImage = images[(index + 1) % images.length];
-		index = (index + 1) % images.length;
-
-		transitioning = true;
-
-		setTimeout(() => {
-			currentImage = nextImage;
-			nextImage = null;
-		}, transitionDuration);
-
-		setTimeout(() => {
-			transitioning = false;
-		}, transitionDuration + transitionDelay);
-	};
 
 	//this tries to make the animation right not working
-
-	let update = false;
-	$: {
-		update = true;
-		afterUpdate(() => {
-			update = false;
-		});
-	}
 </script>
 
 <div class=" text-white mt-10 flex flex-col items-center">
-	<div
-		class="profile-card flex flex-col md:flex-row bg-gray-800 shadow rounded-lg max-w-7xl p-6"
-	>
-		<div class="image w-3/4 md:min-w-[400px] md:w-[43%] relative ">
-
-			<img src={currentImage} alt="Current image" class="justify-center items-center object-cover h-full w-full rounded-lg"  />
-
+	<div class="profile-card flex flex-col md:flex-row bg-gray-800 shadow rounded-lg max-w-7xl p-6">
+		<div class="image w-3/4 md:min-w-[400px] md:w-[43%] relative">
+			<img
+				src={currentImage}
+				alt="Current image"
+				class="justify-center items-center object-cover h-full w-full rounded-lg"
+			/>
+			{index}
 			<div class="absolute top-1/2 transform -translate-y-1/2 left-3">
+				
 				<button
 					class="bg-transparent text-white text-4xl font-semibold hover:text-gray-300 transition-colors duration-200"
-					on:click={switchImage}
-					disabled={transitioning}
+					on:click={() => {
+						index--;
+						if (index < 0) {
+							index = images.length - 1;
+						}
+						currentImage = images[index];
+					}}
 				>
 					&lt;
 				</button>
@@ -93,8 +69,13 @@
 			<div class="absolute top-1/2 transform -translate-y-1/2 right-3">
 				<button
 					class="bg-transparent text-white text-4xl font-semibold hover:text-gray-300 transition-colors duration-200"
-					on:click={switchImage}
-					disabled={transitioning}
+					on:click={() => {
+						index++;
+						if (index >= images.length) {
+							index = 0;
+						}
+						currentImage = images[index];
+					}}
 				>
 					&gt;
 				</button>
@@ -121,9 +102,7 @@
 			<h2 class="text-6xl mb-2 -mt-4">{user.name}</h2>
 			<div class="flex-grow mb-2 border border-red-100 rounded-xl block w-full h-fit p-5">
 				<h4 class="text-lg leading-6 font-medium text-white">Biography</h4>
-				<p class="mt-2 text-base break-words text-gray-400">{@html user.bio}
-
-				</p>
+				<p class="mt-2 text-base break-words text-gray-400">{@html user.bio}</p>
 			</div>
 			<div class="flex-grow mb-2 border border-red-100 rounded-xl block w-full h-fit p-5">
 				<h4 class="text-lg leading-6 font-medium text-white">Company goals</h4>

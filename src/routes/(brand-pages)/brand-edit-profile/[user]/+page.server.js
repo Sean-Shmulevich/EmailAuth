@@ -8,11 +8,15 @@ import { sendEmail } from '$lib/email';
 
 // get a profile by of a specific user by their userID
 async function getUserProfile(userId) {
-	const profile = await prismaClient.profile.findUnique({
+	const profile = await prismaClient.brandProfile.findUnique({
 		where: {
 			user_id: userId
 		}
 	});
+
+	if (!profile) {
+		return false;
+	}
 
 	return profile;
 }
@@ -75,56 +79,40 @@ export const actions = {
 
 		let userId = user.userId;
 		const formData = await request.formData();
-		let name = formData.get('name')?.toString();
-		let sport = formData.get('sport')?.toString();
-		let college = formData.get('college')?.toString();
-		let year = formData.get('year')?.toString();
+		let size = formData.get('size')?.toString();
 		let bio = formData.get('bio')?.toString();
 
-		// console.log(formData);
 		// If user does not exist, throw an error
 		//TODO change this to sveltekit fail
 		if (!user) throw new Error('User not found');
 
 		let missingFields = [];
-		if (!name) missingFields.push('name');
-		if (!sport) missingFields.push('sport');
-		if (!college) missingFields.push('college');
-		if (!year) missingFields.push('year');
+		if (!size) missingFields.push('size');
+		// if (!sport) missingFields.push('');
 		if (!bio) missingFields.push('bio');
 
 		if (missingFields.length) {
 			return {
 				message: `Please fill out the following fields: ${missingFields.join(', ')}`,
-				user: { name, sport, college, year, bio }
+				user: { size, bio }
 			};
 		}
 
 		// If user exists, create a profile
-		const profile = await prismaClient.profile.upsert({
+		const profile = await prismaClient.brandProfile.update({
 			where: { user_id: userId },
-			create: {
-				name: name,
-				sport: sport,
-				college: college,
-				year: year,
+			data: {
+				size: size,
 				bio: bio,
 				user_id: userId
 			},
-			update: {
-				name: name,
-				sport: sport,
-				college: college,
-				year: year,
-				bio: bio
-			}
 		});
 
 
 		// I mean i could just return the profile
 		return {
 			message: 'Profile updated successfully',
-			user: { name, sport, college, year, bio }
+			user: { size, bio }
 		};
 	},
 	logout: async ({ locals }) => {

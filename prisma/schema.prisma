@@ -58,7 +58,7 @@ model object {
   file_size    Int?
   file_type    String?
   image_number Int       @default(1) // new field
-  authUser     AuthUser  @relation(fields: [userId], references: [id])
+  authUser     AuthUser  @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       String
 
   @@map("object")
@@ -71,7 +71,7 @@ model Profile {
   college   String
   year      String
   bio       String
-  auth_user AuthUser? @relation(fields: [user_id], references: [id])
+  auth_user AuthUser? @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@map("profile")
 }
@@ -95,7 +95,7 @@ model BrandProfile {
   goals            String
   socialMediaLinks String
   bio              String?
-  auth_user        AuthUser? @relation(fields: [user_id], references: [id])
+  auth_user        AuthUser? @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@map("brand_profile")
 }

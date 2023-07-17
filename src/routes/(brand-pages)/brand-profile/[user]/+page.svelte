@@ -21,7 +21,7 @@
 		goals: 'empty',
 		bio: 'empty'
 	};
-	console.log(data.currUserProfile);
+	// console.log(data.currUserProfile);
 	//TODO: implement social media links
 
 	//set the user data to the data from the database from load in +page.server.ts
@@ -31,9 +31,17 @@
 	let index = 0;
 	let images = [defaultImage];
 
-	//start from the first image
-	for (let i = 0; i < data.objects.length-1; i++) {
-		images[i] = `${s3 + '/' + encodeURIComponent(data.objects[i+1].id)}`;
+	//start from the first image with 4:3 aspect ratio
+
+	for (let i = 0; i < data.objects.length - 1; i++) {
+		images[i] = `${s3 + '/' + encodeURIComponent(data.objects[i + 1].id)}`;
+	}
+
+	//except edge case if there is no main image posted yet
+	//then since the loop below starts from the second image in the objects array we need the first one as well
+	if (data.objects[0].image_number !== 0) {
+		//push the first image to the front of the array
+		images.unshift(`${s3 + '/' + encodeURIComponent(data.objects[0].id)}`);
 	}
 	console.log(images);
 	let currentImage = images[index];
@@ -42,15 +50,16 @@
 </script>
 
 <div class=" text-white mt-10 flex flex-col items-center">
-	<div class="profile-card w-full flex flex-col md:flex-row bg-gray-800 shadow rounded-lg max-w-7xl p-6">
+	<div
+		class="profile-card w-full flex flex-col md:flex-row bg-gray-800 shadow rounded-lg max-w-7xl p-6"
+	>
 		<div class="image w-3/4 md:min-w-[400px] md:w-[43%] relative">
 			<img
 				src={currentImage}
 				alt="Current image"
-				class="justify-center items-center object-cover h-full  max-h-[90vh]  w-full rounded-lg"
+				class="justify-center items-center object-cover h-full max-h-[90vh] w-full rounded-lg"
 			/>
 			<div class="absolute top-1/2 transform -translate-y-1/2 left-3">
-				
 				<button
 					class="bg-transparent text-white text-4xl font-semibold hover:text-gray-300 transition-colors duration-200"
 					on:click={() => {

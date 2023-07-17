@@ -29,9 +29,9 @@ export const load = async ({ params, locals }) => {
 	// user.isAdmin===false ||
 	//any users of the app that are logged in can see anybodys profile
 	// if a user is not email verified then they should not be able to see any profiles
-	if (!user || !user.emailVerified) {
-		throw redirect(302, '/');
-	}
+	// if (!user || !user.emailVerified) {
+	// 	throw redirect(302, '/');
+	// }
 
 	const objects = await prismaClient.object.findMany({
 		where: {
@@ -42,7 +42,7 @@ export const load = async ({ params, locals }) => {
 		}
 	});
 
-	console.log("objects",objects);
+	// console.log("objects",objects);
 	//should users be able to see other peoples profiles or should it just be buisnesses and the admin?
 	//well if I dont directly link to the users it will be fine how it is now but I still need to query the information
 

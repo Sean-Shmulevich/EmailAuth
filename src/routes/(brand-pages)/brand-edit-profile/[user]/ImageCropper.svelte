@@ -118,7 +118,7 @@
 				type="button"
 				on:click={() => {
 					cropSubmit();
-					console.log(croppedImage);
+					// console.log(croppedImage);
 					// croppedImage = null;
 					image = null;
 					square = false;

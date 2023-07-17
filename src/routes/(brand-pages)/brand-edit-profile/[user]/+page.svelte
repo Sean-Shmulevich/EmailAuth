@@ -113,7 +113,7 @@
 	};
 
 	//load in the images from the db
-	console.log(data.objects);
+	// console.log(data.objects);
 	for (let i = 0; i < data.objects.length; i++) {
 		let imgNum = data.objects[i].image_number;
 
@@ -127,7 +127,7 @@
 			//the first one is already in the buttons list
 			buttons.push(`image${imgNum}`);
 		}
-		console.log(buttons);
+		// console.log(buttons);
 	}
 
 	//this code is ran when the clild compnent finishes cropping the image and returns a blob with the cropped image.
@@ -180,7 +180,7 @@
 	//upload the image only when submit is pressed
 	function handleSubmit(event) {
 		upload(croppedImage);
-		console.log("run");
+		// console.log("run");
 		images = { ...images };
 		croppedImage = null;
 	}

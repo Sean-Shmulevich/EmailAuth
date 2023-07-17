@@ -72,33 +72,14 @@
 	}
 </script>
 
-<div
-	class=" text-white mt-10 flex flex-col items-center"
->
-
-<h2 class="text-6xl mb-10 ">{user.name}</h2>
+<div class=" text-white mt-10 flex flex-col items-center">
+	<h2 class="text-6xl mb-10">{user.name}</h2>
 	<div
-		class="profile-card  flex flex-col md:flex-row bg-gray-800 shadow rounded-lg max-w-7xl w-full p-6"
+		class="profile-card flex flex-col md:flex-row bg-gray-800 shadow rounded-lg max-w-7xl p-6"
 	>
-		<div class="image w-3/4 md:w-[43%] relative">
-			{#if update}
-				{#if transitioning}
-					<img
-						src={currentImage}
-						alt="Current image"
-						class="object-cover h-full w-full rounded-lg"
-					/>
-					<img src={nextImage} alt="Next image" class="object-cover h-full w-full rounded-lg" />
-				{:else}
-					<img
-						src={currentImage}
-						alt="Current image"
-						class="object-cover h-full w-full rounded-lg"
-					/>
-				{/if}
-			{:else}
-				<img src={currentImage} alt="Current image" class="object-cover h-full w-full rounded-lg" />
-			{/if}
+		<div class="image w-3/4 md:min-w-[400px] md:w-[43%] relative ">
+
+			<img src={currentImage} alt="Current image" class="justify-center items-center object-cover h-full w-full rounded-lg"  />
 
 			<div class="absolute top-1/2 transform -translate-y-1/2 left-3">
 				<button
@@ -137,26 +118,28 @@
 			</div>
 		</div>
 
-		<div
-			class="profile-text mt-5 md:mt-0 md:pl-6 md:w-1/2 flex flex-col"
-			style="height:inherit"
-		>
-			<div class="text-5xl my-5 leading-6 font-medium text-white">{user.name}</div>
-			<div class="mt-5 flex-grow overflow-y-auto overflow-wrap break-word">
+		<div class="profile-text mt-5 md:mt-0 md:pl-6 md:w-[57%] flex flex-col" style="height:inherit">
+			<div class="flex-grow mb-2 border border-red-100 rounded-xl block w-full h-fit p-5">
 				<h4 class="text-lg leading-6 font-medium text-white">Biography</h4>
-				<p class="mt-2 text-base text-gray-400">{@html user.bio}</p>
-				<h4 class="text-lg leading-6 font-medium text-white">Company goals</h4>
-				<p class="mt-2 text-base text-gray-400">{@html user.goals}</p>
+				<p class="mt-2 text-base break-words text-gray-400">{@html user.bio}
+
+				</p>
 			</div>
+			<div class="flex-grow mb-2 border border-red-100 rounded-xl block w-full h-fit p-5">
+				<h4 class="text-lg leading-6 font-medium text-white">Company goals</h4>
+				<p class="mt-2 text-base break-words text-gray-400">{@html user.goals}</p>
+			</div>
+			<!-- <div class="overflow-y-auto overflow-wrap break-word">
+			</div> -->
 			<!-- <div class="flex flex-col mt-5">
 
 			</div> -->
 		</div>
 	</div>
 
-	<div class="w-full px-10 lg:px-0 max-w-7xl min-h-40 flex mb-12 mt-10 lg:flex-row flex-col ">
-		<div class=" lg:w-[30%] w-full rounded-xl p-5 pl-8 border border-white">
-			<div class="text-sm leading-5 text-gray-400 ">
+	<div class="w-full px-6 lg:px-0 max-w-7xl min-h-40 flex mb-12 mt-10 md:flex-row flex-col">
+		<div class=" md:w-[30%] w-full rounded-xl p-5 pl-8 border border-white mr-10">
+			<div class="text-sm leading-5 text-gray-400">
 				<ul class="list-disc ml-4 text-lg">
 					<li><span class="font-semibold">Location:</span> {user.location}</li>
 					<li><span class="font-semibold">Industry:</span> {user.industry}</li>
@@ -164,7 +147,7 @@
 				</ul>
 			</div>
 		</div>
-		<div class="lg:w-[70%] w-full rounded-xl p-5 pl-8 border border-white">
+		<div class="md:w-[70%] w-full rounded-xl p-5 pl-8 border border-white">
 			<div class="text-sm leading-5 text-gray-400">
 				<ul class="list-disc ml-4 text-lg">
 					<li><span class="font-semibold">Location:</span> {user.location}</li>
@@ -174,7 +157,6 @@
 			</div>
 		</div>
 	</div>
-
 </div>
 
 <style>
@@ -207,13 +189,13 @@
 	@media (max-width: 950px) {
 		.profile-card {
 			flex-direction: column;
-			width: 80%;
+			width: 90%;
 		}
 		.image {
-			width: 100%;
+			min-width: 100%;
 		}
 		.profile-text {
-			margin-top: 0px;
+			margin-top: 20px;
 			padding-left: 6px;
 			width: 100%;
 		}

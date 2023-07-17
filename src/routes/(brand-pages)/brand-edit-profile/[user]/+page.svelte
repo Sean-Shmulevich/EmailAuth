@@ -21,7 +21,6 @@
 	let editor;
 	let editorGoals;
 
-
 	// If we don't have the editor yet, we'll save the contents here.
 	let pendingContents = null;
 	let pendingContentsGoals = null;
@@ -60,6 +59,8 @@
 
 	//the current image being modified in the images object
 	let currImage = null;
+
+	let socialMediaLinks = [{ name: '', link: '' }];
 
 	onMount(async () => {
 		if (typeof window !== 'undefined') {
@@ -100,6 +101,8 @@
 				//get the bio html from the db convert it to delta and set the quill editor
 				deltaContent = JSON.parse(data.currUserProfile.bio);
 				deltaContentGoals = JSON.parse(data.currUserProfile.goals);
+
+				socialMediaLinks = JSON.parse(data.currUserProfile.socialMediaLinks);
 
 				quill.setContents(deltaContent);
 				quillGoals.setContents(deltaContentGoals);
@@ -168,7 +171,6 @@
 	function htmlToDelta(html) {
 		const quill = new Quill();
 		const clipboard = quill.getModule('clipboard');
-
 
 		// Get the delta representation of the HTML content
 		const delta = clipboard.convert(html);
@@ -247,6 +249,7 @@
 
 		return fields.key;
 	}
+
 </script>
 
 <!-- Include Quill's CSS on your page -->
@@ -397,8 +400,7 @@
 				<div
 					bind:this={editor}
 					class="shadow appearance-none border z-0 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none bg-white focus:shadow-outline"
-				>
-				</div>
+				/>
 			</div>
 
 			<div class="mb-4">
@@ -417,7 +419,47 @@
 				<div
 					bind:this={editorGoals}
 					class="shadow appearance-none border z-0 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none bg-white focus:shadow-outline"
+				/>
+			</div>
+
+			<div class="mb-4">
+				{#each socialMediaLinks as link, i (link)}
+					<div class="flex flex-col sm:flex-row w-3/4 mx-auto">
+						<input
+							class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+							id="social-name-{i}"
+							name="social-name-{i}"
+							type="text"
+							placeholder="name"
+							bind:value={link.name}
+						/>
+						<div class="w-8" />
+						<input
+							class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+							id="social-link-{i}"
+							name="social-link-{i}"
+							type="text"
+							placeholder="link"
+							bind:value={link.link}
+						/>
+					</div>
+				{/each}
+
+				<div
+					class={'text-white mx-auto bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5  mr-2 mb-2'}
+					on:click={() => {
+						//Check if the last social media link is empty or if the name is empty
+						//there should only be one empty at a time
+						if (
+							socialMediaLinks[socialMediaLinks.length - 1].name !== '' &&
+							socialMediaLinks[socialMediaLinks.length - 1].link !== '' &&
+							socialMediaLinks.length < 5
+						) {
+							socialMediaLinks = [...socialMediaLinks, { name: '', link: '' }];
+						}
+					}}
 				>
+					Add new social media
 				</div>
 			</div>
 

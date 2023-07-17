@@ -71,6 +71,10 @@
 	let currentImage = images[index];
 
 	//this tries to make the animation right not working
+
+	
+
+	
 </script>
 
 <div class=" text-white mt-10 flex flex-col items-center">

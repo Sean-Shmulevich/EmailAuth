@@ -3,8 +3,10 @@
 	// @ts-nocheck
 
 	import { fade } from 'svelte/transition';
-	import { afterUpdate } from 'svelte';
+	import { onMount } from 'svelte';
 
+	let Quill;
+	let quill;
 	// default image for profiles without any uploaded images yet.
 	//TODO change default image
 	let defaultImage =
@@ -27,6 +29,28 @@
 	//set the user data to the data from the database from load in +page.server.ts
 	user = { ...user, ...data.currUserProfile };
 
+	onMount(async () => {
+		if (typeof window !== 'undefined') {
+			const module = await import('quill');
+			Quill = module.default;
+			quill = new Quill(document.createElement('div'));
+			console.log("here")
+			if (data.currUserProfile) {
+				user.goals = deltaToHtml(data.currUserProfile.goals, quill);
+				user.bio = deltaToHtml(data.currUserProfile.bio, quill);
+			}
+			user = user;
+		}
+	});
+
+	function deltaToHtml(delta, quill) {
+		// Set the Quill editor's contents to the Delta
+		quill.setContents(JSON.parse(delta));
+
+		// Return the editor's HTML
+		return quill.root.innerHTML;
+	}
+
 	//index keeps track of the current image in the slidedeck
 	let index = 0;
 	let images = [defaultImage];
@@ -43,7 +67,6 @@
 		//push the first image to the front of the array
 		images.unshift(`${s3 + '/' + encodeURIComponent(data.objects[0].id)}`);
 	}
-	console.log(images);
 	let currentImage = images[index];
 
 	//this tries to make the animation right not working

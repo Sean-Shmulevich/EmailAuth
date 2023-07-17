@@ -8,18 +8,28 @@
 	import { enhance } from '$app/forms';
 	export let data;
 	export let form;
-	import Delta from 'quill-delta';
+
 	import { onMount } from 'svelte';
 
 	let presignUrl = '/api/presign';
 	let s3 = '/api/s3object';
 
 	//dynamically load quill on mount
-	let quill;
-	let editor;
 	let Quill;
+	let quill;
+	let quillGoals;
+	let editor;
+	let editorGoals;
 
+
+	// If we don't have the editor yet, we'll save the contents here.
+	let pendingContents = null;
+	let pendingContentsGoals = null;
+	//variabe for quill to save the current state of the html content
+	let deltaContent = '';
+	let deltaContentGoals = '';
 	let buttons = [];
+
 	let images = {
 		'main-image': '',
 		image1: '',
@@ -41,11 +51,7 @@
 		bio: 'empty'
 	};
 
-
-	// If we don't have the editor yet, we'll save the contents here.
-	let pendingContents = null;
-
-	// upload window open or closed 
+	// upload window open or closed
 	let isModalOpen = false;
 	//Image after cropping
 	let croppedImage = null;
@@ -54,10 +60,6 @@
 
 	//the current image being modified in the images object
 	let currImage = null;
-
-	//variabe for quill to save the current state of the html content
-	let deltaContent = '';
-
 
 	onMount(async () => {
 		if (typeof window !== 'undefined') {
@@ -69,13 +71,23 @@
 			quill = new Quill(editor, {
 				theme: 'snow'
 			});
+			quillGoals = new Quill(editorGoals, {
+				theme: 'snow'
+			});
 
 			// If we have pending contents, set them now.
 			quill.on('text-change', function (delta, oldDelta, source) {
 				//keep track of user.bio HTML so it can be sent to the db as part of the user object
-				user.bio = quill.root.innerHTML;
+				user.bio = JSON.stringify(quill.getContents());
 				//keep track of user.bio delta so it can be sent with quill.setContents(deltaContent)
 				deltaContent = quill.getContents();
+				// console.log(user.bio);
+			});
+			quillGoals.on('text-change', function (delta, oldDelta, source) {
+				//keep track of user.bio HTML so it can be sent to the db as part of the user object
+				user.goals = JSON.stringify(quillGoals.getContents());
+				//keep track of user.bio delta so it can be sent with quill.setContents(deltaContent)
+				deltaContentGoals = quillGoals.getContents();
 				// console.log(user.bio);
 			});
 
@@ -86,9 +98,11 @@
 				user = { ...user, ...data.currUserProfile };
 
 				//get the bio html from the db convert it to delta and set the quill editor
-				deltaContent = htmlToDelta(data.currUserProfile.bio);
-				deltaContent = deltaContent;
+				deltaContent = JSON.parse(data.currUserProfile.bio);
+				deltaContentGoals = JSON.parse(data.currUserProfile.goals);
+
 				quill.setContents(deltaContent);
+				quillGoals.setContents(deltaContentGoals);
 			}
 
 			//persist the bio
@@ -97,18 +111,23 @@
 				quill.setContents(pendingContents);
 				pendingContents = null; // We've set the contents, so we can clear the pending contents.
 			}
+			if (pendingContentsGoals) {
+				quillGoals.setContents(pendingContentsGoals);
+				pendingContentsGoals = null; // We've set the contents, so we can clear the pending contents.
+			}
 		}
 	});
 
-	// restore when somebody navigates away from the page 
+	// restore when somebody navigates away from the page
 	export const snapshot = {
 		capture: () => {
-			return { user, deltaContent };
+			return { user, deltaContent, deltaContentGoals };
 		},
 		restore: (data) => {
 			user = data.user;
 			//load in delta content from the snapshot
 			pendingContents = data.deltaContent;
+			pendingContentsGoals = data.deltaContentGoals;
 		}
 	};
 
@@ -116,8 +135,6 @@
 	// console.log(data.objects);
 	for (let i = 0; i < data.objects.length; i++) {
 		let imgNum = data.objects[i].image_number;
-
-		
 
 		// get urls from aws and load them into the images array
 		if (imgNum === 0) {
@@ -149,14 +166,12 @@
 
 	// Convert HTML to Delta helper function
 	function htmlToDelta(html) {
-		const quill = new Quill(document.createElement('pre'));
+		const quill = new Quill();
 		const clipboard = quill.getModule('clipboard');
 
-		// Set the HTML content to the clipboard module
-		clipboard.container.innerHTML = html;
 
 		// Get the delta representation of the HTML content
-		const delta = clipboard.convert();
+		const delta = clipboard.convert(html);
 
 		return delta;
 	}
@@ -185,7 +200,7 @@
 		croppedImage = null;
 	}
 
-	//upload the file to aws s3	
+	//upload the file to aws s3
 	async function upload(file) {
 		// Get presigned POST URL and form fields
 		let { url, fields } = await fetch(`${presignUrl}?fileType=${file.type}`)
@@ -366,7 +381,6 @@
 				/>
 			</div>
 
-
 			<div class="mb-4">
 				<label class="block text-gray-300 text-sm font-bold mb-2" for="bio"> Bio </label>
 				<p class="text-gray-500 text-xs mb-2">Tell us a little about yourself.</p>
@@ -376,6 +390,7 @@
 					style="display: none;"
 					name="bio"
 					id="bio"
+					hidden
 					type="text"
 					bind:value={user.bio}
 				/>
@@ -383,7 +398,26 @@
 					bind:this={editor}
 					class="shadow appearance-none border z-0 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none bg-white focus:shadow-outline"
 				>
-					{deltaContent}
+				</div>
+			</div>
+
+			<div class="mb-4">
+				<label class="block text-gray-300 text-sm font-bold mb-2" for="bio"> Goals </label>
+				<p class="text-gray-500 text-xs mb-2">What are your company's goals</p>
+				<!-- JANKY way of getting the user.bio into form data -->
+				<input
+					class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+					style="display: none;"
+					name="goals"
+					id="goals"
+					hidden
+					type="text"
+					bind:value={user.goals}
+				/>
+				<div
+					bind:this={editorGoals}
+					class="shadow appearance-none border z-0 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none bg-white focus:shadow-outline"
+				>
 				</div>
 			</div>
 

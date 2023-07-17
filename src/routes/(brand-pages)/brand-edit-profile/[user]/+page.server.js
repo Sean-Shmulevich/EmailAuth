@@ -81,6 +81,7 @@ export const actions = {
 		const formData = await request.formData();
 		let size = formData.get('size')?.toString();
 		let bio = formData.get('bio')?.toString();
+		let goals = formData.get('goals')?.toString();
 
 		// If user does not exist, throw an error
 		//TODO change this to sveltekit fail
@@ -90,11 +91,12 @@ export const actions = {
 		if (!size) missingFields.push('size');
 		// if (!sport) missingFields.push('');
 		if (!bio) missingFields.push('bio');
+		if (!goals) missingFields.push('goals');
 
 		if (missingFields.length) {
 			return {
 				message: `Please fill out the following fields: ${missingFields.join(', ')}`,
-				user: { size, bio }
+				user: { size, bio, goals }
 			};
 		}
 
@@ -104,6 +106,7 @@ export const actions = {
 			data: {
 				size: size,
 				bio: bio,
+				goals: goals,
 				user_id: userId
 			},
 		});
@@ -112,7 +115,7 @@ export const actions = {
 		// I mean i could just return the profile
 		return {
 			message: 'Profile updated successfully',
-			user: { size, bio }
+			user: { size, bio, goals }
 		};
 	},
 	logout: async ({ locals }) => {

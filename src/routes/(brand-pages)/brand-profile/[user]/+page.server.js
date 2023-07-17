@@ -19,6 +19,8 @@ async function getUserProfile(userId) {
 	return profile;
 }
 
+
+
 export const load = async ({ params, locals }) => {
 	const { user } = await locals.auth.validateUser();
 

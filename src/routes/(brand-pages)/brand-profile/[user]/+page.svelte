@@ -47,9 +47,8 @@
 			<img
 				src={currentImage}
 				alt="Current image"
-				class="justify-center items-center object-cover h-full w-full rounded-lg"
+				class="justify-center items-center object-cover h-full  max-h-[90vh]  w-full rounded-lg"
 			/>
-			{index}
 			<div class="absolute top-1/2 transform -translate-y-1/2 left-3">
 				
 				<button

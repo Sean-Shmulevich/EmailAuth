@@ -42,7 +42,7 @@
 </script>
 
 <div class=" text-white mt-10 flex flex-col items-center">
-	<div class="profile-card flex flex-col md:flex-row bg-gray-800 shadow rounded-lg max-w-7xl p-6">
+	<div class="profile-card w-full flex flex-col md:flex-row bg-gray-800 shadow rounded-lg max-w-7xl p-6">
 		<div class="image w-3/4 md:min-w-[400px] md:w-[43%] relative">
 			<img
 				src={currentImage}

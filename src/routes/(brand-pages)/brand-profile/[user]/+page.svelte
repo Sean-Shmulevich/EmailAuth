@@ -73,7 +73,6 @@
 </script>
 
 <div class=" text-white mt-10 flex flex-col items-center">
-	<h2 class="text-6xl mb-10">{user.name}</h2>
 	<div
 		class="profile-card flex flex-col md:flex-row bg-gray-800 shadow rounded-lg max-w-7xl p-6"
 	>
@@ -119,6 +118,7 @@
 		</div>
 
 		<div class="profile-text mt-5 md:mt-0 md:pl-6 md:w-[57%] flex flex-col" style="height:inherit">
+			<h2 class="text-6xl mb-2 -mt-4">{user.name}</h2>
 			<div class="flex-grow mb-2 border border-red-100 rounded-xl block w-full h-fit p-5">
 				<h4 class="text-lg leading-6 font-medium text-white">Biography</h4>
 				<p class="mt-2 text-base break-words text-gray-400">{@html user.bio}
@@ -137,7 +137,7 @@
 		</div>
 	</div>
 
-	<div class="w-full px-6 lg:px-0 max-w-7xl min-h-40 flex mb-12 mt-10 md:flex-row flex-col">
+	<div class="w-full px-6 lg:px-0 max-w-7xl min-h-40 flex mb-8 mt-5 md:flex-row flex-col">
 		<div class=" md:w-[30%] w-full rounded-xl p-5 pl-8 border border-white mr-10">
 			<div class="text-sm leading-5 text-gray-400">
 				<ul class="list-disc ml-4 text-lg">

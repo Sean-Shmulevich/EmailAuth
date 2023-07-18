@@ -9,6 +9,7 @@
     console.log(offers);
 </script>
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <svelte:head>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/2.3.22/rx.all.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -55,21 +56,6 @@
 		--background: linear-gradient(white, rgb(246, 244, 250));
 	}
 
-
-	html {
-		width: 100%;
-		height: 100%;
-		min-width: 100%;
-		margin: 0;
-		padding: 0;
-		background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		font-family: 'Open Sans', sans-serif;
-		color: var(--primary-color);
-		user-select: none;
-	}
 
 	#wrapper {
 		display: flex;

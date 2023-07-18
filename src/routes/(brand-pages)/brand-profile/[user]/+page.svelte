@@ -53,13 +53,13 @@
 	}
 
 	//index keeps track of the current image in the slidedeck
-	let index = 0;
+	let index = 1;
 	let images = [defaultImage];
 
 	//start from the first image with 4:3 aspect ratio
 
-	for (let i = 0; i < data.objects.length - 1 && data.objects !== []; i++) {
-		images[i] = `${s3 + '/' + encodeURIComponent(data.objects[i + 1].id)}`;
+	for (let i = 0; i < data.objects.length && data.objects !== []; i++) {
+		images[i] = `${s3 + '/' + encodeURIComponent(data.objects[i].id)}`;
 	}
 
 	//except edge case if there is no main image posted yet

@@ -94,7 +94,7 @@
 					class="bg-transparent text-white text-4xl font-semibold hover:text-gray-300 transition-colors duration-200"
 					on:click={() => {
 						index--;
-						if (index < 0) {
+						if (index < 1) {
 							index = images.length - 1;
 						}
 						currentImage = images[index];
@@ -110,7 +110,7 @@
 					on:click={() => {
 						index++;
 						if (index >= images.length) {
-							index = 0;
+							index = 1;
 						}
 						currentImage = images[index];
 					}}

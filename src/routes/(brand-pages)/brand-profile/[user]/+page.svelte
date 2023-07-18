@@ -119,21 +119,7 @@
 				</button>
 			</div>
 
-			<div
-				class="absolute bottom-3 flex justify-center w-full space-x-8"
-				style="transform: translateX(-6px)"
-			>
-				{#each images as image, i (image)}
-					<button
-						class="h-2 w-2 bg-black rounded-full opacity-50 transform focus:outline-none {index ===
-						i
-							? 'scale-150 opacity-100'
-							: ''}"
-						on:click={() => (index = i)}
-						disabled
-					/>
-				{/each}
-			</div>
+
 		</div>
 
 		<div class="profile-text mt-5 md:mt-0 md:pl-6 md:w-[57%] flex flex-col" style="height:inherit">

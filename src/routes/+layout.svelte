@@ -15,9 +15,9 @@
 		<meta name="viewport" content="width=device-width" />
 		<title>Demo mailbox</title>
 	</head>
-	<body class="bg-gray-900 h-[100vh]">
+	<body class="bg-gray-900 h-[100vh] overflow-x-hidden">
 		<!-- TODO make it fixed if we want it to be sticky -->
-		<header class="w-full body-font bg-blue-300 ">
+		<header class="w-full body-font bg-blue-300">
 			<div class="container sticky mx-auto flex flex-wrap pt-5 flex-col md:flex-row items-center">
 				<!-- svelte-ignore a11y-missing-attribute -->
 				<a
@@ -67,7 +67,7 @@
 							/>
 							{data.user.email}
 						</Button>
-						<Dropdown inline triggeredBy="#avatar_with_name">
+						<Dropdown class="z-10" inline triggeredBy="#avatar_with_name">
 							<div slot="header" class="px-4 py-2 bg-blue-500">
 								{#if data.msg === 'email authenticated'}
 									<span class="block text-sm text-gray-900"> Waiting on verification </span>
@@ -75,6 +75,9 @@
 							</div>
 
 							{#if !data.user.isBrand}
+								<DropdownItem class="text-center" href="/deals"
+									>Deals</DropdownItem
+								>
 								<DropdownItem class="text-center" href="/user-profile/{data.user.userId}"
 									>View Profile</DropdownItem
 								>

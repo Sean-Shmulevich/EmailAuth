@@ -24,6 +24,9 @@ model AuthUser {
   auth_session   AuthSession[]
   auth_key       AuthKey[]
   object         object[]
+  Deal           Deal[]
+  // for users
+  acceptedDeals  String[]
 
   @@map("auth_user")
 }
@@ -98,4 +101,41 @@ model BrandProfile {
   auth_user        AuthUser? @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@map("brand_profile")
+}
+
+model Deal {
+  id                      String       @id @unique
+  title                   String
+  description             String
+  sportPreference         String
+  genderPreference        String
+  shortDescription        String
+  location                String
+  inPersonOrVirtual       String
+  dateTime                String
+  duration                String
+  mainGoal                String
+  estimatedPayment        String
+  recommendedDeliverables String[]
+  athleteCount            Int
+  singleOrMultiple        String
+  publishDate             DateTime?
+  authUser                AuthUser     @relation(fields: [authUserId], references: [id])
+  authUserId              String
+  isCampaign              Boolean
+  usersAccepted           String[]
+  usersRejected           String[]
+  dealFindUser            DealFindUser?
+
+  @@map("deal")
+}
+
+model DealFindUser {
+  dealId String @id @unique
+  deal   Deal?   @relation(fields: [dealId], references: [id])
+
+  auth_user_accepted String[]
+  auth_user_rejected String[]
+
+  @@map("deal_find_user")
 }

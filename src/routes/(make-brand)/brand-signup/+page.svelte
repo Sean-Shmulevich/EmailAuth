@@ -9,7 +9,6 @@
 		location: 'Where is your company located?',
 		industry: 'What industry is your company in?',
 		size: 'How many employees does your company have?',
-		goals: "What are your company's goals?"
 	};
 	const questionKeys = Object.keys(questions);
 	let currQuestion = 'name';

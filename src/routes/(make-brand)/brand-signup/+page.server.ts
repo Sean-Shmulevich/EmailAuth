@@ -59,7 +59,9 @@ export const actions: Actions = {
 					location: formData.get('location')?.toString() ?? '',
 					industry: formData.get('industry')?.toString() ?? '',
 					size: formData.get('size')?.toString() ?? '',
-					goals: formData.get('goals')?.toString() ?? ''
+					goals: '',
+					socialMediaLinks: "",
+					bio: ""
 				}
 			});
 			const token = await emailVerificationToken.issue(user.userId);

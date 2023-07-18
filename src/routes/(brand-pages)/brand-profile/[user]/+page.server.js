@@ -66,6 +66,7 @@ export const actions = {
 		if (!session) return null;
 		await auth.invalidateSession(session.sessionId);
 		locals.auth.setSession(null);
+		throw redirect(302, '/');
 	}
 };
 

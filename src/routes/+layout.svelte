@@ -5,6 +5,7 @@
 	// import { onMount, onDestroy } from 'svelte';
 	import { Button, Dropdown, DropdownItem, Chevron, Avatar } from 'flowbite-svelte';
 
+	import { goto } from '$app/navigation';
 	export let data: PageData;
 </script>
 
@@ -14,6 +15,7 @@
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<title>Demo mailbox</title>
+		
 	</head>
 	<body class="bg-gray-900 h-[100vh] overflow-x-hidden">
 		<!-- TODO make it fixed if we want it to be sticky -->
@@ -67,7 +69,7 @@
 							/>
 							{data.user.email}
 						</Button>
-						<Dropdown class="z-10" inline triggeredBy="#avatar_with_name">
+						<Dropdown class="z-12" inline triggeredBy="#avatar_with_name">
 							<div slot="header" class="px-4 py-2 bg-blue-500">
 								{#if data.msg === 'email authenticated'}
 									<span class="block text-sm text-gray-900"> Waiting on verification </span>

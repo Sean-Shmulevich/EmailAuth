@@ -1,23 +1,13 @@
 <script>
-	let swipe;
-	import { onMount } from 'svelte';
-	onMount(async () => {
-		swipe = await import('./swipe.js');
-	});
+
 
     export let offers;
-    console.log(offers);
+
 </script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<svelte:head>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/2.3.22/rx.all.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-QueryBuilder/2.7.0/js/query-builder.min.js"
-	></script>
-	<script src="https://hammerjs.github.io/dist/hammer.min.js"></script>
-</svelte:head>
+
+
 
 <div id="wrapper">
 	<div id="container">
@@ -77,6 +67,7 @@
 	.background {
 		position: absolute;
 		width: 60vh;
+        max-width: 100vw;
 		height: 80vh;
 	}
 

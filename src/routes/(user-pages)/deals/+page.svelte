@@ -24,6 +24,14 @@
 			usersRejected: []
 		}
 	];
+	import { onMount, tick } from 'svelte';
+    import {swipe} from "./swipe.js"
+	onMount(async () => {
+		if (window !== undefined) {
+            swipe();
+		}
+	});
+
 	//     model Deal {
 	//   id                      String    @id @unique
 	//   title                   String
@@ -46,5 +54,7 @@
 	//   usersAccepted           String[]
 	//   usersRejected           String[]
 </script>
+
+<svelte:head />
 
 <SwipeCard bind:offers />

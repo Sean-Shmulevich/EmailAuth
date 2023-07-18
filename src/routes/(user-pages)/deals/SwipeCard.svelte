@@ -1,13 +1,9 @@
 <script>
-
-
-    export let offers;
-
+	export let offers;
+	let pageNum = 0;
 </script>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <div id="wrapper">
 	<div id="container">
@@ -18,22 +14,75 @@
 
 			<div class="label">Made by @app1e.jews</div>
 		</div>
-        {#each offers as offer}
-            <div class="box">
-                <div class="boxcontent">
-                    <img
-                        src="https://www.3dwiggle.com/wp-content/uploads/2016/06/hiroshi-yoshinaga-wired-lathyrus-blog-3dwiggle-1.gif"
-                        alt="Profile picture"
-                    />
+		{#each offers as offer}
+			<div class="box">
+				<div class="boxcontent">
+					{#if pageNum === 0}
+                        <div class="text=center">
+                            <p >Hello World</p>
+                        </div>
+					{/if}
+					{#if pageNum === 1}
+						<img
+							src="https://www.3dwiggle.com/wp-content/uploads/2016/06/hiroshi-yoshinaga-wired-lathyrus-blog-3dwiggle-1.gif"
+							alt="Profile picture"
+						/>
+
+						<div class="info">
+							<div class="name">Влад, 20</div>
+							<div class="interest">1 Common Interest</div>
+						</div>
+					{/if}
+					{#if pageNum === 2}
+						<img
+							src="https://www.3dwiggle.com/wp-content/uploads/2016/06/hiroshi-yoshinaga-wired-lathyrus-blog-3dwiggle-1.gif"
+							alt="Profile picture"
+						/>
+						<div class="info">
+							<div class="name">Влад, 20</div>
+							<div class="interest">2 Common Interest</div>
+						</div>
+					{/if}
+					{#if pageNum === 3}
+						<img
+							src="https://www.3dwiggle.com/wp-content/uploads/2016/06/hiroshi-yoshinaga-wired-lathyrus-blog-3dwiggle-1.gif"
+							alt="Profile picture"
+						/>
+						<div class="info">
+							<div class="name">Влад, 20</div>
+							<div class="interest">3 Common Interest</div>
+						</div>
+					{/if}
                     <div class="like">Like</div>
                     <div class="nope">Nope</div>
-                    <div class="info">
-                        <div class="name">Влад, 20</div>
-                        <div class="interest">1 Common Interest</div>
-                    </div>
-                </div>
-            </div>
-        {/each}
+				</div>
+				<div
+					class="w-full flex flex-row bg-black h-14 rounded-2xl border border-white"
+					style="position: relative;bottom: -80vh;justify-content:space-between"
+				>
+					<button
+						class="ml-4 mt-2 w-10 h-10 bg-white z-10"
+						style=""
+						on:click={() => {
+							pageNum = pageNum - 1;
+							if (pageNum <= 0) {
+								pageNum = 3;
+							}
+						}}
+					/>
+					<button
+						class="mr-4 mt-2 w-10 h-10 bg-white z-10"
+						style=""
+						on:click={() => {
+							pageNum = pageNum + 1;
+							if (pageNum > 3) {
+								pageNum = 0;
+							}
+						}}
+					/>
+				</div>
+			</div>
+		{/each}
 	</div>
 </div>
 
@@ -45,7 +94,6 @@
 		--secondary-color: rgb(246, 244, 250);
 		--background: linear-gradient(white, rgb(246, 244, 250));
 	}
-
 
 	#wrapper {
 		display: flex;
@@ -67,7 +115,7 @@
 	.background {
 		position: absolute;
 		width: 60vh;
-        max-width: 100vw;
+		max-width: 100vw;
 		height: 80vh;
 	}
 
@@ -94,8 +142,8 @@
 		position: absolute;
 		width: 60vh;
 		height: 80vh;
-        max-width: 95vw;
-        margin-left:10px;
+		max-width: 95vw;
+		margin-left: 10px;
 	}
 
 	.boxcontent {

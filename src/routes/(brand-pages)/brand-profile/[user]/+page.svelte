@@ -64,7 +64,8 @@
 
 	//except edge case if there is no main image posted yet
 	//then since the loop below starts from the second image in the objects array we need the first one as well
-	if (data.objects && data.objects[0].image_number !== 0) {
+	console.log(data.objects)
+	if (data.objects !== null && data.objects[0].image_number !== 0) {
 		//push the first image to the front of the array
 		images.unshift(`${s3 + '/' + encodeURIComponent(data.objects[0].id)}`);
 	}

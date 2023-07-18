@@ -27,7 +27,7 @@
 	//variabe for quill to save the current state of the html content
 	let deltaContent = '';
 	let deltaContentGoals = '';
-	let buttons = [];
+	let buttons = ["image1"];
 
 	let images = {
 		'main-image': '',
@@ -138,6 +138,9 @@
 	// console.log(data.objects);
 	for (let i = 0; i < data.objects.length; i++) {
 		let imgNum = data.objects[i].image_number;
+		if(imgNum > 1){
+			buttons.push(`image${imgNum}`);
+		}
 
 		// get urls from aws and load them into the images array
 		if (imgNum === 0) {
@@ -145,8 +148,9 @@
 		} else if (imgNum <= 8) {
 			images[`image${imgNum}`] = `${s3 + '/' + encodeURIComponent(data.objects[i].id)}`;
 			//the first one is already in the buttons list
-			buttons.push(`image${imgNum}`);
+
 		}
+
 		// console.log(buttons);
 	}
 
@@ -347,7 +351,7 @@
 						{/if}
 					{/each}
 					{#if buttons.length < 8}
-						<button
+						<div
 							class="w-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition duration-300"
 							on:click={addNewButton}
 						>
@@ -366,7 +370,7 @@
 								/>
 							</svg>
 							Add
-						</button>
+						</div>
 					{/if}
 				</div>
 			</div>

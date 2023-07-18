@@ -58,17 +58,18 @@
 
 	//start from the first image with 4:3 aspect ratio
 
-	for (let i = 0; i < data.objects.length - 1; i++) {
+	for (let i = 0; i < data.objects.length - 1 && data.objects !== []; i++) {
 		images[i] = `${s3 + '/' + encodeURIComponent(data.objects[i + 1].id)}`;
 	}
 
 	//except edge case if there is no main image posted yet
 	//then since the loop below starts from the second image in the objects array we need the first one as well
 	console.log(data.objects)
-	if (data.objects !== null && data.objects[0].image_number !== 0) {
-		//push the first image to the front of the array
-		images.unshift(`${s3 + '/' + encodeURIComponent(data.objects[0].id)}`);
-	}
+	// handle empty objects
+	// if (data.objects !== [] ) {
+	// 	//push the first image to the front of the array
+	// 	images.unshift(`${s3 + '/' + encodeURIComponent(data.objects[0].id)}`);
+	// }
 	let currentImage = images[index];
 
 	//this tries to make the animation right not working

@@ -18,9 +18,9 @@
 			<div class="box">
 				<div class="boxcontent">
 					{#if pageNum === 0}
-                        <div class="text=center">
-                            <p >Hello World</p>
-                        </div>
+						<div class="w-full text=center">
+							<p>Hello World</p>
+						</div>
 					{/if}
 					{#if pageNum === 1}
 						<img
@@ -53,34 +53,31 @@
 							<div class="interest">3 Common Interest</div>
 						</div>
 					{/if}
-                    <div class="like">Like</div>
-                    <div class="nope">Nope</div>
+					<div class="like">Like</div>
+					<div class="nope">Nope</div>
 				</div>
-				<div
-					class="w-full flex flex-row bg-black h-14 rounded-2xl border border-white"
-					style="position: relative;bottom: -80vh;justify-content:space-between"
-				>
-					<button
-						class="ml-4 mt-2 w-10 h-10 bg-white z-10"
-						style=""
-						on:click={() => {
-							pageNum = pageNum - 1;
-							if (pageNum <= 0) {
-								pageNum = 3;
-							}
-						}}
-					/>
-					<button
-						class="mr-4 mt-2 w-10 h-10 bg-white z-10"
-						style=""
-						on:click={() => {
-							pageNum = pageNum + 1;
-							if (pageNum > 3) {
-								pageNum = 0;
-							}
-						}}
-					/>
-				</div>
+
+				<button
+					class="hover:bg-white rounded-2xl absolute left-0 mt-6 w-10 h-[95%] opacity-20 z-10"
+					style=""
+					on:click={() => {
+						pageNum = pageNum - 1;
+						if (pageNum <= 0) {
+							pageNum = 3;
+						}
+					}}
+				/>
+				<button
+					class="hover:bg-white rounded-2xl absolute right-0 mt-6 w-10 h-[95%] opacity-20 z-12"
+
+					style=""
+					on:click={() => {
+						pageNum = pageNum + 1;
+						if (pageNum > 3) {
+							pageNum = 0;
+						}
+					}}
+				/>
 			</div>
 		{/each}
 	</div>

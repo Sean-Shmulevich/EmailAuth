@@ -13,8 +13,8 @@ datasource db {
 }
 
 model AuthUser {
-  id             String        @id @unique
-  email          String        @unique
+  id             String           @id @unique
+  email          String           @unique
   email_verified Boolean
   admin_verified Boolean
   is_admin       Boolean
@@ -25,6 +25,7 @@ model AuthUser {
   auth_key       AuthKey[]
   object         object[]
   Deal           Deal[]
+  userDealStatus UserDealStatus[]
   // for users
   acceptedDeals  String[]
 
@@ -104,7 +105,7 @@ model BrandProfile {
 }
 
 model Deal {
-  id                      String       @id @unique
+  id                      String    @id @unique @default(uuid())
   title                   String
   description             String
   sportPreference         String
@@ -120,22 +121,24 @@ model Deal {
   athleteCount            Int
   singleOrMultiple        String
   publishDate             DateTime?
-  authUser                AuthUser     @relation(fields: [authUserId], references: [id])
+  authUser                AuthUser  @relation(fields: [authUserId], references: [id])
   authUserId              String
   isCampaign              Boolean
-  usersAccepted           String[]
-  usersRejected           String[]
-  dealFindUser            DealFindUser?
+
+  rejectedIds    String[]
+  acceptedIds    String[]
+  userDealStatus UserDealStatus[]
 
   @@map("deal")
 }
 
-model DealFindUser {
-  dealId String @id @unique
-  deal   Deal?   @relation(fields: [dealId], references: [id])
+model UserDealStatus {
+  userId String
+  dealId String
+  status String   @default("pending") // can be "accepted", "rejected", or "pending"
+  user   AuthUser @relation(fields: [userId], references: [id])
+  deal   Deal     @relation(fields: [dealId], references: [id])
 
-  auth_user_accepted String[]
-  auth_user_rejected String[]
-
-  @@map("deal_find_user")
+  @@id([userId, dealId])
+  @@map("user_deal_status")
 }

@@ -6,7 +6,7 @@
 	export let offers;
 
 	//how many swipes before refetching the next data
-	let MAX_SWIPE_COUNT = 3;
+	let MAX_SWIPE_COUNT = 4;
 	//the status of the last 5 swipes
 	let swipeStatusList = [];
 	//the number page of the current deal
@@ -40,7 +40,7 @@
 			// swipe(onCardAction);
 			//!!! this makes it more seamless by loading in the last deal and running
 			//this code one before it gets there.
-			offers = [offers[offers.length-1],...nextDeals];
+			offers = [...nextDeals];
 			refreshCounter += 1;
 			console.log(await add(userDealDecisions));
 

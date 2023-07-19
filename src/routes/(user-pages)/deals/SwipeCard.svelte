@@ -29,7 +29,7 @@
 
 	let onCardAction = async (status) => {
 		swipeStatusList.push(status); // Ad the swipe status to the list
-		// console.log(swipeStatusList, swipeStatusList.length - 1);
+		console.log(swipeStatusList, swipeStatusList.length - 1);
 		if (swipeStatusList.length - 1 === MAX_SWIPE_COUNT) {
 			//fetch the next five deals with a post request to /deals
 			const userDealDecisions = makeObjects(swipeStatusList, currDealIds);
@@ -40,7 +40,7 @@
 			// swipe(onCardAction);
 			offers = [...nextDeals];
 			refreshCounter += 1;
-			// console.log(await add(userDealDecisions));
+			console.log(await add(userDealDecisions));
 
 			//request the next 5 deals set offers and make sure the swipeCardComponent updates
 			//reset the swipeStatusList and the currDealIds

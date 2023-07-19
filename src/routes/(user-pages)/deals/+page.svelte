@@ -101,11 +101,8 @@
 	import { onMount, tick } from 'svelte';
 	import { swipe } from './swipe.js';
 	import { initializeSwipe } from './swipe.js';
-	import { newData } from './stores.js';
 
 	// swipe(onCardAction);
-	let MAX_SWIPE_COUNT = 3;
-	let swipeStatusList = [];
     let refreshCounter = 0;
 	// const userDealDecisions = makeObjects(swipeStatusList, currDealIds);
 	//userDealDecisions

@@ -2,30 +2,34 @@
 	import { swipe } from './swipe.js';
 	import { onMount, tick } from 'svelte';
 
+	//the 5 offers that are visible at a time
 	export let offers;
-	let MAX_SWIPE_COUNT = 3;
+
+	//how many swipes before refetching the next data
+	let MAX_SWIPE_COUNT = 4;
+	//the status of the last 5 swipes
 	let swipeStatusList = [];
+	//the number page of the current deal
 	let pageNum = 0;
+
+	//the ids of the current 5 items
 	export let currDealIds;
+	//key for +page.svelte to reload component
 	export let refreshCounter;
-	import { newData } from './stores.js';
 	//make sure to run when offers changes
 	$: {
 		for (let i = 0; i < offers.length; i++) {
 			currDealIds[i] = offers[i].id;
 		}
 	}
-	newData.subscribe((value) => {
-		if (value.length !== 0) {
-			console.log('UPDATED!!!', value);
-			offers = [...value];
-			offers = offers.concat();
-		}
-		// offers = value;
-	});
+	//when onCardAction is called and offers changes
+	//since offers is linked to +page.svelte it will be saved there
+	//and when the component is reloaded it will be set to
+	//the new offers that were fetched at the end of the previous offers
+
 	let onCardAction = async (status) => {
 		swipeStatusList.push(status); // Ad the swipe status to the list
-		console.log(swipeStatusList, swipeStatusList.length - 1);
+		// console.log(swipeStatusList, swipeStatusList.length - 1);
 		if (swipeStatusList.length - 1 === MAX_SWIPE_COUNT) {
 			//fetch the next five deals with a post request to /deals
 			const userDealDecisions = makeObjects(swipeStatusList, currDealIds);
@@ -33,9 +37,8 @@
 			swipeStatusList = [];
 			currDealIds = [];
 			let nextDeals = await add(userDealDecisions);
-			console.log(offers);
 			// swipe(onCardAction);
-			$newData = nextDeals;
+			offers = [...nextDeals];
 			refreshCounter += 1;
 			// console.log(await add(userDealDecisions));
 
@@ -66,29 +69,6 @@
 		}
 		return objArr;
 	}
-	// beforeUpdate(() => {
-	// 	if (window !== undefined && currDealIds === []) {
-	// 		swipe(async (status) => {
-	// 			swipeStatusList.push(status); // Ad the swipe status to the list
-	// 			console.log(swipeStatusList, swipeStatusList.length - 1);
-	// 			if (swipeStatusList.length - 1 === MAX_SWIPE_COUNT) {
-	// 				//fetch the next five deals with a post request to /deals
-	// 				const userDealDecisions = makeObjects(swipeStatusList, currDealIds);
-	// 				//post array of the past 5 decisions to /deals POST
-	// 				swipeStatusList = [];
-	// 				currDealIds = [];
-	// 				let nextDeals = await add(userDealDecisions);
-	// 				offers = [...nextDeals];
-	// 				console.log(offers);
-	// 				// console.log(await add(userDealDecisions));
-
-	// 				//request the next 5 deals set offers and make sure the swipeCardComponent updates
-	// 				//reset the swipeStatusList and the currDealIds
-	// 				//set offers to the new offers
-	// 			}
-	// 		});
-	// 	}
-	// });
 </script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />

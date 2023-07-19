@@ -51,4 +51,6 @@ export const load: PageServerLoad = async ({ locals, url }) => {
 	});
 
 	console.log(deal.id);
+	// const nextDeals = await prismaClient.deal.findMany({take: 5});
+	return {nextDeals};
 };

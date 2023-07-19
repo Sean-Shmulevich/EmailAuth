@@ -46,6 +46,7 @@
 			// swipe(onCardAction);
 			//!!! this makes it more seamless by loading in the last deal and running
 			//this code one before it gets there.
+			console.log(nextDeals)
 			offers = [...nextDeals];
 			refreshCounter += 1;
 

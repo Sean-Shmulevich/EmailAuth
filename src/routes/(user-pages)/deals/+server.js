@@ -35,8 +35,8 @@ export async function POST({ request, locals }) {
 		await prismaClient.userDealStatus.create({
 			data: {
 				userId: user.userId,
-				dealId: userSwipeData[i].id,
-				status: userSwipeData[i].status
+				dealId: userSwipeData[i].dealId,
+				status: userSwipeData[i].decision
 			}
 		});
 	}
@@ -56,8 +56,8 @@ export async function POST({ request, locals }) {
 		}
 	});
 
-	if (!nextDeals || nextDeals.length === 0) {
-		return json('no deals found');
-	}
+	// if (!nextDeals || nextDeals.length === 0) {
+	// 	return json('no deals found');
+	// }
 	return json(nextDeals);
 }

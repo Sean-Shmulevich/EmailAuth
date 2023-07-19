@@ -13,9 +13,8 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
-		<title>Demo mailbox</title>
+		<title>DapUp</title>
 		
 	</head>
 	<body class="bg-gray-900 h-[100vh] overflow-x-hidden">
@@ -28,7 +27,7 @@
 					class="flex title-font font-mediums items-center text-white mb-4 md:mb-0"
 					style="margin-top:-18px"
 				>
-					<img class="w-52 " src="{logo}"/>
+					<img class=" w-40 " src="{logo}"/>
 					<!-- <span class="ml-3 text-3xl gold">DapUp</span> -->
 				</a>
 				<nav

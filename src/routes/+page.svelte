@@ -86,8 +86,8 @@
 					</svg>
 				</div>
 				<div class="flex-grow pl-6">
-					<h2 class="text-gray-900 text-lg title-font font-medium mb-2">Automation</h2>
-					<p class="leading-relaxed text-base">
+					<h2 class="text-white text-lg title-font font-medium mb-2">Automation</h2>
+					<p class="leading-relaxed text-base text-white">
 						IT Process Automation Software is an application that has functionalities to develop,
 						manage, and monitor automated processes for IT enterprise. Because IT processes are
 						scattered across multiple environments, tools, and technologies, this is a difficult
@@ -128,8 +128,8 @@
 					</svg>
 				</div>
 				<div class="flex-grow pl-6">
-					<h2 class="text-gray-900 text-lg title-font font-medium mb-2">Data</h2>
-					<p class="leading-relaxed text-base">
+					<h2 class="text-white text-lg title-font font-medium mb-2">Data</h2>
+					<p class="leading-relaxed text-white text-base">
 						Database software is a software program or utility used for creating, editing and
 						maintaining database files and records. This type of software allows users to store data
 						in the form of structured fields, tables and columns, which can then be retrieved
@@ -169,8 +169,8 @@
 					</svg>
 				</div>
 				<div class="flex-grow pl-6">
-					<h2 class="text-gray-900 text-lg title-font font-medium mb-2">Product</h2>
-					<p class="leading-relaxed text-base">
+					<h2 class="text-white text-lg title-font font-medium mb-2">Product</h2>
+					<p class="leading-relaxed text-white text-base">
 						Software as a product (SaaP, also programming product, software product) — is a product,
 						software, which is made to be sold to users, and users pay for licence which allows them
 						to use it, in contrast to SaaS, where users buy subscription and where the software is
@@ -200,10 +200,10 @@
 <section class="text-gray-600 body-font">
 	<div class="container px-5 py-24 mx-auto">
 		<div class="flex flex-col text-center w-full mb-20">
-			<h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
+			<h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-white">
 				Our Growth & Success
 			</h1>
-			<p class="lg:w-2/3 mx-auto leading-relaxed text-base">
+			<p class="lg:w-2/3 mx-auto leading-relaxed text-base text-white">
 				Building internal capabilities and powerful engineering teams for sustainable success.
 				<br />Our startup help you to build your carrier.
 			</p>
@@ -224,7 +224,7 @@
 						<path d="M20.88 18.09A5 5 0 0018 9h-1.26A8 8 0 103 16.29" />
 					</svg>
 					<h2 class="title-font font-medium text-3xl text-gray-900">2.7K</h2>
-					<p class="leading-relaxed">Softwares</p>
+					<p class=" text-white leading-relaxed">Softwares</p>
 				</div>
 			</div>
 			<div class="p-4 md:w-1/4 sm:w-1/2 w-full">
@@ -243,7 +243,7 @@
 						<path d="M23 21v-2a4 4 0 00-3-3.87m-4-12a4 4 0 010 7.75" />
 					</svg>
 					<h2 class="title-font font-medium text-3xl text-gray-900">1.3K</h2>
-					<p class="leading-relaxed">Clients</p>
+					<p class="text-white leading-relaxed">Clients</p>
 				</div>
 			</div>
 			<div class="p-4 md:w-1/4 sm:w-1/2 w-full">
@@ -263,7 +263,7 @@
 						/>
 					</svg>
 					<h2 class="title-font font-medium text-3xl text-gray-900">10K+</h2>
-					<p class="leading-relaxed">Working Hours</p>
+					<p class="text-white leading-relaxed">Working Hours</p>
 				</div>
 			</div>
 			<div class="p-4 md:w-1/4 sm:w-1/2 w-full">
@@ -280,7 +280,7 @@
 						<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
 					</svg>
 					<h2 class="title-font font-medium text-3xl text-gray-900">526</h2>
-					<p class="leading-relaxed">Maintained</p>
+					<p class="text-white leading-relaxed">Maintained</p>
 				</div>
 			</div>
 		</div>
@@ -315,7 +315,7 @@
 						<h2 class="font-bold title-font text-sm text-gray-900 mb-1 tracking-wider">
 							Feasibility analysis
 						</h2>
-						<p class="leading-relaxed">
+						<p class="leading-relaxed text-white">
 							The feasibility study can show how to make your own software profitable in the long
 							run, evaluates all factors including economic and technical that affect the project
 							development.
@@ -342,10 +342,10 @@
 						</svg>
 					</div>
 					<div class="flex-grow pl-4">
-						<h2 class="font-bold title-font text-sm text-gray-900 mb-1 tracking-wider">
+						<h2 class="font-bold title-font text-sm mb-1 tracking-wider text-white">
 							Designing & Modelling
 						</h2>
-						<p class="leading-relaxed">
+						<p class="leading-relaxed text-white">
 							Designers, like any other architects, build the whole structure of the project, and
 							provide the final prototype that will be used for the next steps of software
 							development.
@@ -373,10 +373,10 @@
 						</svg>
 					</div>
 					<div class="flex-grow pl-4">
-						<h2 class="font-bold title-font text-sm text-gray-900 mb-1 tracking-wider">
+						<h2 class="font-bold title-font text-sm text-white mb-1 tracking-wider">
 							Construction
 						</h2>
-						<p class="leading-relaxed">
+						<p class="leading-relaxed text-white">
 							Here is coding where developers are getting started. Every programmer has his own
 							software development tasks list for coding for which he is responsible. The software
 							build process is controlled by project managers. This phase is the most time-consuming
@@ -405,10 +405,10 @@
 						</svg>
 					</div>
 					<div class="flex-grow pl-4">
-						<h2 class="font-bold title-font text-sm text-gray-900 mb-1 tracking-wider">
+						<h2 class="font-bold title-font text-sm text-white mb-1 tracking-wider">
 							Quality Assurance
 						</h2>
-						<p class="leading-relaxed">
+						<p class="leading-relaxed text-white">
 							QA engineers test the quality of the code written by developers. They use different
 							frameworks and kinds of testing to learn if there are any bugs in the system. Testers
 							write test cases and report the bugs to developers to fix them, also helping to figure
@@ -434,10 +434,10 @@
 						</svg>
 					</div>
 					<div class="flex-grow pl-4">
-						<h2 class="font-bold title-font text-sm text-gray-900 mb-1 tracking-wider">
+						<h2 class="font-bold title-font text-sm text-white mb-1 tracking-wider">
 							Deployment & Release
 						</h2>
-						<p class="leading-relaxed">
+						<p class="leading-relaxed text-white">
 							The first software release will be followed by the releases of the next versions of
 							the product. It is the final stage of development that can be also followed by
 							maintenance and support.
@@ -457,10 +457,10 @@
 <!-- Testinomials -->
 <section class="text-gray-600 body-font">
 	<div class="container px-5 py-24 mx-auto">
-		<h1 class="text-3xl font-medium title-font text-gray-900 mb-12 text-center">Testimonials</h1>
+		<h1 class="text-3xl font-medium title-font text-white mb-12 text-center">Testimonials</h1>
 		<div class="flex flex-wrap -m-4">
 			<div class="p-4 md:w-1/2 w-full">
-				<div class="h-full bg-gray-100 p-8 rounded">
+				<div class="h-full bg-gray-700 p-8 rounded">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						fill="currentColor"
@@ -471,7 +471,7 @@
 							d="M925.036 57.197h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.399 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l36 76c11.6 24.399 40.3 35.1 65.1 24.399 66.2-28.6 122.101-64.8 167.7-108.8 55.601-53.7 93.7-114.3 114.3-181.9 20.601-67.6 30.9-159.8 30.9-276.8v-239c0-27.599-22.401-50-50-50zM106.036 913.497c65.4-28.5 121-64.699 166.9-108.6 56.1-53.7 94.4-114.1 115-181.2 20.6-67.1 30.899-159.6 30.899-277.5v-239c0-27.6-22.399-50-50-50h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.4 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l35.9 75.8c11.601 24.399 40.501 35.2 65.301 24.399z"
 						/>
 					</svg>
-					<p class="leading-relaxed mb-6">
+					<p class="leading-relaxed mb-6 text-white">
 						We've been trying to put together a functional website since I began my practice in
 						April of 2012. I am happy to say we finally hired the Creative Solutions team and
 						they've worked closely with us throughout the process, staying on task, on target, and
@@ -485,14 +485,14 @@
 							class="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center"
 						/>
 						<span class="flex-grow flex flex-col pl-4">
-							<span class="title-font font-medium text-gray-900">CMO</span>
-							<span class="text-gray-500 text-sm">Leading Medical Care Company</span>
+							<span class="title-font font-medium text-white">CMO</span>
+							<span class="text-white text-sm">Leading Medical Care Company</span>
 						</span>
 					</a>
 				</div>
 			</div>
 			<div class="p-4 md:w-1/2 w-full">
-				<div class="h-full bg-gray-100 p-8 rounded">
+				<div class="h-full bg-gray-700 p-8 rounded">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						fill="currentColor"
@@ -503,14 +503,14 @@
 							d="M925.036 57.197h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.399 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l36 76c11.6 24.399 40.3 35.1 65.1 24.399 66.2-28.6 122.101-64.8 167.7-108.8 55.601-53.7 93.7-114.3 114.3-181.9 20.601-67.6 30.9-159.8 30.9-276.8v-239c0-27.599-22.401-50-50-50zM106.036 913.497c65.4-28.5 121-64.699 166.9-108.6 56.1-53.7 94.4-114.1 115-181.2 20.6-67.1 30.899-159.6 30.899-277.5v-239c0-27.6-22.399-50-50-50h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.4 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l35.9 75.8c11.601 24.399 40.501 35.2 65.301 24.399z"
 						/>
 					</svg>
-					<p class="leading-relaxed mb-6">
+					<p class="leading-relaxed text-white mb-6">
 						I am really impressed by the quality of services I received from Creative Solutions
 						Solutions. You were right on schedule, charged reasonable prices, were professional and
 						courteous in dealings, and delivered items well before time. I have got a good
 						e-commerce site for my products. My revenue has increased because of Creative Solutions
 						and I will definitely use your services again.
 					</p>
-					<a class="inline-flex items-center">
+					<a class="inline-flex items-center text-white">
 						<img
 							alt="testimonial"
 							src="https://source.unsplash.com/featured?user"
@@ -529,38 +529,9 @@
 
 <!-- Footer -->
 <footer class="text-gray-600 body-font">
-	<div class="container px-5 py-24 mx-auto">
-		<div class="flex flex-wrap md:text-left text-center order-first">
-			<div class="lg:w-1/4 md:w-1/2 w-full px-4">
-				<h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
-					Newsletter
-				</h2>
-				<div
-					class="flex xl:flex-nowrap md:flex-nowrap lg:flex-wrap flex-wrap justify-center items-end md:justify-start"
-				>
-					<div class="relative w-40 sm:w-auto xl:mr-4 lg:mr-0 sm:mr-4 mr-2">
-						<label for="footer-field" class="leading-7 text-sm text-gray-600">Subsribe</label>
-						<input
-							type="text"
-							id="footer-field"
-							placeholder="Your Email Here"
-							name="footer-field"
-							class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:bg-transparent focus:ring-2 focus:ring-blue-200 focus:border-blue-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-						/>
-					</div>
-					<button
-						class="lg:mt-2 xl:mt-0 flex-shrink-0 inline-flex text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded"
-						>Get Feed</button
-					>
-				</div>
-				<p class="text-gray-500 text-sm mt-2 md:text-left text-center">
-					Subcribe to our Monthly Newsletter
-					<br class="lg:block hidden" />to stay updated about latest Services, Offerings & Discount
-					seasons.
-				</p>
-			</div>
-		</div>
-	</div>
+	<!-- <div class="container px-5 py-24 mx-auto"> -->
+		
+	<!-- </div> -->
 	<div class="bg-gray-100">
 		<div class="container px-5 py-6 mx-auto flex items-center sm:flex-row flex-col">
 			<a

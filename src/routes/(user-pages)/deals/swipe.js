@@ -1,5 +1,6 @@
 console.log('hello ');
-export const swipe = () => {
+let swipeSubscription = null;
+export const swipe = (onCardAction) => {
 	const mouseEventToCoordinate = (mouseEvent) => {
 		mouseEvent.preventDefault();
 		return { x: mouseEvent.clientX, y: mouseEvent.clientY };
@@ -81,8 +82,10 @@ export const swipe = () => {
 		const minSwipeLength = 130;
 		if (coordinate.x > minSwipeLength) {
 			like();
+			onCardAction('liked');
 		} else if (coordinate.x < -minSwipeLength) {
 			nope();
+			onCardAction('disliked');
 		} else {
 			cancel();
 		}
@@ -132,4 +135,12 @@ export const swipe = () => {
 			event.preventDefault();
 		});
 	});
+};
+export const initializeSwipe = (onCardAction) => {
+	if (swipeSubscription) {
+		swipeSubscription.unsubscribe();
+		swipeSubscription = null;
+	}
+
+	swipeSubscription = swipe(onCardAction);
 };

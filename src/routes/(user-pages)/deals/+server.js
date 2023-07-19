@@ -20,8 +20,23 @@ export async function GET({ locals }) {
 		}
 	});
 
-	if(!nextDeals) {
-		return json("no deals found");
+	if (!nextDeals) {
+		return json('no deals found');
 	}
-	return json("hello world");
+	return json('hello world');
+}
+
+export async function POST({ request, locals }) {
+	const { user } = await locals.auth.validateUser();
+	//set 5 userDealStatus objects for the current user
+
+	const nextDeals = await prismaClient.deal.findMany({
+		take: 5,
+
+	});
+
+	if (!nextDeals) {
+		return json('no deals found');
+	}
+	return json(nextDeals);
 }

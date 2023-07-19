@@ -1,6 +1,94 @@
 <script>
+	import { swipe } from './swipe.js';
+	import { onMount, tick } from 'svelte';
+
 	export let offers;
+	let MAX_SWIPE_COUNT = 3;
+	let swipeStatusList = [];
 	let pageNum = 0;
+	export let currDealIds;
+	export let refreshCounter;
+	import { newData } from './stores.js';
+	//make sure to run when offers changes
+	$: {
+		for (let i = 0; i < offers.length; i++) {
+			currDealIds[i] = offers[i].id;
+		}
+	}
+	newData.subscribe((value) => {
+		if (value.length !== 0) {
+			console.log('UPDATED!!!', value);
+			offers = [...value];
+			offers = offers.concat();
+		}
+		// offers = value;
+	});
+	let onCardAction = async (status) => {
+		swipeStatusList.push(status); // Ad the swipe status to the list
+		console.log(swipeStatusList, swipeStatusList.length - 1);
+		if (swipeStatusList.length - 1 === MAX_SWIPE_COUNT) {
+			//fetch the next five deals with a post request to /deals
+			const userDealDecisions = makeObjects(swipeStatusList, currDealIds);
+			//post array of the past 5 decisions to /deals POST
+			swipeStatusList = [];
+			currDealIds = [];
+			let nextDeals = await add(userDealDecisions);
+			console.log(offers);
+			// swipe(onCardAction);
+			$newData = nextDeals;
+			refreshCounter += 1;
+			// console.log(await add(userDealDecisions));
+
+			//request the next 5 deals set offers and make sure the swipeCardComponent updates
+			//reset the swipeStatusList and the currDealIds
+			//set offers to the new offers
+		}
+	};
+	onMount(async () => {
+		swipe(onCardAction);
+	});
+	async function add(swipeData) {
+		const response = await fetch('/deals', {
+			method: 'POST',
+			body: swipeData,
+			headers: {
+				'content-type': 'application/json'
+			}
+		});
+
+		return await response.json();
+	}
+	function makeObjects(decisionArr, dealIdArr) {
+		let objArr = [];
+		for (let i = 0; i < decisionArr.length; i++) {
+			let obj = { dealId: dealIdArr[i], decision: decisionArr[i] };
+			objArr.push(obj);
+		}
+		return objArr;
+	}
+	// beforeUpdate(() => {
+	// 	if (window !== undefined && currDealIds === []) {
+	// 		swipe(async (status) => {
+	// 			swipeStatusList.push(status); // Ad the swipe status to the list
+	// 			console.log(swipeStatusList, swipeStatusList.length - 1);
+	// 			if (swipeStatusList.length - 1 === MAX_SWIPE_COUNT) {
+	// 				//fetch the next five deals with a post request to /deals
+	// 				const userDealDecisions = makeObjects(swipeStatusList, currDealIds);
+	// 				//post array of the past 5 decisions to /deals POST
+	// 				swipeStatusList = [];
+	// 				currDealIds = [];
+	// 				let nextDeals = await add(userDealDecisions);
+	// 				offers = [...nextDeals];
+	// 				console.log(offers);
+	// 				// console.log(await add(userDealDecisions));
+
+	// 				//request the next 5 deals set offers and make sure the swipeCardComponent updates
+	// 				//reset the swipeStatusList and the currDealIds
+	// 				//set offers to the new offers
+	// 			}
+	// 		});
+	// 	}
+	// });
 </script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,7 +107,7 @@
 				<div class="boxcontent">
 					{#if pageNum === 0}
 						<div class="w-full text=center">
-							<p>Hello World</p>
+							<p>{offer.id}</p>
 						</div>
 					{/if}
 					{#if pageNum === 1}
@@ -69,7 +157,6 @@
 				/>
 				<button
 					class="hover:bg-white rounded-2xl absolute right-0 mt-6 w-10 h-[95%] opacity-20 z-12"
-
 					style=""
 					on:click={() => {
 						pageNum = pageNum + 1;

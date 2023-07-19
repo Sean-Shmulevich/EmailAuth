@@ -19,7 +19,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 export const actions: Actions = {
 	default: async ({ request, locals }) => {
 		const formData = await request.formData();
-		const email = formData.get('email')?.toString() ?? '';
+		const email = (formData.get('email')?.toString() ?? '').toLowerCase();
 		if (email === null || !emailRegex.test(email)) {
 			return fail(400, {
 				message: 'Invalid email',

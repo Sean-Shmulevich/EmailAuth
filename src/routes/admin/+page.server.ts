@@ -26,7 +26,7 @@ export const actions: Actions = {
 		// }
 
 		const formData = await request.formData();
-		const email = formData.get('email')?.toString() ?? '';
+		const email = (formData.get('email')?.toString() ?? '').toLowerCase();
 
 		const user = await prismaClient.authUser.findUnique({
 			where: {

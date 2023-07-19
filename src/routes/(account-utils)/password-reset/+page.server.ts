@@ -9,7 +9,7 @@ import type { Actions } from './$types';
 export const actions: Actions = {
 	default: async ({ request }) => {
 		const formData = await request.formData();
-		const email = formData.get('email')?.toString() ?? '';
+		const email = (formData.get('email')?.toString() ?? '').toLowerCase();
 		if (email === null || !emailRegex.test(email)) {
 			return fail(400, {
 				message: 'Invalid email',

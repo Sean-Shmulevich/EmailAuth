@@ -6,6 +6,7 @@
 	export let offers;
 
 	//how many swipes before refetching the next data
+	//TODO if 5 items are not fetched the update will not trigger
 	let MAX_SWIPE_COUNT = 4;
 	//the status of the last 5 swipes
 	let swipeStatusList = [];
@@ -32,17 +33,21 @@
 		console.log(swipeStatusList, swipeStatusList.length - 1);
 		if (swipeStatusList.length - 1 === MAX_SWIPE_COUNT) {
 			//fetch the next five deals with a post request to /deals
-			const userDealDecisions = makeObjects(swipeStatusList, currDealIds);
+			let objArr = [];
+			for (let i = 0; i < currDealIds.length; i++) {
+				let obj = { dealId: currDealIds[i], decision: swipeStatusList[i] };
+				objArr.push(obj);
+			}
 			//post array of the past 5 decisions to /deals POST
 			swipeStatusList = [];
 			currDealIds = [];
-			let nextDeals = await add(userDealDecisions);
+			console.log(objArr);
+			let nextDeals = await add(JSON.stringify(objArr));
 			// swipe(onCardAction);
 			//!!! this makes it more seamless by loading in the last deal and running
 			//this code one before it gets there.
 			offers = [...nextDeals];
 			refreshCounter += 1;
-			console.log(await add(userDealDecisions));
 
 			//request the next 5 deals set offers and make sure the swipeCardComponent updates
 			//reset the swipeStatusList and the currDealIds

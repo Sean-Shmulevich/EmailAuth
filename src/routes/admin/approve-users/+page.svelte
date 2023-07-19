@@ -7,10 +7,12 @@
 	export let data;
 </script>
 
-<h1 class="text-center text-6xl">Admin approve users</h1>
+<div class="bg-white rounded-xl mx-auto -mt-14 max-w-[90%] px-10 pb-10 w-[85%] mb-12">
 
-<div class="mx-24 mt-10">
-	<div class="mx-auto mb-10 text-center rounded-3xl py-4 w-80 bg-black text-white">
+<h1 class="text-center pt-10 text-6xl">Admin approve users</h1>
+
+<div class="mt-10">
+	<div class="mx-auto mb-10 text-center rounded-3xl py-4 w-[20%] bg-black text-white">
 		<a class="text-center" href="/admin/approve-brands">go to approve brands</a>
 	</div>
 
@@ -49,5 +51,4 @@
 	{/each}
 </div>
 
-<style>
-</style>
+</div>

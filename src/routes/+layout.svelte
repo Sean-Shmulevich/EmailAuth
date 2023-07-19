@@ -4,7 +4,7 @@
 	import type { PageData } from './$types';
 	// import { onMount, onDestroy } from 'svelte';
 	import { Button, Dropdown, DropdownItem, Chevron, Avatar } from 'flowbite-svelte';
-	import logo from "$lib/static/DapUpLogo.png";
+	import logo from "/dapuplogo.png";
 
 	import { goto } from '$app/navigation';
 	export let data: PageData;

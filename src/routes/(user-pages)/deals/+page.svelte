@@ -78,6 +78,25 @@
 			publishDate: 'DateTime.now()',
 			isCampaign: true
 		},
+        {
+			id: 'DealID4',
+			title: 'Deal Title',
+			description: 'Deal Description',
+			sportPreference: 'Sport Preference',
+			genderPreference: 'Male',
+			shortDescription: 'Campaign Short Description',
+			inPersonOrVirtual: 'In Person or Virtual',
+			location: 'iowa',
+			dateTime: '2021-10-10',
+			duration: '1 hour',
+			mainGoal: 'main goal',
+			estimatedPayment: '100',
+			recommendedDeliverables: ['deliverable1', 'deliverable2'],
+			athleteCount: 1,
+			singleOrMultiple: 'single',
+			publishDate: 'DateTime.now()',
+			isCampaign: true
+		}
 
 	];
 	import { onMount, tick } from 'svelte';

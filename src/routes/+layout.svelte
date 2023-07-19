@@ -4,6 +4,7 @@
 	import type { PageData } from './$types';
 	// import { onMount, onDestroy } from 'svelte';
 	import { Button, Dropdown, DropdownItem, Chevron, Avatar } from 'flowbite-svelte';
+	import logo from "./DapUpLogo.png";
 
 	import { goto } from '$app/navigation';
 	export let data: PageData;
@@ -19,7 +20,7 @@
 	</head>
 	<body class="bg-gray-900 h-[100vh] overflow-x-hidden">
 		<!-- TODO make it fixed if we want it to be sticky -->
-		<header class="w-full body-font bg-blue-300">
+		<header class="w-full body-font bg-gray-800">
 			<div class="container sticky mx-auto flex flex-wrap pt-5 flex-col md:flex-row items-center">
 				<!-- svelte-ignore a11y-missing-attribute -->
 				<a
@@ -27,19 +28,8 @@
 					class="flex title-font font-mediums items-center text-white mb-4 md:mb-0"
 					style="margin-top:-18px"
 				>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						fill="none"
-						stroke="currentColor"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						class="w-10 h-10 text-white p-2 bg-blue-500 rounded-full"
-						viewBox="0 0 24 24"
-					>
-						<path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-					</svg>
-					<span class="ml-3 text-3xl gold">DapUp</span>
+					<img class="w-52 " src="{logo}"/>
+					<!-- <span class="ml-3 text-3xl gold">DapUp</span> -->
 				</a>
 				<nav
 					class="md:ml-auto flex flex-wrap items-center text-base justify-center"
@@ -62,9 +52,9 @@
 						</a>
 						<!-- if data.msg === 'email authenticated' -->
 					{:else}
-						<Button pill class="bg-black !p-1" id="avatar_with_name">
+						<Button pill class="bg-yellow-400 text-black !p-1" id="avatar_with_name">
 							<Avatar
-								src="https://arkansasrazorbacks.com/wp-content/uploads/2021/12/Ayden-Owens-MTR-2021-22.jpg"
+								src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXw3NjA4Mjc3NHx8ZW58MHx8fHx8&w=1000&q=80"
 								class="mr-2"
 							/>
 							{data.user.email}

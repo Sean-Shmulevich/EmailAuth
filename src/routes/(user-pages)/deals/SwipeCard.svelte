@@ -45,6 +45,7 @@
 			let nextDeals = await add(JSON.stringify(objArr));
 			// swipe(onCardAction);
 			//!!! this makes it more seamless by loading in the last deal and running
+			//TODO check for invalid json
 			//this code one before it gets there.
 			console.log(nextDeals)
 			offers = [...nextDeals];
@@ -138,7 +139,7 @@
 					style=""
 					on:click={() => {
 						pageNum = pageNum - 1;
-						if (pageNum <= 0) {
+						if (pageNum < 0) {
 							pageNum = 3;
 						}
 					}}

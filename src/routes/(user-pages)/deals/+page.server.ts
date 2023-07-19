@@ -42,13 +42,13 @@ export const load: PageServerLoad = async ({ locals, url }) => {
 		}
 	});
 
-	const userDealStatus = await prismaClient.userDealStatus.create({
-		data: {
-			userId: user.userId,
-			dealId: deal.id,
-			status: 'Pending'
-		}
-	});
+	// const userDealStatus = await prismaClient.userDealStatus.create({
+	// 	data: {
+	// 		userId: user.userId,
+	// 		dealId: deal.id,
+	// 		status: 'Pending'
+	// 	}
+	// });
 
 	console.log(deal.id);
 	// const nextDeals = await prismaClient.deal.findMany({take: 5});

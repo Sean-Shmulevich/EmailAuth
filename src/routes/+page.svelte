@@ -30,7 +30,7 @@
 	<div class="container mx-auto flex px-5 py-24 items-center justify-center">
 		<div class="text-center lg:w-full xl:w-full">
 			<h1
-				class="text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-bold leading-tight mb-8 text-black"
+				class="text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-bold leading-tight mb-8 text-white"
 			>
 				Connecting college athletes with brands
 			</h1>

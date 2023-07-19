@@ -1,5 +1,6 @@
 <script>
 	import SwipeCard from './SwipeCard.svelte';
+    
 	let offers = [
 		{
 			id: 'DealID',
@@ -19,9 +20,6 @@
 			singleOrMultiple: 'single',
 			publishDate: 'DateTime.now()',
 			isCampaign: true,
-			singleEvent: {},
-			usersAccepted: [],
-			usersRejected: []
 		}
 	];
 	import { onMount, tick } from 'svelte';
@@ -30,7 +28,12 @@
 		if (window !== undefined) {
             swipe();
 		}
+    roll();
 	});
+    async function roll() {
+		const response = await fetch('/deals');
+        console.log(await response.json());
+	}
 
 	//     model Deal {
 	//   id                      String    @id @unique

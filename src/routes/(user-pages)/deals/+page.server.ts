@@ -25,22 +25,30 @@ export const load: PageServerLoad = async ({ locals, url }) => {
 			singleOrMultiple: 'Single',
 			publishDate: new Date(),
 			authUserId: user.userId, // the user id
-			isCampaign: false,
+			isCampaign: false
 		}
 	});
-	// const dealFindUser = await prismaClient.dealFindUser.create({
-	// 	data: {
-	// 		dealId: dealId,
-	// 		deal: {
-	// 			connect: { id: dealId }
-	// 		},
-	// 		auth_user_accepted: {
-	// 			set: [userId] // Associate the user with the deal-find-user and mark them as accepted
-	// 		},
-	// 		auth_user_rejected: {
-	// 			set: [] // An empty array for rejected users initially
-	// 		}
-	// 	}
-	// });
-	console.log(deal);
+
+	const nextDeals = await prismaClient.deal.findMany({
+		take: 5,
+		where: {
+			NOT: {
+				userDealStatus: {
+					some: {
+						userId: user.userId
+					}
+				}
+			}
+		}
+	});
+
+	const userDealStatus = await prismaClient.userDealStatus.create({
+		data: {
+			userId: user.userId,
+			dealId: deal.id,
+			status: 'Pending'
+		}
+	});
+
+	console.log(deal.id);
 };

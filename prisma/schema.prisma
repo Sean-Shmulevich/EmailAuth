@@ -121,12 +121,10 @@ model Deal {
   athleteCount            Int
   singleOrMultiple        String
   publishDate             DateTime?
-  authUser                AuthUser  @relation(fields: [authUserId], references: [id])
+  authUser                AuthUser  @relation(fields: [authUserId], references: [id], onDelete: Cascade)
   authUserId              String
   isCampaign              Boolean
 
-  rejectedIds    String[]
-  acceptedIds    String[]
   userDealStatus UserDealStatus[]
 
   @@map("deal")
@@ -136,8 +134,8 @@ model UserDealStatus {
   userId String
   dealId String
   status String   @default("pending") // can be "accepted", "rejected", or "pending"
-  user   AuthUser @relation(fields: [userId], references: [id])
-  deal   Deal     @relation(fields: [dealId], references: [id])
+  user   AuthUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+  deal   Deal     @relation(fields: [dealId], references: [id], onDelete: Cascade)
 
   @@id([userId, dealId])
   @@map("user_deal_status")

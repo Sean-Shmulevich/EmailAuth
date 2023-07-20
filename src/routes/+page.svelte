@@ -30,7 +30,7 @@
 			<h1
 				class="text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-bold leading-tight mb-8 text-white"
 			>
-				Connecting college athletes with brands
+				The premier matchmaking platform for athletes and brands
 			</h1>
 
 			<div style="height:20vh" />
@@ -60,7 +60,7 @@
 </section>
 
 <!-- Services -->
-<section class="text-gray-600 body-font">
+<section class="text-gray-600 body-font -mb-40">
 	<div class="container px-5 py-24 mx-auto">
 		<h1 class="sm:text-3xl text-2xl font-medium title-font text-center text-gray-900 mb-20">
 			Services
@@ -86,10 +86,10 @@
 				<div class="flex-grow pl-6">
 					<h2 class="text-white text-lg title-font font-medium mb-2">Automation</h2>
 					<p class="leading-relaxed text-base text-white">
-						IT Process Automation Software is an application that has functionalities to develop,
-						manage, and monitor automated processes for IT enterprise. Because IT processes are
-						scattered across multiple environments, tools, and technologies, this is a difficult
-						task to manage. IT Automation Tools will help you to manage them easily.
+						DapUp enables your brand to customize marketing campaigns curated by data driven
+						software designed to maximize your company’s ROI. Each Campaign created on the DapUp
+						Platform is pre approved by our team ensuring all NCAA regulatory Compliance is
+						maintained. With DapUp, partnerships are made easy.
 					</p>
 					<a class="mt-3 text-blue-500 inline-flex items-center" href="#"
 						>Learn More
@@ -128,10 +128,9 @@
 				<div class="flex-grow pl-6">
 					<h2 class="text-white text-lg title-font font-medium mb-2">Data</h2>
 					<p class="leading-relaxed text-white text-base">
-						Database software is a software program or utility used for creating, editing and
-						maintaining database files and records. This type of software allows users to store data
-						in the form of structured fields, tables and columns, which can then be retrieved
-						directly and/or through programmatic access.
+						DapUp brings the athletes to you. Athletes will express interest in your brand or
+						campaign, and DapUp’s technology recommends matches based on profile alignment. Once a
+						match is made, your brand can connect directly with your favorite athletes.
 					</p>
 					<a class="mt-3 text-blue-500 inline-flex items-center" href="/"
 						>Learn More
@@ -169,10 +168,9 @@
 				<div class="flex-grow pl-6">
 					<h2 class="text-white text-lg title-font font-medium mb-2">Product</h2>
 					<p class="leading-relaxed text-white text-base">
-						Software as a product (SaaP, also programming product, software product) — is a product,
-						software, which is made to be sold to users, and users pay for licence which allows them
-						to use it, in contrast to SaaS, where users buy subscription and where the software is
-						centrally hosted.
+						Manage all of your athlete marketing campaigns on the DapUp platform. From creating
+						offers, to connecting with athletes, to executing contracts, DapUp centralizes all
+						aspects of your campaign. Expand your brand, grow your influence, DapUp Your Game.
 					</p>
 					<a class="mt-3 text-blue-500 inline-flex items-center" href="#"
 						>Learn More
@@ -195,18 +193,16 @@
 </section>
 
 <!-- Statistics -->
-<section class="text-gray-600 body-font">
+<section class="text-gray-600 -mx-20 body-font">
 	<div class="container px-5 py-24 mx-auto">
 		<div class="flex flex-col text-center w-full mb-20">
-			<h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-white">
-				Our Growth & Success
-			</h1>
+			<h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-white">The DapUp ABC’s</h1>
 			<p class="lg:w-2/3 mx-auto leading-relaxed text-base text-white">
-				Building internal capabilities and powerful engineering teams for sustainable success.
-				<br />Our startup help you to build your carrier.
+				DapUp is driven by 4 main pillars.
+				<br />Our mission is simple.
 			</p>
 		</div>
-		<div class="flex flex-wrap -m-4 text-center">
+		<div class="flex flex-wrap -m-4 text-center max-w-[90vw] mx-auto">
 			<div class="p-4 md:w-1/4 sm:w-1/2 w-full">
 				<div class="border-2 border-gray-200 px-4 py-6 rounded-lg">
 					<svg
@@ -222,7 +218,7 @@
 						<path d="M20.88 18.09A5 5 0 0018 9h-1.26A8 8 0 103 16.29" />
 					</svg>
 					<h2 class="title-font font-medium text-3xl text-gray-300">2.7K</h2>
-					<p class=" text-white leading-relaxed">Softwares</p>
+					<p class=" text-white leading-relaxed">Athlete Empowerment</p>
 				</div>
 			</div>
 			<div class="p-4 md:w-1/4 sm:w-1/2 w-full">
@@ -241,7 +237,7 @@
 						<path d="M23 21v-2a4 4 0 00-3-3.87m-4-12a4 4 0 010 7.75" />
 					</svg>
 					<h2 class="title-font font-medium text-3xl text-gray-300">1.3K</h2>
-					<p class="text-white leading-relaxed">Clients</p>
+					<p class="text-white leading-relaxed">Brand Alignment</p>
 				</div>
 			</div>
 			<div class="p-4 md:w-1/4 sm:w-1/2 w-full">
@@ -261,7 +257,7 @@
 						/>
 					</svg>
 					<h2 class="title-font font-medium text-3xl text-gray-300">10K+</h2>
-					<p class="text-white leading-relaxed">Working Hours</p>
+					<p class="text-white leading-relaxed">Community Impact</p>
 				</div>
 			</div>
 			<div class="p-4 md:w-1/4 sm:w-1/2 w-full">
@@ -278,7 +274,7 @@
 						<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
 					</svg>
 					<h2 class="title-font font-medium text-3xl text-gray-300">526</h2>
-					<p class="text-white leading-relaxed">Maintained</p>
+					<p class="text-white leading-relaxed">Data Driven Growth</p>
 				</div>
 			</div>
 		</div>
@@ -286,7 +282,7 @@
 </section>
 
 <!-- Steps -->
-<section class="text-gray-600 body-font mx-12">
+<section class="text-gray-600 body-font -mt-10">
 	<div class="container px-5 py-24 mx-auto flex flex-wrap">
 		<div class="flex flex-wrap w-full">
 			<div class="lg:w-2/5 md:w-1/2 md:pr-10 md:py-6">
@@ -311,12 +307,11 @@
 					</div>
 					<div class="flex-grow pl-4">
 						<h2 class="font-bold title-font text-sm text-gray-200 mb-1 tracking-wider">
-							Feasibility analysis
+							Maintained
 						</h2>
 						<p class="leading-relaxed text-white">
-							The feasibility study can show how to make your own software profitable in the long
-							run, evaluates all factors including economic and technical that affect the project
-							development.
+							Design a campaign using templates and recommendations from DapUp. Input athlete
+							preferences, price range, dates, and deliverables.
 						</p>
 					</div>
 				</div>
@@ -340,13 +335,10 @@
 						</svg>
 					</div>
 					<div class="flex-grow pl-4">
-						<h2 class="font-bold title-font text-sm mb-1 tracking-wider text-white">
-							Designing & Modelling
-						</h2>
+						<h2 class="font-bold title-font text-sm mb-1 tracking-wider text-white">Launch</h2>
 						<p class="leading-relaxed text-white">
-							Designers, like any other architects, build the whole structure of the project, and
-							provide the final prototype that will be used for the next steps of software
-							development.
+							Publish campaign locally or nationally. Get exposure for your brand in front of
+							athletes all over the NCAA actively using DapUp.
 						</p>
 					</div>
 				</div>
@@ -371,14 +363,10 @@
 						</svg>
 					</div>
 					<div class="flex-grow pl-4">
-						<h2 class="font-bold title-font text-sm text-white mb-1 tracking-wider">
-							Construction
-						</h2>
+						<h2 class="font-bold title-font text-sm text-white mb-1 tracking-wider">Match</h2>
 						<p class="leading-relaxed text-white">
-							Here is coding where developers are getting started. Every programmer has his own
-							software development tasks list for coding for which he is responsible. The software
-							build process is controlled by project managers. This phase is the most time-consuming
-							operation.
+							Team up with athletes from your favorite teams. Choose the athlete you want to DapUp
+							and connect with them directly.
 						</p>
 					</div>
 				</div>
@@ -403,14 +391,10 @@
 						</svg>
 					</div>
 					<div class="flex-grow pl-4">
-						<h2 class="font-bold title-font text-sm text-white mb-1 tracking-wider">
-							Quality Assurance
-						</h2>
+						<h2 class="font-bold title-font text-sm text-white mb-1 tracking-wider">Contract</h2>
 						<p class="leading-relaxed text-white">
-							QA engineers test the quality of the code written by developers. They use different
-							frameworks and kinds of testing to learn if there are any bugs in the system. Testers
-							write test cases and report the bugs to developers to fix them, also helping to figure
-							out how to build a software product most efficiently.
+							Hire athletes for campaigns in a rule compliant and legal manner. Sign transparent
+							contracts within the app.
 						</p>
 					</div>
 				</div>
@@ -432,13 +416,10 @@
 						</svg>
 					</div>
 					<div class="flex-grow pl-4">
-						<h2 class="font-bold title-font text-sm text-white mb-1 tracking-wider">
-							Deployment & Release
-						</h2>
+						<h2 class="font-bold title-font text-sm text-white mb-1 tracking-wider">Manage</h2>
 						<p class="leading-relaxed text-white">
-							The first software release will be followed by the releases of the next versions of
-							the product. It is the final stage of development that can be also followed by
-							maintenance and support.
+							Get notified when athletes complete deliverables. Track campaign progress in one
+							place.
 						</p>
 					</div>
 				</div>
@@ -453,7 +434,7 @@
 </section>
 
 <!-- Testinomials -->
-<section class="text-gray-600 body-font">
+<!-- <section class="text-gray-600 body-font">
 	<div class="container px-5 py-24 mx-auto">
 		<h1 class="text-3xl font-medium title-font text-white mb-12 text-center">Testimonials</h1>
 		<div class="flex flex-wrap -m-4">
@@ -523,7 +504,7 @@
 			</div>
 		</div>
 	</div>
-</section>
+</section> -->
 
 <!-- Footer -->
 <footer class="text-gray-600 body-font">

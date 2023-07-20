@@ -90,13 +90,17 @@
 								<DropdownItem class="text-center" href="/brand-edit-profile/{data.user.userId}"
 									>Edit Profile</DropdownItem
 								>
+								<DropdownItem class="text-center" href="/brand-create-offer"
+									>Create Deal</DropdownItem
+								>
 							{/if}
 
 							{#if data.msg === 'fully authenticated'}
 								<h1>hello user is admin authenticated</h1>
 							{/if}
-							<form action="?/logout" method="post" use:enhance>
-								<DropdownItem type="submit" slot="footer">Sign out</DropdownItem>
+							<form action="?/logout" class="text-center mx-auto" method="post" use:enhance>
+								<DropdownItem class="text-center" type="submit" slot="footer">Sign out</DropdownItem
+								>
 							</form>
 						</Dropdown>
 					{/if}

@@ -105,7 +105,7 @@ model BrandProfile {
 }
 
 model Deal {
-  id                      String    @id @unique @default(uuid())
+  id                      String       @id @unique @default(uuid())
   title                   String
   description             String
   sportPreference         String
@@ -121,13 +121,27 @@ model Deal {
   athleteCount            Int
   singleOrMultiple        String
   publishDate             DateTime?
-  authUser                AuthUser  @relation(fields: [authUserId], references: [id], onDelete: Cascade)
+  authUser                AuthUser     @relation(fields: [authUserId], references: [id], onDelete: Cascade)
   authUserId              String
   isCampaign              Boolean
+  dealImages              DealImages[]
 
   userDealStatus UserDealStatus[]
 
   @@map("deal")
+}
+
+model DealImages {
+  id           String    @id @default("1")
+  created      DateTime? @default(now())
+  file_name    String?
+  file_size    Int?
+  file_type    String?
+  image_number Int       @default(1) // new field
+  authDeal     Deal      @relation(fields: [dealId], references: [id], onDelete: Cascade)
+  dealId       String
+
+  @@map("deal_image")
 }
 
 model UserDealStatus {

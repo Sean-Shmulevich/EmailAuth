@@ -6,6 +6,10 @@
 	export let data;
 	export let form;
 
+	let eventType;
+	let inPersonOrVirtual;
+	let singleOrMultiple;
+
 	import { onMount } from 'svelte';
 
 	let presignUrl = '/api/presign';
@@ -26,24 +30,15 @@
 	function handleSubmit(event) {
 		upload(croppedImage);
 		// console.log("run");
-		images = { ...images };
+		// images = { ...images };
 		croppedImage = null;
 	}
 	let radioValue;
 
 	const options = [
-		{
-			value: 'green',
-			label: 'Bulbasaur'
-		},
-		{
-			value: 'red',
-			label: 'Charmander'
-		},
-		{
-			value: 'blue',
-			label: 'Squirtle'
-		}
+		['Single Event', 'Campaign'],
+		['In Person', 'Virtual'],
+		['Single Athlete', 'Multiple Athletes']
 	];
 
 	async function upload(file) {
@@ -97,7 +92,7 @@
 <div class="bg-gray-900 text-white flex flex-col items-center text-center justify-center space-y-8">
 	<h2 class="text-2xl mt-10">Edit Profile</h2>
 	<div
-		class="profile-card flex flex-col bg-gray-800 shadow overflow-hidden mt-10 rounded-lg max-w-5xl mb-10 w-full p-6"
+		class="profile-card flex flex-col bg-gray-800 shadow overflow-hidden mt-10 rounded-lg max-w-5xl w-[80%] mb-10 p-6"
 	>
 		<form
 			method="POST"
@@ -115,16 +110,67 @@
 				bind:square={squareInput}
 				bind:open={isModalOpen}
 			/>
-			<Radio
-				{options}
-				fontSize={16}
-				legend="Select a starter Pokemon"
-				bind:userSelected={radioValue}
-			/>
-			<p>
-				{radioValue} is selected
-			</p>
 		</form>
+		<Radio bind:selected={eventType} options={options[0]} flexDirection="row" />
+		{#if eventType === 'Single Event'}
+			<h2 class="mt-4">Single Event Selected</h2>
+			<div>
+				<label class="block text-gray-400 text-sm font-bold mb-2" for="message"
+					>Short description of your event</label
+				>
+				<textarea
+					id="short-description"
+					name="short-description"
+					rows="5"
+					class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+					placeholder="ex: Join us for a night of fun and games!"
+				/>
+				<div class="border my-5 rounded-xl p-3">
+					<Radio bind:selected={inPersonOrVirtual} options={options[1]} flexDirection="row" />
+					{#if inPersonOrVirtual}
+						<h2>{inPersonOrVirtual}</h2>
+					{/if}
+				</div>
+
+				<div class="border rounded-xl p-3">
+					<Radio bind:selected={singleOrMultiple} options={options[2]} flexDirection="row" />
+					{#if singleOrMultiple === 'Multiple Athletes'}
+						<div class="mb-4 w-32 mx-auto">
+							<label class="text-gray-300 text-sm font-bold mb-2 text-left" for="number-of-athletes"
+								>Number of Athletes</label
+							>
+							<input
+								id="number-of-athletes"
+								name="number-of-athletes"
+								type="number"
+								min="0"
+								class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+								placeholder="#Athletes"
+							/>
+						</div>
+					{/if}
+				</div>
+
+				<div class="border mt-5 rounded-xl align-left">
+					<div class="flex p-5 flex-col sm:flex-row items-center">
+						<label
+							class="text-gray-300 text-sm font-bold text-left w-fit sm:mr-5 whitespace-nowrap"
+							for="sport-preference">Sport Preference</label
+						>
+						<input
+							id="sport-preference"
+							name="sport-preference"
+							type="text"
+							class="shadow appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+							placeholder="Enter your sport preference"
+						/>
+					</div>
+				</div>
+			</div>
+		{/if}
+		{#if eventType === 'Campaign'}
+			<h2>Campaign Selected</h2>
+		{/if}
 	</div>
 </div>
 

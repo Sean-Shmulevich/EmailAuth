@@ -116,34 +116,34 @@
 		</main>
 	</body>
 </html>
-
+<!-- 
 <style lang="postcss">
-	:global(main h1) {
+	(main h1) {
 		/* TODO this styles could be problematic */
 		@apply lg:mt-20 md:mt-24 sm:mt-28 mt-32  mb-2 w-full text-3xl font-semibold;
 	}
-	:global(main label) {
+	(main label) {
 		@apply mb-1 w-full text-sm font-medium;
 	}
-	:global(main input) {
+	(main input) {
 		@apply my-1 mb-2 w-full rounded border px-2 py-1.5;
 	}
-	:global(main input[type='submit']) {
+	(main input[type='submit']) {
 		@apply mb-2 w-full cursor-pointer rounded border bg-black px-2 py-1.5 font-medium text-white;
 	}
-	:global(main p.message) {
+	(main p.message) {
 		@apply text-sm;
 	}
-	:global(main p.error) {
+	(main p.error) {
 		@apply text-sm text-red-400;
 	}
 	/* :global(main a) {
 		@apply mx-auto block w-fit text-indigo-500  hover:underline;
 	} */
-	:global(form) {
+	(form) {
 		@apply my-2;
 	}
-	:global(main form p) {
+	(main form p) {
 		@apply text-sm text-zinc-500;
 	}
-</style>
+</style> -->

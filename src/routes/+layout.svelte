@@ -36,7 +36,7 @@
 					<!-- <span class="ml-3 text-3xl gold">DapUp</span> -->
 				</a>
 				<nav
-					class="md:ml-auto flex flex-wrap items-center text-base justify-center z-[100]"
+					class="md:ml-auto block flex-wrap items-center text-base justify-center z-[100]"
 					style="margin-bottom:18px"
 				>
 					{#if data.msg === 'not authenticated'}
@@ -68,7 +68,7 @@
 							/>
 							<p class="p-2">{data.user.email}</p>
 						</Button>
-						<Dropdown class="z-12 relative" inline triggeredBy="#avatar_with_name">
+						<Dropdown class="z-12" inline triggeredBy="#avatar_with_name">
 							{#if data.msg === 'email authenticated'}
 								<div class="px-4 py-2 bg-red-700">
 									<span class="block text-sm text-white"> Waiting on verification </span>

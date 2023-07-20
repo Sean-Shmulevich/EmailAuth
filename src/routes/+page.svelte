@@ -24,8 +24,6 @@
 	<input type="submit" value="Sign out" />
 </form> -->
 
-
-
 <section class="text-white body-font mx-0 mt-36" style="height:75vh">
 	<div class="container mx-auto flex px-5 py-24 items-center justify-center">
 		<div class="text-center lg:w-full xl:w-full">
@@ -93,7 +91,7 @@
 						scattered across multiple environments, tools, and technologies, this is a difficult
 						task to manage. IT Automation Tools will help you to manage them easily.
 					</p>
-					<a class="mt-3 text-blue-500 inline-flex items-center"
+					<a class="mt-3 text-blue-500 inline-flex items-center" href="#"
 						>Learn More
 						<svg
 							fill="none"
@@ -135,7 +133,7 @@
 						in the form of structured fields, tables and columns, which can then be retrieved
 						directly and/or through programmatic access.
 					</p>
-					<a class="mt-3 text-blue-500 inline-flex items-center"
+					<a class="mt-3 text-blue-500 inline-flex items-center" href="/"
 						>Learn More
 						<svg
 							fill="none"
@@ -176,7 +174,7 @@
 						to use it, in contrast to SaaS, where users buy subscription and where the software is
 						centrally hosted.
 					</p>
-					<a class="mt-3 text-blue-500 inline-flex items-center"
+					<a class="mt-3 text-blue-500 inline-flex items-center" href="#"
 						>Learn More
 						<svg
 							fill="none"
@@ -223,7 +221,7 @@
 						<path d="M8 17l4 4 4-4m-4-5v9" />
 						<path d="M20.88 18.09A5 5 0 0018 9h-1.26A8 8 0 103 16.29" />
 					</svg>
-					<h2 class="title-font font-medium text-3xl text-gray-900">2.7K</h2>
+					<h2 class="title-font font-medium text-3xl text-gray-300">2.7K</h2>
 					<p class=" text-white leading-relaxed">Softwares</p>
 				</div>
 			</div>
@@ -242,7 +240,7 @@
 						<circle cx="9" cy="7" r="4" />
 						<path d="M23 21v-2a4 4 0 00-3-3.87m-4-12a4 4 0 010 7.75" />
 					</svg>
-					<h2 class="title-font font-medium text-3xl text-gray-900">1.3K</h2>
+					<h2 class="title-font font-medium text-3xl text-gray-300">1.3K</h2>
 					<p class="text-white leading-relaxed">Clients</p>
 				</div>
 			</div>
@@ -262,7 +260,7 @@
 							d="M21 19a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3zM3 19a2 2 0 002 2h1a2 2 0 002-2v-3a2 2 0 00-2-2H3z"
 						/>
 					</svg>
-					<h2 class="title-font font-medium text-3xl text-gray-900">10K+</h2>
+					<h2 class="title-font font-medium text-3xl text-gray-300">10K+</h2>
 					<p class="text-white leading-relaxed">Working Hours</p>
 				</div>
 			</div>
@@ -279,7 +277,7 @@
 					>
 						<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
 					</svg>
-					<h2 class="title-font font-medium text-3xl text-gray-900">526</h2>
+					<h2 class="title-font font-medium text-3xl text-gray-300">526</h2>
 					<p class="text-white leading-relaxed">Maintained</p>
 				</div>
 			</div>
@@ -312,7 +310,7 @@
 						</svg>
 					</div>
 					<div class="flex-grow pl-4">
-						<h2 class="font-bold title-font text-sm text-gray-900 mb-1 tracking-wider">
+						<h2 class="font-bold title-font text-sm text-gray-200 mb-1 tracking-wider">
 							Feasibility analysis
 						</h2>
 						<p class="leading-relaxed text-white">
@@ -530,7 +528,7 @@
 <!-- Footer -->
 <footer class="text-gray-600 body-font">
 	<!-- <div class="container px-5 py-24 mx-auto"> -->
-		
+
 	<!-- </div> -->
 	<div class="bg-gray-100">
 		<div class="container px-5 py-6 mx-auto flex items-center sm:flex-row flex-col">

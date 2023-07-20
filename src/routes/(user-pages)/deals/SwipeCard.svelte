@@ -47,7 +47,7 @@
 			//!!! this makes it more seamless by loading in the last deal and running
 			//TODO check for invalid json
 			//this code one before it gets there.
-			console.log(nextDeals)
+			console.log(nextDeals);
 			offers = [...nextDeals];
 			refreshCounter += 1;
 
@@ -135,7 +135,7 @@
 				</div>
 
 				<button
-					class="hover:bg-white rounded-2xl absolute left-0 mt-6 w-10 h-[95%] opacity-20 z-10"
+					class="hover:bg-white rounded-2xl absolute left-0 mt-6 w-10 h-[95%] opacity-20"
 					style=""
 					on:click={() => {
 						pageNum = pageNum - 1;
@@ -145,7 +145,7 @@
 					}}
 				/>
 				<button
-					class="hover:bg-white rounded-2xl absolute right-0 mt-6 w-10 h-[95%] opacity-20 z-12"
+					class="hover:bg-white rounded-2xl absolute right-0 mt-6 w-10 h-[95%] opacity-20"
 					style=""
 					on:click={() => {
 						pageNum = pageNum + 1;

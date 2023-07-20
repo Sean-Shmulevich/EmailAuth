@@ -17,16 +17,16 @@
 
 <div class="flex justify-center {flexDirection !== 'row' ? 'flex-col' : 'flex-row '}">
 	{#each options as option}
-		<label class="flex items-center justify-center space-x-2">
+		<label class="flex items-center w-full justify-center">
 			<input
-				class="form-radio h-4 w-4 text-blue-500"
+				class="form-radio h-4 text-blue-500"
 				checked={selected === option}
 				on:change={onChange}
 				type="radio"
 				name={option}
 				value={option}
 			/>
-			<span>{option}</span>
+			<span class="mr-5">{option}</span>
 		</label>
 	{/each}
 </div>

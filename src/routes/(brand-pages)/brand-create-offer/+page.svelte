@@ -1,6 +1,7 @@
 <script>
 	// checkbox decides which import component to use either single event or campaign
 	import ImageCropper from '../ImageCropper.svelte';
+	import Checkboxes from './Checkboxes.svelte';
 	import Radio from './Radio.svelte';
 	import { enhance } from '$app/forms';
 	export let data;
@@ -9,6 +10,7 @@
 	let eventType;
 	let inPersonOrVirtual;
 	let singleOrMultiple;
+	let mainGoalCheckboxes = [];
 
 	import { onMount } from 'svelte';
 
@@ -161,11 +163,35 @@
 							id="sport-preference"
 							name="sport-preference"
 							type="text"
-							class="shadow appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+							class="shadow p-2 appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 							placeholder="Enter your sport preference"
 						/>
 					</div>
 				</div>
+			</div>
+			<div class="border rounded-xl mt-5 p-3">
+				<Checkboxes
+					bind:activeOptions={mainGoalCheckboxes}
+					checkboxes={[
+						{ label: 'Option 1', value: 'option1', checked: false },
+						{ label: 'Option 2', value: 'option2', checked: false },
+						{ label: 'Custom goal', value: 'Custom goal', checked: false }
+					]}
+				/>
+				{#if mainGoalCheckboxes.includes('Custom goal')}
+					<div class="mb-4 w-1/4 mx-auto">
+						<label class="text-gray-300 text-sm font-bold mb-2 text-left" for="custom-goal"
+							>Custom Goal</label
+						>
+						<input
+							id="custom-goal"
+							name="custom-goal"
+							type="text"
+							class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+							placeholder="Enter your custom goal"
+						/>
+					</div>
+				{/if}
 			</div>
 		{/if}
 		{#if eventType === 'Campaign'}

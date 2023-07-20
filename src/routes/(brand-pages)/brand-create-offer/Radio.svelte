@@ -31,5 +31,5 @@
 	{/each}
 </div>
 
-<style>
+<style style="postcss">
 </style>

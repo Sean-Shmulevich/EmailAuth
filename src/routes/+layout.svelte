@@ -40,17 +40,17 @@
 					style="margin-bottom:18px"
 				>
 					{#if data.msg === 'not authenticated'}
-						<span class="mr-6 text-gray-300">Login/Sign Up: </span>
+						<span class="mr-6 text-white">Login/Sign Up: </span>
 						<a
 							href="/login"
-							class="mr-10 hover:bg-gray-300 hover:text-gray-500 bg-gray-500 text-white font-semibold inline-flex items-center mr-5 px-4 py-2 rounded-full bg-gray-500 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30"
+							class="hover:text-yellow-500 hover:bg-gray-800 bg-gray-500 text-white font-semibold inline-flex items-center mr-5 px-4 py-2 rounded-full bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30"
 						>
 							Athletes
 						</a>
 
 						<a
 							href="/brand-login"
-							class="hover:text-gray-500 hover:bg-gray-300 bg-gray-500 text-white font-semibold inline-flex items-center px-4 py-2 rounded-full bg-grey-400 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30"
+							class="hover:text-yellow-500 hover:bg-gray-800 bg-gray-500 text-white font-semibold inline-flex items-center px-4 py-2 rounded-full bg-grey-400 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30"
 						>
 							Brands
 						</a>
@@ -66,7 +66,7 @@
 								src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXw3NjA4Mjc3NHx8ZW58MHx8fHx8&w=1000&q=80"
 								class="mr-2"
 							/>
-							{data.user.email}
+							<p class="p-2">{data.user.email}</p>
 						</Button>
 						<Dropdown class="z-12 " inline triggeredBy="#avatar_with_name">
 							<div slot="header" class="px-4 py-2 bg-blue-500">

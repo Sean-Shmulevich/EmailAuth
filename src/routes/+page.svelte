@@ -62,8 +62,8 @@
 <!-- Services -->
 <section class="text-gray-600 body-font -mb-40">
 	<div class="container px-5 py-24 mx-auto">
-		<h1 class="sm:text-3xl text-2xl font-medium title-font text-center text-gray-900 mb-20">
-			Services
+		<h1 class="sm:text-3xl text-2xl font-medium title-font text-center text-white mb-20">
+			Create, Connect and Manage
 			<br class="hidden sm:block" />
 		</h1>
 		<div class="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4 md:space-y-0 space-y-6">
@@ -84,7 +84,7 @@
 					</svg>
 				</div>
 				<div class="flex-grow pl-6">
-					<h2 class="text-white text-lg title-font font-medium mb-2">Automation</h2>
+					<h2 class="text-white text-lg title-font font-medium mb-2">Create</h2>
 					<p class="leading-relaxed text-base text-white">
 						DapUp enables your brand to customize marketing campaigns curated by data driven
 						software designed to maximize your company’s ROI. Each Campaign created on the DapUp
@@ -126,7 +126,7 @@
 					</svg>
 				</div>
 				<div class="flex-grow pl-6">
-					<h2 class="text-white text-lg title-font font-medium mb-2">Data</h2>
+					<h2 class="text-white text-lg title-font font-medium mb-2">Connect</h2>
 					<p class="leading-relaxed text-white text-base">
 						DapUp brings the athletes to you. Athletes will express interest in your brand or
 						campaign, and DapUp’s technology recommends matches based on profile alignment. Once a
@@ -166,7 +166,7 @@
 					</svg>
 				</div>
 				<div class="flex-grow pl-6">
-					<h2 class="text-white text-lg title-font font-medium mb-2">Product</h2>
+					<h2 class="text-white text-lg title-font font-medium mb-2">Manage</h2>
 					<p class="leading-relaxed text-white text-base">
 						Manage all of your athlete marketing campaigns on the DapUp platform. From creating
 						offers, to connecting with athletes, to executing contracts, DapUp centralizes all
@@ -307,7 +307,7 @@
 					</div>
 					<div class="flex-grow pl-4">
 						<h2 class="font-bold title-font text-sm text-gray-200 mb-1 tracking-wider">
-							Maintained
+							Customize
 						</h2>
 						<p class="leading-relaxed text-white">
 							Design a campaign using templates and recommendations from DapUp. Input athlete

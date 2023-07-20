@@ -92,7 +92,7 @@
 </script>
 
 <div class="bg-gray-900 text-white flex flex-col items-center text-center justify-center space-y-8">
-	<h2 class="text-2xl mt-10">Edit Profile</h2>
+	<h2 class="text-2xl mt-10">Create offer</h2>
 	<div
 		class="profile-card flex flex-col bg-gray-800 shadow overflow-hidden mt-10 rounded-lg max-w-5xl w-[80%] mb-10 p-6"
 	>

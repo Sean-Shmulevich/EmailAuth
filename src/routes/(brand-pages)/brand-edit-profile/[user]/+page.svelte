@@ -27,7 +27,7 @@
 	//variabe for quill to save the current state of the html content
 	let deltaContent = '';
 	let deltaContentGoals = '';
-	let buttons = ["image1"];
+	let buttons = ['image1'];
 
 	let images = {
 		'main-image': '',
@@ -133,12 +133,16 @@
 			pendingContentsGoals = data.deltaContentGoals;
 		}
 	};
+	import { afterUpdate } from 'svelte';
+	afterUpdate(() => {
+		images = { ...images };
+	});
 
 	//load in the images from the db
 	// console.log(data.objects);
 	for (let i = 0; i < data.objects.length; i++) {
 		let imgNum = data.objects[i].image_number;
-		if(imgNum > 1){
+		if (imgNum > 1) {
 			buttons.push(`image${imgNum}`);
 		}
 
@@ -148,7 +152,6 @@
 		} else if (imgNum <= 8) {
 			images[`image${imgNum}`] = `${s3 + '/' + encodeURIComponent(data.objects[i].id)}`;
 			//the first one is already in the buttons list
-
 		}
 
 		// console.log(buttons);
@@ -253,7 +256,6 @@
 
 		return fields.key;
 	}
-
 </script>
 
 <!-- Include Quill's CSS on your page -->
@@ -481,7 +483,6 @@
 		{/if}
 	</div>
 </div>
-
 
 <style>
 	.nah {

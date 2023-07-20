@@ -4,7 +4,7 @@
 	import type { PageData } from './$types';
 	// import { onMount, onDestroy } from 'svelte';
 	import { Button, Dropdown, DropdownItem, Chevron, Avatar } from 'flowbite-svelte';
-	import logo from "/dapuplogo.png";
+	// let logo = null;
 
 	import { goto } from '$app/navigation';
 	export let data: PageData;
@@ -15,19 +15,24 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
 		<title>DapUp</title>
-		
 	</head>
 	<body class="bg-gray-900 h-[100vh] overflow-x-hidden">
 		<!-- TODO make it fixed if we want it to be sticky -->
 		<header class="w-full body-font bg-gray-800">
-			<div class="container sticky mx-auto flex flex-wrap pt-5 flex-col md:flex-row items-center">
+			<div
+				class="container sticky mx-auto flex flex-wrap pt-5 flex-row justify-center items-center"
+			>
 				<!-- svelte-ignore a11y-missing-attribute -->
 				<a
 					href="/"
 					class="flex title-font font-mediums items-center text-white mb-4 md:mb-0"
 					style="margin-top:-18px"
 				>
-					<img class=" w-40 " src="{logo}"/>
+					<img class=" w-40 hidden md:block" src={'https://shmul.dev/assets/dapuplogo.png'} />
+					<img
+						class=" w-14 mt-4 mr-5 ml-2 md:hidden"
+						src={'https://shmul.dev/assets/dapupsmall.png'}
+					/>
 					<!-- <span class="ml-3 text-3xl gold">DapUp</span> -->
 				</a>
 				<nav
@@ -51,14 +56,19 @@
 						</a>
 						<!-- if data.msg === 'email authenticated' -->
 					{:else}
-						<Button pill class="bg-yellow-400 text-black !p-1" id="avatar_with_name">
+						<Button
+							pill
+							class="h-full w-full bg-gray-700 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-70 border border-gray-100
+						text-white !p-1"
+							id="avatar_with_name"
+						>
 							<Avatar
 								src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXw3NjA4Mjc3NHx8ZW58MHx8fHx8&w=1000&q=80"
 								class="mr-2"
 							/>
 							{data.user.email}
 						</Button>
-						<Dropdown class="z-12" inline triggeredBy="#avatar_with_name">
+						<Dropdown class="z-12 " inline triggeredBy="#avatar_with_name">
 							<div slot="header" class="px-4 py-2 bg-blue-500">
 								{#if data.msg === 'email authenticated'}
 									<span class="block text-sm text-gray-900"> Waiting on verification </span>
@@ -66,9 +76,7 @@
 							</div>
 
 							{#if !data.user.isBrand}
-								<DropdownItem class="text-center" href="/deals"
-									>Deals</DropdownItem
-								>
+								<DropdownItem class="text-center" href="/deals">Deals</DropdownItem>
 								<DropdownItem class="text-center" href="/user-profile/{data.user.userId}"
 									>View Profile</DropdownItem
 								>

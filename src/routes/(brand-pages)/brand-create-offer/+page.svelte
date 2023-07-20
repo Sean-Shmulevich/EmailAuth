@@ -17,6 +17,7 @@
 	let presignUrl = '/api/presign';
 	let s3 = '/api/s3object';
 
+	let dealImage = '';
 	// upload window open or closed
 	let isModalOpen = false;
 	//Image after cropping
@@ -33,7 +34,6 @@
 		upload(croppedImage);
 		// console.log("run");
 		// images = { ...images };
-		croppedImage = null;
 	}
 	let radioValue;
 
@@ -61,7 +61,6 @@
 		// Send the POST request
 		try {
 			await fetch(url, { method: 'POST', body: form });
-			images = { ...images };
 		} catch (error) {
 			console.log(error);
 			return false;
@@ -76,12 +75,9 @@
 
 		//!!!
 		//Turn index into a key arry and find the index of the current Image when uploaded
-		const keys = Object.keys(images); // convert keys to an array
-		const index = keys.indexOf(currImage); // find index of 'age'
-		form.append('position', index);
+		form.append('position', '0');
 		try {
 			await fetch(s3 + '/' + encodeURIComponent(fields.key), { method: 'POST', body: form });
-			images = { ...images };
 		} catch (error) {
 			console.log(error);
 			return false;
@@ -92,7 +88,7 @@
 </script>
 
 <div class="bg-gray-900 text-white flex flex-col items-center text-center justify-center space-y-8">
-	<h2 class="text-2xl mt-10">Create offer</h2>
+	<h2 class="text-2xl mt-10">Create Offer</h2>
 	<div
 		class="profile-card flex flex-col bg-gray-800 shadow overflow-hidden mt-10 rounded-lg max-w-5xl w-[80%] mb-10 p-6"
 	>
@@ -114,6 +110,29 @@
 			/>
 		</form>
 		<Radio bind:selected={eventType} options={options[0]} flexDirection="row" />
+		<div class="border rounded-xl mt-5 p-3">
+			<p class="text-gray-200 text-xl mb-2">Main Deal Image</p>
+			<button
+				class="{croppedImage
+					? 'nah'
+					: ''} text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+				on:click={() => {
+					squareInput = false;
+					isModalOpen = true;
+				}}
+				>Upload Image
+			</button>
+			{#if croppedImage !== null}
+				<img src={URL.createObjectURL(croppedImage)} alt="Profile example" class="w-1/2 mx-auto" />
+				<button
+					on:click={() => {
+						croppedImage = null;
+						isModalOpen = true;
+						//!!!
+					}}>Change Image</button
+				>
+			{/if}
+		</div>
 		{#if eventType === 'Single Event'}
 			<h2 class="mt-4">Single Event Selected</h2>
 			<div>
@@ -170,6 +189,7 @@
 				</div>
 			</div>
 			<div class="border rounded-xl mt-5 p-3">
+				<h2 class="text-center text-xl mb-5">Main Goals</h2>
 				<Checkboxes
 					bind:activeOptions={mainGoalCheckboxes}
 					checkboxes={[
@@ -179,7 +199,7 @@
 					]}
 				/>
 				{#if mainGoalCheckboxes.includes('Custom goal')}
-					<div class="mb-4 w-1/4 mx-auto">
+					<div class="mb-4 w-1/4 mt-4 mx-auto">
 						<label class="text-gray-300 text-sm font-bold mb-2 text-left" for="custom-goal"
 							>Custom Goal</label
 						>
@@ -193,9 +213,30 @@
 					</div>
 				{/if}
 			</div>
+			<div class="border mt-5 rounded-xl align-left">
+				<div class="flex p-5 flex-col sm:flex-row items-center">
+					<label
+						class="text-gray-300 text-sm font-bold text-left w-fit sm:mr-5 whitespace-nowrap"
+						for="estimated-payment">Estimated Payment</label
+					>
+					<input
+						id="estimated-payment"
+						name="estimated-payment"
+						type="text"
+						class="shadow p-2 appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+						placeholder="Estimated Pay or Range"
+					/>
+				</div>
+			</div>
 		{/if}
 		{#if eventType === 'Campaign'}
 			<h2>Campaign Selected</h2>
 		{/if}
 	</div>
 </div>
+
+<style>
+	.nah {
+		display: none;
+	}
+</style>

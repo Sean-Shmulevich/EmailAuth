@@ -48,40 +48,69 @@ export async function POST({ request, locals }) {
 	}
 	let document;
 	try {
-		// Get existing image details from the database
-		const position = parseInt(data.get('position'));
-		//if I make multiple users will it
-		// - find the object with the first image_number for a specific user?
-		// - find the first object with that existing image number?
-		const existingImage = await prismaClient.object.findFirst({
-			where: {
-				userId: user.userId,
-				image_number: position
+		if (data.get('deal_id')) {
+			const existingImage = await prismaClient.dealImages.findFirst({
+				where: {
+					dealId: data.get('deal_id')
+				}
+			});
+			if (existingImage) {
+				const s3 = new S3Client();
+				let obj = await s3.send(
+					new DeleteObjectCommand({ Bucket: S3_BUCKET, Key: existingImage.id })
+				);
+
+				// Delete the existing image record from the database
+				await prismaClient.dealImages.delete({
+					where: { id: existingImage.id }
+				});
 			}
-		});
+			document = await prismaClient.dealImages.create({
+				data: {
+					id: data.get('objectId'),
+					file_name: data.get('fileName'),
+					file_size: parseInt(data.get('fileSize')),
+					file_type: data.get('fileType'),
+					image_number: parseInt(data.get('position')),
+					dealId: data.get('deal_id')
+				}
+			});
+		} else {
+			// Get existing image details from the database
+			const position = parseInt(data.get('position'));
+			//if I make multiple users will it
+			// - find the object with the first image_number for a specific user?
+			// - find the first object with that existing image number?
+			const existingImage = await prismaClient.object.findFirst({
+				where: {
+					userId: user.userId,
+					image_number: position
+				}
+			});
 
-		// If there is an existing image, delete it
-		if (existingImage) {
-			const s3 = new S3Client();
-			let obj = await s3.send(
-				new DeleteObjectCommand({ Bucket: S3_BUCKET, Key: existingImage.id })
-			);
+			// If there is an existing image, delete it
+			if (existingImage) {
+				const s3 = new S3Client();
+				let obj = await s3.send(
+					new DeleteObjectCommand({ Bucket: S3_BUCKET, Key: existingImage.id })
+				);
 
-			// Delete the existing image record from the database
-			await prismaClient.object.delete({
-				where: { id: existingImage.id }
+				// Delete the existing image record from the database
+				await prismaClient.object.delete({
+					where: { id: existingImage.id }
+				});
+			}
+			document = await prismaClient.object.create({
+				data: {
+					id: data.get('objectId'),
+					file_name: data.get('fileName'),
+					file_size: parseInt(data.get('fileSize')),
+					file_type: data.get('fileType'),
+					image_number: parseInt(data.get('position')),
+					userId: user.userId
+				}
 			});
 		}
-		document = await prismaClient.object.create({
-			data: {
-				id: data.get('objectId'),
-				file_name: data.get('fileName'),
-				file_size: parseInt(data.get('fileSize')),
-				file_type: data.get('fileType'),
-				image_number: parseInt(data.get('position')),
-				userId: user.userId
-			}
-		});
 	} catch (error) {
 		console.log(error);
 	}
@@ -89,4 +118,3 @@ export async function POST({ request, locals }) {
 		return new Response(document.id, { status: 200 });
 	}
 }
-

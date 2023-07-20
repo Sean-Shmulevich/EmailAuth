@@ -15,9 +15,9 @@
 	}
 </script>
 
-<div class="grid">
+<div class="boxgrid">
 	{#each checkboxes as checkbox}
-		<label>
+		<label style="word-wrap: nowrap;">
 			<input
 				type="checkbox"
 				class="mx-5"

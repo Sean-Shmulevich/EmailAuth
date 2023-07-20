@@ -141,7 +141,7 @@ model DealImages {
   authDeal     Deal      @relation(fields: [dealId], references: [id], onDelete: Cascade)
   dealId       String
 
-  @@map("deal_image")
+  @@map("deal_images")
 }
 
 model UserDealStatus {

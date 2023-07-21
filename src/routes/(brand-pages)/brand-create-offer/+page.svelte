@@ -331,7 +331,20 @@
 							/>
 						</div>
 					</div>
-					<button type="submit">Submit Deal</button>
+					<div class="text-right mr-auto mt-5">
+						<button
+							class="rounded-full p-5 bg-green-800"
+							name="deal-submit"
+							value="publish"
+							type="submit">Publish Deal</button
+						>
+						<button
+							class="rounded-full p-5 bg-red-800"
+							name="deal-submit"
+							value="no-publish"
+							type="submit">Save for later</button
+						>
+					</div>
 				{/if}
 				{#if pageNum <= 1}
 					<button

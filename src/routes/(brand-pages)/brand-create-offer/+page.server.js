@@ -20,19 +20,35 @@ export const actions = {
 		const formData = await request.formData();
 		console.log(formData);
 
+		let publish = false;
+		// formData.get('deal-submit') && formData.get('deal-submit').toString() === "publish"
+		if (formData.get('deal-submit') && formData.get('deal-submit').toString() === 'publish') {
+			publish = true;
+		}
+		// TODO return fail if the minimum inputs are not added
+		// TODO return fail under different circumstances if the deal is going no-publish
+		// TODO return fail if the user is not a brand
+		// optional fields
+		//	Custom event type 'event-type-custom'
+		//	Deal location 'deal-location'
+		//  number of athletes 'number-of-athletes'
+		//  custom goals custom-goals
 		// Parse the main goals and custom goals from the form data
+
+		// console.log(formData.get('end-date'));
+		let eventType = formData.get('event-type')?.toString() ?? '';
+		if (formData.get('event-type-custom')) {
+			eventType = formData.get('event-type-custom')?.toString() ?? '';
+		}
+
 		const mainGoals = JSON.parse(formData.get('goals')?.toString() ?? '[]');
 		const customGoals = JSON.parse(formData.get('custom-goals')?.toString() ?? '[]');
-
-		console.log(formData.get('end-date'));
-		let eventType = formData.get('event-type')?.toString() ?? '';
-		if (formData.get('event-type-custom'))
-			[(eventType = formData.get('event-type-custom')?.toString() ?? '')];
 		// Combine the main goals and custom goals into a single array
 		const allGoals = [...mainGoals, ...customGoals];
 		const deal = await prismaClient.deal.create({
 			data: {
 				title: formData.get('deal-title')?.toString() ?? '',
+				active: publish,
 				shortDescription: formData.get('short-description')?.toString() ?? '',
 				eventType: eventType,
 				sportPreference: formData.get('sport-preference')?.toString() ?? '',

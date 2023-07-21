@@ -656,6 +656,15 @@
   dependencies:
     tslib "^2.5.0"
 
+"@beyonk/svelte-datepicker@^12.0.1":
+  version "12.0.1"
+  resolved "https://registry.yarnpkg.com/@beyonk/svelte-datepicker/-/svelte-datepicker-12.0.1.tgz#ce2128b287716e3ab818a6ee60187261c59f5810"
+  integrity sha512-9RH88EL/dGRZwSLS0Gxt61q/VUC1QYsa2JV1TJgY7crArZRmYKY7dgRejp+VkQcctoKfnz7wZGFA52KuZEjwbQ==
+  dependencies:
+    dayjs "^1.10.7"
+    es6-object-assign "^1.1.0"
+    svelte "^3.24.0"
+
 "@esbuild/android-arm64@0.17.19":
   version "0.17.19"
   resolved "https://registry.yarnpkg.com/@esbuild/android-arm64/-/android-arm64-0.17.19.tgz#bafb75234a5d3d1b690e7c2956a599345e84a2fd"
@@ -1853,6 +1862,16 @@ cssesc@^3.0.0:
   resolved "https://registry.npmjs.org/cssesc/-/cssesc-3.0.0.tgz"
   integrity sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg==
 
+date-picker-svelte@^2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/date-picker-svelte/-/date-picker-svelte-2.6.0.tgz#3fff9a2b7c9ab91462372bd70c84a5715037936e"
+  integrity sha512-xTzF1GTuAB1/NgDgM+no1y2raAfyZAMFtgEvrlL1VcHJYweggFoCK+1LHfMnVu4cJPLtC+NCRLThCMb/pu1xsg==
+
+dayjs@^1.10.7:
+  version "1.11.9"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.9.tgz#9ca491933fadd0a60a2c19f6c237c03517d71d1a"
+  integrity sha512-QvzAURSbQ0pKdIye2txOzNaHmxtUBXerpY0FJsFXUMKbIZeFm5ht1LS/jFsrncjnmtv8HsG0W2g6c0zUjZWmpA==
+
 debug@4, debug@^4.1.1, debug@^4.3.2, debug@^4.3.4:
   version "4.3.4"
   resolved "https://registry.npmjs.org/debug/-/debug-4.3.4.tgz"
@@ -1943,6 +1962,11 @@ emoji-regex@^8.0.0:
   version "8.0.0"
   resolved "https://registry.npmjs.org/emoji-regex/-/emoji-regex-8.0.0.tgz"
   integrity sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==
+
+es6-object-assign@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/es6-object-assign/-/es6-object-assign-1.1.0.tgz#c2c3582656247c39ea107cb1e6652b6f9f24523c"
+  integrity sha512-MEl9uirslVwqQU369iHNWZXsI8yaZYGg/D65aOgZkeyFJwHYSxilf7rQzXKI7DdDuBPrBXbfk3sl9hJhmd5AUw==
 
 es6-promise@^3.1.2:
   version "3.3.1"
@@ -3407,6 +3431,11 @@ svelte-preprocess@^5.0.3:
     magic-string "^0.27.0"
     sorcery "^0.11.0"
     strip-indent "^3.0.0"
+
+svelte@^3.24.0:
+  version "3.59.2"
+  resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.59.2.tgz#a137b28e025a181292b2ae2e3dca90bf8ec73aec"
+  integrity sha512-vzSyuGr3eEoAtT/A6bmajosJZIUWySzY2CzB3w2pgPvnkUjGqlDnsNnA0PMO+mMAhuyMul6C2uuZzY6ELSkzyA==
 
 svelte@^3.58.0:
   version "3.59.1"

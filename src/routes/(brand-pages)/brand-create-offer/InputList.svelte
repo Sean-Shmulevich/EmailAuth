@@ -1,8 +1,11 @@
 <script>
 	export let inputs = [{ id: 0, value: '' }];
+	export let inputName;
+	export let showName;
 
 	function handleInputChange(event, input) {
 		input.value = event.target.value;
+		inputs = [...inputs];
 	}
 
 	function addInput() {
@@ -23,15 +26,24 @@
 <div class="flex flex-col">
 	{#each inputs as input, i}
 		<div class="flex my-4 space-x-4">
-			<p>Deliverable {i + 1}</p>
+			<p>{showName} {i + 1}</p>
 			<input
 				class="w-full rounded-md text-black p-2"
 				type="text"
 				value={input.value}
 				on:input={(event) => handleInputChange(event, input)}
 			/>
-			<button on:click={() => deleteInput(input.id)}>-</button>
+			<button on:click|preventDefault={() => deleteInput(input.id)}>-</button>
 		</div>
 	{/each}
-	<button class="text-xl" on:click={addInput}>+</button>
+	{#if inputs.length > 0}
+		<input
+			type="hidden"
+			name={inputName}
+			value={JSON.stringify(
+				inputs.map((input) => input.value).filter((value) => value.trim() !== '')
+			)}
+		/>
+	{/if}
+	<button class="text-xl" on:click|preventDefault={addInput}>+</button>
 </div>

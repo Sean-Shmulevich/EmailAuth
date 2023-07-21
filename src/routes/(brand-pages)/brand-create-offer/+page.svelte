@@ -5,11 +5,16 @@
 	import Radio from './Radio.svelte';
 	import InputList from './InputList.svelte';
 	import { enhance } from '$app/forms';
+	let endDate = new Date();
+	let dateToday = new Date().toISOString().slice(0, 10);
+	console.log(dateToday);
 	export let data;
 	export let form;
+	let selected;
 
-	let eventType;
+	let eventCampaignOrSingle;
 	let inPersonOrVirtual;
+	let genderPreference;
 	let singleOrMultiple;
 	let mainGoalCheckboxes = [];
 	let deliverables = [{ id: 0, value: '' }];
@@ -32,20 +37,24 @@
 
 	//choose event type radio or custom input box
 	//  Hidden input box unless the user picks custom
-	function handleSubmit(event) {
-		upload(croppedImage);
-		// console.log("run");
-		// images = { ...images };
+	//this will exeecute when the form is submitted and when the image is changed
+	//(when it is changed on crop not on submit)
+	$: {
+		if (form && form.dealId && croppedImage !== null) {
+			console.log('here');
+			upload(croppedImage, form.dealId);
+		}
 	}
 	let radioValue;
 
 	const options = [
 		['Single Event', 'Campaign'],
 		['In Person', 'Virtual'],
-		['Single Athlete', 'Multiple Athletes']
+		['Single Athlete', 'Multiple Athletes'],
+		['Male', 'Female', 'Any gender']
 	];
 
-	async function upload(file) {
+	async function upload(file, dealId) {
 		// Get presigned POST URL and form fields
 		let { url, fields } = await fetch(`${presignUrl}?fileType=${file.type}`)
 			.then((response) => response.json())
@@ -74,6 +83,7 @@
 		form.append('fileName', file.name);
 		form.append('fileSize', file.size);
 		form.append('fileType', file.type);
+		form.append('deal_id', dealId);
 
 		//!!!
 		//Turn index into a key arry and find the index of the current Image when uploaded
@@ -96,7 +106,7 @@
 	>
 		<form
 			method="POST"
-			action="?/update"
+			action="?/makeDeal"
 			use:enhance={() => {
 				return async ({ update }) => {
 					await update({ reset: false });
@@ -104,14 +114,160 @@
 			}}
 			class="w-full"
 		>
-			<ImageCropper
-				on:cropSubmit={handleSubmit}
-				bind:croppedImage
-				bind:square={squareInput}
-				bind:open={isModalOpen}
-			/>
+			<ImageCropper bind:croppedImage bind:square={squareInput} bind:open={isModalOpen} />
+			<div class="border p-2 rounded-xl align-left">
+				<Radio
+					inputName={'is-campaign'}
+					bind:selected={eventCampaignOrSingle}
+					options={options[0]}
+					flexDirection="row"
+				/>
+			</div>
+			<div class="border mt-5 rounded-xl align-left">
+				<h2 class="mt-4">Deal title</h2>
+				<input
+					id="deal-title"
+					name="deal-title"
+					type="text"
+					class="mx-5 shadow appearance-none border rounded mb-5 w-[90%] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+					placeholder="ex: Social Media Post"
+				/>
+			</div>
+			<div class="border mt-5 p-5 rounded-xl align-left">
+				<h2 class="mb-2">Deal End Date</h2>
+				<input
+					class="text-black text-center max-w-[90%] w-72"
+					type="date"
+					id="end-date"
+					name="end-date"
+					min={dateToday.toString()}
+					bind:value={endDate}
+				/>
+			</div>
+
+			{#if eventCampaignOrSingle === 'Single Event'}
+				<div>
+					<div class="border mt-5 rounded-xl align-left">
+						<h2 class="mt-4">Single Event Selected</h2>
+						<label class="block text-gray-400 text-sm font-bold mb-2" for="message"
+							>Short description of your event</label
+						>
+						<textarea
+							id="short-description"
+							name="short-description"
+							rows="5"
+							class="mx-5 shadow appearance-none border rounded mb-5 w-[90%] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+							placeholder="ex: Join us for a night of fun and games!"
+						/>
+					</div>
+					<div class="border my-5 rounded-xl p-3">
+						<Radio
+							inputName={'in-person-or-virtual'}
+							bind:selected={inPersonOrVirtual}
+							options={options[1]}
+							flexDirection="row"
+						/>
+						{#if inPersonOrVirtual && inPersonOrVirtual === 'In Person'}
+							<h2 class="mt-4">Deal location</h2>
+							<input
+								id="deal-location"
+								name="deal-location"
+								type="text"
+								class="mx-5 shadow appearance-none border rounded mb-5 w-[90%] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+								placeholder="ex: Peterson Events Center"
+							/>
+						{/if}
+					</div>
+
+					<div class="border rounded-xl p-3">
+						<Radio
+							inputName={'single-or-multiple'}
+							bind:selected={singleOrMultiple}
+							options={options[2]}
+							flexDirection="row"
+						/>
+						{#if singleOrMultiple === 'Multiple Athletes'}
+							<div class="mb-4 w-32 mx-auto">
+								<label
+									class="text-gray-300 text-sm font-bold mb-2 text-left"
+									for="number-of-athletes">Number of Athletes</label
+								>
+								<input
+									id="number-of-athletes"
+									name="number-of-athletes"
+									type="number"
+									min="0"
+									class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+									placeholder="#Athletes"
+								/>
+							</div>
+						{/if}
+					</div>
+
+					<div class="border mt-5 rounded-xl align-left">
+						<div class="flex p-5 flex-col sm:flex-row items-center">
+							<label
+								class="text-gray-300 text-sm font-bold text-left w-fit sm:mr-5 whitespace-nowrap"
+								for="sport-preference">Sport Preference</label
+							>
+							<input
+								id="sport-preference"
+								name="sport-preference"
+								type="text"
+								class="shadow p-2 appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+								placeholder="Enter your sport preference"
+							/>
+						</div>
+					</div>
+					<div class="border mt-5 rounded-xl p-5 align-left">
+						<Radio
+							inputName={'gender-preference'}
+							bind:selected={genderPreference}
+							options={options[3]}
+							flexDirection="row"
+						/>
+					</div>
+				</div>
+				<div class="border rounded-xl mt-5 p-3">
+					<h2 class="text-center text-xl mb-5">Main Goals</h2>
+					<Checkboxes
+						bind:activeOptions={mainGoalCheckboxes}
+						checkboxName={'goals'}
+						checkboxes={[
+							{ label: 'Option 1', value: 'option1', checked: false },
+							{ label: 'Option 2', value: 'option2', checked: false },
+							{ label: 'Custom goal', value: 'Custom goal', checked: false }
+						]}
+					/>
+					{#if mainGoalCheckboxes.includes('Custom goal')}
+						<InputList inputName={'custom-goals'} showName={'Custom Goal'} inputs={deliverables} />
+					{/if}
+				</div>
+				<div class="border mt-5 rounded-xl align-left">
+					<div class="flex p-5 flex-col sm:flex-row items-center">
+						<label
+							class="text-gray-300 text-sm font-bold text-left w-fit sm:mr-5 whitespace-nowrap"
+							for="estimated-payment">Estimated Payment</label
+						>
+						<input
+							id="estimated-payment"
+							name="estimated-payment"
+							type="text"
+							class="shadow p-2 appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+							placeholder="Estimated Pay or Range"
+						/>
+					</div>
+				</div>
+				<div class="border mt-5 p-5 rounded-xl align-left">
+					<h2 class="text-xl mb-2">Deal Deliverables for athlete</h2>
+					<InputList inputName={'deliverables'} showName={'Deliverable'} inputs={deliverables} />
+				</div>
+				<button type="submit">Submit Deal</button>
+			{/if}
+			{#if eventCampaignOrSingle === 'Campaign'}
+				<h2>Campaign Selected</h2>
+			{/if}
 		</form>
-		<Radio bind:selected={eventType} options={options[0]} flexDirection="row" />
 		<div class="border rounded-xl mt-5 p-3">
 			<p class="text-gray-200 text-xl mb-2">Main Deal Image</p>
 			<button
@@ -135,109 +291,6 @@
 				>
 			{/if}
 		</div>
-		{#if eventType === 'Single Event'}
-			<h2 class="mt-4">Single Event Selected</h2>
-			<div>
-				<label class="block text-gray-400 text-sm font-bold mb-2" for="message"
-					>Short description of your event</label
-				>
-				<textarea
-					id="short-description"
-					name="short-description"
-					rows="5"
-					class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-					placeholder="ex: Join us for a night of fun and games!"
-				/>
-				<div class="border my-5 rounded-xl p-3">
-					<Radio bind:selected={inPersonOrVirtual} options={options[1]} flexDirection="row" />
-					{#if inPersonOrVirtual}
-						<h2>{inPersonOrVirtual}</h2>
-					{/if}
-				</div>
-
-				<div class="border rounded-xl p-3">
-					<Radio bind:selected={singleOrMultiple} options={options[2]} flexDirection="row" />
-					{#if singleOrMultiple === 'Multiple Athletes'}
-						<div class="mb-4 w-32 mx-auto">
-							<label class="text-gray-300 text-sm font-bold mb-2 text-left" for="number-of-athletes"
-								>Number of Athletes</label
-							>
-							<input
-								id="number-of-athletes"
-								name="number-of-athletes"
-								type="number"
-								min="0"
-								class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-								placeholder="#Athletes"
-							/>
-						</div>
-					{/if}
-				</div>
-
-				<div class="border mt-5 rounded-xl align-left">
-					<div class="flex p-5 flex-col sm:flex-row items-center">
-						<label
-							class="text-gray-300 text-sm font-bold text-left w-fit sm:mr-5 whitespace-nowrap"
-							for="sport-preference">Sport Preference</label
-						>
-						<input
-							id="sport-preference"
-							name="sport-preference"
-							type="text"
-							class="shadow p-2 appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-							placeholder="Enter your sport preference"
-						/>
-					</div>
-				</div>
-			</div>
-			<div class="border rounded-xl mt-5 p-3">
-				<h2 class="text-center text-xl mb-5">Main Goals</h2>
-				<Checkboxes
-					bind:activeOptions={mainGoalCheckboxes}
-					checkboxes={[
-						{ label: 'Option 1', value: 'option1', checked: false },
-						{ label: 'Option 2', value: 'option2', checked: false },
-						{ label: 'Custom goal', value: 'Custom goal', checked: false }
-					]}
-				/>
-				{#if mainGoalCheckboxes.includes('Custom goal')}
-					<div class="mb-4 w-1/4 mt-4 mx-auto">
-						<label class="text-gray-300 text-sm font-bold mb-2 text-left" for="custom-goal"
-							>Custom Goal</label
-						>
-						<input
-							id="custom-goal"
-							name="custom-goal"
-							type="text"
-							class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-							placeholder="Enter your custom goal"
-						/>
-					</div>
-				{/if}
-			</div>
-			<div class="border mt-5 rounded-xl align-left">
-				<div class="flex p-5 flex-col sm:flex-row items-center">
-					<label
-						class="text-gray-300 text-sm font-bold text-left w-fit sm:mr-5 whitespace-nowrap"
-						for="estimated-payment">Estimated Payment</label
-					>
-					<input
-						id="estimated-payment"
-						name="estimated-payment"
-						type="text"
-						class="shadow p-2 appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-						placeholder="Estimated Pay or Range"
-					/>
-				</div>
-			</div>
-			<div class="border mt-5 p-5 rounded-xl align-left">
-				<h2 class="text-xl mb-2">Deal Deliverables for athlete</h2>
-				<InputList inputs={deliverables} />
-			</div>
-		{/if}
-		{#if eventType === 'Campaign'}
-			<h2>Campaign Selected</h2>
-		{/if}
 	</div>
 </div>
 

@@ -1,6 +1,7 @@
 <script>
 	export let checkboxes = [];
 	export let activeOptions = [];
+	export let checkboxName;
 
 	function handleCheckboxChange(event, checkbox) {
 		const { checked, value } = event.target;
@@ -28,6 +29,9 @@
 			{checkbox.label}
 		</label>
 	{/each}
+	{#if activeOptions.length > 0}
+		<input type="hidden" name={checkboxName} value={JSON.stringify(activeOptions)} />
+	{/if}
 </div>
 
 <style>

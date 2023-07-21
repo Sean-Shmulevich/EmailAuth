@@ -4,9 +4,10 @@
 	// and Inclusive Components by Heydon Pickering https://inclusive-components.design/toggle-button/
 
 	export let options;
-	export let userSelected = options[0].value;
+	// export let userSelected = options[0].value;
 	export let fontSize = 16;
 	export let flexDirection = 'column';
+	export let inputName;
 
 	export let selected;
 
@@ -23,7 +24,7 @@
 				checked={selected === option}
 				on:change={onChange}
 				type="radio"
-				name={option}
+				name={inputName}
 				value={option}
 			/>
 			<span class="mr-5">{option}</span>

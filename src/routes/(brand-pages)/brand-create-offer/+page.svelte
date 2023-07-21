@@ -3,6 +3,7 @@
 	import ImageCropper from '../ImageCropper.svelte';
 	import Checkboxes from './Checkboxes.svelte';
 	import Radio from './Radio.svelte';
+	import InputList from './InputList.svelte';
 	import { enhance } from '$app/forms';
 	export let data;
 	export let form;
@@ -11,6 +12,7 @@
 	let inPersonOrVirtual;
 	let singleOrMultiple;
 	let mainGoalCheckboxes = [];
+	let deliverables = [{ id: 0, value: '' }];
 
 	import { onMount } from 'svelte';
 
@@ -227,6 +229,10 @@
 						placeholder="Estimated Pay or Range"
 					/>
 				</div>
+			</div>
+			<div class="border mt-5 p-5 rounded-xl align-left">
+				<h2 class="text-xl mb-2">Deal Deliverables for athlete</h2>
+				<InputList inputs={deliverables} />
 			</div>
 		{/if}
 		{#if eventType === 'Campaign'}

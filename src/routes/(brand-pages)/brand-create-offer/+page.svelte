@@ -18,6 +18,7 @@
 	let singleOrMultiple;
 	let mainGoalCheckboxes = [];
 	let deliverables = [{ id: 0, value: '' }];
+	let pageNum = 0;
 
 	import { onMount } from 'svelte';
 
@@ -115,15 +116,13 @@
 			class="w-full"
 		>
 			<ImageCropper bind:croppedImage bind:square={squareInput} bind:open={isModalOpen} />
-			<div class="border p-2 rounded-xl align-left">
-				<Radio
-					inputName={'is-campaign'}
-					bind:selected={eventCampaignOrSingle}
-					options={options[0]}
-					flexDirection="row"
-				/>
-			</div>
-			<div class="border mt-5 rounded-xl align-left">
+			<Radio
+				inputName={'is-campaign'}
+				bind:selected={eventCampaignOrSingle}
+				options={options[0]}
+				flexDirection="row"
+			/>
+			<div class="border p-2 rounded-xl mt-4 align-left">
 				<h2 class="mt-4">Deal title</h2>
 				<input
 					id="deal-title"
@@ -132,8 +131,7 @@
 					class="mx-5 shadow appearance-none border rounded mb-5 w-[90%] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 					placeholder="ex: Social Media Post"
 				/>
-			</div>
-			<div class="border mt-5 p-5 rounded-xl align-left">
+				<!-- <div class="border mt-5 p-5 rounded-xl align-left">
 				<h2 class="mb-2">Deal End Date</h2>
 				<input
 					class="text-black text-center max-w-[90%] w-72"
@@ -143,154 +141,182 @@
 					min={dateToday.toString()}
 					bind:value={endDate}
 				/>
+			</div> -->
+				<label class="block text-white text-lg font-bold mb-2" for="message"
+					>Short description of your event</label
+				>
+				<textarea
+					id="short-description"
+					name="short-description"
+					rows="5"
+					class="mx-5 shadow appearance-none border rounded mb-5 w-[90%] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+					placeholder="ex: Join us for a night of fun and games!"
+				/>
+				<p class="text-gray-200 text-xl mb-2">Main Deal Image</p>
+				<button
+					class="{croppedImage
+						? 'nah'
+						: ''} text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+					on:click={() => {
+						squareInput = false;
+						isModalOpen = true;
+					}}
+					>Upload Image
+				</button>
+				{#if croppedImage !== null}
+					<img
+						src={URL.createObjectURL(croppedImage)}
+						alt="Profile example"
+						class="w-1/2 mx-auto"
+					/>
+					<button
+						on:click={() => {
+							croppedImage = null;
+							isModalOpen = true;
+							//!!!
+						}}>Change Image</button
+					>
+				{/if}
 			</div>
-
 			{#if eventCampaignOrSingle === 'Single Event'}
-				<div>
-					<div class="border mt-5 rounded-xl align-left">
-						<h2 class="mt-4">Single Event Selected</h2>
-						<label class="block text-gray-400 text-sm font-bold mb-2" for="message"
-							>Short description of your event</label
-						>
-						<textarea
-							id="short-description"
-							name="short-description"
-							rows="5"
-							class="mx-5 shadow appearance-none border rounded mb-5 w-[90%] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-							placeholder="ex: Join us for a night of fun and games!"
-						/>
-					</div>
+				{#if pageNum >= 1}
 					<div class="border my-5 rounded-xl p-3">
-						<Radio
-							inputName={'in-person-or-virtual'}
-							bind:selected={inPersonOrVirtual}
-							options={options[1]}
-							flexDirection="row"
-						/>
-						{#if inPersonOrVirtual && inPersonOrVirtual === 'In Person'}
-							<h2 class="mt-4">Deal location</h2>
-							<input
-								id="deal-location"
-								name="deal-location"
-								type="text"
-								class="mx-5 shadow appearance-none border rounded mb-5 w-[90%] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-								placeholder="ex: Peterson Events Center"
+						<div class="mb-5 p-2">
+							<h2 class="mb-4 text-left">Event in person or virtual:</h2>
+							<Radio
+								inputName={'in-person-or-virtual'}
+								bind:selected={inPersonOrVirtual}
+								options={options[1]}
+								flexDirection="row"
 							/>
-						{/if}
-					</div>
+							{#if inPersonOrVirtual && inPersonOrVirtual === 'In Person'}
+								<h2 class="mt-4">Deal location</h2>
+								<input
+									id="deal-location"
+									name="deal-location"
+									type="text"
+									class="mx-5 shadow appearance-none border rounded mb-5 w-[90%] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+									placeholder="ex: Peterson Events Center"
+								/>
+							{/if}
+							<hr class="mt-2" />
+						</div>
 
-					<div class="border rounded-xl p-3">
-						<Radio
-							inputName={'single-or-multiple'}
-							bind:selected={singleOrMultiple}
-							options={options[2]}
-							flexDirection="row"
-						/>
-						{#if singleOrMultiple === 'Multiple Athletes'}
-							<div class="mb-4 w-32 mx-auto">
+						<div class="mb-5">
+							<h2 class="mb-4 text-left">Single or multiple athletes:</h2>
+							<Radio
+								inputName={'single-or-multiple'}
+								bind:selected={singleOrMultiple}
+								options={options[2]}
+								flexDirection="row"
+							/>
+							{#if singleOrMultiple === 'Multiple Athletes'}
+								<div class="mb-4 w-32 mx-auto">
+									<label
+										class="text-gray-300 text-sm font-bold mb-2 text-left"
+										for="number-of-athletes">Number of Athletes</label
+									>
+									<input
+										id="number-of-athletes"
+										name="number-of-athletes"
+										type="number"
+										min="0"
+										class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+										placeholder="#Athletes"
+									/>
+								</div>
+							{/if}
+							<hr class="mt-2" />
+						</div>
+						<div class="mb-2">
+							<h2 class="mb-4 text-left">Gender preference:</h2>
+							<Radio
+								inputName={'gender-preference'}
+								bind:selected={genderPreference}
+								options={options[3]}
+								flexDirection="row"
+							/>
+						</div>
+						<div class="border mt-5 rounded-xl align-left">
+							<div class="flex p-5 flex-col sm:flex-row items-center">
 								<label
-									class="text-gray-300 text-sm font-bold mb-2 text-left"
-									for="number-of-athletes">Number of Athletes</label
+									class="text-gray-300 text-sm font-bold text-left w-fit sm:mr-5 whitespace-nowrap"
+									for="sport-preference">Sport Preference</label
 								>
 								<input
-									id="number-of-athletes"
-									name="number-of-athletes"
-									type="number"
-									min="0"
-									class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-									placeholder="#Athletes"
+									id="sport-preference"
+									name="sport-preference"
+									type="text"
+									class="shadow p-2 appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+									placeholder="Enter your sport preference"
 								/>
 							</div>
-						{/if}
+						</div>
+						<div class="border mt-5 rounded-xl align-left">
+							<div class="flex p-5 flex-col sm:flex-row items-center">
+								<label
+									class="text-gray-300 text-sm font-bold text-left w-fit sm:mr-5 whitespace-nowrap"
+									for="estimated-payment">Estimated Payment</label
+								>
+								<input
+									id="estimated-payment"
+									name="estimated-payment"
+									type="text"
+									class="shadow p-2 appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+									placeholder="Estimated Pay or Range"
+								/>
+							</div>
+						</div>
 					</div>
+				{/if}
 
-					<div class="border mt-5 rounded-xl align-left">
-						<div class="flex p-5 flex-col sm:flex-row items-center">
-							<label
-								class="text-gray-300 text-sm font-bold text-left w-fit sm:mr-5 whitespace-nowrap"
-								for="sport-preference">Sport Preference</label
-							>
-							<input
-								id="sport-preference"
-								name="sport-preference"
-								type="text"
-								class="shadow p-2 appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-								placeholder="Enter your sport preference"
+				{#if pageNum >= 2}
+					<div class="border rounded-xl mt-5 p-3">
+						<div class="border rounded-xl mt-5 p-3">
+							<h2 class="text-center text-xl mb-5">Main Goals</h2>
+							<Checkboxes
+								bind:activeOptions={mainGoalCheckboxes}
+								checkboxName={'goals'}
+								checkboxes={[
+									{ label: 'Option 1', value: 'option1', checked: false },
+									{ label: 'Option 2', value: 'option2', checked: false },
+									{ label: 'Custom goal', value: 'Custom goal', checked: false }
+								]}
+							/>
+							{#if mainGoalCheckboxes.includes('Custom goal')}
+								<InputList
+									inputName={'custom-goals'}
+									showName={'Custom Goal'}
+									inputs={deliverables}
+								/>
+							{/if}
+						</div>
+
+						<div class="border mt-5 p-5 rounded-xl align-left">
+							<h2 class="text-xl mb-2">Deal Deliverables for athlete</h2>
+							<InputList
+								inputName={'deliverables'}
+								showName={'Deliverable'}
+								inputs={deliverables}
 							/>
 						</div>
 					</div>
-					<div class="border mt-5 rounded-xl p-5 align-left">
-						<Radio
-							inputName={'gender-preference'}
-							bind:selected={genderPreference}
-							options={options[3]}
-							flexDirection="row"
-						/>
-					</div>
-				</div>
-				<div class="border rounded-xl mt-5 p-3">
-					<h2 class="text-center text-xl mb-5">Main Goals</h2>
-					<Checkboxes
-						bind:activeOptions={mainGoalCheckboxes}
-						checkboxName={'goals'}
-						checkboxes={[
-							{ label: 'Option 1', value: 'option1', checked: false },
-							{ label: 'Option 2', value: 'option2', checked: false },
-							{ label: 'Custom goal', value: 'Custom goal', checked: false }
-						]}
-					/>
-					{#if mainGoalCheckboxes.includes('Custom goal')}
-						<InputList inputName={'custom-goals'} showName={'Custom Goal'} inputs={deliverables} />
-					{/if}
-				</div>
-				<div class="border mt-5 rounded-xl align-left">
-					<div class="flex p-5 flex-col sm:flex-row items-center">
-						<label
-							class="text-gray-300 text-sm font-bold text-left w-fit sm:mr-5 whitespace-nowrap"
-							for="estimated-payment">Estimated Payment</label
-						>
-						<input
-							id="estimated-payment"
-							name="estimated-payment"
-							type="text"
-							class="shadow p-2 appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-							placeholder="Estimated Pay or Range"
-						/>
-					</div>
-				</div>
-				<div class="border mt-5 p-5 rounded-xl align-left">
-					<h2 class="text-xl mb-2">Deal Deliverables for athlete</h2>
-					<InputList inputName={'deliverables'} showName={'Deliverable'} inputs={deliverables} />
-				</div>
-				<button type="submit">Submit Deal</button>
+					<button type="submit">Submit Deal</button>
+				{/if}
+				{#if pageNum <= 1}
+					<button
+						on:click={() => {
+							pageNum += 1;
+							pageNum = pageNum;
+							console.log(pageNum);
+						}}>Continue Deal</button
+					>
+				{/if}
 			{/if}
 			{#if eventCampaignOrSingle === 'Campaign'}
 				<h2>Campaign Selected</h2>
 			{/if}
 		</form>
-		<div class="border rounded-xl mt-5 p-3">
-			<p class="text-gray-200 text-xl mb-2">Main Deal Image</p>
-			<button
-				class="{croppedImage
-					? 'nah'
-					: ''} text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-				on:click={() => {
-					squareInput = false;
-					isModalOpen = true;
-				}}
-				>Upload Image
-			</button>
-			{#if croppedImage !== null}
-				<img src={URL.createObjectURL(croppedImage)} alt="Profile example" class="w-1/2 mx-auto" />
-				<button
-					on:click={() => {
-						croppedImage = null;
-						isModalOpen = true;
-						//!!!
-					}}>Change Image</button
-				>
-			{/if}
-		</div>
 	</div>
 </div>
 

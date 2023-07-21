@@ -6,6 +6,7 @@
 	export let options;
 	// export let userSelected = options[0].value;
 	export let fontSize = 16;
+	export let justify = 'center';
 	export let flexDirection = 'column';
 	export let inputName;
 
@@ -16,9 +17,9 @@
 	}
 </script>
 
-<div class="flex justify-center {flexDirection !== 'row' ? 'flex-col' : 'flex-row '}">
+<div class="flex {flexDirection !== 'row' ? 'flex-col' : 'flex-row '}">
 	{#each options as option}
-		<label class="flex items-center w-full justify-center">
+		<label class="flex items-center w-full {justify === 'left' ? '' : ' justify-center'}">
 			<input
 				class="form-radio h-4 text-blue-500"
 				checked={selected === option}

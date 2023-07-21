@@ -8,7 +8,7 @@
 		name: 'What is your company name?',
 		location: 'Where is your company located?',
 		industry: 'What industry is your company in?',
-		size: 'How many employees does your company have?',
+		size: 'How many employees does your company have?'
 	};
 	const questionKeys = Object.keys(questions);
 	let currQuestion = 'name';
@@ -54,7 +54,6 @@
 
 <div class="flex w-full bg-gray-900 justify-center items-center h-screen">
 	<div class="w-[80%] bg-gray-500 p-4 h-2/3 lg:h-1/2 rounded-xl">
-
 		{#if currIndex < questionKeys.length}
 			<h2 class="text-center text-5xl mb-4">{questions[currQuestion]}</h2>
 			<hr />
@@ -76,7 +75,7 @@
 			<form method="POST" use:enhance>
 				<!-- enumerate through the values created in the slideshow to create the brand profile when creating the account -->
 				{#each questionKeys as question, index}
-					<input type="hidden" name={question} value={responses[index]} />	
+					<input type="hidden" name={question} value={responses[index]} />
 				{/each}
 				<input type="hidden" name="hiddenField" value="someValue" />
 				<label for="email">Email</label><br />
@@ -93,6 +92,7 @@
 		<!-- Content goes here -->
 	</div>
 </div>
+
 <!-- <h1>Create an account</h1>
 <form method="post" use:enhance>
 	<label for="email">Email</label><br />
@@ -107,3 +107,33 @@
 	<p class="error">{form.message}</p>
 {/if}
 <a href="/brand-login">Sign in</a> -->
+<style lang="postcss">
+	h1 {
+		/* TODO this styles could be problematic */
+		@apply lg:mt-20 md:mt-24 sm:mt-28 mt-32  mb-2 w-full text-3xl font-semibold;
+	}
+	label {
+		@apply mb-1 w-full text-sm font-medium;
+	}
+	input {
+		@apply my-1 mb-2 w-full rounded border px-2 py-1.5;
+	}
+	input[type='submit'] {
+		@apply mb-2 w-full cursor-pointer rounded border bg-black px-2 py-1.5 font-medium text-white;
+	}
+	p.message {
+		@apply text-sm;
+	}
+	p.error {
+		@apply text-sm text-red-400;
+	}
+	/* :global(main a) {
+		@apply mx-auto block w-fit text-indigo-500  hover:underline;
+	} */
+	form {
+		@apply my-2;
+	}
+	form p {
+		@apply text-sm text-zinc-500;
+	}
+</style>

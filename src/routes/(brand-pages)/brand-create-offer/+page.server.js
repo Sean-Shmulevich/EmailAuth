@@ -24,17 +24,22 @@ export const actions = {
 		const mainGoals = JSON.parse(formData.get('goals')?.toString() ?? '[]');
 		const customGoals = JSON.parse(formData.get('custom-goals')?.toString() ?? '[]');
 
+		console.log(formData.get('end-date'));
+		let eventType = formData.get('event-type')?.toString() ?? '';
+		if (formData.get('event-type-custom'))
+			[(eventType = formData.get('event-type-custom')?.toString() ?? '')];
 		// Combine the main goals and custom goals into a single array
 		const allGoals = [...mainGoals, ...customGoals];
 		const deal = await prismaClient.deal.create({
 			data: {
 				title: formData.get('deal-title')?.toString() ?? '',
 				shortDescription: formData.get('short-description')?.toString() ?? '',
+				eventType: eventType,
 				sportPreference: formData.get('sport-preference')?.toString() ?? '',
 				genderPreference: formData.get('gender-preference')?.toString() ?? '',
 				location: formData.get('deal-location')?.toString() ?? '',
 				inPersonOrVirtual: formData.get('in-person-or-virtual')?.toString() ?? '',
-				endDate: new Date(formData.get('end-date')?.toString() ?? new Date()),
+				endDate: new Date(formData.get('end-date')?.toString()),
 				goals: {
 					set: allGoals
 				},

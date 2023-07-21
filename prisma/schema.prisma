@@ -107,11 +107,13 @@ model BrandProfile {
 model Deal {
   id                      String       @id @unique @default(uuid())
   title                   String
+  active                  Boolean      @default(false)
   sportPreference         String
   genderPreference        String
   shortDescription        String
   location                String
   inPersonOrVirtual       String
+  eventType               String
   endDate                 DateTime?
   goals                   String[]
   estimatedPayment        String

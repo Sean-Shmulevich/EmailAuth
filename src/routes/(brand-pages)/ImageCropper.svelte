@@ -80,7 +80,7 @@
 		<h2 class="font-bold text-2xl text-center w-full">Image Upload</h2>
 		<button
 			type="button"
-			on:click={() => {
+			on:click|preventDefault={() => {
 				open = !open;
 				reset();
 			}}
@@ -116,7 +116,7 @@
 			/><br />
 			<button
 				type="button"
-				on:click={() => {
+				on:click|preventDefault={() => {
 					cropSubmit();
 					// console.log(croppedImage);
 					// croppedImage = null;
@@ -129,7 +129,7 @@
 		{:else}
 			<br /><button
 				type="button"
-				on:click={async () => {
+				on:click|preventDefault={async () => {
 					croppedImage = await getCroppedImg(image, pixelCrop);
 				}}
 				class="btn">Crop!</button
@@ -137,7 +137,7 @@
 		{/if}
 		<button
 			type="button"
-			on:click={() => {
+			on:click|preventDefault={() => {
 				reset();
 			}}
 			class="btn">Start Over</button

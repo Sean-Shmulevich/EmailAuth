@@ -5,7 +5,7 @@
 	import Radio from './Radio.svelte';
 	import InputList from './InputList.svelte';
 	import { enhance } from '$app/forms';
-	let endDate = new Date();
+	let endDate = new Date().toISOString().slice(0, 10);
 	let dateToday = new Date().toISOString().slice(0, 10);
 	console.log(dateToday);
 	export let data;
@@ -16,6 +16,7 @@
 	let inPersonOrVirtual;
 	let genderPreference;
 	let singleOrMultiple;
+	let eventType;
 	let mainGoalCheckboxes = [];
 	let deliverables = [{ id: 0, value: '' }];
 	let pageNum = 0;
@@ -52,7 +53,8 @@
 		['Single Event', 'Campaign'],
 		['In Person', 'Virtual'],
 		['Single Athlete', 'Multiple Athletes'],
-		['Male', 'Female', 'Any gender']
+		['Male', 'Female', 'Any gender'],
+		['In person appearance', 'Social media post', 'shoutout', 'autograph', 'custom']
 	];
 
 	async function upload(file, dealId) {
@@ -100,6 +102,7 @@
 	}
 </script>
 
+<ImageCropper bind:croppedImage bind:square={squareInput} bind:open={isModalOpen} />
 <div class="bg-gray-900 text-white flex flex-col items-center text-center justify-center space-y-8">
 	<h2 class="text-2xl mt-10">Create Offer</h2>
 	<div
@@ -115,70 +118,97 @@
 			}}
 			class="w-full"
 		>
-			<ImageCropper bind:croppedImage bind:square={squareInput} bind:open={isModalOpen} />
 			<Radio
 				inputName={'is-campaign'}
 				bind:selected={eventCampaignOrSingle}
 				options={options[0]}
 				flexDirection="row"
 			/>
-			<div class="border p-2 rounded-xl mt-4 align-left">
-				<h2 class="mt-4">Deal title</h2>
-				<input
-					id="deal-title"
-					name="deal-title"
-					type="text"
-					class="mx-5 shadow appearance-none border rounded mb-5 w-[90%] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-					placeholder="ex: Social Media Post"
-				/>
-				<!-- <div class="border mt-5 p-5 rounded-xl align-left">
-				<h2 class="mb-2">Deal End Date</h2>
-				<input
-					class="text-black text-center max-w-[90%] w-72"
-					type="date"
-					id="end-date"
-					name="end-date"
-					min={dateToday.toString()}
-					bind:value={endDate}
-				/>
-			</div> -->
-				<label class="block text-white text-lg font-bold mb-2" for="message"
-					>Short description of your event</label
-				>
-				<textarea
-					id="short-description"
-					name="short-description"
-					rows="5"
-					class="mx-5 shadow appearance-none border rounded mb-5 w-[90%] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-					placeholder="ex: Join us for a night of fun and games!"
-				/>
-				<p class="text-gray-200 text-xl mb-2">Main Deal Image</p>
-				<button
-					class="{croppedImage
-						? 'nah'
-						: ''} text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-					on:click={() => {
-						squareInput = false;
-						isModalOpen = true;
-					}}
-					>Upload Image
-				</button>
-				{#if croppedImage !== null}
-					<img
-						src={URL.createObjectURL(croppedImage)}
-						alt="Profile example"
-						class="w-1/2 mx-auto"
+			{#if eventCampaignOrSingle}
+				<div class="border p-2 rounded-xl mt-4 align-left">
+					<h2 class="mt-4">Deal title</h2>
+					<input
+						id="deal-title"
+						name="deal-title"
+						type="text"
+						class="mx-5 shadow appearance-none border rounded mb-5 w-[90%] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+						placeholder="ex: Social Media Post"
 					/>
-					<button
-						on:click={() => {
-							croppedImage = null;
-							isModalOpen = true;
-							//!!!
-						}}>Change Image</button
+
+					<label class="block text-white text-lg font-bold mb-2" for="message"
+						>Short description of your event</label
 					>
-				{/if}
-			</div>
+					<textarea
+						id="short-description"
+						name="short-description"
+						rows="5"
+						class="mx-5 shadow appearance-none border rounded mb-5 w-[90%] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+						placeholder="ex: Join us for a night of fun and games!"
+					/>
+					<div class="mb-5">
+						<h2 class="mb-2">Deal End Date</h2>
+						<input
+							class="text-black text-center max-w-[90%] w-72"
+							type="date"
+							id="end-date"
+							name="end-date"
+							min={dateToday}
+							bind:value={endDate}
+						/>
+					</div>
+					<div class="border my-5 rounded-xl p-3">
+						<p class="text-gray-200 text-xl mb-2">Main Deal Image</p>
+						<button
+							class="{croppedImage
+								? 'nah'
+								: ''} text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+							on:click|preventDefault={() => {
+								squareInput = false;
+								isModalOpen = true;
+							}}
+							>Upload Image
+						</button>
+						{#if croppedImage !== null}
+							<img
+								src={URL.createObjectURL(croppedImage)}
+								alt="Profile example"
+								class="w-1/2 mx-auto"
+							/>
+							<button
+								on:click|preventDefault={() => {
+									croppedImage = null;
+									isModalOpen = true;
+									//!!!
+								}}>Change Image</button
+							>
+						{/if}
+					</div>
+				</div>
+			{/if}
 			{#if eventCampaignOrSingle === 'Single Event'}
+				<div class="border my-5 p-5 rounded-xl">
+					<h2 class="mb-4 items-left text-left">Event type:</h2>
+					<Radio
+						justify={'left'}
+						inputName="event-type"
+						bind:selected={eventType}
+						options={options[4]}
+					/>
+					{#if eventType && eventType === 'custom'}
+						<div class="mt-5">
+							<label class="text-gray-300 text-sm font-bold mb-2 text-center" for="event-type"
+								>Custom Event Type</label
+							>
+							<input
+								id="event-type-custom"
+								name="event-type-custom"
+								type="text"
+								class="mx-5 shadow appearance-none border rounded mb-5 w-[90%] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+								placeholder="ex: Social Media Post"
+							/>
+						</div>
+					{/if}
+				</div>
 				{#if pageNum >= 1}
 					<div class="border my-5 rounded-xl p-3">
 						<div class="mb-5 p-2">
@@ -305,7 +335,7 @@
 				{/if}
 				{#if pageNum <= 1}
 					<button
-						on:click={() => {
+						on:click|preventDefault={() => {
 							pageNum += 1;
 							pageNum = pageNum;
 							console.log(pageNum);

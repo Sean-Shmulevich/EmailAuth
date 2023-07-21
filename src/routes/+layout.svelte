@@ -98,8 +98,11 @@
 								>Edit Profile</DropdownItem
 							>
 							{#if data.msg === 'fully authenticated'}
-								<DropdownItem class="text-center" href="/brand-create-offer"
+								<!-- <DropdownItem class="text-center" href="/brand-create-offer"
 									>Create Deal</DropdownItem
+								> -->
+								<DropdownItem class="text-center" href="/creation-center"
+									>Creation Center</DropdownItem
 								>
 							{/if}
 						{/if}

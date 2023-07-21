@@ -1,6 +1,6 @@
 <script>
 	// checkbox decides which import component to use either single event or campaign
-	import ImageCropper from '../ImageCropper.svelte';
+	import ImageCropper from '../../ImageCropper.svelte';
 	import Checkboxes from './Checkboxes.svelte';
 	import Radio from './Radio.svelte';
 	import InputList from './InputList.svelte';

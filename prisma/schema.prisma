@@ -107,7 +107,7 @@ model BrandProfile {
 model Deal {
   id                      String       @id @unique @default(uuid())
   title                   String
-  active                  Boolean      @default(false)
+  active                  String       @default("pending")
   sportPreference         String
   genderPreference        String
   shortDescription        String

@@ -20,10 +20,10 @@ export const actions = {
 		const formData = await request.formData();
 		console.log(formData);
 
-		let publish = false;
+		let publish = 'pending';
 		// formData.get('deal-submit') && formData.get('deal-submit').toString() === "publish"
 		if (formData.get('deal-submit') && formData.get('deal-submit').toString() === 'publish') {
-			publish = true;
+			publish = 'active';
 		}
 		// TODO return fail if the minimum inputs are not added
 		// TODO return fail under different circumstances if the deal is going no-publish

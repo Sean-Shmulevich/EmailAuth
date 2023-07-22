@@ -21,6 +21,17 @@
 			deleteName = '';
 		}
 	}
+	let dealLink = 'creation-center/deal/';
+	$: {
+		console.log(data.publishedDeals[0].dealImages);
+		if (activeButton === 'published') {
+			dealLink = 'creation-center/deal/';
+		} else if (activeButton === 'unpublished') {
+			dealLink = 'creation-center/brand-create-offer?dealId=';
+		} else {
+			dealLink = 'creation-center/deal/';
+		}
+	}
 	// /creation-center/deal/{deal.id}
 	//  show all deal data
 	//  show all interested athletes
@@ -44,10 +55,12 @@
 	/>
 </a>
 {#if showModal}
-	<div class="p-5 fixed flex flex-col justify-between left-1/4 w-1/2 bg-gray-700 h-72 rounded-xl">
+	<div
+		class="p-5 border border-black fixed flex flex-col justify-between left-1/4 w-1/2 bg-gray-700 h-72 rounded-xl"
+	>
 		<p class="text-white text-center text-xl">Are you sure you want to delete this?</p>
 		<p class="text-white text-center text-lg">Deal Name: {deleteName}</p>
-		<form method="POST" action="?/deleteDeal" use:enhance>
+		<form class="mx-auto" method="POST" action="?/deleteDeal" use:enhance>
 			<input type="hidden" name="deal-id" bind:value={deleteId} />
 			<button
 				on:click={() => {
@@ -110,13 +123,22 @@
 		>
 	</div>
 	{#each currentDealList as deal}
+		<p class="text-white text-xl">{deal.dealImages}</p>
 		<div class="bg-white rounded-xl mb-10 w-[80%] lg:w-[40%] flex flex-col shadow-md p-5 mx-auto">
 			<div class="bg-gray-200 w-full sm:w-[60%] mx-auto">
-				<img
-					src={'https://visafoto.com/img/docs/zz_30x40.jpg'}
-					alt={deal.title}
-					class="w-full h-full object-cover"
-				/>
+				{#if deal.dealImages.length !== 0}
+					<img
+						src="/api/s3object/{deal.dealImages.id}"
+						alt="Brand deal to athlete {deal.title}"
+						class="w-full h-full object-cover"
+					/>
+				{:else}
+					<img
+						src="https://localhost:5173/api/s3object/1690047383938a750a7168ff2492899697beefcb7dc6e"
+						alt="Brand deal to athlete {deal.title}"
+						class="w-full h-full object-cover"
+					/>
+				{/if}
 				<!-- You need to implement the Image component yourself -->
 			</div>
 			<div class="p-8 w-full flex flex-row">
@@ -148,7 +170,7 @@
 					</div>
 				</div>
 				<div class="w-1/2 text-center">
-					<a class="mx-auto" href="/creation-center/brand-create-offer?dealId={deal.id}">
+					<a class="mx-auto" href="{dealLink}{deal.id}">
 						<button
 							class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full"
 						>

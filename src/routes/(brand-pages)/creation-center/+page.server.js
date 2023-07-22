@@ -12,18 +12,27 @@ export const load = async ({ params, locals }) => {
 		where: {
 			authUserId: user.userId,
 			active: 'active'
+		},
+		include: {
+			dealImages: true
 		}
 	});
 	const unpublishedDeals = await prismaClient.deal.findMany({
 		where: {
 			authUserId: user.userId,
 			active: 'pending'
+		},
+		include: {
+			dealImages: true
 		}
 	});
 	const completedDeals = await prismaClient.deal.findMany({
 		where: {
 			authUserId: user.userId,
 			active: 'completed'
+		},
+		include: {
+			dealImages: true
 		}
 	});
 	return {

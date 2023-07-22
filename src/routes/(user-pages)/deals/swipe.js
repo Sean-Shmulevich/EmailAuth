@@ -82,7 +82,7 @@ export const swipe = (onCardAction) => {
 		const minSwipeLength = 130;
 		if (coordinate.x > minSwipeLength) {
 			like();
-			onCardAction('liked');
+			onCardAction('pending');
 		} else if (coordinate.x < -minSwipeLength) {
 			nope();
 			onCardAction('disliked');

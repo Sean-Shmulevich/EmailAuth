@@ -21,6 +21,10 @@
 	<p>{currDeal.sportPreference}</p>
 	<p>{currDeal.genderPreference}</p>
 	<!-- <p>{currDeal.shortDescription}</p> -->
+	<!-- <p>{currDeal.endDate}</p> -->
+	<!-- <p>{currDeal.publishDate}</p> -->
+	<!-- <p>{currDeal.isCampaign}</p> -->
+	<!-- <p>{currDeal.isCampaign}</p> -->
 	{#if currDeal.location !== ''}
 		<p>location: {currDeal.location}</p>
 	{:else}

@@ -96,7 +96,7 @@
 				<div class="boxcontent">
 					{#if pageNum === 0}
 						<div class="w-full text=center">
-							<p>{offer.id}</p>
+							<p>{JSON.stringify(offer)}</p>
 						</div>
 					{/if}
 					{#if pageNum === 1}

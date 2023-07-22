@@ -1,5 +1,6 @@
 import { prismaClient } from '$lib/db';
 import { fail, redirect } from '@sveltejs/kit';
+import { auth } from '$lib/lucia';
 
 export const load = async ({ params, locals }) => {
 	const { user } = await locals.auth.validateUser();
@@ -56,5 +57,11 @@ export const actions = {
 		return {
 			showModal: false
 		};
+	},
+	logout: async ({ locals }) => {
+		const session = await locals.auth.validate();
+		if (!session) return null;
+		await auth.invalidateSession(session.sessionId);
+		locals.auth.setSession(null);
 	}
 };

@@ -190,6 +190,30 @@
 				flexDirection="row"
 			/>
 			{#if eventCampaignOrSingle}
+				<div class="border my-5 p-5 rounded-xl">
+					<h2 class="mb-4 items-left text-left">Event type:</h2>
+					<Radio
+						justify={'left'}
+						inputName="event-type"
+						bind:selected={eventType}
+						options={options[4]}
+					/>
+					{#if eventType && eventType === 'custom'}
+						<div class="mt-5">
+							<label class="text-gray-300 text-sm font-bold mb-2 text-center" for="event-type"
+								>Custom Event Type</label
+							>
+							<input
+								id="event-type-custom"
+								name="event-type-custom"
+								type="text"
+								bind:value={eventTypeCustom}
+								class="mx-5 shadow appearance-none border rounded mb-5 w-[90%] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+								placeholder="ex: Social Media Post"
+							/>
+						</div>
+					{/if}
+				</div>
 				<div class="border p-2 rounded-xl mt-4 align-left">
 					<h2 class="mt-4">Deal title</h2>
 					<input
@@ -253,30 +277,6 @@
 				</div>
 			{/if}
 			{#if eventCampaignOrSingle === 'Single Event'}
-				<div class="border my-5 p-5 rounded-xl">
-					<h2 class="mb-4 items-left text-left">Event type:</h2>
-					<Radio
-						justify={'left'}
-						inputName="event-type"
-						bind:selected={eventType}
-						options={options[4]}
-					/>
-					{#if eventType && eventType === 'custom'}
-						<div class="mt-5">
-							<label class="text-gray-300 text-sm font-bold mb-2 text-center" for="event-type"
-								>Custom Event Type</label
-							>
-							<input
-								id="event-type-custom"
-								name="event-type-custom"
-								type="text"
-								bind:value={eventTypeCustom}
-								class="mx-5 shadow appearance-none border rounded mb-5 w-[90%] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-								placeholder="ex: Social Media Post"
-							/>
-						</div>
-					{/if}
-				</div>
 				{#if pageNum >= 1}
 					<div class="border my-5 rounded-xl p-3">
 						<div class="mb-5 p-2">

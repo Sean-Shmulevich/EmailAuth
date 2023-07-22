@@ -1,10 +1,26 @@
 <script>
+	import { enhance } from '$app/forms';
+	import { Jumper } from 'svelte-loading-spinners';
+
 	export let data;
+	export let form;
 	let publishedDeals = data.publishedDeals;
 	let unpublishedDeals = data.unpublishedDeals;
 	let completedDeals = data.completedDeals;
 	let currentDealList = publishedDeals;
 	let activeButton = 'published';
+	let showModal = false;
+	let loading = false;
+	let nah = false;
+	$: {
+		console.log(form);
+		if (form?.showModal === false) {
+			showModal = false;
+			loading = false;
+			deleteId = '';
+			deleteName = '';
+		}
+	}
 	// /creation-center/deal/{deal.id}
 	//  show all deal data
 	//  show all interested athletes
@@ -12,6 +28,8 @@
 	//  admin has to be able to see athletes being selected for deals
 
 	// /creation-center/brand-create-offer/edit/{deal.id} pending deals
+	let deleteId;
+	let deleteName;
 </script>
 
 <a
@@ -19,8 +37,48 @@
 	class="absolute -top-[72px] sm:top-5 right-0 p-5"
 	href="/creation-center/brand-create-offer"
 >
-	<img class="w-14" src="https://cdn-icons-png.flaticon.com/512/8070/8070671.png" />
+	<img
+		class="w-14"
+		alt="create deal"
+		src="https://cdn-icons-png.flaticon.com/512/8070/8070671.png"
+	/>
 </a>
+{#if showModal}
+	<div class="p-5 fixed flex flex-col justify-between left-1/4 w-1/2 bg-gray-700 h-72 rounded-xl">
+		<p class="text-white text-center text-xl">Are you sure you want to delete this?</p>
+		<p class="text-white text-center text-lg">Deal Name: {deleteName}</p>
+		<form method="POST" action="?/deleteDeal" use:enhance>
+			<input type="hidden" name="deal-id" bind:value={deleteId} />
+			<button
+				on:click={() => {
+					loading = true;
+					// nah = true;
+					currentDealList = currentDealList.filter((deal) => deal.id !== deleteId);
+				}}
+				type="submit"
+				class="{loading
+					? 'nah'
+					: ''} bg-green-500 mt-auto mb-10 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full"
+				>Delete</button
+			>
+			<button
+				on:click|preventDefault={() => {
+					showModal = false;
+				}}
+				class="{loading
+					? 'nah'
+					: ''} bg-green-500 mt-auto mb-10 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full"
+				>Cancel</button
+			>
+		</form>
+		{#if loading}
+			<div class="mx-auto">
+				<Jumper size="60" color="#FF3E00" unit="px" duration="6s" />
+			</div>
+		{/if}
+	</div>
+{/if}
+
 <div class="text-black">
 	<div class="flex flex-row -mt-5 w-[80%] lg:w-[40%] text-white text-center justify-center mx-auto">
 		<button
@@ -100,9 +158,18 @@
 				</div>
 			</div>
 			{#if activeButton !== 'completed'}
-				<button class="ml-auto -mt-14 mr-0 w-fit">
+				<button
+					on:click|preventDefault={() => {
+						showModal = true;
+						nah = false;
+						deleteName = deal.title;
+						deleteId = deal.id;
+					}}
+					class="ml-auto -mt-14 mr-0 w-fit"
+				>
 					<img
 						class="w-10"
+						alt="delete deal"
 						src="https://w7.pngwing.com/pngs/616/37/png-transparent-trash-can-illustration-computer-icons-icon-design-delete-button-miscellaneous-text-rectangle.png"
 					/>
 				</button>
@@ -112,4 +179,7 @@
 </div>
 
 <style>
+	.nah {
+		display: none;
+	}
 </style>

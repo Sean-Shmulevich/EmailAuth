@@ -31,3 +31,30 @@ export const load = async ({ params, locals }) => {
 		completedDeals
 	};
 };
+
+export const actions = {
+	deleteDeal: async ({ request, params, locals }) => {
+		const { user } = await locals.auth.validateUser();
+		const form = await request.formData();
+		const dealId = form.get('deal-id')?.toString() ?? '';
+		console.log('object');
+		const deal = await prismaClient.deal.findFirst({
+			where: {
+				id: dealId,
+				authUserId: user.userId
+			}
+		});
+		if (!deal) {
+			return fail(500, { message: 'Deal not found' });
+		}
+
+		await prismaClient.deal.delete({
+			where: {
+				id: dealId
+			}
+		});
+		return {
+			showModal: false
+		};
+	}
+};

@@ -19,7 +19,80 @@
 	let eventType;
 	let mainGoalCheckboxes = [];
 	let deliverables = [{ id: 0, value: '' }];
+	let customGoals = [{ id: 0, value: '' }];
 	let pageNum = 0;
+	let title;
+	let shortDescription;
+	let eventTypeCustom;
+	let location;
+	let athNum;
+	let sportPref;
+	let pay;
+
+	const options = [
+		['Single Event', 'Campaign'],
+		['In Person', 'Virtual'],
+		['Single Athlete', 'Multiple Athletes'],
+		['Male', 'Female', 'Any gender'],
+		['In person appearance', 'Social media post', 'shoutout', 'autograph', 'custom']
+	];
+	let checkboxes = [
+		{ label: 'Option 1', value: 'option1', checked: false },
+		{ label: 'Option 2', value: 'option2', checked: false },
+		{ label: 'Custom goal', value: 'Custom goal', checked: false }
+	];
+	// $: {
+	if (data.deal) {
+		pageNum = 2;
+		let deal = data.deal;
+		title = deal.title;
+		let isCampaign = 'Campaign';
+		if (!deal.isCampaign) {
+			isCampaign = 'Single Event';
+		}
+		eventCampaignOrSingle = isCampaign;
+		shortDescription = deal.shortDescription;
+		endDate = deal.endDate.toISOString().slice(0, 10);
+		eventType = deal.eventType;
+		if (!options[4].includes(deal.eventType)) {
+			eventType = 'custom';
+			eventTypeCustom = deal.eventType;
+		}
+		inPersonOrVirtual = deal.inPersonOrVirtual;
+
+		if (deal.inPersonOrVirtual === 'inPerson') {
+			location = deal.location;
+		}
+		singleOrMultiple = deal.singleOrMultiple;
+		if (deal.singleOrMultiple === 'multiple') {
+			athNum = deal.athleteCount;
+		}
+		genderPreference = deal.genderPreference;
+		sportPref = deal.sportPreference;
+		pay = deal.estimatedPayment;
+		let goals = deal.goals;
+		let custGoals = [];
+		for (let i = 0; i < checkboxes.length; i++) {
+			if (goals.includes(checkboxes[i].value)) {
+				checkboxes[i].checked = true;
+			} else {
+				if (goals[i] !== 'Custom goal') {
+					custGoals.push({ id: i, value: goals[i] });
+				}
+			}
+		}
+		if (goals.length !== 0) {
+			customGoals = custGoals;
+		}
+		let del = [];
+		for (let i = 0; i < deal.recommendedDeliverables.length; i++) {
+			del.push({ id: i, value: deal.recommendedDeliverables[i] });
+		}
+		if (deal.recommendedDeliverables.length !== 0) {
+			deliverables = del;
+		}
+	}
+	// }
 
 	import { onMount } from 'svelte';
 
@@ -48,14 +121,6 @@
 		}
 	}
 	let radioValue;
-
-	const options = [
-		['Single Event', 'Campaign'],
-		['In Person', 'Virtual'],
-		['Single Athlete', 'Multiple Athletes'],
-		['Male', 'Female', 'Any gender'],
-		['In person appearance', 'Social media post', 'shoutout', 'autograph', 'custom']
-	];
 
 	async function upload(file, dealId) {
 		// Get presigned POST URL and form fields
@@ -130,6 +195,7 @@
 					<input
 						id="deal-title"
 						name="deal-title"
+						bind:value={title}
 						type="text"
 						class="mx-5 shadow appearance-none border rounded mb-5 w-[90%] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 						placeholder="ex: Social Media Post"
@@ -142,6 +208,7 @@
 						id="short-description"
 						name="short-description"
 						rows="5"
+						bind:value={shortDescription}
 						class="mx-5 shadow appearance-none border rounded mb-5 w-[90%] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 						placeholder="ex: Join us for a night of fun and games!"
 					/>
@@ -203,6 +270,7 @@
 								id="event-type-custom"
 								name="event-type-custom"
 								type="text"
+								bind:value={eventTypeCustom}
 								class="mx-5 shadow appearance-none border rounded mb-5 w-[90%] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 								placeholder="ex: Social Media Post"
 							/>
@@ -225,6 +293,7 @@
 									id="deal-location"
 									name="deal-location"
 									type="text"
+									bind:value={location}
 									class="mx-5 shadow appearance-none border rounded mb-5 w-[90%] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 									placeholder="ex: Peterson Events Center"
 								/>
@@ -250,6 +319,7 @@
 										id="number-of-athletes"
 										name="number-of-athletes"
 										type="number"
+										bind:value={athNum}
 										min="0"
 										class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 										placeholder="#Athletes"
@@ -277,6 +347,7 @@
 									id="sport-preference"
 									name="sport-preference"
 									type="text"
+									bind:value={sportPref}
 									class="shadow p-2 appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 									placeholder="Enter your sport preference"
 								/>
@@ -292,6 +363,7 @@
 									id="estimated-payment"
 									name="estimated-payment"
 									type="text"
+									bind:value={pay}
 									class="shadow p-2 appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 									placeholder="Estimated Pay or Range"
 								/>
@@ -307,17 +379,13 @@
 							<Checkboxes
 								bind:activeOptions={mainGoalCheckboxes}
 								checkboxName={'goals'}
-								checkboxes={[
-									{ label: 'Option 1', value: 'option1', checked: false },
-									{ label: 'Option 2', value: 'option2', checked: false },
-									{ label: 'Custom goal', value: 'Custom goal', checked: false }
-								]}
+								bind:checkboxes
 							/>
-							{#if mainGoalCheckboxes.includes('Custom goal')}
+							{#if (data && data.deal && data.deal.goals.includes('Custom goal')) || mainGoalCheckboxes.includes('Custom goal')}
 								<InputList
 									inputName={'custom-goals'}
 									showName={'Custom Goal'}
-									inputs={deliverables}
+									inputs={customGoals}
 								/>
 							{/if}
 						</div>
@@ -358,6 +426,9 @@
 			{/if}
 			{#if eventCampaignOrSingle === 'Campaign'}
 				<h2>Campaign Selected</h2>
+			{/if}
+			{#if data && data.deal}
+				<input type="hidden" name="deal-id" value={data.deal.id} />
 			{/if}
 		</form>
 	</div>

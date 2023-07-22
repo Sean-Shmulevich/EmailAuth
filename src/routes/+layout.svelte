@@ -114,7 +114,7 @@
 				{/if}
 			</div>
 		</header>
-		<main class="">
+		<main class="relative">
 			<slot />
 		</main>
 	</body>

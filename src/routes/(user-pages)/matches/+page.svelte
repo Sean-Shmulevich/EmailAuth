@@ -1,6 +1,8 @@
 <script>
 	import { enhance } from '$app/forms';
 	export let data;
+	export let form;
+	import { Wave } from 'svelte-loading-spinners';
 	console.log(data.dealProfiles);
 
 	let activeButton = 'new';
@@ -8,16 +10,35 @@
 	let newDeals;
 	let ongoingDeals;
 	let interestedBrands;
+	let delId;
 	if (data) {
 		completedDeals = data.completedDealProfiles;
 		newDeals = data.newDealProfiles;
 		ongoingDeals = data.ongoingDealProfiles;
 		interestedBrands = newDeals;
 	}
+	let loading = false;
+	$: {
+		if (form && form.status === 'ok') {
+			interestedBrands = interestedBrands.filter((deal) => deal.id !== delId);
+			delId = '';
+			loading = false;
+		}
+	}
 
 	let defaultImg = '/api/s3object/1690047383938a750a7168ff2492899697beefcb7dc6e';
 </script>
 
+{#if loading}
+	<div
+		class="fixed top-0 left-0 w-full h-screen flex items-center justify-center z-20 bg-black bg-opacity-50"
+	>
+		<div class=" transform -translate-x-32 w-20 h-20">
+			<!-- Replace this with your loader component -->
+			<Wave size="160" color="#FF3E00" unit="px" duration="6s" />
+		</div>
+	</div>
+{/if}
 <div
 	class="flex flex-row -mt-5 w-[80%] sm:w-[60%] mb-5 text-white text-center justify-center mx-auto"
 >
@@ -137,7 +158,8 @@
 					>
 						<button
 							on:click={() => {
-								interestedBrands = interestedBrands.filter((deal) => deal.id !== currDeal.id);
+								delId = currDeal.id;
+								loading = true;
 							}}
 							name="agree-deal"
 							value={currDeal.id}

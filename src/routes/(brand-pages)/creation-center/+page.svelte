@@ -24,7 +24,7 @@
 
 	let dealLink = 'creation-center/deal/';
 	$: {
-		console.log(data.publishedDeals[0].dealImages);
+		// console.log(data.publishedDeals[0].dealImages);
 		if (activeButton === 'published') {
 			dealLink = 'creation-center/deal/';
 		} else if (activeButton === 'unpublished') {
@@ -128,7 +128,7 @@
 			class="bg-gray-700 text-white rounded-xl mb-10 w-[80%] lg:w-[40%] flex flex-col shadow-md p-5 mx-auto"
 		>
 			<div class="bg-gray-200 w-full sm:w-[60%] mx-auto">
-				{#if deal.dealImages.length !== 0}
+				{#if deal && deal.dealImages && deal.dealImages.length !== 0}
 					<img
 						src="/api/s3object/{deal.dealImages[0].id}"
 						alt="Brand deal to athlete {deal.title}"
@@ -208,6 +208,8 @@
 				</button>
 			{/if}
 		</div>
+	{:else}
+		<p class="text-2xl text-red-600 text-center mt-10">No deals here yet</p>
 	{/each}
 </div>
 

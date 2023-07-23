@@ -276,8 +276,8 @@
 					</div>
 				</div>
 				{#if pageNum >= 1}
-					<div class="border my-5 rounded-xl p-3">
-						<div class="mb-5 p-2">
+					<div class="border mt-5 rounded-xl p-3">
+						<div class="p-2">
 							<h2 class="mb-4 text-left">Event in person or virtual:</h2>
 							<Radio
 								inputName={'in-person-or-virtual'}
@@ -414,6 +414,7 @@
 				{/if}
 				{#if pageNum <= 1}
 					<button
+						class="bg-green-600 p-3 mt-4 rounded-full w-fit"
 						on:click|preventDefault={() => {
 							pageNum += 1;
 							pageNum = pageNum;

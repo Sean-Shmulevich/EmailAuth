@@ -15,8 +15,7 @@
 		interestedBrands = newDeals;
 	}
 
-	let defaultImg =
-		'https://localhost:5173/api/s3object/1690047383938a750a7168ff2492899697beefcb7dc6e';
+	let defaultImg = '/api/s3object/1690047383938a750a7168ff2492899697beefcb7dc6e';
 </script>
 
 <div

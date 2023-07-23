@@ -14,8 +14,7 @@ export const load = async ({ url, route, params, locals }) => {
     FROM "profile"
     WHERE "sport" = ${sportPref}
     ORDER BY RANDOM()
-    LIMIT 2;
-  	`;
+    LIMIT 2;`;
 	if (!matchingProfiles || matchingProfiles.length === 0) {
 		matchingProfiles = await prismaClient.$queryRaw`
 	  SELECT *
@@ -24,7 +23,6 @@ export const load = async ({ url, route, params, locals }) => {
 	  LIMIT 2;
 	`;
 	}
-	console.log(params.deal);
 	if (!user || !user.isBrand || !user.emailVerified || !user.adminVerified) {
 		throw redirect(302, '/');
 	}

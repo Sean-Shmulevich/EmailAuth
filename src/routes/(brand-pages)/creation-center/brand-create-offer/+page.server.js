@@ -95,11 +95,10 @@ export const actions = {
 				},
 				data: data
 			});
-			return { dealId: deal.id, noPublish: true };
 		} else {
 			deal = await prismaClient.deal.create({ data: data });
-			return { dealId: deal.id };
 		}
+		return { dealId: deal.id, noPublish: publish === 'pending' };
 
 		// Access the croppedImage file by its name
 

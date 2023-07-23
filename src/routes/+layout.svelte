@@ -78,16 +78,16 @@
 						{/if}
 
 						{#if !data.user.isBrand}
+							{#if data.msg === 'fully authenticated'}
+								<DropdownItem class="text-center" href="/deals">Discover</DropdownItem>
+								<DropdownItem class="text-center" href="/matches">Matches</DropdownItem>
+							{/if}
 							<DropdownItem class="text-center" href="/user-profile/{data.user.userId}"
 								>View Profile</DropdownItem
 							>
 							<DropdownItem class="text-center" href="/edit-profile/{data.user.userId}"
 								>Edit Profile</DropdownItem
 							>
-							{#if data.msg === 'fully authenticated'}
-								<DropdownItem class="text-center" href="/deals">Discover</DropdownItem>
-								<DropdownItem class="text-center" href="/matches">Matches</DropdownItem>
-							{/if}
 						{:else}
 							<DropdownItem class="text-center" href="/brand-profile/{data.user.userId}"
 								>View Profile</DropdownItem

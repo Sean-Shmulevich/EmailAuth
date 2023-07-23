@@ -275,8 +275,6 @@
 						{/if}
 					</div>
 				</div>
-			{/if}
-			{#if eventCampaignOrSingle === 'Single Event'}
 				{#if pageNum >= 1}
 					<div class="border my-5 rounded-xl p-3">
 						<div class="mb-5 p-2">
@@ -423,9 +421,6 @@
 						}}>Continue Deal</button
 					>
 				{/if}
-			{/if}
-			{#if eventCampaignOrSingle === 'Campaign'}
-				<h2>Campaign Selected</h2>
 			{/if}
 			{#if data && data.deal}
 				<input type="hidden" name="deal-id" value={data.deal.id} />

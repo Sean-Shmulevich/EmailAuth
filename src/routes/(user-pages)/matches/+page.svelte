@@ -4,12 +4,17 @@
 	console.log(data.dealProfiles);
 
 	let activeButton = 'new';
-	let interestedBrands = [];
+	let completedDeals;
+	let newDeals;
+	let ongoingDeals;
+	let interestedBrands;
 	if (data) {
-		if (data.dealProfiles) {
-			interestedBrands = data.dealProfiles;
-		}
+		completedDeals = data.completedDealProfiles;
+		newDeals = data.newDealProfiles;
+		ongoingDeals = data.ongoingDealProfiles;
+		interestedBrands = newDeals;
 	}
+
 	let defaultImg =
 		'https://localhost:5173/api/s3object/1690047383938a750a7168ff2492899697beefcb7dc6e';
 </script>
@@ -20,6 +25,7 @@
 	<button
 		on:click|preventDefault={() => {
 			activeButton = 'new';
+			interestedBrands = newDeals;
 		}}
 		class=" {activeButton === 'new'
 			? 'border-4 border-green-400'
@@ -28,6 +34,7 @@
 	<button
 		on:click|preventDefault={() => {
 			activeButton = 'ongoing';
+			interestedBrands = ongoingDeals;
 		}}
 		class=" {activeButton === 'ongoing'
 			? 'border-4 border-green-400'
@@ -37,6 +44,7 @@
 		on:click|preventDefault={() => {
 			// currentDealList = completedDeals;
 			activeButton = 'completed';
+			interestedBrands = completedDeals;
 		}}
 		class="  {activeButton === 'completed'
 			? 'border-4 border-green-400'
@@ -122,9 +130,24 @@
 					View Profile
 				</a>
 				{#if activeButton === 'new'}
-					<button class="p-3 border border-white bg-gray-700 w-1/3 rounded-xl">
-						Agree to offer
-					</button>
+					<form
+						class="w-1/3 border bg-gray-700 rounded-xl border-white"
+						method="POST"
+						use:enhance
+						action="?/agree"
+					>
+						<button
+							on:click={() => {
+								interestedBrands = interestedBrands.filter((deal) => deal.id !== currDeal.id);
+							}}
+							name="agree-deal"
+							value={currDeal.id}
+							type="submit"
+							class="w-full h-full"
+						>
+							Agree to offer
+						</button>
+					</form>
 				{/if}
 				{#if activeButton === 'ongoing'}
 					<button class="p-3 border border-white bg-gray-700 w-1/3 rounded-xl">

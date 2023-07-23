@@ -85,7 +85,7 @@
 								>Edit Profile</DropdownItem
 							>
 							{#if data.msg === 'fully authenticated'}
-								<DropdownItem class="text-center" href="/deals">Deals</DropdownItem>
+								<DropdownItem class="text-center" href="/deals">Discover</DropdownItem>
 								<DropdownItem class="text-center" href="/matches">Matches</DropdownItem>
 							{/if}
 						{:else}

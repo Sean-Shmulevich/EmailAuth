@@ -16,10 +16,22 @@ export const load = async ({ params, locals }) => {
 	const deal = await prismaClient.deal.findUnique({
 		where: { id: paramDealId }
 	});
-	const userDeals = await prismaClient.userDealStatus.findMany({
+	const interestedUsersData = await prismaClient.userDealStatus.findMany({
 		where: {
 			dealId: paramDealId,
 			status: 'pending'
+		},
+		include: {
+			user: true
+		}
+	});
+	const confirmedUserData = await prismaClient.userDealStatus.findMany({
+		where: {
+			dealId: paramDealId,
+			status: 'brand-accepted'
+		},
+		include: {
+			user: true
 		}
 	});
 	const dealImage = await prismaClient.dealImages.findFirst({
@@ -27,14 +39,46 @@ export const load = async ({ params, locals }) => {
 			dealId: paramDealId
 		}
 	});
+	const interestedUsers = interestedUsersData.map((userData) => userData.user);
+	const confirmedUsers = confirmedUserData.map((userData) => userData.user);
 	return {
 		deal,
-		userDeals,
+		interestedUsers,
+		confirmedUsers,
 		dealImage
 	};
 };
 
 export const actions = {
+	pickUser: async ({ params, request, locals }) => {
+		const { user } = await locals.auth.validateUser();
+		const data = await request.formData();
+		const userToApprove = data.get('userId')?.toString();
+		const paramDealId = params.deal;
+		console.log(paramDealId);
+		// console.log(params, body, locals);
+		if (!user || user.isBrand === false) {
+			throw redirect(302, '/');
+		}
+		const dealStatus = await prismaClient.userDealStatus.update({
+			where: {
+				userId_dealId: {
+					dealId: paramDealId,
+					userId: userToApprove
+				}
+			},
+			data: {
+				status: 'brand-accepted'
+			}
+		});
+		console.log(dealStatus);
+		if (!dealStatus) {
+			throw fail(400, { msg: 'User not found' });
+		}
+		return {
+			status: 'ok'
+		};
+	},
 	logout: async ({ locals }) => {
 		const session = await locals.auth.validate();
 		if (!session) return null;

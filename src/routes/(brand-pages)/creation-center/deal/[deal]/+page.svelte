@@ -1,6 +1,7 @@
 <script>
 	export let data;
 	export let form;
+	import { enhance } from '$app/forms';
 	// console.log(data.userDeals);
 
 	let currDeal = data.deal;
@@ -11,35 +12,114 @@
 	if (data.dealImage) {
 		dealImg = `/api/s3object/${data.dealImage.id}`;
 	}
+	// console.log(data.interestedUsers);
 </script>
 
 <!-- <p class="text-white">{JSON.stringify(data.dealImage)}</p> -->
-<div class="w-[90%] mx-auto bg-gray-800 rounded-xl mt-5 p-5">
+<div class="w-fit mx-auto bg-gray-800 rounded-xl mt-5 p-5">
 	<h2 class="text-center text-3xl mb-2 text-white">{currDeal.title}</h2>
 	<hr />
-	<p>{currDeal.eventType}</p>
-	<p>{currDeal.sportPreference}</p>
-	<p>{currDeal.genderPreference}</p>
-	<!-- <p>{currDeal.shortDescription}</p> -->
-	<!-- <p>{currDeal.endDate}</p> -->
-	<!-- <p>{currDeal.publishDate}</p> -->
-	<!-- <p>{currDeal.isCampaign}</p> -->
-	<!-- <p>{currDeal.isCampaign}</p> -->
-	{#if currDeal.location !== ''}
-		<p>location: {currDeal.location}</p>
-	{:else}
-		<p>location {currDeal.inPersonOrVirtual}</p>
-	{/if}
-	<p>{currDeal.endDate}</p>
-	{#each currDeal.goals as goal}
-		<p>{goal}</p>
-	{/each}
-	<p>{currDeal.estimatedPayment}</p>
-	{#each currDeal.recommendedDeliverables as dels}
-		<p>{dels}</p>
-	{/each}
+	<div class="flex flex-col md:flex-row">
+		<img
+			class="mt-5 rounded-2xl mx-auto sm:mx-[unset] h-[500px] w-[400px]"
+			src={dealImg}
+			alt="deal main {data.dealImage}"
+		/>
+		<div class="text-white mt-5 w-full md:w-[25%] min-w-[300px]">
+			<div class="border border-white p-5 text-lg rounded-xl">
+				<p>Event Type</p>
+				<p class="mb-5">{currDeal.eventType}</p>
+				<p>Sport Preference</p>
+				<p class="mb-5">{currDeal.sportPreference}</p>
+				<p>Gender Preference:</p>
+				<p>{currDeal.genderPreference}</p>
+			</div>
+			<!-- <p>{currDeal.shortDescription}</p> -->
+			<!-- <p>{currDeal.endDate}</p> -->
+			<!-- <p>{currDeal.publishDate}</p> -->
+			<!-- <p>{currDeal.isCampaign}</p> -->
+			<!-- <p>{currDeal.singleOrMultiple}</p> -->
+			<!-- <p>{currDeal.athleteCount}</p> -->
+			<!-- <p>{currDeal.}</p> -->
 
-	<img class="mt-5 rounded-2xl w-[20%]" src={dealImg} alt="deal main {data.dealImage}" />
+			<div class="border border-white p-5 text-lg rounded-xl">
+				<p>Location</p>
+				{#if currDeal.location !== ''}
+					<p class="mb-5">{currDeal.location}</p>
+				{:else}
+					<p class="mb-5">{currDeal.inPersonOrVirtual}</p>
+				{/if}
+
+				<p>End Date</p>
+				<p class="mb-5">
+					{new Date(currDeal.endDate).toLocaleDateString('en-GB', {
+						day: 'numeric',
+						month: 'short',
+						year: 'numeric'
+					})}
+				</p>
+				<p>Estimated Payment</p>
+				<p>{currDeal.estimatedPayment}</p>
+			</div>
+		</div>
+	</div>
+	<div class="w-full -mt-5 py-5">
+		<div class="border border-1 rounded-xl text-white p-5">
+			<p class="text-xl">Deliverables</p>
+			<hr class="mb-2" />
+			{#each currDeal.recommendedDeliverables as dels}
+				<p>{dels}</p>
+			{/each}
+		</div>
+		<div class="border border-1 rounded-xl text-white p-5">
+			<p class="text-xl">Goals</p>
+			<hr class="mb-2" />
+			{#each currDeal.goals as goal}
+				<p>{goal}</p>
+			{/each}
+		</div>
+	</div>
 </div>
+<div class="mx-20 mt-10">
+	<h2 class="text-2xl text-white text-center">Deals Pending Completion</h2>
+	<hr class="mt-2" />
+	{#each data.confirmedUsers as user}
+		<div
+			class="my-5 text-white border border-white rounded-xl bg-gray-800 shadow-md p-4 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between"
+		>
+			<div>
+				<h2 class="text-xl font-bold mb-2">{user.email}</h2>
+				<a class="text-blue-500 underline" href="/user-profile/{user.id}">profile link</a>
+			</div>
+			<form class="" method="post" action="?/verify" use:enhance>
+				<input id="email" name="email" hidden value={user.email} />
 
+				<button type="submit" class="p-2 bg-blue-500 text-white rounded"
+					>View/Edit deal contract</button
+				>
+			</form>
+		</div>
+	{/each}
+</div>
 <!-- show a deal and interesed users-->
+<div class="mx-20">
+	<h2 class="text-2xl text-white text-center">Interested Athtletes</h2>
+	<hr class="mt-2" />
+	{#each data.interestedUsers as user}
+		<div
+			class="my-5 text-white border border-white rounded-xl bg-gray-800 shadow-md p-4 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between"
+		>
+			<div>
+				<h2 class="text-xl font-bold mb-2">{user.email}</h2>
+				<a class="text-blue-500 underline" href="/user-profile/{user.id}">profile link</a>
+			</div>
+			<form method="post" action="?/pickUser" use:enhance>
+				<input id="userId" name="userId" hidden value={user.id} />
+
+				<button type="submit" class="p-2 bg-blue-500 text-white rounded">
+					Work with this athlete</button
+				>
+			</form>
+		</div>
+	{/each}
+</div>

@@ -237,7 +237,7 @@
 						placeholder="ex: Join us for a night of fun and games!"
 					/>
 					<div class="mb-5">
-						<h2 class="mb-2">Deal End Date</h2>
+						<h2 class="mb-2" />
 						<input
 							class="text-black text-center max-w-[90%] w-72"
 							type="date"

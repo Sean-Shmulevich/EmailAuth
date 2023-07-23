@@ -165,7 +165,11 @@
 										<p>Dates</p>
 										<hr />
 										<p class="p-2">
-											{offer.endDate.toISOString().slice(0, 10)}
+											{new Date(offer.endDate).toLocaleDateString('en-GB', {
+												day: 'numeric',
+												month: 'short',
+												year: 'numeric'
+											})}
 										</p>
 									</div>
 								</div>

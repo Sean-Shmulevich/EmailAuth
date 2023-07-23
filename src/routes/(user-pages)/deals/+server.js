@@ -10,6 +10,7 @@ export async function GET({ locals }) {
 	const nextDeals = await prismaClient.deal.findMany({
 		take: 5,
 		where: {
+			active: 'active',
 			NOT: {
 				userDealStatus: {
 					some: {
@@ -31,7 +32,7 @@ export async function POST({ request, locals }) {
 	//set 5 userDealStatus objects for the current user
 	let userSwipeData = await request.json();
 	// console.log(await request.json());
-	for(let i = 0; i < userSwipeData.length; i++) {
+	for (let i = 0; i < userSwipeData.length; i++) {
 		await prismaClient.userDealStatus.create({
 			data: {
 				userId: user.userId,
@@ -41,11 +42,11 @@ export async function POST({ request, locals }) {
 		});
 	}
 
-
 	//TODO: what if it is less then 5
 	const nextDeals = await prismaClient.deal.findMany({
 		take: 5,
 		where: {
+			active: 'active',
 			NOT: {
 				userDealStatus: {
 					some: {

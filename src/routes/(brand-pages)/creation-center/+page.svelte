@@ -123,12 +123,11 @@
 		>
 	</div>
 	{#each currentDealList as deal}
-		<p class="text-white text-xl">{deal.dealImages}</p>
 		<div class="bg-white rounded-xl mb-10 w-[80%] lg:w-[40%] flex flex-col shadow-md p-5 mx-auto">
 			<div class="bg-gray-200 w-full sm:w-[60%] mx-auto">
 				{#if deal.dealImages.length !== 0}
 					<img
-						src="/api/s3object/{deal.dealImages.id}"
+						src="/api/s3object/{deal.dealImages[0].id}"
 						alt="Brand deal to athlete {deal.title}"
 						class="w-full h-full object-cover"
 					/>
@@ -142,7 +141,7 @@
 				<!-- You need to implement the Image component yourself -->
 			</div>
 			<div class="p-8 w-full flex flex-row">
-				<div class="w-1/2">
+				<div class="w-full">
 					<h1 class="font-bold text-xl mb-2">{deal.title}</h1>
 					<p class="text-gray-700 text-base">Description: {deal.shortDescription}</p>
 					<div class="mt-4">
@@ -151,8 +150,11 @@
 							<div class="ml-3 text-sm text-gray-500">{deal.genderPreference}</div>
 						</div>
 						<div class="mt-2 flex items-center">
-							<div class="text-sm text-gray-500">{deal.location}</div>
-							<div class="ml-3 text-sm text-gray-500">{deal.inPersonOrVirtual}</div>
+							{#if deal.location !== ''}
+								<div class="text-sm text-gray-500">Location: {deal.location}</div>
+							{:else}
+								<div class="text-sm text-gray-500">Location: {deal.inPersonOrVirtual}</div>
+							{/if}
 						</div>
 						<div class="text-sm text-gray-500">
 							Event type: {deal.eventType !== '' ? deal.eventType : 'no event type'}
@@ -168,15 +170,21 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="w-1/2 text-center">
-					<a class="mx-auto" href="{dealLink}{deal.id}">
-						<button
-							class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full"
-						>
-							View activity
-						</button>
-					</a>
+					<div class="w-full text-center">
+						<a class="mx-auto" href="{dealLink}{deal.id}">
+							<button
+								class="bg-green-500 hover:bg-green-700 text-white transform translate-y-5 font-bold py-2 px-4 rounded-full"
+							>
+								{#if activeButton === 'unpublished'}
+									Finish creating deal
+								{:else if activeButton === 'completed'}
+									View Details
+								{:else}
+									See user activity
+								{/if}
+							</button>
+						</a>
+					</div>
 				</div>
 			</div>
 			{#if activeButton !== 'completed'}

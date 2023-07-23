@@ -16,3 +16,4 @@
 
 <!-- Show the athlete reccomendations and options to approve -->
 <!-- just dump their full profiles on this page basically  -->
+<!-- post request must contain email and userId -->

@@ -56,7 +56,7 @@
 </a>
 {#if showModal}
 	<div
-		class="p-5 border border-black fixed flex flex-col justify-between left-1/4 w-1/2 bg-gray-700 h-72 rounded-xl"
+		class="p-5 border-4 border-white fixed flex flex-col justify-between left-1/4 w-1/2 bg-gray-800 h-72 rounded-xl"
 	>
 		<p class="text-white text-center text-xl">Are you sure you want to delete this?</p>
 		<p class="text-white text-center text-lg">Deal Name: {deleteName}</p>
@@ -123,7 +123,9 @@
 		>
 	</div>
 	{#each currentDealList as deal}
-		<div class="bg-white rounded-xl mb-10 w-[80%] lg:w-[40%] flex flex-col shadow-md p-5 mx-auto">
+		<div
+			class="bg-gray-700 text-white rounded-xl mb-10 w-[80%] lg:w-[40%] flex flex-col shadow-md p-5 mx-auto"
+		>
 			<div class="bg-gray-200 w-full sm:w-[60%] mx-auto">
 				{#if deal.dealImages.length !== 0}
 					<img
@@ -133,7 +135,7 @@
 					/>
 				{:else}
 					<img
-						src="https://localhost:5173/api/s3object/1690047383938a750a7168ff2492899697beefcb7dc6e"
+						src="/api/s3object/1690047383938a750a7168ff2492899697beefcb7dc6e"
 						alt="Brand deal to athlete {deal.title}"
 						class="w-full h-full object-cover"
 					/>
@@ -146,26 +148,26 @@
 					<p class="text-gray-700 text-base">Description: {deal.shortDescription}</p>
 					<div class="mt-4">
 						<div class="flex items-center">
-							<div class="text-sm text-gray-500">{deal.sportPreference}</div>
-							<div class="ml-3 text-sm text-gray-500">{deal.genderPreference}</div>
+							<div class="text-sm text-white">{deal.sportPreference}</div>
+							<div class="ml-3 text-sm text-white">{deal.genderPreference}</div>
 						</div>
 						<div class="mt-2 flex items-center">
 							{#if deal.location !== ''}
-								<div class="text-sm text-gray-500">Location: {deal.location}</div>
+								<div class="text-sm text-white">Location: {deal.location}</div>
 							{:else}
-								<div class="text-sm text-gray-500">Location: {deal.inPersonOrVirtual}</div>
+								<div class="text-sm text-white">Location: {deal.inPersonOrVirtual}</div>
 							{/if}
 						</div>
-						<div class="text-sm text-gray-500">
+						<div class="text-sm text-white">
 							Event type: {deal.eventType !== '' ? deal.eventType : 'no event type'}
 						</div>
-						<div class="text-sm text-gray-500">
+						<div class="text-sm text-white">
 							End Date: {deal.endDate.toISOString().slice(0, 10)}
 						</div>
-						<div class="text-sm text-gray-500">Payment: {deal.estimatedPayment}</div>
-						<div class="text-sm text-gray-500">Athletes: {deal.athleteCount}</div>
+						<div class="text-sm text-white">Payment: {deal.estimatedPayment}</div>
+						<div class="text-sm text-white">Athletes: {deal.athleteCount}</div>
 						<div class="mt-2 flex items-center">
-							<div class="text-sm text-gray-500">
+							<div class="text-sm text-white">
 								Published: {deal.publishDate.toISOString().slice(0, 10)}
 							</div>
 						</div>

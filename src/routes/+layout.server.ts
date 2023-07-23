@@ -5,8 +5,7 @@ import { ROOT_URL } from '$env/static/private';
 export const load: PageServerLoad = async ({ locals }) => {
 	const { user } = await locals.auth.validateUser();
 	//default profile picture
-	let profilePicture =
-		'https://localhost:5173/api/s3object/1690003857238c4c5bcf6bca44e28950c3969413f0dc3';
+	let profilePicture = '/api/s3object/1690003857238c4c5bcf6bca44e28950c3969413f0dc3';
 
 	//if there is no user return nothing to the frontend
 	//if there is a user that is email verified but not admin verified return the user the menu will allow uers to edit profile and logout only

@@ -8,7 +8,7 @@
 	if (currDeal.location === '') {
 		currDeal.location = 'No location set';
 	}
-	let dealImg = 'https://localhost:5173/api/s3object/1690047383938a750a7168ff2492899697beefcb7dc6e';
+	let dealImg = '/api/s3object/1690047383938a750a7168ff2492899697beefcb7dc6e';
 	if (data.dealImage) {
 		dealImg = `/api/s3object/${data.dealImage.id}`;
 	}

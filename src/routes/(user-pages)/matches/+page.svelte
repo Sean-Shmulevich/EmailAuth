@@ -157,7 +157,7 @@
 						action="?/agree"
 					>
 						<button
-							on:click={() => {
+							on:click|preventDefault={() => {
 								delId = currDeal.id;
 								loading = true;
 							}}

@@ -1,6 +1,9 @@
 import { prismaClient } from '$lib/db';
+import { sendEmail } from '$lib/email';
 import { fail, redirect } from '@sveltejs/kit';
 import { auth } from '$lib/lucia';
+
+let deal;
 
 export const load = async ({ params, locals }) => {
 	const { user } = await locals.auth.validateUser();
@@ -13,7 +16,7 @@ export const load = async ({ params, locals }) => {
 	) {
 		throw redirect(302, '/');
 	}
-	const deal = await prismaClient.deal.findUnique({
+	deal = await prismaClient.deal.findUnique({
 		where: { id: paramDealId }
 	});
 	const interestedUsersData = await prismaClient.userDealStatus.findMany({
@@ -54,8 +57,9 @@ export const actions = {
 		const { user } = await locals.auth.validateUser();
 		const data = await request.formData();
 		const userToApprove = data.get('userId')?.toString();
+		const userEmail = data.get('user-email')?.toString();
 		const paramDealId = params.deal;
-		console.log(paramDealId);
+		console.log(deal);
 		// console.log(params, body, locals);
 		if (!user || user.isBrand === false) {
 			throw redirect(302, '/');
@@ -71,7 +75,11 @@ export const actions = {
 				status: 'brand-accepted'
 			}
 		});
-		console.log(dealStatus);
+		sendEmail(
+			userEmail,
+			'A brand is interested in working with you!',
+			`Deal info title: ${deal.title} \n Description: ${deal.shortDescription}`
+		);
 		if (!dealStatus) {
 			throw fail(400, { msg: 'User not found' });
 		}

@@ -99,6 +99,8 @@
 				>
 			</form>
 		</div>
+	{:else}
+		<p class="mx-auto text-center text-2xl my-10 text-red-500">No approved users</p>
 	{/each}
 </div>
 <!-- show a deal and interesed users-->
@@ -115,11 +117,14 @@
 			</div>
 			<form method="post" action="?/pickUser" use:enhance>
 				<input id="userId" name="userId" hidden value={user.id} />
+				<input id="user-email" name="user-email" hidden value={user.email} />
 
 				<button type="submit" class="p-2 bg-blue-500 text-white rounded">
 					Work with this athlete</button
 				>
 			</form>
 		</div>
+	{:else}
+		<p class="mx-auto text-center text-2xl my-10 text-red-500">No interested athletes</p>
 	{/each}
 </div>

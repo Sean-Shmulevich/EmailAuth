@@ -28,7 +28,7 @@
 	<div class="container mx-auto flex px-5 py-24 items-center justify-center">
 		<div class="text-center lg:w-full xl:w-full">
 			<h1
-				class="text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-bold leading-tight mb-8 text-white"
+				class="text-4xl md:text-6xl lg:text-6xl xl:text-8xl font-bold leading-tight mb-8 text-white"
 			>
 				The premier matchmaking platform for athletes and brands
 			</h1>
@@ -37,7 +37,7 @@
 
 			<a
 				href="#learn-more"
-				class="inline-flex flex-col-reverse items-center text-gold hover:text-yellow-500"
+				class="inline-flex transform translate-y-7 flex-col-reverse items-center text-gold hover:text-yellow-500"
 			>
 				<svg
 					class="w-5 h-5 ml-2"
@@ -91,7 +91,7 @@
 						Platform is pre approved by our team ensuring all NCAA regulatory Compliance is
 						maintained. With DapUp, partnerships are made easy.
 					</p>
-					<a class="mt-3 text-blue-500 inline-flex items-center" href="#"
+					<a id="learn-more" class="mt-3 text-blue-500 inline-flex items-center" href="#"
 						>Learn More
 						<svg
 							fill="none"

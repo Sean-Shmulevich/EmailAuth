@@ -1,13 +1,20 @@
 <script>
+	// import { load } from '../../proxy+page.server.js';
 	import { swipe } from './swipe.js';
 	import { onMount, tick } from 'svelte';
+	import { Wave } from 'svelte-loading-spinners';
 
 	//the 5 offers that are visible at a time
 	export let offers;
+	let isLoading = false;
 
+	let MAX_SWIPE_COUNT = 4;
+	if (offers.length < 5) {
+		MAX_SWIPE_COUNT = offers.length - 1;
+	}
 	//how many swipes before refetching the next data
 	//TODO if 5 items are not fetched the update will not trigger
-	let MAX_SWIPE_COUNT = 4;
+
 	//the status of the last 5 swipes
 	let swipeStatusList = [];
 	//the number page of the current deal
@@ -30,6 +37,7 @@
 
 	let onCardAction = async (status) => {
 		swipeStatusList.push(status); // Ad the swipe status to the list
+		pageNum = 0;
 		console.log(swipeStatusList, swipeStatusList.length - 1);
 		if (swipeStatusList.length - 1 === MAX_SWIPE_COUNT) {
 			//fetch the next five deals with a post request to /deals
@@ -43,11 +51,14 @@
 			currDealIds = [];
 			console.log(objArr);
 			let nextDeals = await add(JSON.stringify(objArr));
+			isLoading = false;
 			// swipe(onCardAction);
 			//!!! this makes it more seamless by loading in the last deal and running
 			//TODO check for invalid json
 			//this code one before it gets there.
-			console.log(nextDeals);
+			if (nextDeals.length < 5) {
+				MAX_SWIPE_COUNT = nextDeals.length - 1;
+			}
 			offers = [...nextDeals];
 			refreshCounter += 1;
 
@@ -60,6 +71,7 @@
 		swipe(onCardAction);
 	});
 	async function add(swipeData) {
+		isLoading = true;
 		const response = await fetch('/deals', {
 			method: 'POST',
 			body: swipeData,
@@ -88,29 +100,91 @@
 			<!-- Элемент где был кружок  -->
 
 			<!--  Элемент  -->
-
-			<div class="label">Made by @app1e.jews</div>
+			{#if isLoading}
+				<div class="centerAll">
+					<Wave size="160" color="#FF3E00" unit="px" duration="6s" />
+				</div>
+			{:else}
+				<div class="label">No Deals Left</div>
+			{/if}
 		</div>
 		{#each offers as offer}
 			<div class="box">
 				<div class="boxcontent">
 					{#if pageNum === 0}
-						<div class="w-full text=center">
-							<p>{JSON.stringify(offer)}</p>
+						{#if offer.dealImages && offer.dealImages.length !== 0}
+							<img src="/api/s3object/{offer.dealImages[0].id}" alt="Profile" />
+						{:else}
+							<img
+								src="/api/s3object/1690047383938a750a7168ff2492899697beefcb7dc6e"
+								alt="Profile"
+							/>
+						{/if}
+						<div class="info">
+							<div class="name">{offer.title}</div>
+							<p>{offer.eventType} event</p>
+							<div class="interest">{offer.shortDescription}</div>
 						</div>
 					{/if}
 					{#if pageNum === 1}
-						<img
-							src="https://www.3dwiggle.com/wp-content/uploads/2016/06/hiroshi-yoshinaga-wired-lathyrus-blog-3dwiggle-1.gif"
-							alt="Profile picture"
-						/>
-
-						<div class="info">
-							<div class="name">Влад, 20</div>
-							<div class="interest">1 Common Interest</div>
+						<div class="w-full p-5 text-white text-center h-full bg-gray-700">
+							<div class="flex w-full flex-row">
+								<div class="p-2 w-1/2 rounded-xl">
+									<div class="border border-white rounded-xl p-4">
+										<p>Looking for</p>
+										<hr />
+										<p class="mt-2">
+											{offer.sportPreference} players
+										</p>
+									</div>
+									<div class="border p-4 mt-4 border-white rounded-xl">
+										<p class="">Location</p>
+										<hr />
+										<p class="p-2">
+											{#if offer.inPersonOrVirtual === 'In Person'}
+												{offer.location}
+											{:else}
+												Location: Virtual
+											{/if}
+										</p>
+									</div>
+								</div>
+								<div class="p-2 w-1/2">
+									<div class=" border p-4 border-white rounded-xl">
+										<p>Estimated Pay</p>
+										<hr />
+										<p class="mt-2">
+											${offer.estimatedPayment}
+										</p>
+									</div>
+									<div class="mt-4 border p-4 border-white rounded-xl">
+										<p>Dates</p>
+										<hr />
+										<p class="p-2">
+											{offer.endDate.toISOString().slice(0, 10)}
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="flex flex-col mt-4 h-[65%]">
+								<div class="flex-grow mb-4 w-full text-center border rounded-xl border-white p-4">
+									<p class="mb-2">Deliverables</p>
+									<hr class="mb-2" />
+									{#each offer.recommendedDeliverables as deliverable, i}
+										<p class="text-left">{i + 1}. {deliverable}</p>
+									{/each}
+								</div>
+								<div class="flex-grow w-full text-center border rounded-xl border-white p-4">
+									<p class="mb-2">Goals</p>
+									<hr />
+									{#each offer.goals as goal, i}
+										<p class="text-left">{i + 1}. {goal}</p>
+									{/each}
+								</div>
+							</div>
 						</div>
 					{/if}
-					{#if pageNum === 2}
+					<!-- {#if pageNum === 2}
 						<img
 							src="https://www.3dwiggle.com/wp-content/uploads/2016/06/hiroshi-yoshinaga-wired-lathyrus-blog-3dwiggle-1.gif"
 							alt="Profile picture"
@@ -129,7 +203,7 @@
 							<div class="name">Влад, 20</div>
 							<div class="interest">3 Common Interest</div>
 						</div>
-					{/if}
+					{/if} -->
 					<div class="like">Like</div>
 					<div class="nope">Nope</div>
 				</div>
@@ -140,7 +214,7 @@
 					on:click={() => {
 						pageNum = pageNum - 1;
 						if (pageNum < 0) {
-							pageNum = 3;
+							pageNum = 1;
 						}
 					}}
 				/>
@@ -149,7 +223,7 @@
 					style=""
 					on:click={() => {
 						pageNum = pageNum + 1;
-						if (pageNum > 3) {
+						if (pageNum > 1) {
 							pageNum = 0;
 						}
 					}}
@@ -162,6 +236,16 @@
 <style>
 	@import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto:900');
 
+	.centerAll {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		-webkit-transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%);
+	}
+	.interest {
+		word-wrap: break-word;
+	}
 	:root {
 		--primary-color: #ff0050;
 		--secondary-color: rgb(246, 244, 250);

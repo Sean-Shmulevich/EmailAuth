@@ -13,33 +13,11 @@ export const load: PageServerLoad = async ({ locals, url }) => {
 		throw redirect(302, '/');
 		// return {msg: 'not authenticated', user: null};
 	}
-	// const deal = await prismaClient.deal.create({
-	// 	data: {
-	// 		title: 'title1',
-	// 		description: 'description1',
-	// 		sportPreference: 'Basketball',
-	// 		genderPreference: 'Male',
-	// 		shortDescription: 'shortDescription1',
-	// 		location: 'location1',
-	// 		inPersonOrVirtual: 'Virtual',
-	// 		dateTime: '2023-07-20T14:48:00.000Z', // an example date time
-	// 		duration: '1 hour',
-	// 		mainGoal: 'Promotion',
-	// 		estimatedPayment: '100$',
-	// 		recommendedDeliverables: {
-	// 			set: ['deliverable1', 'deliverable2'] // an array of recommended deliverables
-	// 		},
-	// 		athleteCount: 1,
-	// 		singleOrMultiple: 'Single',
-	// 		publishDate: new Date(),
-	// 		authUserId: user.userId, // the user id
-	// 		isCampaign: false
-	// 	}
-	// });
 
 	const nextDeals = await prismaClient.deal.findMany({
 		take: 5,
 		where: {
+			active: 'active',
 			NOT: {
 				userDealStatus: {
 					some: {
@@ -47,6 +25,9 @@ export const load: PageServerLoad = async ({ locals, url }) => {
 					}
 				}
 			}
+		},
+		include: {
+			dealImages: true
 		}
 	});
 

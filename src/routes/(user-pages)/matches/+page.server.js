@@ -65,6 +65,7 @@ export const actions = {
 		// const userEmail = data.get('user-email')?.toString();
 		const dealId = data.get('agree-deal')?.toString();
 		// console.log(params, body, locals);
+		console.log('here');
 		if (!user || user.isBrand || !user.emailVerified || !user.adminVerified) {
 			throw redirect(302, '/');
 		}

@@ -3,7 +3,6 @@
 	export let data;
 	export let form;
 	import { Wave } from 'svelte-loading-spinners';
-	console.log(data.dealProfiles);
 
 	let activeButton = 'new';
 	let completedDeals;
@@ -19,10 +18,11 @@
 	}
 	let loading = false;
 	$: {
-		if (form && form.status === 'ok') {
+		if (form?.status === 'ok' && delId !== '' && loading === true) {
 			interestedBrands = interestedBrands.filter((deal) => deal.id !== delId);
-			delId = '';
+			form = null;
 			loading = false;
+			delId = '';
 		}
 	}
 
@@ -157,7 +157,7 @@
 						action="?/agree"
 					>
 						<button
-							on:click|preventDefault={() => {
+							on:click={() => {
 								delId = currDeal.id;
 								loading = true;
 							}}

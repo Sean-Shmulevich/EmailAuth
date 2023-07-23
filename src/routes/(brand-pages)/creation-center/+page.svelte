@@ -21,6 +21,7 @@
 			deleteName = '';
 		}
 	}
+
 	let dealLink = 'creation-center/deal/';
 	$: {
 		console.log(data.publishedDeals[0].dealImages);
@@ -145,7 +146,7 @@
 			<div class="p-8 w-full flex flex-row">
 				<div class="w-full">
 					<h1 class="font-bold text-xl mb-2">{deal.title}</h1>
-					<p class="text-gray-700 text-base">Description: {deal.shortDescription}</p>
+					<p class="text-white break-words text-base">Description: {deal.shortDescription}</p>
 					<div class="mt-4">
 						<div class="flex items-center">
 							<div class="text-sm text-white">{deal.sportPreference}</div>
@@ -213,5 +214,12 @@
 <style>
 	.nah {
 		display: none;
+	}
+	.centerAll {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		-webkit-transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%);
 	}
 </style>

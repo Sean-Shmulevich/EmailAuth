@@ -94,7 +94,7 @@
 		<input
 			type="file"
 			accept=".jpg, .jpeg, .png"
-			on:change={(e) => onFileSelected(e)}
+			on:change|preventDefault={(e) => onFileSelected(e)}
 			bind:this={fileinput}
 			class="input"
 		/>

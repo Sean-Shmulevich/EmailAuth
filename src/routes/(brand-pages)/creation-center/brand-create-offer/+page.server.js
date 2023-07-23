@@ -85,7 +85,8 @@ export const actions = {
 		};
 
 		let deal;
-		console.log(url.searchParams);
+		// console.log(url.searchParams);
+		//the page was called with pre-existing data
 		if (formData.get('deal-id')) {
 			console.log('here');
 			deal = await prismaClient.deal.update({
@@ -94,10 +95,12 @@ export const actions = {
 				},
 				data: data
 			});
+			return { dealId: deal.id, noPublish: true };
 		} else {
 			deal = await prismaClient.deal.create({ data: data });
+			return { dealId: deal.id };
 		}
-		return { dealId: deal.id };
+
 		// Access the croppedImage file by its name
 
 		// Continue with the rest of your code...

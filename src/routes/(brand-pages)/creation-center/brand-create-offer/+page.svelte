@@ -4,7 +4,10 @@
 	import Checkboxes from './Checkboxes.svelte';
 	import Radio from './Radio.svelte';
 	import InputList from './InputList.svelte';
+	import { Wave } from 'svelte-loading-spinners';
+	import { navigating } from '$app/stores';
 	import { enhance } from '$app/forms';
+	import { goto } from '$app/navigation';
 	let endDate = new Date().toISOString().slice(0, 10);
 	let dateToday = new Date().toISOString().slice(0, 10);
 	console.log(dateToday);
@@ -116,8 +119,12 @@
 	//(when it is changed on crop not on submit)
 	$: {
 		if (form && form.dealId && croppedImage !== null) {
-			console.log('here');
 			upload(croppedImage, form.dealId);
+			if (form.noPublish) {
+				goto(`/creation-center`);
+			} else {
+				goto(`/suggest/${form.dealId}?sportPref=${sportPref}`);
+			}
 		}
 	}
 	let radioValue;
@@ -168,6 +175,7 @@
 </script>
 
 <ImageCropper bind:croppedImage bind:square={squareInput} bind:open={isModalOpen} />
+
 <div class="bg-gray-900 text-white flex flex-col items-center text-center justify-center space-y-8">
 	<h2 class="text-2xl mt-10">Create Offer</h2>
 	<div

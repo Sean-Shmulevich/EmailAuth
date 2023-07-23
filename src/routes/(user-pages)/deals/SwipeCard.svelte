@@ -108,7 +108,7 @@
 				<div
 					class="text-white border border-white p-5 text-2xl rounded-full centerAll max-w-12 bg-red-500"
 				>
-					No Deals Left
+					Check back later for more deals
 				</div>
 			{/if}
 		</div>

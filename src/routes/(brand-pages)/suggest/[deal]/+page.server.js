@@ -11,7 +11,7 @@ export const load = async ({ url, route, params, locals }) => {
 	let matchingProfiles;
 	matchingProfiles = await prismaClient.$queryRaw`
     SELECT *
-    FROM "profile"
+    FROM profile.*, auth_user.objects
     WHERE "sport" = ${sportPref}
     ORDER BY RANDOM()
     LIMIT 2;`;

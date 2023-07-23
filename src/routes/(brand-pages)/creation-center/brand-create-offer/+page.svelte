@@ -118,8 +118,10 @@
 	//this will exeecute when the form is submitted and when the image is changed
 	//(when it is changed on crop not on submit)
 	$: {
-		if (form && form.dealId && croppedImage !== null) {
-			upload(croppedImage, form.dealId);
+		if (form && form.dealId) {
+			if (croppedImage !== null) {
+				upload(croppedImage, form.dealId);
+			}
 			if (form.noPublish) {
 				goto(`/creation-center`);
 			} else {

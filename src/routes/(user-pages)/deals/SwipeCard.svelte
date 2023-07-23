@@ -102,10 +102,14 @@
 			<!--  Элемент  -->
 			{#if isLoading}
 				<div class="centerAll">
-					<Wave size="160" color="#FF3E00" unit="px" duration="6s" />
+					<Wave size="160" color="#FF3E00" unit="px" duration="3s" />
 				</div>
-			{:else}
-				<div class="label">No Deals Left</div>
+			{:else if offers.length === 0}
+				<div
+					class="text-white border border-white p-5 text-2xl rounded-full centerAll max-w-12 bg-red-500"
+				>
+					No Deals Left
+				</div>
 			{/if}
 		</div>
 		{#each offers as offer}

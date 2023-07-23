@@ -161,4 +161,6 @@
 			{/if}
 		</div>
 	</div>
+{:else}
+	<p class=" text-3xl text-red-500 text-center">Sorry no deals here :(</p>
 {/each}

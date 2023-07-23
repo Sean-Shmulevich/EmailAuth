@@ -34,29 +34,23 @@
 			</h1>
 
 			<div style="height:20vh" />
-
-			<a
-				href="#learn-more"
-				class="inline-flex transform translate-y-7 flex-col-reverse items-center text-gold hover:text-yellow-500"
-			>
-				<svg
-					class="w-5 h-5 ml-2"
-					xmlns="http://www.w3.org/2000/svg"
-					fill="none"
-					viewBox="0 0 24 24"
-					stroke="currentColor"
-				>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="M19 9l-7 7-7-7"
-					/>
-				</svg>
-				Learn more about us
-			</a>
 		</div>
 	</div>
+	<a
+		href="#learn-more"
+		class="inline-flex absolute w-[40%] left-0 right-0 top-[60vh] mx-auto text-center flex-col-reverse items-center text-gold hover:text-yellow-500"
+	>
+		<svg
+			class="w-5 h-5 ml-2"
+			xmlns="http://www.w3.org/2000/svg"
+			fill="none"
+			viewBox="0 0 24 24"
+			stroke="currentColor"
+		>
+			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+		</svg>
+		Learn more about us
+	</a>
 </section>
 
 <!-- Services -->

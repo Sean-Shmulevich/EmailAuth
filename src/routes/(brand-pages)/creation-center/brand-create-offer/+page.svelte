@@ -2,6 +2,7 @@
 	// checkbox decides which import component to use either single event or campaign
 	import ImageCropper from '../../ImageCropper.svelte';
 	import Checkboxes from './Checkboxes.svelte';
+	import PreviewCard from './PreviewCard.svelte';
 	import MyRadio from './Radio.svelte';
 	import InputList from './InputList.svelte';
 	import { Wave } from 'svelte-loading-spinners';
@@ -186,14 +187,42 @@
 
 		return fields.key;
 	}
+	let showPreview = false;
 </script>
 
 <ImageCropper bind:croppedImage bind:square={squareInput} bind:open={isModalOpen} />
 
-<div class="bg-gray-900 text-white flex flex-col items-center text-center justify-center space-y-8">
+<PreviewCard
+	bind:showPreview
+	bind:croppedImage
+	bind:title
+	bind:eventType
+	bind:shortDescription
+	bind:sportPreference={sportPref}
+	bind:location
+	bind:inPersonOrVirtual
+	bind:estimatedPayment={pay}
+	bind:endDate
+	bind:eventDate
+	bind:isCampaign={eventCampaignOrSingle}
+	bind:recommendedDeliverables={deliverables}
+	bind:checkGoals={mainGoalCheckboxes}
+	bind:customGoals
+/>
+<div
+	class="{showPreview
+		? 'hidden'
+		: ''} bg-gray-900 text-white flex flex-col items-center text-center justify-center space-y-8"
+>
 	<h2 class="text-2xl mt-10">Create Offer</h2>
+	<button
+		on:click={() => {
+			showPreview = !showPreview;
+		}}
+		class="underline text-xl text-right">Show preview</button
+	>
 	<div
-		class="profile-card flex flex-col bg-gray-800 shadow overflow-hidden mt-10 rounded-lg max-w-5xl w-[80%] mb-10 p-6"
+		class=" profile-card flex flex-col bg-gray-800 shadow overflow-hidden mt-10 rounded-lg max-w-5xl w-[80%] mb-10 p-6"
 	>
 		<form
 			method="POST"

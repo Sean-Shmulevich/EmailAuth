@@ -9,24 +9,36 @@ export const load = async ({ url, route, params, locals }) => {
 	const sportPref = url.searchParams.get('sportPref');
 
 	let matchingProfiles;
-	matchingProfiles = await prismaClient.$queryRaw`
-    SELECT *
-    FROM profile.*, auth_user.objects
-    WHERE "sport" = ${sportPref}
-    ORDER BY RANDOM()
-    LIMIT 2;`;
-	if (!matchingProfiles || matchingProfiles.length === 0) {
-		matchingProfiles = await prismaClient.$queryRaw`
-	  SELECT *
-	  FROM "profile"
-	  ORDER BY RANDOM()
-	  LIMIT 2;
-	`;
-	}
 	if (!user || !user.isBrand || !user.emailVerified || !user.adminVerified) {
 		throw redirect(302, '/');
 	}
-	return { matchingProfiles };
+	matchingProfiles = await prismaClient.$queryRaw`
+    SELECT *
+    FROM "profile"
+    WHERE "sport" = ${sportPref}
+    ORDER BY RANDOM()
+    LIMIT 2;`;
+	if (matchingProfiles.length === 0) {
+		matchingProfiles = await prismaClient.$queryRaw`
+			SELECT *
+			FROM "profile"
+			ORDER BY RANDOM()
+			LIMIT 2;
+		`;
+	}
+	let images = [];
+	for (let i = 0; i < matchingProfiles.length; i++) {
+		const id = matchingProfiles[i].user_id;
+		const imageList = await prismaClient.authUser.findUnique({
+			where: { id: id },
+			include: {
+				object: true
+			}
+		});
+		images[i] = imageList.object;
+	}
+	// console.log('Matching Profiles ' + (await matchingProfiles));
+	return { matchingProfiles, images };
 };
 
 export const actions = {
@@ -34,36 +46,40 @@ export const actions = {
 		const { user } = await locals.auth.validateUser();
 		const data = await request.formData();
 		const userToApprove = data.get('userId')?.toString();
-		const userEmail = data.get('user-email')?.toString();
 		const paramDealId = params.deal;
 		// console.log(params, body, locals);
 		if (!user || user.isBrand === false) {
 			throw redirect(302, '/');
 		}
+		const userToWorkWith = await prismaClient.authUser.findUnique({ where: { id: userToApprove } });
+		// console.log(userToWorkWith.email);
 		const deal = await prismaClient.deal.findUnique({
 			where: { id: paramDealId }
 		});
-		const dealStatus = await prismaClient.userDealStatus.update({
+		const dealStatus = await prismaClient.userDealStatus.upsert({
 			where: {
 				userId_dealId: {
 					dealId: paramDealId,
 					userId: userToApprove
 				}
 			},
-			data: {
+			create: {
+				userId: userToApprove,
+				dealId: paramDealId,
+				status: 'brand-accepted'
+			},
+			update: {
 				status: 'brand-accepted'
 			}
 		});
 		sendEmail(
-			userEmail,
+			userToWorkWith.email,
 			'A brand is interested in working with you!',
 			`Deal info title: ${deal.title} \n Description: ${deal.shortDescription}`
 		);
 		if (!dealStatus) {
 			throw fail(400, { msg: 'User not found' });
 		}
-		return {
-			status: 'ok'
-		};
+		throw redirect(302, '/creation-center');
 	}
 };

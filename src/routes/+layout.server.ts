@@ -19,7 +19,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 			image_number: 0
 		}
 	});
-	if (profilePictureData) {
+	if (profilePictureData && profilePictureData.id) {
 		profilePicture = `${ROOT_URL}/api/s3object/${profilePictureData.id}`;
 	}
 	if (!user.adminVerified) {

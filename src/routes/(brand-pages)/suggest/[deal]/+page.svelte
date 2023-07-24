@@ -58,6 +58,10 @@
 <!-- Show the athlete reccomendations and options to approve -->
 <!-- just dump their full profiles on this page basically  -->
 <!-- post request must contain email and userId -->
+<h2 class="text-xl text-center text-white mt-5 mb-5">
+	Your deal has been launched pick one of our recommended athletes or wait for your deal to generate
+	interest
+</h2>
 <h2 class="text-3xl text-center text-white mt-5 mb-5">Suggested Athletes</h2>
 <div class="w-full text-center">
 	<a class="p-2 w-full mx-auto bg-red-500 rounded-full" href="/creation-center"

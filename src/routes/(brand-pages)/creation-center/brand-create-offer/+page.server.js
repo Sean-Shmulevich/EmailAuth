@@ -22,7 +22,7 @@ export const load = async ({ url, locals }) => {
 			}
 		});
 		if (!deal) {
-			throw redirect(302, '/creation-center');
+			throw redirect(302, `/suggest/${url.searchParams.get('dealId')}?sportPref=null`);
 		}
 		return {
 			deal
@@ -43,6 +43,7 @@ export const actions = {
 		if (formData.get('deal-submit') && formData.get('deal-submit').toString() === 'publish') {
 			publish = 'active';
 		}
+		// console.log(publish);
 		// TODO return fail if the minimum inputs are not added
 		// TODO return fail under different circumstances if the deal is going no-publish
 		// TODO return fail if the user is not a brand
@@ -102,10 +103,12 @@ export const actions = {
 				},
 				data: data
 			});
+			console.log(deal.active);
+			return { dealId: deal.id, noPublish: deal.active === 'pending' };
 		} else {
 			deal = await prismaClient.deal.create({ data: data });
+			return { dealId: deal.id, noPublish: deal.active === 'pending' };
 		}
-		return { dealId: deal.id, noPublish: publish === 'pending' };
 
 		// Access the croppedImage file by its name
 

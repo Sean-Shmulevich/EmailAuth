@@ -15,6 +15,7 @@
 	export let data;
 	export let form;
 	let selected;
+	let publish = false;
 
 	let eventCampaignOrSingle;
 	let inPersonOrVirtual;
@@ -113,7 +114,7 @@
 		if (deal.recommendedDeliverables.length !== 0) {
 			deliverables = del;
 		}
-		console.log(deal.dealImages);
+		// console.log(deal.dealImages);
 		if (deal.dealImages.length !== 0) {
 			currImage = `/api/s3object/${deal.dealImages[0].id}`;
 		}
@@ -125,13 +126,17 @@
 	//this will exeecute when the form is submitted and when the image is changed
 	//(when it is changed on crop not on submit)
 	$: {
-		if (form && form.dealId) {
+		console.log(form);
+
+		if (form) {
 			if (croppedImage !== null) {
 				upload(croppedImage, form.dealId);
 			}
-			if (form.noPublish) {
+			console.log(form.noPublish);
+			if (form.noPublish && !publish) {
 				goto(`/creation-center`);
 			} else {
+				console.log('here');
 				goto(`/suggest/${form.dealId}?sportPref=${sportPref}`);
 			}
 		}
@@ -455,6 +460,11 @@
 					<div class="text-right mr-auto mt-5">
 						<button
 							class="rounded-full p-5 bg-green-800"
+							on:click={() => {
+								if (form) {
+									publish = false;
+								}
+							}}
 							name="deal-submit"
 							value="publish"
 							type="submit">Publish Deal</button
@@ -462,6 +472,11 @@
 						<button
 							class="rounded-full p-5 bg-red-800"
 							name="deal-submit"
+							on:click={() => {
+								if (form) {
+									publish = true;
+								}
+							}}
 							value="no-publish"
 							type="submit">Save for later</button
 						>

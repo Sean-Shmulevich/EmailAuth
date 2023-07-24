@@ -10,7 +10,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 	const { user } = await locals.auth.validateUser();
 	if (user) {
 		//TODO send some data with this redirect to signify that it is happening
-		if(!user.isBrand) throw redirect(302, '/login');
+		if (!user.isBrand) throw redirect(302, '/login');
 		if (!user.emailVerified) throw redirect(302, '/email-verification');
 		throw redirect(302, '/');
 	}
@@ -19,14 +19,14 @@ export const load: PageServerLoad = async ({ locals }) => {
 export const actions: Actions = {
 	default: async ({ request, locals }) => {
 		const formData = await request.formData();
-		const email = formData.get('email')?.toString() ?? '';
-		
+		const email = (formData.get('email')?.toString() ?? '').toLowerCase();
+
 		const user = await prismaClient.authUser.findUnique({
 			where: {
-				email: email,
-			},
+				email: email
+			}
 		});
-		if(!user || !user.is_brand || user.is_admin){
+		if (!user || !user.is_brand || user.is_admin) {
 			return fail(400, {
 				message: 'Not brand user',
 				email

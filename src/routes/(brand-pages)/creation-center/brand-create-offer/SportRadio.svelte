@@ -11,7 +11,6 @@
 		'Field hockey',
 		'Football',
 		'Golf',
-		'Golf',
 		'Gymnastics',
 		'Ice hockey',
 		'Lacrosse',
@@ -33,10 +32,15 @@
 
 <div class="flex flex-row items-center">
 	<Button><Chevron>Sport Preference</Chevron></Button>
-	<Dropdown class="w-54 h-32 overflow-y-scroll  text-left whitespace-nowrap space-y-3 text-sm">
+	<Dropdown
+		class="w-54 h-32 overflow-y-scroll text-black  text-left whitespace-nowrap space-y-3 text-sm"
+	>
 		{#each sportsNames as sportName}
-			<Radio class="ml-2 mt-2" name="sport-preference" bind:group={sportPref} value={sportName}
-				>{sportName}</Radio
+			<Radio
+				class="text-black ml-2 mt-2"
+				name="sport-preference"
+				bind:group={sportPref}
+				value={sportName}>{sportName}</Radio
 			>
 		{/each}
 		<div class="h-2 w-full" />

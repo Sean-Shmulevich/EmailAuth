@@ -87,10 +87,10 @@
                                     year: 'numeric'
                                 })} -->
 											{#if isCampaign}
-												Start Date: {eventDate}
-												End Date: {endDate}
+												<p>Start Date: {eventDate}</p>
+												<p>End Date: {endDate}</p>
 											{:else}
-												Date: {eventDate}
+												<p>Date: {eventDate}</p>
 											{/if}
 										</p>
 									</div>

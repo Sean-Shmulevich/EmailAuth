@@ -32,7 +32,22 @@
 	let athNum;
 	let sportPref;
 	let pay;
+	import { onMount } from 'svelte';
+	import SportRadio from './SportRadio.svelte';
 
+	let presignUrl = '/api/presign';
+	let s3 = '/api/s3object';
+
+	let dealImage = '';
+	// upload window open or closed
+	let isModalOpen = false;
+	//Image after cropping
+	let croppedImage = null;
+	//basically a parameter to the ImageCropper.svelte component to change the crop aspect ratio and other associated values
+	let squareInput = false;
+
+	//the current image being modified in the images object
+	let currImage = null;
 	const options = [
 		['Single Event', 'Campaign'],
 		['In Person', 'Virtual'],
@@ -56,8 +71,10 @@
 		}
 		eventCampaignOrSingle = isCampaign;
 		shortDescription = deal.shortDescription;
-		endDate = deal.endDate.toISOString().slice(0, 10);
-		eventDate = deal.endDate.toISOString().slice(0, 10);
+		if (deal.isCampaign) {
+			endDate = deal.endDate.toISOString().slice(0, 10);
+		}
+		eventDate = deal.eventDate.toISOString().slice(0, 10);
 		eventType = deal.eventType;
 		if (!options[4].includes(deal.eventType)) {
 			eventType = 'custom';
@@ -96,25 +113,12 @@
 		if (deal.recommendedDeliverables.length !== 0) {
 			deliverables = del;
 		}
+		console.log(deal.dealImages);
+		if (deal.dealImages.length !== 0) {
+			currImage = `/api/s3object/${deal.dealImages[0].id}`;
+		}
 	}
 	// }
-
-	import { onMount } from 'svelte';
-	import SportRadio from './SportRadio.svelte';
-
-	let presignUrl = '/api/presign';
-	let s3 = '/api/s3object';
-
-	let dealImage = '';
-	// upload window open or closed
-	let isModalOpen = false;
-	//Image after cropping
-	let croppedImage = null;
-	//basically a parameter to the ImageCropper.svelte component to change the crop aspect ratio and other associated values
-	let squareInput = false;
-
-	//the current image being modified in the images object
-	let currImage = null;
 
 	//choose event type radio or custom input box
 	//  Hidden input box unless the user picks custom
@@ -285,17 +289,30 @@
 					</div>
 					<div class="border my-5 rounded-xl p-3">
 						<p class="text-gray-200 text-xl mb-2">Main Deal Image</p>
-						<button
-							class="{croppedImage
-								? 'nah'
-								: ''} text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-							on:click|preventDefault={() => {
-								squareInput = false;
-								isModalOpen = true;
-							}}
-							>Upload Image
-						</button>
-						{#if croppedImage !== null}
+
+						{#if !currImage && !croppedImage}
+							<button
+								class="{croppedImage
+									? 'nah'
+									: ''} text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+								on:click|preventDefault={() => {
+									squareInput = false;
+									isModalOpen = true;
+								}}
+								>Upload Image
+							</button>
+						{/if}
+						{#if currImage !== null}
+							<img src={currImage} alt="Profile example" class="w-1/2 mx-auto" />
+							<button
+								on:click|preventDefault={() => {
+									croppedImage = null;
+									isModalOpen = true;
+									currImage = null;
+									//!!!
+								}}>Change Image</button
+							>
+						{:else if croppedImage !== null}
 							<img
 								src={URL.createObjectURL(croppedImage)}
 								alt="Profile example"

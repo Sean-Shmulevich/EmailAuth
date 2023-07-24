@@ -30,6 +30,7 @@ export const load: PageServerLoad = async ({ locals, url }) => {
 			dealImages: true
 		}
 	});
+	// console.log(nextDeals);
 
 	// const userDealStatus = await prismaClient.userDealStatus.create({
 	// 	data: {

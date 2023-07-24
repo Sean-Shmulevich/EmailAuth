@@ -16,6 +16,9 @@ export const load = async ({ url, locals }) => {
 			where: {
 				id: url.searchParams.get('dealId'),
 				active: 'pending'
+			},
+			include: {
+				dealImages: true
 			}
 		});
 		if (!deal) {

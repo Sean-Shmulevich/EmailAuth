@@ -15,14 +15,14 @@
 	if (data && data.matchingProfiles) {
 		user1 = data.matchingProfiles[0];
 		users[0] = { ...users[0], ...user1 };
-		console.log(data.matchingProfiles);
+		// console.log(data.matchingProfiles);
 		if (data.matchingProfiles.length > 1) {
 			user2 = data.matchingProfiles[1];
 			users[1] = { ...users[1], ...user2 };
 		}
 		suggestedUsers = data.matchingProfiles;
 	}
-	console.log(users);
+	// console.log(users);
 	let index0 = 0;
 	let index1 = 0;
 	let images = [[], []];
@@ -59,6 +59,11 @@
 <!-- just dump their full profiles on this page basically  -->
 <!-- post request must contain email and userId -->
 <h2 class="text-3xl text-center text-white mt-5 mb-5">Suggested Athletes</h2>
+<div class="w-full text-center">
+	<a class="p-2 w-full mx-auto bg-red-500 rounded-full" href="/creation-center"
+		>Go back to creation center</a
+	>
+</div>
 {#each users as user, i}
 	<div class="bg-gray-900 my-5 text-white flex flex-col items-center justify-center space-y-8">
 		<div

@@ -33,7 +33,7 @@ export const actions = {
 	makeDeal: async ({ url, request, locals }) => {
 		const { user } = await locals.auth.validateUser();
 		const formData = await request.formData();
-		console.log(formData);
+		// console.log(formData);
 
 		let publish = 'pending';
 		// formData.get('deal-submit') && formData.get('deal-submit').toString() === "publish"
@@ -55,7 +55,10 @@ export const actions = {
 		if (formData.get('event-type-custom')) {
 			eventType = formData.get('event-type-custom')?.toString() ?? '';
 		}
-
+		let endDate = null;
+		if (formData.get('end-date')) {
+			endDate = new Date(formData.get('end-date')?.toString());
+		}
 		const mainGoals = JSON.parse(formData.get('goals')?.toString() ?? '[]');
 		const customGoals = JSON.parse(formData.get('custom-goals')?.toString() ?? '[]');
 		// Combine the main goals and custom goals into a single array
@@ -69,7 +72,8 @@ export const actions = {
 			genderPreference: formData.get('gender-preference')?.toString() ?? '',
 			location: formData.get('deal-location')?.toString() ?? '',
 			inPersonOrVirtual: formData.get('in-person-or-virtual')?.toString() ?? '',
-			endDate: new Date(formData.get('end-date')?.toString()),
+			endDate: endDate,
+			eventDate: new Date(formData.get('event-date')?.toString()),
 			goals: {
 				set: allGoals
 			},
@@ -88,7 +92,7 @@ export const actions = {
 		// console.log(url.searchParams);
 		//the page was called with pre-existing data
 		if (formData.get('deal-id')) {
-			console.log('here');
+			// console.log('here');
 			deal = await prismaClient.deal.update({
 				where: {
 					id: formData.get('deal-id').toString()

@@ -2,15 +2,16 @@
 	// checkbox decides which import component to use either single event or campaign
 	import ImageCropper from '../../ImageCropper.svelte';
 	import Checkboxes from './Checkboxes.svelte';
-	import Radio from './Radio.svelte';
+	import MyRadio from './Radio.svelte';
 	import InputList from './InputList.svelte';
 	import { Wave } from 'svelte-loading-spinners';
 	import { navigating } from '$app/stores';
 	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
 	let endDate = new Date().toISOString().slice(0, 10);
+	let eventDate = new Date().toISOString().slice(0, 10);
 	let dateToday = new Date().toISOString().slice(0, 10);
-	console.log(dateToday);
+	// console.log(dateToday);
 	export let data;
 	export let form;
 	let selected;
@@ -56,6 +57,7 @@
 		eventCampaignOrSingle = isCampaign;
 		shortDescription = deal.shortDescription;
 		endDate = deal.endDate.toISOString().slice(0, 10);
+		eventDate = deal.endDate.toISOString().slice(0, 10);
 		eventType = deal.eventType;
 		if (!options[4].includes(deal.eventType)) {
 			eventType = 'custom';
@@ -98,6 +100,7 @@
 	// }
 
 	import { onMount } from 'svelte';
+	import SportRadio from './SportRadio.svelte';
 
 	let presignUrl = '/api/presign';
 	let s3 = '/api/s3object';
@@ -193,7 +196,7 @@
 			}}
 			class="w-full"
 		>
-			<Radio
+			<MyRadio
 				inputName={'is-campaign'}
 				bind:selected={eventCampaignOrSingle}
 				options={options[0]}
@@ -202,7 +205,7 @@
 			{#if eventCampaignOrSingle}
 				<div class="border my-5 p-5 rounded-xl">
 					<h2 class="mb-4 items-left text-left">Event type:</h2>
-					<Radio
+					<MyRadio
 						justify={'left'}
 						inputName="event-type"
 						bind:selected={eventType}
@@ -247,15 +250,38 @@
 						placeholder="ex: Join us for a night of fun and games!"
 					/>
 					<div class="mb-5">
-						<h2 class="mb-2" />
-						<input
-							class="text-black text-center max-w-[90%] w-72"
-							type="date"
-							id="end-date"
-							name="end-date"
-							min={dateToday}
-							bind:value={endDate}
-						/>
+						<!-- <h2 class="mb-2" /> -->
+						{#if eventCampaignOrSingle !== 'Single Event'}
+							<h2 class="mb-4 text-left">Campaign start</h2>
+							<input
+								class="text-black text-center max-w-[90%] w-72"
+								type="date"
+								id="event-date"
+								name="event-date"
+								min={dateToday}
+								max={endDate}
+								bind:value={eventDate}
+							/>
+							<h2 class="mb-4 text-left">Campaign end</h2>
+							<input
+								class="text-black text-center max-w-[90%] w-72"
+								type="date"
+								id="end-date"
+								name="end-date"
+								min={eventDate}
+								bind:value={endDate}
+							/>
+						{:else}
+							<h2 class="mb-4 text-left">When is your single event</h2>
+							<input
+								class="text-black text-center max-w-[90%] w-72"
+								type="date"
+								id="event-date"
+								name="event-date"
+								min={dateToday}
+								bind:value={eventDate}
+							/>
+						{/if}
 					</div>
 					<div class="border my-5 rounded-xl p-3">
 						<p class="text-gray-200 text-xl mb-2">Main Deal Image</p>
@@ -289,7 +315,7 @@
 					<div class="border mt-5 rounded-xl p-3">
 						<div class="p-2">
 							<h2 class="mb-4 text-left">Event in person or virtual:</h2>
-							<Radio
+							<MyRadio
 								inputName={'in-person-or-virtual'}
 								bind:selected={inPersonOrVirtual}
 								options={options[1]}
@@ -311,7 +337,7 @@
 
 						<div class="mb-5">
 							<h2 class="mb-4 text-left">Single or multiple athletes:</h2>
-							<Radio
+							<MyRadio
 								inputName={'single-or-multiple'}
 								bind:selected={singleOrMultiple}
 								options={options[2]}
@@ -338,7 +364,7 @@
 						</div>
 						<div class="mb-2">
 							<h2 class="mb-4 text-left">Gender preference:</h2>
-							<Radio
+							<MyRadio
 								inputName={'gender-preference'}
 								bind:selected={genderPreference}
 								options={options[3]}
@@ -347,7 +373,9 @@
 						</div>
 						<div class="border mt-5 rounded-xl align-left">
 							<div class="flex p-5 flex-col sm:flex-row items-center">
-								<label
+								<SportRadio bind:sportPref />
+								<input type="hidden" name="sport-preference" value={sportPref} />
+								<!-- <label
 									class="text-gray-300 text-sm font-bold text-left w-fit sm:mr-5 whitespace-nowrap"
 									for="sport-preference">Sport Preference</label
 								>
@@ -358,7 +386,7 @@
 									bind:value={sportPref}
 									class="shadow p-2 appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 									placeholder="Enter your sport preference"
-								/>
+								/> -->
 							</div>
 						</div>
 						<div class="border mt-5 rounded-xl align-left">
@@ -428,7 +456,7 @@
 						on:click|preventDefault={() => {
 							pageNum += 1;
 							pageNum = pageNum;
-							console.log(pageNum);
+							// console.log(pageNum);
 						}}>Continue Deal</button
 					>
 				{/if}

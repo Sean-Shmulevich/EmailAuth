@@ -70,7 +70,7 @@ export const actions = {
 		const userToApprove = data.get('userId')?.toString();
 		const userEmail = data.get('user-email')?.toString();
 		const paramDealId = params.deal;
-		console.log(deal);
+		// console.log(deal);
 		// console.log(params, body, locals);
 		if (!user || user.isBrand === false) {
 			throw redirect(302, '/');

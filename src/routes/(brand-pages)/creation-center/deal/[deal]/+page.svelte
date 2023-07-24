@@ -49,15 +49,20 @@
 				{:else}
 					<p class="mb-5">{currDeal.inPersonOrVirtual}</p>
 				{/if}
-
-				<p>End Date</p>
+				{#if currDeal.isCampaign}
+					Start Date: {currDeal.eventDate.toISOString().slice(0, 10)}
+					End Date: {currDeal.endDate.toISOString().slice(0, 10)}
+				{:else}
+					Date: {currDeal.eventDate.toISOString().slice(0, 10)}
+				{/if}
+				<!-- <p>End Date</p>
 				<p class="mb-5">
 					{new Date(currDeal.endDate).toLocaleDateString('en-GB', {
 						day: 'numeric',
 						month: 'short',
 						year: 'numeric'
 					})}
-				</p>
+				</p> -->
 				<p>Estimated Payment</p>
 				<p>{currDeal.estimatedPayment}</p>
 			</div>

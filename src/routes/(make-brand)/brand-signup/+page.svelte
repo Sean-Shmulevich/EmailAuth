@@ -38,7 +38,7 @@
 		} else {
 			currIndex++;
 			// All questions have been answered, do something with the responses
-			console.log('All questions have been answered:', responses);
+			// console.log('All questions have been answered:', responses);
 		}
 	}
 

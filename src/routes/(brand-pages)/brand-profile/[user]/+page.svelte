@@ -64,7 +64,7 @@
 
 	//except edge case if there is no main image posted yet
 	//then since the loop below starts from the second image in the objects array we need the first one as well
-	console.log(data.objects)
+	// console.log(data.objects)
 	// handle empty objects
 	// if (data.objects !== [] ) {
 	// 	//push the first image to the front of the array
@@ -73,10 +73,6 @@
 	let currentImage = images[index];
 
 	//this tries to make the animation right not working
-
-	
-
-	
 </script>
 
 <div class=" text-white mt-10 flex flex-col items-center">
@@ -118,8 +114,6 @@
 					&gt;
 				</button>
 			</div>
-
-
 		</div>
 
 		<div class="profile-text mt-5 md:mt-0 md:pl-6 md:w-[57%] flex flex-col" style="height:inherit">

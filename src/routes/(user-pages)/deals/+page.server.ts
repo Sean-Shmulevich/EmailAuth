@@ -8,7 +8,7 @@ import { redirect } from '@sveltejs/kit';
 export const load: PageServerLoad = async ({ locals, url }) => {
 	const { user } = await locals.auth.validateUser();
 
-	console.log(user);
+	// console.log(user);
 	if (!user || !user.emailVerified || !user.adminVerified || user.isBrand) {
 		throw redirect(302, '/');
 		// return {msg: 'not authenticated', user: null};

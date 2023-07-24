@@ -49,7 +49,7 @@
 			//post array of the past 5 decisions to /deals POST
 			swipeStatusList = [];
 			currDealIds = [];
-			console.log(objArr);
+			// console.log(objArr);
 			let nextDeals = await add(JSON.stringify(objArr));
 			isLoading = false;
 			// swipe(onCardAction);
@@ -165,11 +165,17 @@
 										<p>Dates</p>
 										<hr />
 										<p class="p-2">
-											{new Date(offer.endDate).toLocaleDateString('en-GB', {
+											<!-- {new Date(offer.endDate).toLocaleDateString('en-GB', {
 												day: 'numeric',
 												month: 'short',
 												year: 'numeric'
-											})}
+											})} -->
+											{#if offer.isCampaign}
+												Start Date: {offer.eventDate.toISOString().slice(0, 10)}
+												End Date: {offer.endDate.toISOString().slice(0, 10)}
+											{:else}
+												Date: {offer.eventDate.toISOString().slice(0, 10)}
+											{/if}
 										</p>
 									</div>
 								</div>

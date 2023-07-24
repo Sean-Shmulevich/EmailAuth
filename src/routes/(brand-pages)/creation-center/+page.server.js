@@ -47,7 +47,7 @@ export const actions = {
 		const { user } = await locals.auth.validateUser();
 		const form = await request.formData();
 		const dealId = form.get('deal-id')?.toString() ?? '';
-		console.log('object');
+		// console.log('object');
 		const deal = await prismaClient.deal.findFirst({
 			where: {
 				id: dealId,

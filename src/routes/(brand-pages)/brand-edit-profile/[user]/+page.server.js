@@ -49,8 +49,6 @@ export const load = async ({ params, locals }) => {
 		}
 	});
 
-
-
 	//get user profile
 	//i could use either paramUserId or user.userId because
 	//the 'if statement' above makes sure that they are the same
@@ -61,7 +59,7 @@ export const load = async ({ params, locals }) => {
 	//objects is an empty array if there is nothing in it
 	return {
 		currUserProfile: currUserProfile || null,
-		objects: objects 
+		objects: objects
 	};
 };
 
@@ -85,16 +83,20 @@ export const actions = {
 		let socialLinks = [];
 
 		//get social links a maximum of 5
-		for(let i = 0; i < 5; i++){
-			if(formData.get('social-name-'+i) !== null && formData.get('social-link-'+i) !== null && formData.get('social-name-'+i) !== "" && formData.get('social-link-'+i) !== ""){
-				let socialname = formData.get('social-name-'+i)?.toString();
-				let socialink = formData.get('social-link-'+i)?.toString();
-				socialLinks.push({name:socialname,link:socialink});
+		for (let i = 0; i < 5; i++) {
+			if (
+				formData.get('social-name-' + i) !== null &&
+				formData.get('social-link-' + i) !== null &&
+				formData.get('social-name-' + i) !== '' &&
+				formData.get('social-link-' + i) !== ''
+			) {
+				let socialname = formData.get('social-name-' + i)?.toString();
+				let socialink = formData.get('social-link-' + i)?.toString();
+				socialLinks.push({ name: socialname, link: socialink });
 			}
-
 		}
 
-		console.log(socialLinks);
+		// console.log(socialLinks);
 		// If user does not exist, throw an error
 		//TODO change this to sveltekit fail
 		if (!user) throw new Error('User not found');
@@ -121,9 +123,8 @@ export const actions = {
 				goals: goals,
 				user_id: userId,
 				socialMediaLinks: JSON.stringify(socialLinks)
-			},
+			}
 		});
-
 
 		// I mean i could just return the profile
 		return {

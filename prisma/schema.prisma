@@ -114,6 +114,7 @@ model Deal {
   location                String
   inPersonOrVirtual       String
   eventType               String
+  eventDate               DateTime?
   endDate                 DateTime?
   goals                   String[]
   estimatedPayment        String

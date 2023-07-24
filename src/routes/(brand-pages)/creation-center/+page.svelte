@@ -13,7 +13,7 @@
 	let loading = false;
 	let nah = false;
 	$: {
-		console.log(form);
+		// console.log(form);
 		if (form?.showModal === false) {
 			showModal = false;
 			loading = false;
@@ -163,8 +163,14 @@
 							Event type: {deal.eventType !== '' ? deal.eventType : 'no event type'}
 						</div>
 						<div class="text-sm text-white">
-							End Date: {deal.endDate.toISOString().slice(0, 10)}
+							{#if deal.isCampaign}
+								Start Date: {deal.eventDate.toISOString().slice(0, 10)}
+								End Date: {deal.endDate.toISOString().slice(0, 10)}
+							{:else}
+								Date: {deal.eventDate.toISOString().slice(0, 10)}
+							{/if}
 						</div>
+
 						<div class="text-sm text-white">Payment: {deal.estimatedPayment}</div>
 						<div class="text-sm text-white">Athletes: {deal.athleteCount}</div>
 						<div class="mt-2 flex items-center">

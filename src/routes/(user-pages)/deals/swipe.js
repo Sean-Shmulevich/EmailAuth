@@ -1,4 +1,3 @@
-console.log('hello ');
 let swipeSubscription = null;
 export const swipe = (onCardAction) => {
 	const mouseEventToCoordinate = (mouseEvent) => {

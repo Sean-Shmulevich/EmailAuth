@@ -101,14 +101,14 @@
 									<p class="mb-2">Deliverables</p>
 									<hr class="mb-2" />
 									{#each recommendedDeliverables as deliverable, i}
-										<p class="text-left">{i + 1}. {deliverable}</p>
+										<p class="text-left">{i + 1}. {deliverable.value}</p>
 									{/each}
 								</div>
 								<div class="flex-grow w-full text-center border rounded-xl border-white p-4">
 									<p class="mb-2">Goals</p>
 									<hr />
 									{#each goals as goal, i}
-										<p class="text-left">{i + 1}. {goal}</p>
+										<p class="text-left">{i + 1}. {goal.value}</p>
 									{/each}
 								</div>
 							</div>

@@ -2,6 +2,8 @@
 	import { enhance } from '$app/forms';
 	export let data;
 	export let form;
+	let showModal = false;
+	let brandEmail;
 	import { Wave } from 'svelte-loading-spinners';
 
 	let activeButton = 'new';
@@ -36,6 +38,21 @@
 		<div class=" transform -translate-x-32 w-20 h-20">
 			<!-- Replace this with your loader component -->
 			<Wave size="160" color="#FF3E00" unit="px" duration="6s" />
+		</div>
+	</div>
+{/if}
+{#if showModal}
+	<div
+		class="fixed top-0 left-0 w-full h-screen flex items-center justify-center z-20 bg-black bg-opacity-50"
+	>
+		<div class="w-72 h-30 p-5 bg-gray-700 text-white">
+			<p>Brand Email: {brandEmail}</p>
+			<button
+				class="p-2 bg-green-700 rounded-full text-center mx-auto"
+				on:click={() => {
+					showModal = false;
+				}}>Ok</button
+			>
 		</div>
 	</div>
 {/if}
@@ -148,7 +165,13 @@
 		</div>
 		<div class="text-center text-white mx-auto flex flex-row">
 			{#if activeButton !== 'completed'}
-				<button class="p-3i border border-white bg-gray-700 w-1/3 rounded-xl">
+				<button
+					on:click={() => {
+						showModal = true;
+						brandEmail = currDeal.authUser.email;
+					}}
+					class="p-3i border border-white bg-gray-700 w-1/3 rounded-xl"
+				>
 					Contact Brand
 				</button>
 				<a

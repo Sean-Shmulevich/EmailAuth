@@ -16,7 +16,8 @@ export const load = async ({ locals }) => {
 		include: {
 			deal: {
 				include: {
-					dealImages: true
+					dealImages: true,
+					authUser: true
 				}
 			}
 		}
@@ -29,7 +30,8 @@ export const load = async ({ locals }) => {
 		include: {
 			deal: {
 				include: {
-					dealImages: true
+					dealImages: true,
+					authUser: true
 				}
 			}
 		}
@@ -42,7 +44,8 @@ export const load = async ({ locals }) => {
 		include: {
 			deal: {
 				include: {
-					dealImages: true
+					dealImages: true,
+					authUser: true
 				}
 			}
 		}

@@ -25,7 +25,7 @@
 	let eventType;
 	let mainGoalCheckboxes = [];
 	let deliverables = [{ id: 0, value: '' }];
-	let customGoals = [{ id: 0, value: '' }];
+	// let customGoals = [{ id: 0, value: '' }];
 	let pageNum = 0;
 	let title;
 	let shortDescription;
@@ -52,7 +52,7 @@
 	let currImage = null;
 	const options = [
 		['Single Event', 'Campaign'],
-		['In Person', 'Virtual'],
+		['In Person', 'Virtual', 'Both'],
 		['Single Athlete', 'Multiple Athletes'],
 		['Male', 'Female', 'Any gender'],
 		['In person appearance', 'Social media post', 'shoutout', 'autograph', 'custom']
@@ -94,20 +94,20 @@
 		genderPreference = deal.genderPreference;
 		sportPref = deal.sportPreference;
 		pay = deal.estimatedPayment;
-		let goals = deal.goals;
-		let custGoals = [];
-		for (let i = 0; i < checkboxes.length; i++) {
-			if (goals.includes(checkboxes[i].value)) {
-				checkboxes[i].checked = true;
-			} else {
-				if (goals[i] !== 'Custom goal') {
-					custGoals.push({ id: i, value: goals[i] });
-				}
-			}
-		}
-		if (goals.length !== 0) {
-			customGoals = custGoals;
-		}
+		// let goals = deal.goals;
+		// let custGoals = [];
+		// for (let i = 0; i < checkboxes.length; i++) {
+		// 	if (goals.includes(checkboxes[i].value)) {
+		// 		checkboxes[i].checked = true;
+		// 	} else {
+		// 		if (goals[i] !== 'Custom goal') {
+		// 			custGoals.push({ id: i, value: goals[i] });
+		// 		}
+		// 	}
+		// }
+		// if (goals.length !== 0) {
+		// 	customGoals = custGoals;
+		// }
 		let del = [];
 		for (let i = 0; i < deal.recommendedDeliverables.length; i++) {
 			del.push({ id: i, value: deal.recommendedDeliverables[i] });
@@ -206,8 +206,6 @@
 	bind:eventDate
 	bind:isCampaign={eventCampaignOrSingle}
 	bind:recommendedDeliverables={deliverables}
-	bind:checkGoals={mainGoalCheckboxes}
-	bind:customGoals
 />
 <div
 	class="{showPreview
@@ -241,30 +239,32 @@
 				flexDirection="row"
 			/>
 			{#if eventCampaignOrSingle}
-				<div class="border my-5 p-5 rounded-xl">
-					<h2 class="mb-4 items-left text-left">Event type:</h2>
-					<MyRadio
-						justify={'left'}
-						inputName="event-type"
-						bind:selected={eventType}
-						options={options[4]}
-					/>
-					{#if eventType && eventType === 'custom'}
-						<div class="mt-5">
-							<label class="text-gray-300 text-sm font-bold mb-2 text-center" for="event-type"
-								>Custom Event Type</label
-							>
-							<input
-								id="event-type-custom"
-								name="event-type-custom"
-								type="text"
-								bind:value={eventTypeCustom}
-								class="mx-5 shadow appearance-none border rounded mb-5 w-[90%] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-								placeholder="ex: Social Media Post"
-							/>
-						</div>
-					{/if}
-				</div>
+				{#if eventCampaignOrSingle !== 'Campaign'}
+					<div class="border my-5 p-5 rounded-xl">
+						<h2 class="mb-4 items-left text-left">Event type:</h2>
+						<MyRadio
+							justify={'left'}
+							inputName="event-type"
+							bind:selected={eventType}
+							options={options[4]}
+						/>
+						{#if eventType && eventType === 'custom'}
+							<div class="mt-5">
+								<label class="text-gray-300 text-sm font-bold mb-2 text-center" for="event-type"
+									>Custom Event Type</label
+								>
+								<input
+									id="event-type-custom"
+									name="event-type-custom"
+									type="text"
+									bind:value={eventTypeCustom}
+									class="mx-5 shadow appearance-none border rounded mb-5 w-[90%] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+									placeholder="ex: Social Media Post"
+								/>
+							</div>
+						{/if}
+					</div>
+				{/if}
 				<div class="border p-2 rounded-xl mt-4 align-left">
 					<h2 class="mt-4">Deal title</h2>
 					<input
@@ -461,7 +461,7 @@
 
 				{#if pageNum >= 2}
 					<div class="border rounded-xl mt-5 p-3">
-						<div class="border rounded-xl mt-5 p-3">
+						<!-- <div class="border rounded-xl mt-5 p-3">
 							<h2 class="text-center text-xl mb-5">Main Goals</h2>
 							<Checkboxes
 								bind:activeOptions={mainGoalCheckboxes}
@@ -475,7 +475,7 @@
 									inputs={customGoals}
 								/>
 							{/if}
-						</div>
+						</div> -->
 
 						<div class="border mt-5 p-5 rounded-xl align-left">
 							<h2 class="text-xl mb-2">Deal Deliverables for athlete</h2>

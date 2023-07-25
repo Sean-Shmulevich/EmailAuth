@@ -56,17 +56,14 @@ export const actions = {
 
 		// console.log(formData.get('end-date'));
 		let eventType = formData.get('event-type')?.toString() ?? '';
-		if (formData.get('event-type-custom')) {
-			eventType = formData.get('event-type-custom')?.toString() ?? '';
-		}
 		let endDate = null;
 		if (formData.get('end-date')) {
 			endDate = new Date(formData.get('end-date')?.toString());
 		}
-		const mainGoals = JSON.parse(formData.get('goals')?.toString() ?? '[]');
-		const customGoals = JSON.parse(formData.get('custom-goals')?.toString() ?? '[]');
+		// const mainGoals = JSON.parse(formData.get('goals')?.toString() ?? '[]');
+		// const customGoals = JSON.parse(formData.get('custom-goals')?.toString() ?? '[]');
 		// Combine the main goals and custom goals into a single array
-		const allGoals = [...mainGoals, ...customGoals];
+		// const allGoals = [...mainGoals, ...customGoals];
 		const data = {
 			title: formData.get('deal-title')?.toString() ?? '',
 			active: publish,
@@ -78,9 +75,9 @@ export const actions = {
 			inPersonOrVirtual: formData.get('in-person-or-virtual')?.toString() ?? '',
 			endDate: endDate,
 			eventDate: new Date(formData.get('event-date')?.toString()),
-			goals: {
-				set: allGoals
-			},
+			// goals: {
+			// 	set: allGoals
+			// },
 			estimatedPayment: formData.get('estimated-payment')?.toString() ?? '',
 			recommendedDeliverables: {
 				set: JSON.parse(formData.get('deliverables')?.toString() ?? '[]') // an array of recommended deliverables

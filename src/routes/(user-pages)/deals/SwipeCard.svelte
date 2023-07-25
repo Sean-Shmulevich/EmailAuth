@@ -188,13 +188,13 @@
 										<p class="text-left">{i + 1}. {deliverable}</p>
 									{/each}
 								</div>
-								<div class="flex-grow w-full text-center border rounded-xl border-white p-4">
+								<!-- <div class="flex-grow w-full text-center border rounded-xl border-white p-4">
 									<p class="mb-2">Goals</p>
 									<hr />
 									{#each offer.goals as goal, i}
 										<p class="text-left">{i + 1}. {goal}</p>
 									{/each}
-								</div>
+								</div> -->
 							</div>
 						</div>
 					{/if}

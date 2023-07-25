@@ -116,7 +116,7 @@ model Deal {
   eventType               String
   eventDate               DateTime?
   endDate                 DateTime?
-  goals                   String[]
+  // goals                   String[]
   estimatedPayment        String
   recommendedDeliverables String[]
   athleteCount            Int

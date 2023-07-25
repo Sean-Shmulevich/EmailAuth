@@ -76,13 +76,13 @@
 				<p>{dels}</p>
 			{/each}
 		</div>
-		<div class="border border-1 rounded-xl text-white p-5">
+		<!-- <div class="border border-1 rounded-xl text-white p-5">
 			<p class="text-xl">Goals</p>
 			<hr class="mb-2" />
 			{#each currDeal.goals as goal}
 				<p>{goal}</p>
 			{/each}
-		</div>
+		</div> -->
 	</div>
 </div>
 <div class="mx-20 mt-10">

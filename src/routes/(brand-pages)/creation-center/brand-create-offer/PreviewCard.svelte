@@ -13,9 +13,9 @@
 	export let isCampaign;
 	export let eventDate;
 	export let recommendedDeliverables;
-	export let checkGoals;
-	export let customGoals;
-	let goals = [...checkGoals, ...customGoals];
+	// export let checkGoals;
+	// export let customGoals;
+	// let goals = [...checkGoals, ...customGoals];
 </script>
 
 <div class={showPreview ? '' : 'nah'}>
@@ -104,13 +104,13 @@
 										<p class="text-left">{i + 1}. {deliverable.value}</p>
 									{/each}
 								</div>
-								<div class="flex-grow w-full text-center border rounded-xl border-white p-4">
+								<!-- <div class="flex-grow w-full text-center border rounded-xl border-white p-4">
 									<p class="mb-2">Goals</p>
 									<hr />
 									{#each goals as goal, i}
 										<p class="text-left">{i + 1}. {goal.value}</p>
 									{/each}
-								</div>
+								</div> -->
 							</div>
 						</div>
 					{/if}

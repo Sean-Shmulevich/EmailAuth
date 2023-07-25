@@ -489,7 +489,7 @@
 					<div class="text-right mr-auto mt-5">
 						<button
 							class="rounded-full p-5 bg-green-800"
-							on:click={() => {
+							on:click|once={() => {
 								if (form) {
 									publish = false;
 								}
@@ -501,7 +501,7 @@
 						<button
 							class="rounded-full p-5 bg-red-800"
 							name="deal-submit"
-							on:click={() => {
+							on:click|once={() => {
 								if (form) {
 									publish = true;
 								}

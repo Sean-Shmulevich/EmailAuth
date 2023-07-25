@@ -62,6 +62,7 @@
 		{ label: 'Option 2', value: 'option2', checked: false },
 		{ label: 'Custom goal', value: 'Custom goal', checked: false }
 	];
+	let formSubmitted = false;
 	// $: {
 	if (data.deal) {
 		pageNum = 2;
@@ -134,7 +135,7 @@
 				upload(croppedImage, form.dealId);
 			}
 			console.log(form.noPublish);
-			if (form.noPublish && !publish) {
+			if (form.noPublish) {
 				goto(`/creation-center`);
 			} else {
 				console.log('here');
@@ -207,6 +208,16 @@
 	bind:isCampaign={eventCampaignOrSingle}
 	bind:recommendedDeliverables={deliverables}
 />
+{#if formSubmitted}
+	<div
+		class="fixed top-0 left-0 w-full h-screen flex items-center justify-center z-20 bg-black bg-opacity-50"
+	>
+		<div class=" transform -translate-x-32 w-20 h-20">
+			<!-- Replace this with your loader component -->
+			<Wave size="160" color="#FF3E00" unit="px" duration="6s" />
+		</div>
+	</div>
+{/if}
 <div
 	class="{showPreview
 		? 'hidden'
@@ -490,9 +501,7 @@
 						<button
 							class="rounded-full p-5 bg-green-800"
 							on:click|once={() => {
-								if (form) {
-									publish = false;
-								}
+								formSubmitted = true;
 							}}
 							name="deal-submit"
 							value="publish"
@@ -502,9 +511,7 @@
 							class="rounded-full p-5 bg-red-800"
 							name="deal-submit"
 							on:click|once={() => {
-								if (form) {
-									publish = true;
-								}
+								formSubmitted = true;
 							}}
 							value="no-publish"
 							type="submit">Save for later</button

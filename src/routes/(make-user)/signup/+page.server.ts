@@ -19,17 +19,23 @@ export const actions: Actions = {
 	default: async ({ request, locals }) => {
 		const formData = await request.formData();
 		const email = formData.get('email')?.toString() ?? '';
+		const name = formData.get('name')?.toString() ?? '';
+		const phoneNumber = formData.get('phone-number')?.toString() ?? '';
 		if (email === null || !emailRegex.test(email)) {
 			return fail(400, {
 				message: 'Invalid email',
-				email
+				email,
+				name,
+				phoneNumber
 			});
 		}
 		const password = formData.get('password');
 		if (password instanceof File || password === null || password.length < 8) {
 			return fail(400, {
 				message: 'Invalid password',
-				email
+				email,
+				name,
+				phoneNumber
 			});
 		}
 		try {
@@ -41,10 +47,12 @@ export const actions: Actions = {
 				},
 				attributes: {
 					email,
+					name,
+					phoneNumber,
 					email_verified: false,
 					admin_verified: false,
 					is_admin: false,
-					is_brand: false,
+					is_brand: false
 				}
 			});
 			const session = await auth.createSession(user.userId);
@@ -55,19 +63,25 @@ export const actions: Actions = {
 			if (e instanceof LuciaError && e.message === 'AUTH_DUPLICATE_KEY_ID') {
 				return fail(400, {
 					message: 'Email is already taken',
-					email
+					email,
+					name,
+					phoneNumber
 				});
 			}
 			// duplication error
 			if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === 'P2002') {
 				return fail(400, {
 					message: 'Email is already taken',
-					email
+					email,
+					name,
+					phoneNumber
 				});
 			}
 			return fail(500, {
 				message: 'An unknown error occurred',
-				email
+				email,
+				name,
+				phoneNumber
 			});
 		}
 	}

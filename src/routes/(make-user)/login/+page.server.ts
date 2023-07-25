@@ -16,17 +16,15 @@ export const load: PageServerLoad = async ({ locals }) => {
 
 export const actions: Actions = {
 	default: async ({ request, locals }) => {
-
-
 		const formData = await request.formData();
 		const email = (formData.get('email')?.toString() ?? '').toLowerCase();
 
 		const user = await prismaClient.authUser.findUnique({
 			where: {
-				email: email,
-			},
+				email: email
+			}
 		});
-		if(!user || user.is_brand || user.is_admin){
+		if (!user || user.is_brand || user.is_admin) {
 			return fail(400, {
 				message: 'wrong login try another one',
 				email

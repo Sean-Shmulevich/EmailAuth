@@ -79,26 +79,12 @@
 				</div>
 				<div class="flex-grow pl-6">
 					<h2 class="text-white text-lg title-font font-medium mb-2">Create</h2>
-					<p class="leading-relaxed text-base text-white">
+					<p class="leading-8 text-base text-white">
 						DapUp enables your brand to customize marketing campaigns curated by data driven
 						software designed to maximize your company’s ROI. Each Campaign created on the DapUp
 						Platform is pre approved by our team ensuring all NCAA regulatory Compliance is
 						maintained. With DapUp, partnerships are made easy.
 					</p>
-					<a id="learn-more" class="mt-3 text-blue-500 inline-flex items-center" href="#"
-						>Learn More
-						<svg
-							fill="none"
-							stroke="currentColor"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							class="w-4 h-4 ml-2"
-							viewBox="0 0 24 24"
-						>
-							<path d="M5 12h14M12 5l7 7-7 7" />
-						</svg>
-					</a>
 				</div>
 			</div>
 			<div class="p-4 md:w-1/3 flex">
@@ -121,25 +107,11 @@
 				</div>
 				<div class="flex-grow pl-6">
 					<h2 class="text-white text-lg title-font font-medium mb-2">Connect</h2>
-					<p class="leading-relaxed text-white text-base">
+					<p class="leading-8 text-white text-base">
 						DapUp brings the athletes to you. Athletes will express interest in your brand or
 						campaign, and DapUp’s technology recommends matches based on profile alignment. Once a
 						match is made, your brand can connect directly with your favorite athletes.
 					</p>
-					<a class="mt-3 text-blue-500 inline-flex items-center" href="/"
-						>Learn More
-						<svg
-							fill="none"
-							stroke="currentColor"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							class="w-4 h-4 ml-2"
-							viewBox="0 0 24 24"
-						>
-							<path d="M5 12h14M12 5l7 7-7 7" />
-						</svg>
-					</a>
 				</div>
 			</div>
 			<div class="p-4 md:w-1/3 flex">
@@ -161,25 +133,11 @@
 				</div>
 				<div class="flex-grow pl-6">
 					<h2 class="text-white text-lg title-font font-medium mb-2">Manage</h2>
-					<p class="leading-relaxed text-white text-base">
+					<p class="leading-8 text-white text-base">
 						Manage all of your athlete marketing campaigns on the DapUp platform. From creating
 						offers, to connecting with athletes, to executing contracts, DapUp centralizes all
 						aspects of your campaign. Expand your brand, grow your influence, DapUp Your Game.
 					</p>
-					<a class="mt-3 text-blue-500 inline-flex items-center" href="#"
-						>Learn More
-						<svg
-							fill="none"
-							stroke="currentColor"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							class="w-4 h-4 ml-2"
-							viewBox="0 0 24 24"
-						>
-							<path d="M5 12h14M12 5l7 7-7 7" />
-						</svg>
-					</a>
 				</div>
 			</div>
 		</div>

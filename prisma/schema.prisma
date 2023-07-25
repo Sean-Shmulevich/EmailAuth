@@ -19,6 +19,8 @@ model AuthUser {
   admin_verified Boolean
   is_admin       Boolean
   is_brand       Boolean
+  phoneNumber    String?
+  name           String?
   profile        Profile?
   brand_profile  BrandProfile?
   auth_session   AuthSession[]
@@ -27,7 +29,7 @@ model AuthUser {
   Deal           Deal[]
   userDealStatus UserDealStatus[]
   // for users
-  acceptedDeals  String[]
+  // acceptedDeals  String[]
 
   @@map("auth_user")
 }

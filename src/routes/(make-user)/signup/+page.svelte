@@ -8,6 +8,12 @@
 <div class="rounded-xl bg-white px-10 pb-10 mx-6 pt-0 -mt-10 max-w-[800px] mx-auto">
 	<h1 class="pt-10">Create an athlete account</h1>
 	<form method="post" use:enhance>
+		<label for="name">Full Name</label><br />
+		<input id="name" name="name" value={form?.name ?? ''} /><br />
+		<label for="phone-number">Phone Number</label><br />
+		<p>xxx-xxx-xxx format</p>
+		<input id="phone-number" name="phone-number" value={form?.phoneNumber ?? ''} /><br />
+
 		<label for="email">Email</label><br />
 		<input id="email" name="email" value={form?.email ?? ''} /><br />
 		<label for="password">Password</label>

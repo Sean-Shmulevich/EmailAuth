@@ -5,9 +5,11 @@
 	//check type of input and make sure it is correct
 	// @ts-nocheck
 	import ImageCropper from './ImageCropper.svelte';
+	import SportRadio from './SportRadio.svelte';
 	import { enhance } from '$app/forms';
 	export let data;
 	export let form;
+	let sportPref;
 	import Delta from 'quill-delta';
 	import { onMount } from 'svelte';
 
@@ -41,11 +43,10 @@
 		image: ''
 	};
 
-
 	// If we don't have the editor yet, we'll save the contents here.
 	let pendingContents = null;
 
-	// upload window open or closed 
+	// upload window open or closed
 	let isModalOpen = false;
 	//Image after cropping
 	let croppedImage = null;
@@ -57,7 +58,6 @@
 
 	//variabe for quill to save the current state of the html content
 	let deltaContent = '';
-
 
 	onMount(async () => {
 		if (typeof window !== 'undefined') {
@@ -84,6 +84,7 @@
 				// console.log(data.currUserProfile);
 				//set the user data fields from the fetched data of the user profile from the db
 				user = { ...user, ...data.currUserProfile };
+				sportPref = data.currUserProfile.sport;
 
 				//get the bio html from the db convert it to delta and set the quill editor
 				deltaContent = htmlToDelta(data.currUserProfile.bio);
@@ -100,7 +101,7 @@
 		}
 	});
 
-	// restore when somebody navigates away from the page 
+	// restore when somebody navigates away from the page
 	export const snapshot = {
 		capture: () => {
 			return { user, deltaContent };
@@ -115,8 +116,6 @@
 	//load in the images from the db
 	for (let i = 0; i < data.objects.length; i++) {
 		let imgNum = data.objects[i].image_number;
-
-		
 
 		// get urls from aws and load them into the images array
 		if (imgNum === 0) {
@@ -182,7 +181,7 @@
 		croppedImage = null;
 	}
 
-	//upload the file to aws s3	
+	//upload the file to aws s3
 	async function upload(file) {
 		// Get presigned POST URL and form fields
 		let { url, fields } = await fetch(`${presignUrl}?fileType=${file.type}`)
@@ -262,9 +261,9 @@
 				</label>
 				<p class="text-gray-500 text-xs mb-2">Please upload a profile picture.</p>
 				<button
-					class="{images['main-image'] !== ''
+					class="gold {images['main-image'] !== ''
 						? 'nah'
-						: ''} text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+						: ''} text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
 					on:click={() => {
 						squareInput = true;
 						isModalOpen = true;
@@ -276,6 +275,7 @@
 					<h2 class="text-2xl">Main Image</h2>
 					<img src={images['main-image']} alt="Profile example" class="w-1/2 mx-auto" />
 					<button
+						class="border border-white p-5 bg-gray-800 rounded-full mt-2"
 						on:click={() => {
 							images['main-image'] = '';
 							isModalOpen = true;
@@ -285,19 +285,20 @@
 						}}>Change Image</button
 					>
 				{/if}
+				<hr class="my-5" />
 			</div>
 			<div class="mb-4">
 				<label class="block text-gray-300 text-sm font-bold mb-2" for="image">
 					Additional Profile Images
 				</label>
-				<p class="text-gray-500 text-xs mb-2">Please upload a profile picture.</p>
+				<p class="text-gray-500 text-xs -mb-10">Please upload additional profile pictures.</p>
 				<div class="space-y-4 p-10">
-					{#each buttons as button }
+					{#each buttons as button}
 						<button
 							disabled={images[button] !== ''}
-							class="{images[button] !== ''
+							class="gold {images[button] !== ''
 								? 'nah'
-								: ''} text-white w-full bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+								: ''} text-white w-full hover:bg-gradient-to-br focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
 							on:click={() => {
 								isModalOpen = true;
 								currImage = button;
@@ -316,6 +317,7 @@
 							</h2>
 							<img src={images[button]} alt="Profile example" class="w-1/2 mx-auto" />
 							<button
+								class="border border-white p-5 bg-gray-800 rounded-full mt-2"
 								on:click={() => {
 									images[button] = '';
 									isModalOpen = true;
@@ -323,10 +325,12 @@
 								}}>Change Image</button
 							>
 						{/if}
+						<hr class="my-5" />
 					{/each}
 					{#if buttons.length < 8}
+						<br />
 						<button
-							class="w-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition duration-300"
+							class="w-1/4 gold text-white font-bold py-2 px-4 rounded transition duration-300"
 							on:click={addNewButton}
 						>
 							<svg
@@ -348,35 +352,21 @@
 					{/if}
 				</div>
 			</div>
-			<div class="mb-4">
+			<div class="mb-4 rounded-xl w-fit bg-gray-700 mx-auto p-4">
 				<label class="block text-gray-300 text-sm font-bold mb-2" for="name"> Name </label>
-				<p class="text-gray-500 text-xs mb-2">Please enter your full name.</p>
-				<input
-					class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-					id="name"
-					name="name"
-					type="text"
-					placeholder="John Doe"
-					bind:value={user.name}
-				/>
+				<p class="text-white text-4xl mb-2">{data.user.name}</p>
 			</div>
 			<div class="mb-4">
 				<label class="block text-gray-300 text-sm font-bold mb-2" for="sport"> Sport </label>
 				<p class="text-gray-500 text-xs mb-2">What is your primary sport?</p>
-				<input
-					class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-					id="sport"
-					name="sport"
-					type="text"
-					placeholder="Basketball"
-					bind:value={user.sport}
-				/>
+				<SportRadio bind:sportPref />
+				<input type="hidden" name="sport" value={sportPref} />
 			</div>
 			<div class="mb-4">
 				<label class="block text-gray-300 text-sm font-bold mb-2" for="college"> College </label>
 				<p class="text-gray-500 text-xs mb-2">Where did you go to college?</p>
 				<input
-					class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+					class="shadow bg-gray-700 appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
 					name="college"
 					id="college"
 					type="text"
@@ -386,9 +376,9 @@
 			</div>
 			<div class="mb-4">
 				<label class="block text-gray-300 text-sm font-bold mb-2" for="year"> Year </label>
-				<p class="text-gray-500 text-xs mb-2">Which year did you graduate?</p>
+				<p class="text-gray-500 text-xs mb-2">When do you graduate?</p>
 				<input
-					class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+					class="shadow appearance-none border rounded w-full py-2 px-3 text-white bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 					name="year"
 					id="year"
 					type="text"
@@ -434,5 +424,23 @@
 <style>
 	.nah {
 		display: none;
+	}
+	.gold {
+		background: radial-gradient(
+				ellipse farthest-corner at right bottom,
+				#fedb37 0%,
+				#fdb931 8%,
+				#9f7928 30%,
+				#8a6e2f 40%,
+				transparent 80%
+			),
+			radial-gradient(
+				ellipse farthest-corner at left top,
+				#ffffff 0%,
+				#ffffac 8%,
+				#d1b464 25%,
+				#5d4a1f 62.5%,
+				#5d4a1f 100%
+			);
 	}
 </style>

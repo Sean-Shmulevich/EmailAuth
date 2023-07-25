@@ -45,8 +45,6 @@ export const load = async ({ params, locals }) => {
 		}
 	});
 
-
-
 	//get user profile
 	//i could use either paramUserId or user.userId because
 	//the 'if statement' above makes sure that they are the same
@@ -57,7 +55,7 @@ export const load = async ({ params, locals }) => {
 	//objects is an empty array if there is nothing in it
 	return {
 		currUserProfile: currUserProfile || null,
-		objects: objects 
+		objects: objects
 	};
 };
 
@@ -75,7 +73,6 @@ export const actions = {
 
 		let userId = user.userId;
 		const formData = await request.formData();
-		let name = formData.get('name')?.toString();
 		let sport = formData.get('sport')?.toString();
 		let college = formData.get('college')?.toString();
 		let year = formData.get('year')?.toString();
@@ -87,7 +84,6 @@ export const actions = {
 		if (!user) throw new Error('User not found');
 
 		let missingFields = [];
-		if (!name) missingFields.push('name');
 		if (!sport) missingFields.push('sport');
 		if (!college) missingFields.push('college');
 		if (!year) missingFields.push('year');
@@ -96,7 +92,7 @@ export const actions = {
 		if (missingFields.length) {
 			return {
 				message: `Please fill out the following fields: ${missingFields.join(', ')}`,
-				user: { name, sport, college, year, bio }
+				user: { sport, college, year, bio }
 			};
 		}
 
@@ -104,7 +100,6 @@ export const actions = {
 		const profile = await prismaClient.profile.upsert({
 			where: { user_id: userId },
 			create: {
-				name: name,
 				sport: sport,
 				college: college,
 				year: year,
@@ -112,7 +107,6 @@ export const actions = {
 				user_id: userId
 			},
 			update: {
-				name: name,
 				sport: sport,
 				college: college,
 				year: year,
@@ -120,11 +114,10 @@ export const actions = {
 			}
 		});
 
-
 		// I mean i could just return the profile
 		return {
 			message: 'Profile updated successfully',
-			user: { name, sport, college, year, bio }
+			user: { sport, college, year, bio }
 		};
 	},
 	logout: async ({ locals }) => {

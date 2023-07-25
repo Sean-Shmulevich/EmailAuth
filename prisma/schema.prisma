@@ -72,7 +72,6 @@ model object {
 
 model Profile {
   user_id   String    @id
-  name      String
   sport     String
   college   String
   year      String

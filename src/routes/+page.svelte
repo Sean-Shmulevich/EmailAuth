@@ -190,8 +190,10 @@
 						<circle cx="9" cy="7" r="4" />
 						<path d="M23 21v-2a4 4 0 00-3-3.87m-4-12a4 4 0 010 7.75" />
 					</svg>
-					<h2 class="title-font font-medium text-3xl text-gray-300">1.3K</h2>
-					<p class="text-white leading-relaxed">Brand Alignment</p>
+					<h2 class="title-font font-medium text-3xl text-gray-300">B</h2>
+					<p class="text-white leading-relaxed">
+						<span class="font-bold text-md text-red-500">B</span>rand Alignment
+					</p>
 				</div>
 			</div>
 			<div class="p-4 md:w-1/4 sm:w-1/2 w-full">
@@ -210,8 +212,10 @@
 							d="M21 19a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3zM3 19a2 2 0 002 2h1a2 2 0 002-2v-3a2 2 0 00-2-2H3z"
 						/>
 					</svg>
-					<h2 class="title-font font-medium text-3xl text-gray-300">10K+</h2>
-					<p class="text-white leading-relaxed">Community Impact</p>
+					<h2 class="title-font font-medium text-3xl text-gray-300">C</h2>
+					<p class="text-white leading-relaxed">
+						<span class="font-bold text-md text-red-500">C</span>ommunity Impact
+					</p>
 				</div>
 			</div>
 			<div class="p-4 md:w-1/4 sm:w-1/2 w-full">

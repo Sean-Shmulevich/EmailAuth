@@ -10,9 +10,9 @@ export const sendEmail = async (emailAddress: string, subject: string, content: 
 	const msg = {
 		to: `${emailAddress}`, // Change to your recipient
 		from: 'seanshmulevich@gmail.com', // Change to your verified sender
-		subject: 'Sending with SendGrid is Fun',
-		text: 'and easy to do anywhere, even with Node.js',
-		html: `<strong>and easy to do anywhere, even with Node.js</strong> ${content}`
+		subject: subject,
+		// text: 'and easy to do anywhere, even with Node.js',
+		html: `<strong>${content}</strong> `
 	};
 	sgMail
 		.send(msg)

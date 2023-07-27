@@ -169,8 +169,10 @@
 						<path d="M8 17l4 4 4-4m-4-5v9" />
 						<path d="M20.88 18.09A5 5 0 0018 9h-1.26A8 8 0 103 16.29" />
 					</svg>
-					<h2 class="title-font font-medium text-3xl text-gray-300">2.7K</h2>
-					<p class=" text-white leading-relaxed">Athlete Empowerment</p>
+					<h2 class="title-font font-medium text-3xl text-gray-300">A</h2>
+					<p class=" text-white leading-relaxed">
+						<span class="font-bold text-md text-red-500">A</span>thleteEmpowerment
+					</p>
 				</div>
 			</div>
 			<div class="p-4 md:w-1/4 sm:w-1/2 w-full">

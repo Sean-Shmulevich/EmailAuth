@@ -11,7 +11,7 @@
 		<label for="name">Full Name</label><br />
 		<input id="name" name="name" value={form?.name ?? ''} /><br />
 		<label for="phone-number">Phone Number</label><br />
-		<p>xxx-xxx-xxx format</p>
+		<p>xxx-xxx-xxxx format</p>
 		<input id="phone-number" name="phone-number" value={form?.phoneNumber ?? ''} /><br />
 
 		<label for="email">Email</label><br />

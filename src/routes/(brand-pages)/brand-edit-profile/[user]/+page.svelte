@@ -429,6 +429,8 @@
 			</div>
 
 			<div class="mb-4">
+				<label class="block text-gray-300 text-sm font-bold mb-2">Social Media Links</label>
+				<!-- <p class="text-gray-500 text-xs mb-2"></p> -->
 				{#each socialMediaLinks as link, i (link)}
 					<div class="flex flex-col sm:flex-row w-3/4 mx-auto">
 						<input
@@ -451,16 +453,13 @@
 					</div>
 				{/each}
 
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<div
 					class={'text-white mx-auto bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5  mr-2 mb-2'}
 					on:click={() => {
 						//Check if the last social media link is empty or if the name is empty
 						//there should only be one empty at a time
-						if (
-							socialMediaLinks[socialMediaLinks.length - 1].name !== '' &&
-							socialMediaLinks[socialMediaLinks.length - 1].link !== '' &&
-							socialMediaLinks.length < 5
-						) {
+						if (socialMediaLinks.length < 5) {
 							socialMediaLinks = [...socialMediaLinks, { name: '', link: '' }];
 						}
 					}}

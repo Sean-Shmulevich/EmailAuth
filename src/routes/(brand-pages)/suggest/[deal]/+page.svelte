@@ -118,7 +118,7 @@
 				class="profile-text mt-5 md:mt-0 md:pl-6 w-full md:w-1/2 flex flex-col"
 				style="height:inherit"
 			>
-				<div class="text-5xl my-5 leading-6 font-medium text-white">{user.name}</div>
+				<div class="text-5xl my-5 leading-6 font-medium text-white">{data.names[i]}</div>
 				<div class="mt-5 flex-grow overflow-y-auto overflow-wrap break-word">
 					<h4 class="text-lg leading-6 font-medium text-white">Biography</h4>
 					<p class="mt-2 text-base text-gray-400">

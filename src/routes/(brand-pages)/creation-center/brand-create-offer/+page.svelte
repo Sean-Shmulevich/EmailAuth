@@ -3,6 +3,7 @@
 	import ImageCropper from '../../ImageCropper.svelte';
 	import Checkboxes from './Checkboxes.svelte';
 	import PreviewCard from './PreviewCard.svelte';
+	import RecDeliverables from './RecDeliverables.svelte';
 	import MyRadio from './Radio.svelte';
 	import InputList from './InputList.svelte';
 	import { Wave } from 'svelte-loading-spinners';
@@ -55,7 +56,20 @@
 		['In Person', 'Virtual', 'Both'],
 		['Single Athlete', 'Multiple Athletes'],
 		['Male', 'Female', 'Any gender'],
-		['In person appearance', 'Social media post', 'shoutout', 'autograph', 'custom']
+		[
+			'Store appearance',
+			'Instagram post',
+			'Shoutouts',
+			'Autographs',
+			'In person appearance activities',
+			'Marketing Campaign',
+			'Gyms',
+			'Coffee',
+			'Restaurant',
+			'Auto Body',
+			'Apparel',
+			'Apartments'
+		]
 	];
 	let checkboxes = [
 		{ label: 'Option 1', value: 'option1', checked: false },
@@ -301,7 +315,7 @@
 					<div class="mb-5">
 						<!-- <h2 class="mb-2" /> -->
 						{#if eventCampaignOrSingle !== 'Single Event'}
-							<h2 class="mb-4 text-left">Campaign start</h2>
+							<h2 class="mb-4 text-left ml-2">Campaign start</h2>
 							<input
 								class="text-black text-center max-w-[90%] w-72"
 								type="date"
@@ -311,7 +325,7 @@
 								max={endDate}
 								bind:value={eventDate}
 							/>
-							<h2 class="mb-4 text-left">Campaign end</h2>
+							<h2 class="mb-4 ml-2 text-left">Campaign end</h2>
 							<input
 								class="text-black text-center max-w-[90%] w-72"
 								type="date"
@@ -472,6 +486,8 @@
 
 				{#if pageNum >= 2}
 					<div class="border rounded-xl mt-5 p-3">
+						<h2 class="text-xl mb-2">Recommended Deliverables</h2>
+						<RecDeliverables bind:eventType bind:eventCampaignOrSingle bind:deliverables />
 						<!-- <div class="border rounded-xl mt-5 p-3">
 							<h2 class="text-center text-xl mb-5">Main Goals</h2>
 							<Checkboxes

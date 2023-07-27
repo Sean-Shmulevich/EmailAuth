@@ -231,8 +231,10 @@
 					>
 						<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
 					</svg>
-					<h2 class="title-font font-medium text-3xl text-gray-300">526</h2>
-					<p class="text-white leading-relaxed">Data Driven Growth</p>
+					<h2 class="title-font font-medium text-3xl text-gray-300">D</h2>
+					<p class="text-white leading-relaxed">
+						<span class="font-bold text-md text-red-500">D</span>ata Driven Growth
+					</p>
 				</div>
 			</div>
 		</div>

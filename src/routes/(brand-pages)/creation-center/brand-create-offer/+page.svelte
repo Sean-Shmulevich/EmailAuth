@@ -68,7 +68,7 @@
 			// 'Restaurant',
 			// 'Auto Body',
 			// 'Apparel',
-			'Custom'
+			'custom'
 		]
 	];
 	let checkboxes = [

@@ -63,12 +63,12 @@
 			'Autographs',
 			'In person appearance activities',
 			'Marketing Campaign',
-			'Gyms',
-			'Coffee',
-			'Restaurant',
-			'Auto Body',
-			'Apparel',
-			'Apartments'
+			// 'Gyms',
+			// 'Coffee',
+			// 'Restaurant',
+			// 'Auto Body',
+			// 'Apparel',
+			'Custom'
 		]
 	];
 	let checkboxes = [

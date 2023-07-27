@@ -171,7 +171,7 @@
 					</svg>
 					<h2 class="title-font font-medium text-3xl text-gray-300">A</h2>
 					<p class=" text-white leading-relaxed">
-						<span class="text-red-500 font-bold text-md">A</span> thleteEmpowerment
+						<span class="text-red-500 font-bold text-md">A</span>thlete Empowerment
 					</p>
 				</div>
 			</div>

@@ -57,8 +57,8 @@
 		['Single Athlete', 'Multiple Athletes'],
 		['Male', 'Female', 'Any gender'],
 		[
-			'Store appearance',
-			'Instagram post',
+			'In person appearance',
+			'Sponsored post',
 			'Shoutouts',
 			'Autographs',
 			'In person appearance activities',

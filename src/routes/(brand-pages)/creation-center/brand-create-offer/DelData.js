@@ -1,6 +1,6 @@
 let DelData = {};
 export default DelData = {
-	store_appearance: [
+	in_person_appearance: [
 		{
 			name: 'Instagram Takeover',
 			value:
@@ -77,7 +77,7 @@ export default DelData = {
 				'Create catchy Instagram Reels featuring the athletes using or endorsing your products, with information about the store appearance in the caption.'
 		}
 	],
-	instagram_post: [
+	sponsored_social_media_post: [
 		{
 			name: 'Sponsored Posts',
 			value:

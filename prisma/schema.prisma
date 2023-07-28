@@ -119,7 +119,7 @@ model Deal {
   endDate                 DateTime?
   // goals                   String[]
   estimatedPayment        String
-  recommendedDeliverables String[]
+  recommendedDeliverables Json
   athleteCount            Int
   singleOrMultiple        String
   publishDate             DateTime?

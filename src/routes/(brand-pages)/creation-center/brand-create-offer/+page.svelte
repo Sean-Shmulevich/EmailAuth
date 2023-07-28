@@ -25,7 +25,7 @@
 	let singleOrMultiple;
 	let eventType;
 	let mainGoalCheckboxes = [];
-	let deliverables = [{ id: 0, value: '' }];
+	let deliverables = [{ id: 0, value: '', title: '' }];
 	// let customGoals = [{ id: 0, value: '' }];
 	let pageNum = 0;
 	let title;
@@ -235,7 +235,7 @@
 <div
 	class="{showPreview
 		? 'hidden'
-		: ''} bg-gray-950 text-white flex flex-col items-center text-center justify-center space-y-8"
+		: ''} bg-gray-900 text-white flex flex-col items-center text-center justify-center space-y-8"
 >
 	<h2 class="text-2xl mt-10">Create Offer</h2>
 	<button

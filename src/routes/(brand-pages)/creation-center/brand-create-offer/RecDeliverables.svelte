@@ -34,11 +34,19 @@
 						dropdownOpenArr[i] = false;
 						let lastInput = deliverables.length - 1;
 						if (deliverables[lastInput].value === '' && lastInput === 0) {
-							deliverables[lastInput] = { id: 0, value: deliverable.value };
+							deliverables[lastInput] = {
+								id: 0,
+								value: deliverable.value,
+								title: deliverable.name
+							};
 						} else {
 							deliverables = [
 								...deliverables,
-								{ id: deliverables.length, value: deliverable.value }
+								{
+									id: deliverables.length,
+									value: deliverable.value,
+									title: deliverable.name
+								}
 							];
 						}
 					}}
@@ -60,9 +68,12 @@
 					dropdownOpen = false;
 					let lastInput = deliverables.length - 1;
 					if (deliverables[lastInput].value === '' && lastInput === 0) {
-						deliverables[lastInput] = { id: 0, value: del.value };
+						deliverables[lastInput] = { id: 0, value: del.value, title: del.name };
 					} else {
-						deliverables = [...deliverables, { id: deliverables.length, value: del.value }];
+						deliverables = [
+							...deliverables,
+							{ id: deliverables.length, value: del.value, title: del.name }
+						];
 					}
 				}}
 			>

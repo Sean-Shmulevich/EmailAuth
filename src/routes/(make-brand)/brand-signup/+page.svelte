@@ -188,7 +188,7 @@
 	let yesNo = ['Yes', 'No'];
 </script>
 
-<div class="flex w-full bg-gray-950 justify-center items-center mt-20">
+<div class="flex w-full bg-gray-900 justify-center items-center mt-20">
 	<div class="w-[90%] sm:w-[60%] border border-white bg-gray-700 p-4 h-2/3 lg:h-1/2 rounded-xl">
 		{#if currIndex < questionKeys.length}
 			<h2 class="text-center text-5xl mb-4 text-white">{questions[currQuestion]}</h2>

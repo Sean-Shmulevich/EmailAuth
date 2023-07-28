@@ -28,7 +28,7 @@ export const load = async ({ url, route, params, locals }) => {
 	}
 	let images = [];
 	let names = [];
-	for (let i = 0; i < matchingProfiles.length; i++) {
+	for (let i = 0; matchingProfiles && i < matchingProfiles.length; i++) {
 		const id = matchingProfiles[i].user_id;
 		const imageList = await prismaClient.authUser.findUnique({
 			where: { id: id },
@@ -40,7 +40,11 @@ export const load = async ({ url, route, params, locals }) => {
 		names[i] = imageList.name;
 	}
 	// console.log('Matching Profiles ' + (await matchingProfiles));
-	return { matchingProfiles, images, names, dealId };
+	if (matchingProfiles.length !== 0) {
+		return { matchingProfiles, images, names, dealId };
+	} else {
+		return { dealId };
+	}
 };
 
 export const actions = {

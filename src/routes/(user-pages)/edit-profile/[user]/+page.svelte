@@ -231,7 +231,7 @@
 
 <!-- Include Quill's CSS on your page -->
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" />
-<div class="bg-gray-900 text-white flex flex-col items-center text-center justify-center space-y-8">
+<div class="bg-gray-700 text-white flex flex-col items-center text-center justify-center space-y-8">
 	<h2 class="text-2xl mt-10">Edit Profile</h2>
 	<div
 		class="profile-card flex flex-col bg-gray-800 shadow overflow-hidden mt-10 rounded-lg max-w-5xl mb-10 w-full p-6"

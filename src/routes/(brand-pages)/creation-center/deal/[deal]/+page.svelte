@@ -12,7 +12,7 @@
 	if (data.dealImage) {
 		dealImg = `/api/s3object/${data.dealImage.id}`;
 	}
-	// console.log(data.interestedUsers);
+	// console.log(currDeal.recommendedDeliverables['set']);
 </script>
 
 <!-- <p class="text-white">{JSON.stringify(data.dealImage)}</p> -->
@@ -72,8 +72,9 @@
 		<div class="border border-1 rounded-xl text-white p-5">
 			<p class="text-xl">Deliverables</p>
 			<hr class="mb-2" />
-			{#each currDeal.recommendedDeliverables as dels}
-				<p>{dels}</p>
+			{#each currDeal.recommendedDeliverables['set'] as del}
+				<p>{del.title}</p>
+				<p>{del.value}</p>
 			{/each}
 		</div>
 		<!-- <div class="border border-1 rounded-xl text-white p-5">

@@ -1,18 +1,24 @@
 <script>
-	export let inputs = [{ id: 0, value: '' }];
+	export let inputs = [{ id: 0, value: '', title: '' }];
 	export let inputName;
+	export let titleName;
 	export let showName;
 
-	function handleInputChange(event, input) {
+	function handleValueChange(event, input) {
 		input.value = event.target.value;
+		inputs = [...inputs];
+	}
+
+	function handleTitleChange(event, input) {
+		input.title = event.target.value;
 		inputs = [...inputs];
 	}
 
 	function addInput() {
 		const lastInput = inputs[inputs.length - 1];
-		if (lastInput.value !== '') {
+		if (lastInput.value !== '' && lastInput.title !== '') {
 			const newInputId = lastInput.id + 1;
-			inputs = [...inputs, { id: newInputId, value: '' }];
+			inputs = [...inputs, { id: newInputId, value: '', title: '' }];
 		}
 	}
 
@@ -27,11 +33,21 @@
 	{#each inputs as input, i}
 		<div class="flex my-4 space-x-4">
 			<p>{showName} {i + 1}</p>
+
 			<input
+				class="w-40 rounded-md text-black p-2"
+				type="text"
+				value={input.title}
+				on:input={(event) => handleTitleChange(event, input)}
+				placeholder="Enter title"
+			/>
+
+			<textarea
 				class="w-full rounded-md text-black p-2"
 				type="text"
 				value={input.value}
-				on:input={(event) => handleInputChange(event, input)}
+				on:input={(event) => handleValueChange(event, input)}
+				placeholder="Enter deliverable"
 			/>
 			<button on:click|preventDefault={() => deleteInput(input.id)}>-</button>
 		</div>
@@ -41,7 +57,9 @@
 			type="hidden"
 			name={inputName}
 			value={JSON.stringify(
-				inputs.map((input) => input.value).filter((value) => value.trim() !== '')
+				inputs
+					.map((input) => ({ value: input.value, title: input.title }))
+					.filter((input) => input.value.trim() !== '' && input.title.trim() !== '')
 			)}
 		/>
 	{/if}

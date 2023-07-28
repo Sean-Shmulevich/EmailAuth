@@ -67,9 +67,13 @@
 	<a class="p-2 w-full mx-auto bg-red-500 rounded-full" href="/creation-center"
 		>Go back to creation center</a
 	>
+	<a
+		class="p-2 w-full mx-auto bg-yellow-500 rounded-full"
+		href="/creation-center/deal/{data.dealId}">See interest on your deal</a
+	>
 </div>
 {#each users as user, i}
-	<div class="bg-gray-900 my-5 text-white flex flex-col items-center justify-center space-y-8">
+	<div class="bg-gray-950 my-5 text-white flex flex-col items-center justify-center space-y-8">
 		<div
 			class="profile-card flex flex-col md:flex-row bg-gray-800 shadow rounded-lg max-w-7xl w-full p-6 overflow-hidden"
 		>

@@ -148,12 +148,12 @@
 			if (croppedImage !== null) {
 				upload(croppedImage, form.dealId);
 			}
-			console.log(form.noPublish);
-			if (form.noPublish) {
-				goto(`/creation-center`);
-			} else {
-				console.log('here');
-				goto(`/suggest/${form.dealId}?sportPref=${sportPref}`);
+			if (!form?.message) {
+				if (form.noPublish) {
+					goto(`/creation-center`);
+				} else {
+					goto(`/suggest/${form.dealId}?sportPref=${sportPref}`);
+				}
 			}
 		}
 	}
@@ -222,7 +222,7 @@
 	bind:isCampaign={eventCampaignOrSingle}
 	bind:recommendedDeliverables={deliverables}
 />
-{#if formSubmitted}
+{#if formSubmitted && !form?.message}
 	<div
 		class="fixed top-0 left-0 w-full h-screen flex items-center justify-center z-20 bg-black bg-opacity-50"
 	>
@@ -235,7 +235,7 @@
 <div
 	class="{showPreview
 		? 'hidden'
-		: ''} bg-gray-900 text-white flex flex-col items-center text-center justify-center space-y-8"
+		: ''} bg-gray-950 text-white flex flex-col items-center text-center justify-center space-y-8"
 >
 	<h2 class="text-2xl mt-10">Create Offer</h2>
 	<button
@@ -547,6 +547,9 @@
 			{/if}
 			{#if data && data.deal}
 				<input type="hidden" name="deal-id" value={data.deal.id} />
+			{/if}
+			{#if form?.message}
+				<p class="text-red-500 text-lg">{form.message}</p>
 			{/if}
 		</form>
 	</div>

@@ -53,7 +53,7 @@ export const load = async ({ params, locals }) => {
 	//the user profile has not been created yet
 	return {
 		currUserProfile: currUserProfile || null,
-		name: userObj.name,
+		name: userObj.name || null,
 		objects: objects || null
 	};
 };

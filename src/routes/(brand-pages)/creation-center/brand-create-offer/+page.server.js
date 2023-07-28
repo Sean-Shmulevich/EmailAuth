@@ -63,7 +63,29 @@ export const actions = {
 		// const mainGoals = JSON.parse(formData.get('goals')?.toString() ?? '[]');
 		// const customGoals = JSON.parse(formData.get('custom-goals')?.toString() ?? '[]');
 		// Combine the main goals and custom goals into a single array
+
 		// const allGoals = [...mainGoals, ...customGoals];
+		const requiredFields = [
+			'deal-title',
+			'short-description',
+			// 'event-type',
+			'sport-preference',
+			'gender-preference',
+			'in-person-or-virtual',
+			'event-date',
+			'estimated-payment',
+			// 'number-of-athletes',
+			'single-or-multiple',
+			'is-campaign'
+		];
+		if (publish === 'active') {
+			for (const field of requiredFields) {
+				if (!formData.get(field)) {
+					// Return fail if any of the required fields are not filled
+					return fail(500, { message: 'All fields must be filled' });
+				}
+			}
+		}
 		const data = {
 			title: formData.get('deal-title')?.toString() ?? '',
 			active: publish,

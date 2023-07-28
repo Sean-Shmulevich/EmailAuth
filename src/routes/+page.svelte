@@ -54,7 +54,7 @@
 </section>
 
 <!-- Services -->
-<section class="text-gray-600 body-font -mb-40">
+<!-- <section class="text-gray-600 body-font -mb-40">
 	<div class="container px-5 py-24 mx-auto">
 		<h1 class="sm:text-3xl text-2xl font-medium title-font text-center text-white mb-20">
 			Create, Connect and Manage
@@ -142,7 +142,7 @@
 			</div>
 		</div>
 	</div>
-</section>
+</section> -->
 
 <!-- Statistics -->
 <section class="text-gray-600 -mx-20 body-font">

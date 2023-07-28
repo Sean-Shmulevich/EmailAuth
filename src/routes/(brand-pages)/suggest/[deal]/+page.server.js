@@ -40,7 +40,7 @@ export const load = async ({ url, route, params, locals }) => {
 		names[i] = imageList.name;
 	}
 	// console.log('Matching Profiles ' + (await matchingProfiles));
-	return { matchingProfiles, images, names };
+	return { matchingProfiles, images, names, dealId };
 };
 
 export const actions = {

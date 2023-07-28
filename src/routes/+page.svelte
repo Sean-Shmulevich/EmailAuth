@@ -146,7 +146,7 @@
 
 <!-- Statistics -->
 <section class="text-gray-600 -mx-20 body-font">
-	<div class="container px-5 py-24 mx-auto">
+	<div class="mt-5 container px-5 py-24 mx-auto">
 		<div class="flex flex-col text-center w-full mb-20">
 			<h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-white">The DapUp ABC’s</h1>
 			<p class="lg:w-2/3 mx-auto leading-relaxed text-base text-white">
@@ -171,7 +171,7 @@
 					</svg>
 					<h2 class="title-font font-medium text-3xl text-gray-300">A</h2>
 					<p class=" text-white leading-relaxed">
-						<span class="text-red-500 font-bold text-md">A</span>thlete Empowerment
+						<span class="text-red-500 font-bold text-lg">A</span>thlete Empowerment
 					</p>
 				</div>
 			</div>
@@ -192,7 +192,7 @@
 					</svg>
 					<h2 class="title-font font-medium text-3xl text-gray-300">B</h2>
 					<p class="text-white leading-relaxed">
-						<span class="font-bold text-md text-red-500">B</span>rand Alignment
+						<span class="font-bold text-lg text-red-500">B</span>rand Alignment
 					</p>
 				</div>
 			</div>
@@ -214,7 +214,7 @@
 					</svg>
 					<h2 class="title-font font-medium text-3xl text-gray-300">C</h2>
 					<p class="text-white leading-relaxed">
-						<span class="font-bold text-md text-red-500">C</span>ommunity Impact
+						<span class="font-bold text-lg text-red-500">C</span>ommunity Impact
 					</p>
 				</div>
 			</div>
@@ -233,7 +233,7 @@
 					</svg>
 					<h2 class="title-font font-medium text-3xl text-gray-300">D</h2>
 					<p class="text-white leading-relaxed">
-						<span class="font-bold text-md text-red-500">D</span>ata Driven Growth
+						<span class="font-bold text-lg text-red-500">D</span>ata Driven Growth
 					</p>
 				</div>
 			</div>

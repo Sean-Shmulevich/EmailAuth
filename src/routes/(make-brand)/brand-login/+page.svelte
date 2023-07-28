@@ -17,8 +17,8 @@
 	{#if form?.message}
 		<p class="error">{form.message}</p>
 	{/if}
-	<a href="/password-reset">Forgot password?</a>
-	<a href="/brand-signup">Create an account</a>
+	<a class="text-blue-600 underline" href="/brand-signup">Create an account</a><br />
+	<a class="underline" href="/password-reset">Forgot password?</a>
 </div>
 
 <style lang="postcss">

@@ -49,11 +49,7 @@
 	class="absolute -top-[72px] sm:top-5 right-0 p-5"
 	href="/creation-center/brand-create-offer"
 >
-	<img
-		class="w-14"
-		alt="create deal"
-		src="https://cdn-icons-png.flaticon.com/512/8070/8070671.png"
-	/>
+	<img class="w-14" alt="create deal" src="https://shmul.dev/assets/createDeal.png" />
 </a>
 {#if showModal}
 	<div
@@ -206,11 +202,7 @@
 					}}
 					class="ml-auto -mt-14 mr-0 w-fit"
 				>
-					<img
-						class="w-10"
-						alt="delete deal"
-						src="https://w7.pngwing.com/pngs/616/37/png-transparent-trash-can-illustration-computer-icons-icon-design-delete-button-miscellaneous-text-rectangle.png"
-					/>
+					<img class="w-10" alt="delete deal" src="https://shmul.dev/assets/trash.png" />
 				</button>
 			{/if}
 		</div>

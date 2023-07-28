@@ -25,8 +25,8 @@
 			src={dealImg}
 			alt="deal main {data.dealImage}"
 		/>
-		<div class="text-white mt-5 w-full md:w-[25%] min-w-[300px]">
-			<div class="border border-white p-5 text-lg rounded-xl">
+		<div class="text-white mt-5 w-full md:w-[25%] flex flex-col min-w-[300px]">
+			<div class="border border-white p-5 text-lg grow rounded-xl">
 				<p>Event Type</p>
 				<p class="mb-5">{currDeal.eventType}</p>
 				<p>Sport Preference</p>
@@ -72,10 +72,13 @@
 		<div class="border border-1 rounded-xl text-white p-5">
 			<p class="text-xl">Deliverables</p>
 			<hr class="mb-2" />
-			{#each currDeal.recommendedDeliverables['set'] as del}
-				<p>{del.title}</p>
-				<p>{del.value}</p>
-			{/each}
+			<ol>
+				{#each currDeal.recommendedDeliverables['set'] as del}
+					<li class="m-5">
+						{del.title}: {del.value}
+					</li>
+				{/each}
+			</ol>
 		</div>
 		<!-- <div class="border border-1 rounded-xl text-white p-5">
 			<p class="text-xl">Goals</p>

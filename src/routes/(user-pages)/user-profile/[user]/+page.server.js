@@ -41,6 +41,7 @@ export const load = async ({ params, locals }) => {
 			image_number: 'asc'
 		}
 	});
+	const userObj = await prismaClient.authUser.findUnique({ where: { id: paramUserId } });
 	//should users be able to see other peoples profiles or should it just be buisnesses and the admin?
 	//well if I dont directly link to the users it will be fine how it is now but I still need to query the information
 
@@ -52,6 +53,7 @@ export const load = async ({ params, locals }) => {
 	//the user profile has not been created yet
 	return {
 		currUserProfile: currUserProfile || null,
+		name: userObj.name,
 		objects: objects || null
 	};
 };
@@ -64,4 +66,3 @@ export const actions = {
 		locals.auth.setSession(null);
 	}
 };
-

@@ -22,6 +22,7 @@
 	};
 	//set the user data to the data from the database from load in +page.server.ts
 	user = { ...user, ...data.currUserProfile };
+	user.name = data.name;
 
 	//index keeps track of the current image in the slidedeck
 	let index = 0;

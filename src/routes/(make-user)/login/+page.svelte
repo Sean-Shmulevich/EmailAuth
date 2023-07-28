@@ -8,7 +8,6 @@
 <div class="rounded-xl bg-white px-10 pb-10 mx-6 pt-0 -mt-10 max-w-[800px] mx-auto">
 	<h1 class="pt-10">Athlete Sign in</h1>
 	<form method="post" use:enhance>
-		<label for="password">Password</label>
 		<label for="email">Email</label><br />
 		<input id="email" name="email" value={form?.email ?? ''} /><br />
 		<label for="password">Password</label>

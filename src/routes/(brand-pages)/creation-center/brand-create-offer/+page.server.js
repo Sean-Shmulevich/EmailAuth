@@ -37,7 +37,7 @@ export const actions = {
 	makeDeal: async ({ url, request, locals }) => {
 		const { user } = await locals.auth.validateUser();
 		const formData = await request.formData();
-		// console.log(formData);
+		console.log(formData);
 
 		let publish = 'pending';
 		// formData.get('deal-submit') && formData.get('deal-submit').toString() === "publish"
@@ -79,11 +79,13 @@ export const actions = {
 			'single-or-multiple',
 			'is-campaign'
 		];
+		console.log(formData.get('single-or-multiple') === false);
 		if (publish === 'active') {
 			for (const field of requiredFields) {
 				if (!formData.get(field)) {
+					console.log('field' + field);
 					// Return fail if any of the required fields are not filled
-					return fail(500, { message: 'All fields must be filled' });
+					// return fail(500, { message: 'All fields must be filled' });
 				}
 			}
 		}

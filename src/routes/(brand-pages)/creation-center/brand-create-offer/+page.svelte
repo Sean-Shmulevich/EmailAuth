@@ -1,5 +1,6 @@
 <script>
 	// checkbox decides which import component to use either single event or campaign
+	// todo campaign has no event type;
 	import ImageCropper from '../../ImageCropper.svelte';
 	import Checkboxes from './Checkboxes.svelte';
 	import PreviewCard from './PreviewCard.svelte';

@@ -10,6 +10,7 @@ export const load = async ({ url, locals }) => {
 	if (!user || !user.isBrand || !user.emailVerified || !user.adminVerified) {
 		throw redirect(302, '/');
 	}
+	// console.log('biutch');
 	//this means that the page is being called with and existing pending deal
 	if (url.searchParams.get('dealId')) {
 		const deal = await prismaClient.deal.findFirst({
@@ -122,7 +123,7 @@ export const actions = {
 				},
 				data: data
 			});
-			console.log(deal.active);
+			// console.log(deal.active);
 			return { dealId: deal.id, noPublish: deal.active === 'pending' };
 		} else {
 			deal = await prismaClient.deal.create({ data: data });

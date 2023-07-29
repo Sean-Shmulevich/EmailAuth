@@ -9,6 +9,7 @@
 	import { Wave } from 'svelte-loading-spinners';
 	import { navigating } from '$app/stores';
 	import { enhance } from '$app/forms';
+	import Compensation from './Compensation.svelte';
 	import { goto } from '$app/navigation';
 	let endDate = new Date().toISOString().slice(0, 10);
 	let eventDate = new Date().toISOString().slice(0, 10);
@@ -24,7 +25,7 @@
 	let genderPreference;
 	let singleOrMultiple;
 	let eventType;
-	let mainGoalCheckboxes = [];
+	// let mainGoalCheckboxes = [];
 	let deliverables = [{ id: 0, value: '', title: '' }];
 	// let customGoals = [{ id: 0, value: '' }];
 	let pageNum = 0;
@@ -123,10 +124,17 @@
 		// if (goals.length !== 0) {
 		// 	customGoals = custGoals;
 		// }
+		//TODO this code will not work how it is right now!!!!
+		//Responce okay maybe itll work rn
 		let del = [];
-		for (let i = 0; i < deal.recommendedDeliverables.length; i++) {
-			del.push({ id: i, value: deal.recommendedDeliverables[i] });
+		for (let i = 0; i < deal.recommendedDeliverables['set'].length; i++) {
+			del.push({
+				id: i,
+				value: deal.recommendedDeliverables['set'][i].value,
+				title: deal.recommendedDeliverables['set'][i].title
+			});
 		}
+		console.log(deal.recommendedDeliverables.set, del);
 		if (deal.recommendedDeliverables.length !== 0) {
 			deliverables = del;
 		}
@@ -466,20 +474,7 @@
 							</div>
 						</div>
 						<div class="border mt-5 rounded-xl align-left">
-							<div class="flex p-5 flex-col sm:flex-row items-center">
-								<label
-									class="text-gray-300 text-sm font-bold text-left w-fit sm:mr-5 whitespace-nowrap"
-									for="estimated-payment">Estimated Payment</label
-								>
-								<input
-									id="estimated-payment"
-									name="estimated-payment"
-									type="text"
-									bind:value={pay}
-									class="shadow p-2 appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-									placeholder="Estimated Pay or Range"
-								/>
-							</div>
+							<Compensation bind:pay />
 						</div>
 					</div>
 				{/if}

@@ -12,7 +12,7 @@
 	export let eventCampaignOrSingle;
 	import DelData from './DelData.js';
 	let placement = 'top';
-	console.log(DelData);
+	// console.log(DelData);
 	let eventTypeParsed;
 	let dropdownOpen = false;
 	$: {
@@ -21,7 +21,7 @@
 		}
 	}
 	let dropdownOpenArr = new Array(Object.entries(DelData).length).fill(false);
-	console.log(dropdownOpenArr);
+	// console.log(dropdownOpenArr);
 </script>
 
 {#if eventCampaignOrSingle === 'Campaign'}

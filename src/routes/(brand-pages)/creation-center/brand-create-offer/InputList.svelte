@@ -44,7 +44,6 @@
 
 			<textarea
 				class="w-full rounded-md text-black p-2"
-				type="text"
 				value={input.value}
 				on:input={(event) => handleValueChange(event, input)}
 				placeholder="Enter deliverable"

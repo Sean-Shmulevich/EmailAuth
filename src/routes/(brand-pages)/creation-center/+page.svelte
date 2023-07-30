@@ -238,6 +238,7 @@
 	.nah {
 		display: none;
 	}
+
 	.centerAll {
 		position: absolute;
 		left: 50%;

@@ -24,6 +24,8 @@
 		console.log(jsonData);
 		if (eventCampaignOrSingle === 'Campaign') {
 			priceRanges = ['$100-500', '$500-1000', '$1000-5000', '$5000+', 'Custom'];
+		} else {
+			priceRanges = ['$20-100', '$100-500', '$500-1000', '$1000+', 'Custom'];
 		}
 	}
 </script>

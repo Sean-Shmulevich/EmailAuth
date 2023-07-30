@@ -28,7 +28,7 @@
 	<div class="container mx-auto flex px-5 py-24 items-center justify-center">
 		<div class="text-center lg:w-full xl:w-full">
 			<h1
-				class="text-4xl md:text-6xl lg:text-6xl xl:text-8xl font-bold leading-tight mb-8 text-white"
+				class="text-4xl -mt-[5vh] sm:mt-0 md:text-6xl lg:text-6xl xl:text-8xl font-bold leading-tight mb-8 text-white"
 			>
 				The premier matchmaking platform for athletes and brands
 			</h1>

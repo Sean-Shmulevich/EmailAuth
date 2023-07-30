@@ -4,6 +4,7 @@
 
 	export let data;
 	export let form;
+	console.log(data.publishedDeals);
 	let publishedDeals = data.publishedDeals;
 	let unpublishedDeals = data.unpublishedDeals;
 	let completedDeals = data.completedDeals;
@@ -33,6 +34,10 @@
 			dealLink = 'creation-center/deal/';
 		}
 	}
+	// let paymentType;
+	// let product;
+	// let payment;
+
 	// /creation-center/deal/{deal.id}
 	//  show all deal data
 	//  show all interested athletes
@@ -142,22 +147,32 @@
 			<div class="p-8 w-full flex flex-row">
 				<div class="w-full">
 					<h1 class="font-bold text-xl mb-2">{deal.title}</h1>
+					{#if deal.isCampaign}
+						<p class="font-bold">Campaign</p>
+					{:else}
+						<p class="font-bold">Single Event</p>
+					{/if}
 					<p class="text-white break-words text-base">Description: {deal.shortDescription}</p>
 					<div class="mt-4">
 						<div class="flex items-center">
-							<div class="text-sm text-white">{deal.sportPreference}</div>
-							<div class="ml-3 text-sm text-white">{deal.genderPreference}</div>
+							<div class="text-sm text-white">Sport Preference: {deal.sportPreference}</div>
+							<div class="ml-3 text-sm text-white">Gender Preference: {deal.genderPreference}</div>
 						</div>
 						<div class="mt-2 flex items-center">
-							{#if deal.location !== ''}
-								<div class="text-sm text-white">Location: {deal.location}</div>
-							{:else}
-								<div class="text-sm text-white">Location: {deal.inPersonOrVirtual}</div>
+							{#if !deal.isCampaign}
+								{#if deal.location !== ''}
+									<div class="text-sm text-white">Location: {deal.location}</div>
+								{:else}
+									<div class="text-sm text-white">Location: {deal.inPersonOrVirtual}</div>
+								{/if}
 							{/if}
 						</div>
-						<div class="text-sm text-white">
-							Event type: {deal.eventType !== '' ? deal.eventType : 'no event type'}
-						</div>
+
+						{#if !deal.isCampaign}
+							<div class="text-sm text-white">
+								Event type: {deal.eventType !== '' ? deal.eventType : 'no event type'}
+							</div>
+						{/if}
 						<div class="text-sm text-white">
 							{#if deal.isCampaign}
 								Start Date: {deal.eventDate.toISOString().slice(0, 10)}
@@ -167,9 +182,17 @@
 							{/if}
 						</div>
 
-						<div class="text-sm text-white">Payment: {deal.estimatedPayment}</div>
-						<div class="text-sm text-white">Athletes: {deal.athleteCount}</div>
-						<div class="mt-2 flex items-center">
+						<p class="mt-5 underline">Compensation</p>
+						{#if JSON.parse(deal.estimatedPayment)['pay'] === 'Both'}
+							<p>Product: {JSON.parse(deal.estimatedPayment).product}</p>
+							<p>Money: {JSON.parse(deal.estimatedPayment).compSelected}</p>
+						{:else if JSON.parse(deal.estimatedPayment)['pay'] === 'Money'}
+							<p>Money: {JSON.parse(deal.estimatedPayment).compSelected}</p>
+						{:else if JSON.parse(deal.estimatedPayment)['pay'] === 'Product'}
+							<p>Product {JSON.parse(deal.estimatedPayment).product}</p>
+						{/if}
+						<div class="text-sm text-white mt-5">Athletes: {deal.athleteCount}</div>
+						<div class="flex items-center">
 							<div class="text-sm text-white">
 								Published: {deal.publishDate.toISOString().slice(0, 10)}
 							</div>

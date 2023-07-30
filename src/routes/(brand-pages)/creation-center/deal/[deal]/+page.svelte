@@ -6,7 +6,7 @@
 
 	let currDeal = data.deal;
 	if (currDeal.location === '') {
-		currDeal.location = 'No location set';
+		currDeal.location = 'Virtual';
 	}
 	let dealImg = '/api/s3object/1690047383938a750a7168ff2492899697beefcb7dc6e';
 	if (data.dealImage) {
@@ -27,12 +27,20 @@
 		/>
 		<div class="text-white mt-5 w-full md:w-[25%] flex flex-col min-w-[300px]">
 			<div class="border border-white p-5 text-lg grow rounded-xl">
-				<p>Event Type</p>
-				<p class="mb-5">{currDeal.eventType}</p>
+				{#if !currDeal.isCampaign}
+					<p>Event Type</p>
+					<p class="mb-5">{currDeal.eventType}</p>
+				{/if}
 				<p>Sport Preference</p>
 				<p class="mb-5">{currDeal.sportPreference}</p>
-				<p>Gender Preference:</p>
-				<p>{currDeal.genderPreference}</p>
+				<p>Gender Preference: {currDeal.genderPreference}</p>
+				{#if !currDeal.isCampaign && currDeal.location !== ''}
+					<p class="">Location: {currDeal.location}</p>
+				{:else if !currDeal.isCampaign && currDeal.location === ''}
+					<p>Location</p>
+					<p class="">{currDeal.inPersonOrVirtual}</p>
+				{/if}
+				<p class="mt-5">Description: {currDeal.shortDescription}</p>
 			</div>
 			<!-- <p>{currDeal.shortDescription}</p> -->
 			<!-- <p>{currDeal.endDate}</p> -->
@@ -43,14 +51,9 @@
 			<!-- <p>{currDeal.}</p> -->
 
 			<div class="border border-white p-5 text-lg rounded-xl">
-				<p>Location</p>
-				{#if currDeal.location !== ''}
-					<p class="mb-5">{currDeal.location}</p>
-				{:else}
-					<p class="mb-5">{currDeal.inPersonOrVirtual}</p>
-				{/if}
 				{#if currDeal.isCampaign}
 					Start Date: {currDeal.eventDate.toISOString().slice(0, 10)}
+					<br />
 					End Date: {currDeal.endDate.toISOString().slice(0, 10)}
 				{:else}
 					Date: {currDeal.eventDate.toISOString().slice(0, 10)}
@@ -63,8 +66,15 @@
 						year: 'numeric'
 					})}
 				</p> -->
-				<p>Estimated Payment</p>
-				<p>{currDeal.estimatedPayment}</p>
+				<p class="mt-5 underline">Compensation</p>
+				{#if JSON.parse(currDeal.estimatedPayment)['pay'] === 'Both'}
+					<p>Product: {JSON.parse(currDeal.estimatedPayment).product}</p>
+					<p>Money: {JSON.parse(currDeal.estimatedPayment).compSelected}</p>
+				{:else if JSON.parse(currDeal.estimatedPayment)['pay'] === 'Money'}
+					<p>Money: {JSON.parse(currDeal.estimatedPayment).compSelected}</p>
+				{:else if JSON.parse(currDeal.estimatedPayment)['pay'] === 'Product'}
+					<p>Product {JSON.parse(currDeal.estimatedPayment).product}</p>
+				{/if}
 			</div>
 		</div>
 	</div>

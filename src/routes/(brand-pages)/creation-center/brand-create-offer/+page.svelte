@@ -110,7 +110,7 @@
 		}
 		genderPreference = deal.genderPreference;
 		sportPref = deal.sportPreference;
-		pay = deal.estimatedPayment;
+		// pay = deal.estimatedPayment;
 		// let goals = deal.goals;
 		// let custGoals = [];
 		// for (let i = 0; i < checkboxes.length; i++) {
@@ -151,8 +151,6 @@
 	//this will exeecute when the form is submitted and when the image is changed
 	//(when it is changed on crop not on submit)
 	$: {
-		console.log(form);
-
 		if (form) {
 			if (croppedImage !== null) {
 				upload(croppedImage, form.dealId);
@@ -331,7 +329,6 @@
 								id="event-date"
 								name="event-date"
 								min={dateToday}
-								max={endDate}
 								bind:value={eventDate}
 							/>
 							<h2 class="mb-4 ml-2 text-left">Campaign end</h2>
@@ -398,27 +395,29 @@
 				</div>
 				{#if pageNum >= 1}
 					<div class="border mt-5 rounded-xl p-3">
-						<div class="p-2">
-							<h2 class="mb-4 text-left">Event in person or virtual:</h2>
-							<MyRadio
-								inputName={'in-person-or-virtual'}
-								bind:selected={inPersonOrVirtual}
-								options={options[1]}
-								flexDirection="row"
-							/>
-							{#if inPersonOrVirtual && inPersonOrVirtual === 'In Person'}
-								<h2 class="mt-4">Deal location</h2>
-								<input
-									id="deal-location"
-									name="deal-location"
-									type="text"
-									bind:value={location}
-									class="mx-5 shadow appearance-none border rounded mb-5 w-[90%] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-									placeholder="ex: Peterson Events Center"
+						{#if eventCampaignOrSingle === 'Single Event'}
+							<div class="p-2">
+								<h2 class="mb-4 text-left">Event in person or virtual:</h2>
+								<MyRadio
+									inputName={'in-person-or-virtual'}
+									bind:selected={inPersonOrVirtual}
+									options={options[1]}
+									flexDirection="row"
 								/>
-							{/if}
-							<hr class="mt-2" />
-						</div>
+								{#if inPersonOrVirtual && inPersonOrVirtual === 'In Person'}
+									<h2 class="mt-4">Deal location</h2>
+									<input
+										id="deal-location"
+										name="deal-location"
+										type="text"
+										bind:value={location}
+										class="mx-5 shadow appearance-none border rounded mb-5 w-[90%] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+										placeholder="ex: Peterson Events Center"
+									/>
+								{/if}
+								<hr class="mt-2" />
+							</div>
+						{/if}
 
 						<div class="mb-5">
 							<h2 class="mb-4 text-left">Single or multiple athletes:</h2>

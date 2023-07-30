@@ -39,13 +39,13 @@ export const sendEmailVerificationEmail = async (
 ) => {
 	const verificationLink = `${ROOT_URL}/email-verification/${verificationToken}`;
 	const emailContent = `
-Welcome to DapUp!<br/> We are thrilled that you've joined our community of college athletes seeking exclusive NIL deals and opportunities with brands.<br/> Thank you for signing up with us!
-While we verify your account, please complete your profile with relevant details about your bio, athletic background, and achievements.<br/> A complete profile expedites the verification process and enhances your DapUp experience. Our team will review your information swiftly and grant access to brand opportunities once your account is verified.<br/>
-Click the following link to begin verifying your account: <a href='${verificationLink}'>${verificationLink}</a><br/>
+Welcome to DapUp!<br/><br/> We are thrilled that you've joined our community of college athletes seeking exclusive NIL deals and opportunities with brands. Thank you for signing up with us!<br/><br/>
+While we verify your account, please complete your profile with relevant details about your bio, athletic background, and achievements. A complete profile expedites the verification process and enhances your DapUp experience.<br/>  Our team will review your information swiftly and grant access to brand opportunities once your account is verified.<br/><br/>
+Click the following link to begin verifying your account: <a href='${verificationLink}'>${verificationLink}</a><br/><br/>
 In the meantime, we invite you to explore our website, DapUp.co, familiarize yourself with our platform, share with your teammates, and stay tuned for incredible opportunities.<br/>
-Have questions? Contact our support team at [support@email.com]. We are here to help you every step of the way.<br/>
+Have questions? Contact our support team at [support@email.com]. We are here to help you every step of the way.<br/><br/>
 Thank you for choosing DapUp, the premier matchmaking platform for athletes and brands. Get ready to DapUp Your Game!<br/>
-Best regards,<br/>
+Best regards,<br/><br/>
 DapUp Team<br/>
 `;
 	await sendEmail(emailAddress, 'Welcome to DapUp - Verification in Progress!', emailContent);

@@ -79,7 +79,7 @@ export const actions = {
 			'single-or-multiple',
 			'is-campaign'
 		];
-		console.log(formData.get('single-or-multiple') === false);
+		// console.log(formData.get('single-or-multiple') === false);
 		if (publish === 'active') {
 			for (const field of requiredFields) {
 				if (!formData.get(field)) {

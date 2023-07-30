@@ -475,7 +475,7 @@
 							</div>
 						</div>
 						<div class="border mt-5 rounded-xl align-left">
-							<Compensation bind:pay />
+							<Compensation bind:eventCampaignOrSingle bind:pay />
 						</div>
 					</div>
 				{/if}

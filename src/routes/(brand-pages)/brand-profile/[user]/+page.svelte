@@ -54,7 +54,7 @@
 
 	//index keeps track of the current image in the slidedeck
 	let index = 1;
-	let images = [defaultImage];
+	let images = [defaultImage, defaultImage];
 
 	//start from the first image with 4:3 aspect ratio
 

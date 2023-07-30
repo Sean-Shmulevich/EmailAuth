@@ -1,8 +1,9 @@
-import { sendEmailVerificationEmail } from '$lib/email';
+import { sendEmailVerificationEmail, sendEmailVerificationEmailBrand } from '$lib/email';
 import { emailVerificationToken } from '$lib/lucia';
 import { fail, redirect } from '@sveltejs/kit';
 
 import type { Actions, PageServerLoad } from './$types';
+import { ElasticBeanstalk } from 'aws-sdk';
 
 export const load: PageServerLoad = async ({ locals }) => {
 	const { user } = await locals.auth.validateUser();
@@ -28,7 +29,11 @@ export const actions: Actions = {
 		}
 		try {
 			const token = await emailVerificationToken.issue(user.userId);
-			await sendEmailVerificationEmail(user.email, token.toString());
+			if (!user.isBrand) {
+				await sendEmailVerificationEmail(user.email, token.toString());
+			} else {
+				await sendEmailVerificationEmailBrand(user.email, token.toString());
+			}
 		} catch (e) {
 			console.log(e);
 			return fail(500, {

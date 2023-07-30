@@ -61,8 +61,12 @@ async function verifyUser(email) {
 	// }
 	sendEmail(
 		email,
-		'Your account has been verified',
-		'Your account has been verified by the admin. You can now login to your account.'
+		'Congratulations! Your DapUp Account is Verified and Approved!',
+		`We are thrilled to inform you that your DapUp account has been successfully verified and approved! Welcome to the DapUp community where college athletes and brands create winning partnerships.
+  
+		You can now launch NIL deals, connect with athletes, and DapUp Your Game! 
+		Best regards,
+		DapUp Team`
 	);
 	return updatedUser;
 }

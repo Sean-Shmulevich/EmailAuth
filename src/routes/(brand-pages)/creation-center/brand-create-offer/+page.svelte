@@ -135,7 +135,7 @@
 				title: deal.recommendedDeliverables['set'][i].title
 			});
 		}
-		console.log(deal.recommendedDeliverables.set, del);
+		// console.log(deal.recommendedDeliverables.set, del);
 		if (deal.recommendedDeliverables.length !== 0) {
 			deliverables = del;
 		}
@@ -264,6 +264,7 @@
 			}}
 			class="w-full"
 		>
+			<!-- <input type="hidden" name="brand-name" value=""/> -->
 			<MyRadio
 				inputName={'is-campaign'}
 				bind:selected={eventCampaignOrSingle}

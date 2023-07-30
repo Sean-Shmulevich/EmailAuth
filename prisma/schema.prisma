@@ -110,6 +110,7 @@ model Deal {
   title                   String
   active                  String       @default("pending")
   sportPreference         String
+  brandName               String
   genderPreference        String
   shortDescription        String
   location                String

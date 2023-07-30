@@ -24,7 +24,7 @@ async function getApprovedUsers() {
 			is_admin: false,
 			is_brand: false,
 			email_verified: true,
-			admin_verified: true 
+			admin_verified: true
 		}
 	});
 
@@ -59,8 +59,9 @@ async function verifyUser(email) {
 
 	sendEmail(
 		email,
-		'Your account has been verified',
-		'Your account has been verified by the admin. You can now login to your account.'
+		'Congratulations! Your DapUp Account is Verified and Approved!',
+		`We are thrilled to inform you that your DapUp account has been successfully verified and approved! Welcome to the DapUp community where college athletes and brands create winning partnerships.
+		You can now explore exclusive deals, connect with brands, and DapUp Your Game! Best regards,`
 	);
 	return updatedUser;
 }

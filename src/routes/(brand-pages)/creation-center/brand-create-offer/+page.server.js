@@ -37,7 +37,6 @@ export const actions = {
 	makeDeal: async ({ url, request, locals }) => {
 		const { user } = await locals.auth.validateUser();
 		const formData = await request.formData();
-		console.log(formData);
 
 		let publish = 'pending';
 		// formData.get('deal-submit') && formData.get('deal-submit').toString() === "publish"
@@ -89,11 +88,17 @@ export const actions = {
 				}
 			}
 		}
+		const companyName = await prismaClient.brandProfile.findFirst({
+			where: {
+				user_id: user.userId
+			}
+		});
 		const data = {
 			title: formData.get('deal-title')?.toString() ?? '',
 			active: publish,
 			shortDescription: formData.get('short-description')?.toString() ?? '',
 			eventType: eventType,
+			brandName: companyName?.name ?? '',
 			sportPreference: formData.get('sport-preference')?.toString() ?? '',
 			genderPreference: formData.get('gender-preference')?.toString() ?? '',
 			location: formData.get('deal-location')?.toString() ?? '',

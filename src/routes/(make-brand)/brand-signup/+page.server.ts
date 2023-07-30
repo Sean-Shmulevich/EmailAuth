@@ -1,7 +1,7 @@
 import { emailRegex } from '$lib/form-submission';
 import { fail, redirect } from '@sveltejs/kit';
 import { auth, emailVerificationToken } from '$lib/lucia';
-import { sendEmailVerificationEmail } from '$lib/email';
+import { sendEmailVerificationEmailBrand } from '$lib/email';
 import { LuciaError } from 'lucia-auth';
 import { Prisma } from '@prisma/client';
 
@@ -60,12 +60,12 @@ export const actions: Actions = {
 					industry: formData.get('industry')?.toString() ?? '',
 					size: formData.get('size')?.toString() ?? '',
 					goals: '',
-					socialMediaLinks: "",
-					bio: ""
+					socialMediaLinks: '',
+					bio: ''
 				}
 			});
 			const token = await emailVerificationToken.issue(user.userId);
-			await sendEmailVerificationEmail(user.email, token.toString());
+			await sendEmailVerificationEmailBrand(user.email, token.toString());
 		} catch (e) {
 			if (e instanceof LuciaError && e.message === 'AUTH_DUPLICATE_KEY_ID') {
 				return fail(400, {

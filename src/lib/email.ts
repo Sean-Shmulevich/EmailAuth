@@ -12,7 +12,7 @@ export const sendEmail = async (emailAddress: string, subject: string, content: 
 		from: 'seanshmulevich@gmail.com', // Change to your verified sender
 		subject: subject,
 		// text: 'and easy to do anywhere, even with Node.js',
-		html: `<strong>${content}</strong> `
+		html: `${content}`
 	};
 	sgMail
 		.send(msg)
@@ -38,9 +38,43 @@ export const sendEmailVerificationEmail = async (
 	verificationToken: string
 ) => {
 	const verificationLink = `${ROOT_URL}/email-verification/${verificationToken}`;
-	const emailContent = `Please verify your email by clicking the link below:<br/><br/>
-<a href="${verificationLink}">${verificationLink}</a>`;
-	await sendEmail(emailAddress, 'Email verification', emailContent);
+	const emailContent = `
+Welcome to DapUp!<br/> We are thrilled that you've joined our community of college athletes seeking exclusive NIL deals and opportunities with brands.<br/> Thank you for signing up with us!
+While we verify your account, please complete your profile with relevant details about your bio, athletic background, and achievements.<br/> A complete profile expedites the verification process and enhances your DapUp experience. Our team will review your information swiftly and grant access to brand opportunities once your account is verified.<br/>
+Click the following link to begin verifying your account: <a href='${verificationLink}'>${verificationLink}</a><br/>
+In the meantime, we invite you to explore our website, DapUp.co, familiarize yourself with our platform, share with your teammates, and stay tuned for incredible opportunities.<br/>
+Have questions? Contact our support team at [support@email.com]. We are here to help you every step of the way.<br/>
+Thank you for choosing DapUp, the premier matchmaking platform for athletes and brands. Get ready to DapUp Your Game!<br/>
+Best regards,<br/>
+DapUp Team<br/>
+`;
+	await sendEmail(emailAddress, 'Welcome to DapUp - Verification in Progress!', emailContent);
+};
+
+export const sendEmailVerificationEmailBrand = async (
+	emailAddress: string,
+	verificationToken: string
+) => {
+	const verificationLink = `${ROOT_URL}/email-verification/${verificationToken}`;
+	const emailContent = `
+	Thank you for choosing DapUp as your platform to grow your business by connecting with college athletes for NIL marketing campaigns.<br/> At DapUp, we are dedicated to empowering brands like yours to collaborate with talented college athletes, creating winning partnerships that drive results.<br/>
+
+	While we verify your account, please complete your profile with relevant details about your brand. 
+
+	A complete profile expedites the verification process and enhances your DapUp experience. Our team will review your information swiftly and grant full access to the DapUp platform once your account is verified.<br/>
+
+	<strong>Click the following link to begin verifying your account: <a href="${verificationLink}">${verificationLink}</a></strong><br/>
+
+	In the meantime, we encourage you to explore our website, DapUp.co, familiarize yourself with our platform, and imagine the possibilities that await you.<br/>
+
+	Have questions? Contact our support team at [support@email.com]. We are here to help you every step of the way.</br>
+
+	Thank you for choosing DapUp, the premier matchmaking platform for athletes and brands. Get ready to DapUp Your Game!<br/>
+
+	Best regards,<br/>
+	DapUp Team
+`;
+	await sendEmail(emailAddress, 'Welcome to DapUp - Verification in Progress!', emailContent);
 };
 
 export const sendPasswordResetEmail = async (emailAddress: string, resetToken: string) => {

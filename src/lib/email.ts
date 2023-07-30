@@ -9,7 +9,7 @@ sgMail.setApiKey(SEND_GRID_API);
 export const sendEmail = async (emailAddress: string, subject: string, content: string) => {
 	const msg = {
 		to: `${emailAddress}`, // Change to your recipient
-		from: 'seanshmulevich@gmail.com', // Change to your verified sender
+		from: 'admin@dapup.co', // Change to your verified sender
 		subject: subject,
 		// text: 'and easy to do anywhere, even with Node.js',
 		html: `${content}`

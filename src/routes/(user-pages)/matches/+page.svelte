@@ -142,8 +142,15 @@
 							year: 'numeric'
 						})}
 					</p> -->
-					<p>Estimated Payment</p>
-					<p>{currDeal.estimatedPayment}</p>
+					<p class="mt-5 underline">Compensation</p>
+					{#if JSON.parse(currDeal.estimatedPayment)['pay'] === 'Both'}
+						<p>Product: {JSON.parse(currDeal.estimatedPayment).product}</p>
+						<p>Money: {JSON.parse(currDeal.estimatedPayment).compSelected}</p>
+					{:else if JSON.parse(currDeal.estimatedPayment)['pay'] === 'Money'}
+						<p>Money: {JSON.parse(currDeal.estimatedPayment).compSelected}</p>
+					{:else if JSON.parse(currDeal.estimatedPayment)['pay'] === 'Product'}
+						<p>Product {JSON.parse(currDeal.estimatedPayment).product}</p>
+					{/if}
 				</div>
 			</div>
 		</div>
@@ -151,9 +158,13 @@
 			<div class="border border-1 rounded-xl text-white p-5">
 				<p class="text-xl">Deliverables</p>
 				<hr class="mb-2" />
-				{#each currDeal.recommendedDeliverables as dels}
-					<p>{dels}</p>
-				{/each}
+				<ol>
+					{#each currDeal.recommendedDeliverables['set'] as del}
+						<li class="m-5">
+							{del.title}: {del.value}
+						</li>
+					{/each}
+				</ol>
 			</div>
 			<!-- <div class="border border-1 rounded-xl text-white p-5">
 				<p class="text-xl">Goals</p>

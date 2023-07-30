@@ -69,7 +69,7 @@
 	}
 </script>
 
-<div class="mt-[30px] bg-gray-700 text-white flex flex-col items-center justify-center space-y-8">
+<div class="mt-[30px] bg-gray-900 text-white flex flex-col items-center justify-center space-y-8">
 	<div
 		class="profile-card flex flex-col md:flex-row bg-gray-800 shadow rounded-lg max-w-7xl w-full p-6 overflow-hidden"
 	>

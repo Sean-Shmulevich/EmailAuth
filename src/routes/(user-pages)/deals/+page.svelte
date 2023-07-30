@@ -6,6 +6,7 @@
 	import { beforeUpdate, onMount, tick } from 'svelte';
 	import { swipe } from './swipe.js';
 	import { initializeSwipe } from './swipe.js';
+	export let pageNum;
 
 	// swipe(onCardAction);
 	let refreshCounter = 0;
@@ -18,8 +19,14 @@
 	let userSwipeData = [{ dealId: 'uniqueDealID', decision: 'user-accepted' }];
 
 	let currDealIds = [];
+	//TODO this code might break the whole thing
+	$: {
+		if (refreshCounter) {
+			pageNum = 0;
+		}
+	}
 </script>
 
 {#key refreshCounter}
-	<SwipeCard bind:refreshCounter bind:offers bind:currDealIds />
+	<SwipeCard bind:pageNum bind:refreshCounter bind:offers bind:currDealIds />
 {/key}

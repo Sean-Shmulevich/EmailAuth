@@ -82,14 +82,6 @@
 
 		return await response.json();
 	}
-	function makeObjects(decisionArr, dealIdArr) {
-		let objArr = [];
-		for (let i = 0; i < decisionArr.length; i++) {
-			let obj = { dealId: dealIdArr[i], decision: decisionArr[i] };
-			objArr.push(obj);
-		}
-		return objArr;
-	}
 </script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -97,9 +89,6 @@
 <div id="wrapper">
 	<div id="container">
 		<div class="background">
-			<!-- Элемент где был кружок  -->
-
-			<!--  Элемент  -->
 			{#if isLoading}
 				<div class="centerAll">
 					<Wave size="160" color="#FF3E00" unit="px" duration="3s" />
@@ -124,91 +113,85 @@
 								alt="Profile"
 							/>
 						{/if}
-						<div class="info">
-							<div class="name">{offer.title}</div>
-							<p>{offer.eventType} event</p>
-							<div class="interest">{offer.shortDescription}</div>
+						<div class="info bg-gray-700 bg-opacity-50 max-w-fit rounded-xl">
+							<div class="name -mt-5">{offer.title}</div>
+							{#if offer.isCampaign}
+								<p>{offer.eventType} event</p>
+							{/if}
+							<div class="interest">Brand: {offer.brandName}</div>
+							{#if JSON.parse(offer.estimatedPayment)['pay'] === 'Both'}
+								<p>Product: {JSON.parse(offer.estimatedPayment).product}</p>
+								<p>Compensation: {JSON.parse(offer.estimatedPayment).compSelected}</p>
+							{:else if JSON.parse(offer.estimatedPayment)['pay'] === 'Money'}
+								<p>Compensation: {JSON.parse(offer.estimatedPayment).compSelected}</p>
+							{:else if JSON.parse(offer.estimatedPayment)['pay'] === 'Product'}
+								<p>Product {JSON.parse(offer.estimatedPayment).product}</p>
+							{/if}
+							{#each offer.recommendedDeliverables['set'] as del, i}
+								<li class="">
+									{del.title} <br />
+								</li>
+							{/each}
 						</div>
 					{/if}
 					{#if pageNum === 1}
 						<div class="w-full p-5 text-white text-center h-full bg-gray-700">
-							<div class="flex w-full flex-row">
-								<div class="p-2 w-1/2 rounded-xl">
-									<div class="border border-white rounded-xl p-4">
-										<p>Looking for</p>
-										<hr />
-										<p class="mt-2">
-											{offer.sportPreference} players
-										</p>
-									</div>
-									<div class="border p-4 mt-4 border-white rounded-xl">
-										<p class="">Location</p>
-										<hr />
-										<p class="p-2">
-											{#if offer.inPersonOrVirtual === 'In Person'}
-												{offer.location}
-											{:else}
-												Location: Virtual
-											{/if}
-										</p>
-									</div>
+							<div class="grid grid-cols-3 gap-4 mb-4 p-5">
+								<div class="p-2 rounded-xl border border-white h-20">
+									Looking for: <br />{offer.sportPreference} players
 								</div>
-								<div class="p-2 w-1/2">
-									<div class=" border p-4 border-white rounded-xl">
-										<p>Estimated Pay</p>
-										<hr />
-										<p class="mt-2">
-											${offer.estimatedPayment}
-										</p>
+								{#if !offer.isCampaign}
+									<div class="p-2 rounded-xl border border-white h-20">
+										Location: <br />{offer.location}
+										{#if offer.location === ''}
+											Virtual
+										{/if}
 									</div>
-									<div class="mt-4 border p-4 border-white rounded-xl">
-										<p>Dates</p>
-										<hr />
-										<p class="p-2">
-											<!-- {new Date(offer.endDate).toLocaleDateString('en-GB', {
-												day: 'numeric',
-												month: 'short',
-												year: 'numeric'
-											})} -->
-											{#if offer.isCampaign}
-												Start Date: {offer.eventDate.toISOString().slice(0, 10)}
-												End Date: {offer.endDate.toISOString().slice(0, 10)}
-											{:else}
-												Date: {offer.eventDate.toISOString().slice(0, 10)}
-											{/if}
-										</p>
-									</div>
+								{/if}
+								<div class="p-2 rounded-xl border border-white h-20">
+									{#if offer.isCampaign}
+										Start Date: <br />{offer.eventDate.toISOString().slice(0, 10)}<br />
+										End Date: <br />{offer.endDate.toISOString().slice(0, 10)}
+									{:else}
+										Date: <br />{offer.eventDate.toISOString().slice(0, 10)}
+									{/if}
 								</div>
+								<!-- <div class="p-2 rounded-xl border border-white h-20">Item 3</div> -->
 							</div>
-							<div class="flex flex-col mt-4 h-[65%]">
+							<div class="p-2 text-left rounded-xl border border-white w-full">
+								<p class="text-lg underline text-center">Description</p>
+								<p>{offer.shortDescription}</p>
+							</div>
+						</div>
+						<!-- <div class="w-full p-5 text-white text-center h-full bg-gray-700">
+								<div class="flex flex-col mt-4 h-[65%]">
 								<div class="flex-grow mb-4 w-full text-center border rounded-xl border-white p-4">
 									<p class="mb-2">Deliverables</p>
 									<hr class="mb-2" />
-									{#each offer.recommendedDeliverables as deliverable, i}
-										<p class="text-left">{i + 1}. {deliverable}</p>
-									{/each}
-								</div>
-								<!-- <div class="flex-grow w-full text-center border rounded-xl border-white p-4">
+								</div> -->
+						<!-- <div class="flex-grow w-full text-center border rounded-xl border-white p-4">
 									<p class="mb-2">Goals</p>
 									<hr />
 									{#each offer.goals as goal, i}
 										<p class="text-left">{i + 1}. {goal}</p>
 									{/each}
 								</div> -->
+						<!-- </div> -->
+						<!-- </div> -->
+					{/if}
+					{#if pageNum === 2}
+						<div class="w-full p-5 text-white text-center h-full bg-gray-700">
+							<div class="text-left w-full">
+								<p class="text-lg underline text-center">Deliverables</p>
+								{#each offer.recommendedDeliverables['set'] as del, i}
+									<li class="m-5">
+										{del.title}: <br />{del.value}
+									</li>
+								{/each}
 							</div>
 						</div>
 					{/if}
-					<!-- {#if pageNum === 2}
-						<img
-							src="https://www.3dwiggle.com/wp-content/uploads/2016/06/hiroshi-yoshinaga-wired-lathyrus-blog-3dwiggle-1.gif"
-							alt="Profile picture"
-						/>
-						<div class="info">
-							<div class="name">Влад, 20</div>
-							<div class="interest">2 Common Interest</div>
-						</div>
-					{/if}
-					{#if pageNum === 3}
+					<!-- {#if pageNum === 3}
 						<img
 							src="https://www.3dwiggle.com/wp-content/uploads/2016/06/hiroshi-yoshinaga-wired-lathyrus-blog-3dwiggle-1.gif"
 							alt="Profile picture"
@@ -217,7 +200,7 @@
 							<div class="name">Влад, 20</div>
 							<div class="interest">3 Common Interest</div>
 						</div>
-					{/if} -->
+					{/if}  -->
 					<div class="like">Like</div>
 					<div class="nope">Nope</div>
 				</div>
@@ -228,7 +211,7 @@
 					on:click={() => {
 						pageNum = pageNum - 1;
 						if (pageNum < 0) {
-							pageNum = 1;
+							pageNum = 2;
 						}
 					}}
 				/>
@@ -237,7 +220,7 @@
 					style=""
 					on:click={() => {
 						pageNum = pageNum + 1;
-						if (pageNum > 1) {
+						if (pageNum > 2) {
 							pageNum = 0;
 						}
 					}}
@@ -373,7 +356,7 @@
 		width: 100%;
 		box-sizing: border-box;
 		text-shadow: 2px 2px 5px gray;
-		background: linear-gradient(rgba(40, 40, 40, 0), rgba(40, 40, 40, 0.6));
+		/* background: linear-gradient(rgba(40, 40, 40, 0), rgba(40, 40, 40, 0.6)); */
 	}
 	.name {
 		font-size: 1.4em;

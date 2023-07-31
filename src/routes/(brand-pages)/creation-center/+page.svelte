@@ -51,7 +51,7 @@
 
 <a
 	title="Create a new Deal"
-	class="absolute -top-[72px] sm:top-5 right-0 p-5"
+	class="absolute -top-[72px] sm:top-5 -right-5 p-5"
 	href="/creation-center/brand-create-offer"
 >
 	<img class="w-14" alt="create deal" src="https://shmul.dev/assets/createDeal.png" />

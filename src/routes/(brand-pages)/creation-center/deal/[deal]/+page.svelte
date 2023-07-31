@@ -16,7 +16,7 @@
 </script>
 
 <!-- <p class="text-white">{JSON.stringify(data.dealImage)}</p> -->
-<div class="w-fit mx-auto bg-gray-800 rounded-xl mt-5 p-5">
+<div class="w-fit mx-auto bg-gray-800 rounded-xl mt-5 p-5 mb-10 pb-5">
 	<h2 class="text-center text-3xl mb-2 text-white">{currDeal.title}</h2>
 	<hr />
 	<div class="flex flex-col md:flex-row">
@@ -107,7 +107,7 @@
 			class="my-5 text-white border border-white rounded-xl bg-gray-800 shadow-md p-4 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between"
 		>
 			<div>
-				<h2 class="text-xl font-bold mb-2">{user.email}</h2>
+				<h2 class="text-xl font-bold mb-2">{user.name}</h2>
 				<a class="text-blue-500 underline" href="/user-profile/{user.id}">profile link</a>
 			</div>
 			<form class="" method="post" action="?/verify" use:enhance>
@@ -130,7 +130,7 @@
 			class="my-5 text-white border border-white rounded-xl bg-gray-800 shadow-md p-4 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between"
 		>
 			<div>
-				<h2 class="text-xl font-bold mb-2">{user.email}</h2>
+				<h2 class="text-xl font-bold mb-2">{user.name}</h2>
 				<a class="text-blue-500 underline" href="/user-profile/{user.id}">profile link</a>
 			</div>
 			<form class="" method="post" action="?/verify" use:enhance>
@@ -155,7 +155,7 @@
 			class="my-5 text-white border border-white rounded-xl bg-gray-800 shadow-md p-4 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between"
 		>
 			<div>
-				<h2 class="text-xl font-bold mb-2">{user.email}</h2>
+				<h2 class="text-xl font-bold mb-2">{user.name}</h2>
 				<a class="text-blue-500 underline" href="/user-profile/{user.id}">profile link</a>
 			</div>
 			<form method="post" action="?/pickUser" use:enhance>

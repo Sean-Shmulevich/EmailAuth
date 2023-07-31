@@ -113,7 +113,7 @@
 								alt="Profile"
 							/>
 						{/if}
-						<div class="info bg-gray-700 bg-opacity-50 max-w-fit rounded-xl">
+						<div class="info bg-black bg-opacity-70 rounded-xl">
 							<div class="name -mt-5">{offer.title}</div>
 							{#if offer.isCampaign}
 								<p>{offer.eventType} event</p>
@@ -149,13 +149,17 @@
 									</div>
 								{/if}
 								<div class="p-2 rounded-xl border border-white h-20">
-									{#if offer.isCampaign}
-										Start Date: <br />{offer.eventDate.toISOString().slice(0, 10)}<br />
-										End Date: <br />{offer.endDate.toISOString().slice(0, 10)}
-									{:else}
-										Date: <br />{offer.eventDate.toISOString().slice(0, 10)}
+									{#if offer.isCampaign && offer.eventDate}
+										Start Date: <br />{offer.eventDate.toString().slice(0, 10)}<br />
+									{:else if !offer.isCampaign && offer.eventDate}
+										Date: <br />{offer.eventDate.toString().slice(0, 10)}
 									{/if}
 								</div>
+								{#if offer.isCampaign}
+									<div class="p-2 rounded-xl border border-white h-20">
+										End Date: <br />{offer.endDate.toString().slice(0, 10)}
+									</div>
+								{/if}
 								<!-- <div class="p-2 rounded-xl border border-white h-20">Item 3</div> -->
 							</div>
 							<div class="p-2 text-left rounded-xl border border-white w-full">

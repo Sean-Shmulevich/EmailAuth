@@ -18,7 +18,7 @@
 		<title>DapUp</title>
 	</head>
 	<body
-		class="bg-gray-900 h-[100vh] overflow-x-hidden font-sans overflow-y-scroll"
+		class="bg-gray-900 h-[100vh] overflow-x-hidden font-sans"
 		style="touch-action: manipulation;"
 	>
 		<!-- TODO make it fixed if we want it to be sticky -->

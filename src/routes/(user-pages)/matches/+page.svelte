@@ -57,7 +57,7 @@
 	</div>
 {/if}
 
-<div class="overflow-y-auto mt-32">
+<div class="overflow-y-auto mt-10">
 	<div
 		class="flex flex-row -mt-5 w-[80%] sm:w-[60%] mb-5 text-white text-center justify-center mx-auto"
 	>

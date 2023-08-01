@@ -142,18 +142,20 @@
 					{@html user.bio}
 				</p>
 			</div>
-			<div class="flex flex-row items-center pt-2 justify-between mt-5 bottom-0">
+			<div class="flex flex-row items-center pt-2 justify-center mt-5 bottom-0">
 				<div
-					class="min-h-10 border rounded-full p-4 flex items-center text-sm leading-5 text-gray-400"
+					class="border p-2 rounded-full flex items-center text-xs sm:text-sm mx-0 sm:mx-5 text-gray-400"
 				>
 					Sport: {user.sport}
 				</div>
 				<div
-					class="border rounded-full p-4 flex items-center text-sm text-center leading-5 text-gray-400"
+					class="border p-2 rounded-full flex items-center text-xs sm:text-sm mx-0 sm:mx-5 text-gray-400"
 				>
 					{user.college}
 				</div>
-				<div class="border p-4 rounded-full flex items-center text-sm leading-5 text-gray-400">
+				<div
+					class="border p-2 rounded-full flex items-center text-xs sm:text-sm mx-0 sm:mx-5 text-gray-400"
+				>
 					Graduation: {user.year}
 				</div>
 			</div>

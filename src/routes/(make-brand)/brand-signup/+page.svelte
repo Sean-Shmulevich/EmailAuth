@@ -128,8 +128,8 @@
 		location: 'Where is your company located?',
 		size: 'Company Size',
 		industry: 'What industry is your company in?',
-		athlete: 'Has your company sponcered a college athlete before?',
-		sportPref: 'What sports do you prefer to sponcer?',
+		athlete: 'Has your company sponsor a college athlete before?',
+		sportPref: 'What sports do you prefer to sponsor?',
 		goals: 'Top 3 goals of athlete marketing'
 	};
 	const questionKeys = Object.keys(questions);

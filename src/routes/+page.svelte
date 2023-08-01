@@ -26,16 +26,18 @@
 <form method="post" use:enhance>
 	<input type="submit" value="Sign out" />
 </form> -->
-<section class="text-white body-font mx-0 mt-36" style="height:75vh">
+<section
+	class="text-white body-font mx-0"
+	style="height:75vh; background-image: url('https://shmul.dev/assets/dapupmain.jpeg'); background-size: cover; background-position: center center"
+>
 	<div class="container mx-auto flex px-5 py-24 items-center justify-center">
 		<div class="text-center lg:w-full xl:w-full">
 			<h1
-				class="text-gold-gradient-title text-4xl -mt-[5vh] sm:mt-0 md:text-6xl lg:text-6xl xl:text-8xl font-bold leading-tight mb-8 text-white"
+				class="text-4xl mt-24 md:text-6xl lg:text-6xl xl:text-8xl font-bold leading-tight mb-8"
+				style="text-shadow: 0 0 5px black;"
 			>
 				The premier matchmaking platform for athletes and brands
 			</h1>
-
-			<div style="height:20vh" />
 		</div>
 	</div>
 	<a
@@ -354,8 +356,8 @@
 
 <section class="bg-gray-900 -mt-5">
 	<div class="py-4 lg:py-16 px-4 mx-auto max-w-screen-md">
-		<h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center text-white">Contact Us</h2>
-		<p class="mb-8 lg:mb-16 font-light text-center text-gray-300 dark:text-gray-400 sm:text-xl">
+		<h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center text-gold">Contact Us</h2>
+		<p class="mb-8 lg:mb-16 font-light text-center text-gray-300 dark:te-gray-400 sm:text-xl">
 			Got a technical issue? Want to send feedback? Let us know.
 		</p>
 		<form method="POST" action="?/contactForm" class="space-y-8">
@@ -536,5 +538,19 @@
 	}
 	.white-icon {
 		filter: invert(1); /* Inverts the colors, making black white */
+	}
+	.gold {
+		color: #d5ad6d; /*if no support for background-clip*/
+		background: -webkit-linear-gradient(transparent, transparent),
+			-webkit-linear-gradient(top, rgba(213, 173, 109, 1) 0%, rgba(213, 173, 109, 1) 26%, rgba(
+							226,
+							186,
+							120,
+							1
+						)
+						35%, rgba(163, 126, 67, 1) 45%, rgba(145, 112, 59, 1) 61%, rgba(213, 173, 109, 1) 100%);
+		background: -o-linear-gradient(transparent, transparent);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
 	}
 </style>

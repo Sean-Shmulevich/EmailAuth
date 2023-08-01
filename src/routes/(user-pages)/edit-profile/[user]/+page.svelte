@@ -123,7 +123,7 @@
 		let imageUrl = `${s3}/${encodeURIComponent(data.objects[0].id)}`;
 		images['main-image'] = imageUrl;
 	}
-	if (data.objects.length >= 2 || data.objects[0].image_number !== 0) {
+	if (data.objects.length >= 2 && data.objects[0].image_number === 0) {
 		console.log(data.objects.length);
 		buttons = [];
 		for (let i = 0; i < data.objects.length; i++) {

@@ -364,7 +364,7 @@
 			<div class="flex justify-center">
 				<img
 					class="w-[80%] h-[80%]"
-					src="https://pbs.twimg.com/profile_images/1580783698080833538/knk3o2Lm_400x400.jpg"
+					src="https://shmul.dev/assets/ayden.png"
 					alt="founder Ayden Owens-Delerme"
 				/>
 			</div>
@@ -380,7 +380,7 @@
 			<div class="flex justify-center">
 				<img
 					class="w-[80%] h-[80%]"
-					src="https://pbs.twimg.com/profile_images/1580783698080833538/knk3o2Lm_400x400.jpg"
+					src="https://shmul.dev/assets/ayden.png"
 					alt="founder Ayden Owens-Delerme"
 				/>
 			</div>

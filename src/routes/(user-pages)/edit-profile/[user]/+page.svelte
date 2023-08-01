@@ -21,9 +21,10 @@
 	let editor;
 	let Quill;
 
-	let buttons = ['image1'];
+	let buttons = [];
 	let images = {
 		'main-image': '',
+		image1: '',
 		image2: '',
 		image3: '',
 		image4: '',
@@ -119,13 +120,12 @@
 	//if its 0 just set the main image
 	//if there are two images in the list or the first image is image_number 1 then then run this code
 	// data.objects.length >= 1 && data.objects[0].image_number === 0
-	if (data.objects.length >= 1 && data.objects[0].image_number === 0) {
+	if (data.objects.length > 0 && data.objects[0].image_number === 0) {
 		let imageUrl = `${s3}/${encodeURIComponent(data.objects[0].id)}`;
 		images['main-image'] = imageUrl;
 	}
-	if (data.objects.length >= 2 && data.objects[0].image_number === 0) {
+	if (data.objects.length > 1) {
 		console.log(data.objects.length);
-		buttons = [];
 		for (let i = 0; i < data.objects.length; i++) {
 			let imgNum = data.objects[i].image_number;
 
@@ -188,9 +188,9 @@
 		console.log(buttons);
 		if (buttons.length < 8) {
 			const currButton = buttons[buttons.length - 1];
-			if (images[currButton] === '' || images[currButton] === undefined) {
-				return;
-			}
+			// if (images[currButton] === '' || images[currButton] === undefined) {
+			// 	return;
+			// }
 			buttons = [...buttons, `image${buttons.length + 1}`];
 		}
 	};
@@ -316,40 +316,40 @@
 				<p class="text-gray-500 text-xs -mb-10">Please upload additional profile pictures.</p>
 				<div class="space-y-4 p-10">
 					{#each buttons as button}
-						{#if images[button]}
-							<button
-								disabled={images[button] !== ''}
-								class="gold {images[button] !== ''
-									? 'nah'
-									: ''} text-white w-full hover:bg-gradient-to-br focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-								on:click={() => {
-									isModalOpen = true;
-									currImage = button;
-								}}
-								>Upload {button.charAt(0).toUpperCase() +
+						<button
+							disabled={images[button] !== ''}
+							class="gold {images[button] !== ''
+								? 'nah'
+								: ''} text-white w-full hover:bg-gradient-to-br focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+							on:click={() => {
+								isModalOpen = true;
+								currImage = button;
+							}}
+							>Upload {button.charAt(0).toUpperCase() +
+								button.slice(1, button.length - 1) +
+								' ' +
+								button.slice(button.length - 1)}</button
+						>
+						{#if images[button] !== ''}
+							<h2 class="text-2xl">
+								{button.charAt(0).toUpperCase() +
 									button.slice(1, button.length - 1) +
 									' ' +
-									button.slice(button.length - 1)}</button
-							>
+									button.slice(button.length - 1)}
+							</h2>
 							{#if images[button] !== ''}
-								<h2 class="text-2xl">
-									{button.charAt(0).toUpperCase() +
-										button.slice(1, button.length - 1) +
-										' ' +
-										button.slice(button.length - 1)}
-								</h2>
 								<img src={images[button]} alt="Profile example" class="w-1/2 mx-auto" />
-								<button
-									class="border border-white p-5 bg-gray-800 rounded-full mt-2"
-									on:click={() => {
-										images[button] = '';
-										isModalOpen = true;
-										currImage = button;
-									}}>Change Image</button
-								>
 							{/if}
-							<hr class="my-5" />
+							<button
+								class="border border-white p-5 bg-gray-800 rounded-full mt-2"
+								on:click={() => {
+									images[button] = '';
+									isModalOpen = true;
+									currImage = button;
+								}}>Change Image</button
+							>
 						{/if}
+						<hr class="my-5" />
 					{/each}
 					{#if buttons.length < 8}
 						<br />

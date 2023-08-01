@@ -143,7 +143,7 @@
 								activeInfo = 'brand';
 							}
 						}}
-						class=" w-full h-full text-white leading-relaxed"
+						class=" w-full text-white leading-relaxed"
 					>
 						<h2 class="title-font font-medium text-3xl text-gray-100">Brand guide</h2>
 					</button>
@@ -347,7 +347,7 @@
 			</div>
 			<img
 				class="lg:w-3/5 md:w-1/2 object-cover object-center rounded-lg md:mt-0 mt-12"
-				src="https://source.unsplash.com/featured?team"
+				src="https://shmul.dev/assets/dappingup.jpeg"
 				alt="step"
 			/>
 		</div>

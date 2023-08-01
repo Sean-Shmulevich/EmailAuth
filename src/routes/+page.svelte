@@ -30,7 +30,7 @@
 	<div class="container mx-auto flex px-5 py-24 items-center justify-center">
 		<div class="text-center lg:w-full xl:w-full">
 			<h1
-				class="text-gold text-4xl -mt-[5vh] sm:mt-0 md:text-6xl lg:text-6xl xl:text-8xl font-bold leading-tight mb-8 text-white"
+				class="text-gold-gradient-title text-4xl -mt-[5vh] sm:mt-0 md:text-6xl lg:text-6xl xl:text-8xl font-bold leading-tight mb-8 text-white"
 			>
 				The premier matchmaking platform for athletes and brands
 			</h1>
@@ -164,7 +164,11 @@
 				<div class="border-2 border-gray-200 hover:border-green-500 px-4 py-6 rounded-lg">
 					<button
 						on:click={() => {
-							activeInfo = 'brand';
+							if (activeInfo === 'brand') {
+								activeInfo = null;
+							} else {
+								activeInfo = 'brand';
+							}
 						}}
 						class=" w-full h-full text-white leading-relaxed"
 					>
@@ -176,7 +180,11 @@
 				<div class="border-2 border-gray-200 hover:border-green-500 px-4 py-6 rounded-lg">
 					<button
 						on:click={() => {
-							activeInfo = 'athlete';
+							if (activeInfo === 'athlete') {
+								activeInfo = null;
+							} else {
+								activeInfo = 'athlete';
+							}
 						}}
 						class=" w-full h-full text-white leading-relaxed"
 					>
@@ -379,12 +387,13 @@
 		<p class="mb-8 lg:mb-16 font-light text-center text-gray-300 dark:text-gray-400 sm:text-xl">
 			Got a technical issue? Want to send feedback? Let us know.
 		</p>
-		<form action="#" class="space-y-8">
+		<form method="POST" action="?/contactForm" class="space-y-8">
 			<div>
 				<label for="email" class="block mb-2 text-sm font-medium text-gray-300">Your email</label>
 				<input
 					type="email"
 					id="email"
+					name="email"
 					class="shadow-sm bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
 					placeholder="name@flowbite.com"
 					required
@@ -395,6 +404,7 @@
 				<input
 					type="text"
 					id="subject"
+					name="subject"
 					class="block p-3 w-full text-sm bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
 					placeholder="Let us know how we can help you"
 					required
@@ -406,6 +416,7 @@
 				>
 				<textarea
 					id="message"
+					name="message"
 					rows="6"
 					class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
 					placeholder="Leave a comment..."
@@ -499,6 +510,8 @@
 
 <style>
 	.text-gold-gradient-title {
+		color: #d5ad6d; /*if no support for background-clip*/
+
 		background: linear-gradient(
 				to right,
 				#b87333,
@@ -517,8 +530,6 @@
 			repeat;
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
-		animation: shine 25s ease-out;
-		background-size: 200% 100%;
 	}
 	.text-gold {
 		background: linear-gradient(

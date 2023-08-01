@@ -2,6 +2,7 @@ import { redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 import { auth } from '$lib/lucia';
 import { prismaClient } from '$lib/db';
+import { sendEmail } from '$lib/email';
 
 export const load: PageServerLoad = async ({ locals }) => {
 	const { user } = await locals.auth.validateUser();
@@ -38,12 +39,21 @@ export const load: PageServerLoad = async ({ locals }) => {
 		user
 	};
 };
-
+// (emailAddress: string, subject: string, content: string)
 export const actions: Actions = {
 	logout: async ({ locals }) => {
 		const session = await locals.auth.validate();
 		if (!session) return null;
 		await auth.invalidateSession(session.sessionId);
 		locals.auth.setSession(null);
+	},
+	contactForm: async ({ request }) => {
+		const formData = await request.formData();
+		console.log(JSON.stringify(formData));
+		const email = (formData.get('email')?.toString() ?? '').toLowerCase();
+		const subject = formData.get('subject')?.toString() ?? '';
+		const message = formData.get('message')?.toString() ?? '';
+		//TODO change this email to support@dapup.co
+		sendEmail('seanshmulevich@gmail.com', `Request from ${email}, Subject: ${subject}`, message);
 	}
 };

@@ -18,7 +18,7 @@
 	//the status of the last 5 swipes
 	let swipeStatusList = [];
 	//the number page of the current deal
-	let pageNum = 0;
+	export let pageNum = 0;
 
 	//the ids of the current 5 items
 	export let currDealIds;

@@ -17,7 +17,10 @@
 		<meta name="viewport" content="width=device-width" />
 		<title>DapUp</title>
 	</head>
-	<body class="bg-gray-900 h-[100vh] overflow-x-hidden font-sans">
+	<body
+		class="bg-gray-900 h-[100vh] overflow-x-hidden font-sans"
+		style="touch-action: manipulation;"
+	>
 		<!-- TODO make it fixed if we want it to be sticky -->
 		<header class="w-full body-font bg-gray-800">
 			<div

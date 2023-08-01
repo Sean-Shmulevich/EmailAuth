@@ -6,7 +6,7 @@
 	import { beforeUpdate, onMount, tick } from 'svelte';
 	import { swipe } from './swipe.js';
 	import { initializeSwipe } from './swipe.js';
-	export let pageNum;
+	let pageNum;
 
 	// swipe(onCardAction);
 	let refreshCounter = 0;

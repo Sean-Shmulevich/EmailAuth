@@ -1,8 +1,11 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import type { ActionData } from './$types';
+	import SportRadio from './SportRadio.svelte';
+	import Radio from './Radio.svelte';
 
 	export let form: ActionData;
+	let genderPreference;
 </script>
 
 <div class="rounded-xl bg-white px-10 pb-10 mx-6 pt-0 -mt-10 max-w-[800px] mx-auto">
@@ -14,6 +17,19 @@
 		<p>xxx-xxx-xxxx format</p>
 		<input id="phone-number" name="phone-number" value={form?.phoneNumber ?? ''} /><br />
 
+		<label for="university">University</label><br />
+		<input id="university" name="university" value={form?.university ?? ''} /><br />
+
+		<label for="sport">Sport</label><br />
+		<SportRadio sportPref={form?.sportPref} /><br />
+
+		<label for="gender-preference">Gender</label><br />
+		<Radio
+			inputName={'gender-preference'}
+			bind:selected={genderPreference}
+			options={['male', 'female']}
+			flexDirection="row"
+		/>
 		<label for="email">Email</label><br />
 		<input id="email" name="email" value={form?.email ?? ''} /><br />
 		<label for="password">Password</label>

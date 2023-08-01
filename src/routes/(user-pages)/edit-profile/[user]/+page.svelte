@@ -24,7 +24,6 @@
 	let buttons = ['image1'];
 	let images = {
 		'main-image': '',
-		image1: '',
 		image2: '',
 		image3: '',
 		image4: '',
@@ -113,17 +112,30 @@
 		}
 	};
 
-	//load in the images from the db
-	for (let i = 0; i < data.objects.length; i++) {
-		let imgNum = data.objects[i].image_number;
+	const processedImageNumbers = new Set();
 
-		// get urls from aws and load them into the images array
-		if (imgNum === 0) {
-			images['main-image'] = `${s3 + '/' + encodeURIComponent(data.objects[i].id)}`;
-		} else if (imgNum <= 8) {
-			images[`image${imgNum}`] = `${s3 + '/' + encodeURIComponent(data.objects[i].id)}`;
-			//the first one is already in the buttons list
-			buttons.push(`image${imgNum}`);
+	if (data.objects) {
+		buttons = [];
+		for (let i = 0; i < data.objects.length; i++) {
+			let imgNum = data.objects[i].image_number;
+
+			// Check if the image number has already been processed (duplicate image)
+			if (processedImageNumbers.has(imgNum)) {
+				continue; // Skip this image and go to the next iteration
+			}
+
+			// Add the image number to the Set to mark it as processed
+			processedImageNumbers.add(imgNum);
+
+			// Get the image URL from AWS and load it into the images object
+			let imageUrl = `${s3}/${encodeURIComponent(data.objects[i].id)}`;
+			if (imgNum === 0) {
+				images['main-image'] = imageUrl;
+			} else if (imgNum <= 8) {
+				images[`image${imgNum}`] = imageUrl;
+				// The first one is already in the buttons list
+				buttons.push(`image${imgNum}`);
+			}
 		}
 	}
 
@@ -294,38 +306,40 @@
 				<p class="text-gray-500 text-xs -mb-10">Please upload additional profile pictures.</p>
 				<div class="space-y-4 p-10">
 					{#each buttons as button}
-						<button
-							disabled={images[button] !== ''}
-							class="gold {images[button] !== ''
-								? 'nah'
-								: ''} text-white w-full hover:bg-gradient-to-br focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-							on:click={() => {
-								isModalOpen = true;
-								currImage = button;
-							}}
-							>Upload {button.charAt(0).toUpperCase() +
-								button.slice(1, button.length - 1) +
-								' ' +
-								button.slice(button.length - 1)}</button
-						>
-						{#if images[button] !== ''}
-							<h2 class="text-2xl">
-								{button.charAt(0).toUpperCase() +
-									button.slice(1, button.length - 1) +
-									' ' +
-									button.slice(button.length - 1)}
-							</h2>
-							<img src={images[button]} alt="Profile example" class="w-1/2 mx-auto" />
+						{#if images[button]}
 							<button
-								class="border border-white p-5 bg-gray-800 rounded-full mt-2"
+								disabled={images[button] !== ''}
+								class="gold {images[button] !== ''
+									? 'nah'
+									: ''} text-white w-full hover:bg-gradient-to-br focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
 								on:click={() => {
-									images[button] = '';
 									isModalOpen = true;
 									currImage = button;
-								}}>Change Image</button
+								}}
+								>Upload {button.charAt(0).toUpperCase() +
+									button.slice(1, button.length - 1) +
+									' ' +
+									button.slice(button.length - 1)}</button
 							>
+							{#if images[button] !== ''}
+								<h2 class="text-2xl">
+									{button.charAt(0).toUpperCase() +
+										button.slice(1, button.length - 1) +
+										' ' +
+										button.slice(button.length - 1)}
+								</h2>
+								<img src={images[button]} alt="Profile example" class="w-1/2 mx-auto" />
+								<button
+									class="border border-white p-5 bg-gray-800 rounded-full mt-2"
+									on:click={() => {
+										images[button] = '';
+										isModalOpen = true;
+										currImage = button;
+									}}>Change Image</button
+								>
+							{/if}
+							<hr class="my-5" />
 						{/if}
-						<hr class="my-5" />
 					{/each}
 					{#if buttons.length < 8}
 						<br />

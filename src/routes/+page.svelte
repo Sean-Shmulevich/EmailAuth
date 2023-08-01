@@ -68,83 +68,54 @@
 		<div class="flex flex-wrap -m-4 text-center max-w-[90vw] mx-auto">
 			<div class="p-4 md:w-1/4 sm:w-1/2 w-full">
 				<div class="border-2 border-gray-200 px-4 py-6 rounded-lg">
-					<svg
-						fill="none"
-						stroke="currentColor"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						class="text-blue-500 w-12 h-12 mb-3 inline-block"
-						viewBox="0 0 24 24"
-					>
-						<path d="M8 17l4 4 4-4m-4-5v9" />
-						<path d="M20.88 18.09A5 5 0 0018 9h-1.26A8 8 0 103 16.29" />
-					</svg>
+					<img
+						src="https://shmul.dev/assets/athleteEmpowerment.png"
+						alt="athlete empowerment"
+						class="w-14 white-icon h-14 mb-3 inline-block"
+					/>
 					<h2 class="title-font font-medium text-3xl text-gray-300">A</h2>
 					<p class=" text-white leading-relaxed">
-						<span class="text-red-500 font-bold text-lg">A</span>thlete Empowerment
+						<span class="text-gold font-bold text-lg">A</span>thlete Empowerment
 					</p>
 				</div>
 			</div>
 			<div class="p-4 md:w-1/4 sm:w-1/2 w-full">
 				<div class="border-2 border-gray-200 px-4 py-6 rounded-lg">
-					<svg
-						fill="none"
-						stroke="currentColor"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						class="text-blue-500 w-12 h-12 mb-3 inline-block"
-						viewBox="0 0 24 24"
-					>
-						<path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-						<circle cx="9" cy="7" r="4" />
-						<path d="M23 21v-2a4 4 0 00-3-3.87m-4-12a4 4 0 010 7.75" />
-					</svg>
+					<img
+						src="https://shmul.dev/assets/brandAlignment.png"
+						alt="brand alignment"
+						class="w-14 white-icon h-14 mb-3 inline-block"
+					/>
+
 					<h2 class="title-font font-medium text-3xl text-gray-300">B</h2>
 					<p class="text-white leading-relaxed">
-						<span class="font-bold text-lg text-red-500">B</span>rand Alignment
+						<span class="font-bold text-lg text-gold">B</span>rand Alignment
 					</p>
 				</div>
 			</div>
 			<div class="p-4 md:w-1/4 sm:w-1/2 w-full">
 				<div class="border-2 border-gray-200 px-4 py-6 rounded-lg">
-					<svg
-						fill="none"
-						stroke="currentColor"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						class="text-blue-500 w-12 h-12 mb-3 inline-block"
-						viewBox="0 0 24 24"
-					>
-						<path d="M3 18v-6a9 9 0 0118 0v6" />
-						<path
-							d="M21 19a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3zM3 19a2 2 0 002 2h1a2 2 0 002-2v-3a2 2 0 00-2-2H3z"
-						/>
-					</svg>
+					<img
+						src="https://shmul.dev/assets/community.png"
+						alt="brand alignment"
+						class="w-14 white-icon h-14 mb-3 inline-block"
+					/>
 					<h2 class="title-font font-medium text-3xl text-gray-300">C</h2>
 					<p class="text-white leading-relaxed">
-						<span class="font-bold text-lg text-red-500">C</span>ommunity Impact
+						<span class="font-bold text-lg text-gold">C</span>ommunity Impact
 					</p>
 				</div>
 			</div>
 			<div class="p-4 md:w-1/4 sm:w-1/2 w-full">
 				<div class="border-2 border-gray-200 px-4 py-6 rounded-lg">
-					<svg
-						fill="none"
-						stroke="currentColor"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						class="text-blue-500 w-12 h-12 mb-3 inline-block"
-						viewBox="0 0 24 24"
-					>
-						<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-					</svg>
+					<img
+						src="https://shmul.dev/assets/Data.png"
+						alt="data"
+						class="w-14 white-icon h-14 mb-3 inline-block"
+					/>
 					<h2 class="title-font font-medium text-3xl text-gray-300">D</h2>
 					<p class="text-white leading-relaxed">
-						<span class="font-bold text-lg text-red-500">D</span>ata Driven Growth
+						<span class="font-bold text-lg text-gold">D</span>ata Driven Growth
 					</p>
 				</div>
 			</div>
@@ -562,5 +533,8 @@
 		100% {
 			background-position: 200% center;
 		}
+	}
+	.white-icon {
+		filter: invert(1); /* Inverts the colors, making black white */
 	}
 </style>

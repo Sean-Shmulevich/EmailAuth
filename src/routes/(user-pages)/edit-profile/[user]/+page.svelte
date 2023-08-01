@@ -113,8 +113,18 @@
 	};
 
 	const processedImageNumbers = new Set();
-
-	if (data.objects) {
+	//if the image list is empty there are no images posted
+	//if the image list has one in it it is either the main profile image or the first image in the auxillary images
+	//so either the first image is image position 0 or image position 1
+	//if its 0 just set the main image
+	//if there are two images in the list or the first image is image_number 1 then then run this code
+	// data.objects.length >= 1 && data.objects[0].image_number === 0
+	if (data.objects.length >= 1 && data.objects[0].image_number === 0) {
+		let imageUrl = `${s3}/${encodeURIComponent(data.objects[0].id)}`;
+		images['main-image'] = imageUrl;
+	}
+	if (data.objects.length >= 2 || data.objects[0].image_number !== 0) {
+		console.log(data.objects.length);
 		buttons = [];
 		for (let i = 0; i < data.objects.length; i++) {
 			let imgNum = data.objects[i].image_number;
@@ -129,9 +139,7 @@
 
 			// Get the image URL from AWS and load it into the images object
 			let imageUrl = `${s3}/${encodeURIComponent(data.objects[i].id)}`;
-			if (imgNum === 0) {
-				images['main-image'] = imageUrl;
-			} else if (imgNum <= 8) {
+			if (imgNum <= 8 && imgNum !== 0) {
 				images[`image${imgNum}`] = imageUrl;
 				// The first one is already in the buttons list
 				buttons.push(`image${imgNum}`);
@@ -175,7 +183,9 @@
 	// }
 
 	//add new ui button
-	const addNewButton = () => {
+	const addNewButton = (e) => {
+		console.log(e);
+		console.log(buttons);
 		if (buttons.length < 8) {
 			const currButton = buttons[buttons.length - 1];
 			if (images[currButton] === '' || images[currButton] === undefined) {

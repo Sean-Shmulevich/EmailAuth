@@ -54,6 +54,6 @@ export const actions: Actions = {
 		const subject = formData.get('subject')?.toString() ?? '';
 		const message = formData.get('message')?.toString() ?? '';
 		//TODO change this email to support@dapup.co
-		sendEmail('seanshmulevich@gmail.com', `Request from ${email}, Subject: ${subject}`, message);
+		sendEmail('info@dapup.co', `Request from ${email}, Subject: ${subject}`, message);
 	}
 };

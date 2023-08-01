@@ -45,7 +45,7 @@
 		class="inline-flex absolute w-[40%] left-0 right-0 top-[60vh] mx-auto text-center flex-col-reverse items-center hover:text-yellow-500"
 	>
 		<svg
-			class="w-5 h-5 ml-2"
+			class="w-5 m-10 h-5 ml-2"
 			xmlns="http://www.w3.org/2000/svg"
 			fill="none"
 			viewBox="0 0 24 24"

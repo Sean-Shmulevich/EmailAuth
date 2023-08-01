@@ -42,13 +42,23 @@ export const sendEmailVerificationEmail = async (
 ) => {
 	const verificationLink = `${ROOT_URL}/email-verification/${verificationToken}`;
 	const emailContent = `
-Welcome to DapUp!<br/><br/> We are thrilled that you've joined our community of college athletes seeking exclusive NIL deals and opportunities with brands. Thank you for signing up with us!<br/><br/>
-While we verify your account, please complete your profile with relevant details about your bio, athletic background, and achievements. A complete profile expedites the verification process and enhances your DapUp experience. Our team will review your information swiftly and grant access to brand opportunities once your account is verified.<br/><br/>
+Welcome to DapUp!<br/><br/> 
+
+We are thrilled that you've joined our community of college athletes seeking exclusive NIL deals and opportunities with brands. Thank you for signing up with us!<br/><br/>
+
+While we verify your account, please complete your profile with relevant details about your bio, athletic background, and achievements. 
+A complete profile expedites the verification process and enhances your DapUp experience. Our team will review your information swiftly 
+and grant access to brand opportunities once your account is verified.<br/><br/>
+
 Click the following link to begin verifying your account: <a href='${verificationLink}'>${verificationLink}</a><br/><br/>
+
 In the meantime, we invite you to explore our website, DapUp.co, familiarize yourself with our platform, share with your teammates, and stay tuned for incredible opportunities.
 Have questions? Contact our support team at [support@email.com]. We are here to help you every step of the way.<br/><br/>
+
 Thank you for choosing DapUp, the premier matchmaking platform for athletes and brands. Get ready to DapUp Your Game!<br/><br/>
+
 Best regards,<br/><br/>
+
 DapUp Team<br/>
 `;
 	await sendEmail(emailAddress, 'Welcome to DapUp - Verification in Progress!', emailContent);
@@ -60,22 +70,24 @@ export const sendEmailVerificationEmailBrand = async (
 ) => {
 	const verificationLink = `${ROOT_URL}/email-verification/${verificationToken}`;
 	const emailContent = `
-	Thank you for choosing DapUp as your platform to grow your business by connecting with college athletes for NIL marketing campaigns.<br/> At DapUp, we are dedicated to empowering brands like yours to collaborate with talented college athletes, creating winning partnerships that drive results.<br/>
+	Welcome to DapUp!<br/><br/>
+	Thank you for choosing DapUp as your platform to grow your business by connecting with college athletes for NIL marketing campaigns.<br/>
+	At DapUp, we are dedicated to empowering brands like yours to collaborate with talented college athletes, creating winning partnerships that drive results.<br/><br/>
 
-	While we verify your account, please complete your profile with relevant details about your brand. 
+	While we verify your account, please complete your profile with relevant details about your brand.<br/>
+	A complete profile expedites the verification process and enhances your DapUp experience. <br/>
+	Our team will review your information swiftly and grant full access to the DapUp platform once your account is verified.<br/><br/>
 
-	A complete profile expedites the verification process and enhances your DapUp experience. Our team will review your information swiftly and grant full access to the DapUp platform once your account is verified.<br/>
-
-	<strong>Click the following link to begin verifying your account: <a href="${verificationLink}">${verificationLink}</a></strong><br/>
+	<strong>Click the following link to begin verifying your account: <a href="${verificationLink}">${verificationLink}</a></strong><br/><br/>
 
 	In the meantime, we encourage you to explore our website, DapUp.co, familiarize yourself with our platform, and imagine the possibilities that await you.<br/>
+	Have questions? Contact our support team at [support@dapup.com] or submit an inquiry right from out homepage. We are here to help you every step of the way.</br></br>
 
-	Have questions? Contact our support team at [support@email.com]. We are here to help you every step of the way.</br>
+	Thank you for choosing DapUp, the premier matchmaking platform for athletes and brands. Get ready to DapUp Your Game!<br/><br/>
 
-	Thank you for choosing DapUp, the premier matchmaking platform for athletes and brands. Get ready to DapUp Your Game!<br/>
+	Best regards,<br/><br/>
 
-	Best regards,<br/>
-	DapUp Team
+	DapUp Team<br/>
 `;
 	await sendEmail(emailAddress, 'Welcome to DapUp - Verification in Progress!', emailContent);
 };

@@ -31,7 +31,7 @@
 </script>
 
 <div class="flex flex-row bg-gray-700 rounded-xl items-center">
-	<Button><Chevron>Sport Preference</Chevron></Button>
+	<Button><Chevron>What is your primary sport?</Chevron></Button>
 	<Dropdown
 		class="w-54 h-32 overflow-y-scroll text-black  text-left whitespace-nowrap space-y-3 text-sm"
 	>

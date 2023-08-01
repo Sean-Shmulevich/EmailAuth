@@ -353,44 +353,44 @@
 		</div>
 	</div>
 </section>
-<section class="text-gray-600 body-font mb-20 flex flex-col">
-	<div class="mt-5 container px-5 mx-auto">
-		<div class="flex flex-col text-center w-full mb-12">
-			<h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gold">Meet the team</h1>
-		</div>
-		<div class="flex flex-col sm:flex-row flex-wrap justify-center text-center mx-auto">
-			<div
-				class="p-4 mb-5 mx-5 text-center bg-transparent rounded-xl border border-white w-full md:w-1/3"
-			>
-				<div class="flex justify-center">
-					<img
-						src="https://pbs.twimg.com/profile_images/1580783698080833538/knk3o2Lm_400x400.jpg"
-						alt="founder Ayden Owens-Delerme"
-					/>
-				</div>
-				<p class="text-lg text-white">Ayden Owens-Delerme</p>
-				<p class="text-sm text-white">Short description overview thing</p>
-				<p class="text-[10px] text-right text-gray-500" style="transform: translateY(9px)">
-					hover for more info >
-				</p>
+<section class="text-gray-600 body-font mb-20">
+	<div class="text-center w-full mb-12">
+		<h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gold">Meet the team</h1>
+	</div>
+	<div class="flex flex-col md:flex-row flex-wrap justify-center text-center mx-auto items-center">
+		<div
+			class="p-4 mb-5 mx-5 text-center bg-transparent rounded-xl border border-white w-fit md:w-1/3"
+		>
+			<div class="flex justify-center">
+				<img
+					class="w-[80%] h-[80%]"
+					src="https://pbs.twimg.com/profile_images/1580783698080833538/knk3o2Lm_400x400.jpg"
+					alt="founder Ayden Owens-Delerme"
+				/>
 			</div>
-			<div
-				class="p-4 mb-5 mx-5 text-center bg-transparent rounded-xl border border-white w-full md:w-1/3"
-			>
-				<div class="flex justify-center">
-					<img
-						src="https://pbs.twimg.com/profile_images/1580783698080833538/knk3o2Lm_400x400.jpg"
-						alt="founder Ayden Owens-Delerme"
-					/>
-				</div>
-				<p class="text-lg text-white">Ayden Owens-Delerme</p>
-				<p class="text-sm text-white">Short description overview thing</p>
-				<p class="text-[10px] text-right text-gray-500" style="transform: translateY(9px)">
-					hover for more info >
-				</p>
-			</div>
-			<!-- <div class="p-4 sm:w-1/2 w-full" /> -->
+			<p class="text-xl text-white">Ayden Owens-Delerme</p>
+			<p class="text-md text-white">Short description overview thing</p>
+			<p class="text-[15px] text-right text-gray-500" style="transform: translateY(9px)">
+				hover for more info >
+			</p>
 		</div>
+		<div
+			class="p-4 mb-5 mx-5 text-center bg-transparent rounded-xl border border-white w-fit md:w-1/3"
+		>
+			<div class="flex justify-center">
+				<img
+					class="w-[80%] h-[80%]"
+					src="https://pbs.twimg.com/profile_images/1580783698080833538/knk3o2Lm_400x400.jpg"
+					alt="founder Ayden Owens-Delerme"
+				/>
+			</div>
+			<p class="text-xl text-white">Ayden Owens-Delerme</p>
+			<p class="text-md text-white">Short description overview thing</p>
+			<p class="text-[15px] text-right text-gray-500" style="transform: translateY(9px)">
+				hover for more info >
+			</p>
+		</div>
+		<!-- <div class="p-4 sm:w-1/2 w-full" /> -->
 	</div>
 </section>
 <section class="bg-gray-900 -mt-5">

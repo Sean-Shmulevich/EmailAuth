@@ -34,7 +34,8 @@
 <Button><Chevron>Pick 3 social media links to add to your profile</Chevron></Button>
 <Dropdown
 	bind:open
-	class="w-54 h-32 overflow-y-scroll text-black  text-left whitespace-nowrap space-y-3 text-sm"
+	placement="top"
+	class="w-64 h-32 bg-white overflow-y-scroll text-black  text-left whitespace-nowrap space-y-3 text-sm"
 >
 	{#each socialMediaTypes as socialMedia}
 		<Radio

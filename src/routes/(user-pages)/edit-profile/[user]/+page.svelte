@@ -6,6 +6,7 @@
 	// @ts-nocheck
 	import ImageCropper from './ImageCropper.svelte';
 	import SportRadio from './SportRadio.svelte';
+	import SocialMediaPicker from './SocialMediaPicker.svelte';
 	import { enhance } from '$app/forms';
 	export let data;
 	export let form;
@@ -428,6 +429,9 @@
 				>
 					{deltaContent}
 				</div>
+			</div>
+			<div class="mb-4">
+				<SocialMediaPicker />
 			</div>
 
 			<div class="flex items-center justify-between">

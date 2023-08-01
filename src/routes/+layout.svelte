@@ -63,7 +63,7 @@
 		</div>
 		<div class="z-10 relative">
 			{#if data.msg !== 'not authenticated'}
-				<Dropdown class="z-12 text-white" inline triggeredBy="#avatar_with_name">
+				<Dropdown class="z-12 text-white bg-gray-700" inline triggeredBy="#avatar_with_name">
 					{#if data.msg === 'email authenticated'}
 						<div class="px-4 py-2 bg-red-700">
 							<span class="block text-sm text-white"> Waiting on verification </span>

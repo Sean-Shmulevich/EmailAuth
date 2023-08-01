@@ -143,6 +143,7 @@
 		</div>
 	</div>
 </section> -->
+<!-- User Guide -->
 
 <!-- Statistics -->
 <section class="text-gray-600 -mx-20 body-font">
@@ -235,6 +236,32 @@
 					<p class="text-white leading-relaxed">
 						<span class="font-bold text-lg text-red-500">D</span>ata Driven Growth
 					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="text-gray-600 -mx-20 body-font">
+	<div class="mt-5 container px-5 mx-auto">
+		<div class="flex flex-col text-center w-full mb-12">
+			<h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-white">
+				How does DapUp work?
+			</h1>
+		</div>
+		<div class="flex flex-wrap -m-4 text-center max-w-[90vw] mx-auto">
+			<div class="p-4 sm:w-1/2 w-full">
+				<div class="border-2 border-gray-200 hover:border-green-500 px-4 py-6 rounded-lg">
+					<a href="/user-guide" class=" text-white leading-relaxed">
+						<h2 class="title-font font-medium text-3xl text-gray-100">Brand guide</h2>
+					</a>
+				</div>
+			</div>
+			<div class="p-4 sm:w-1/2 w-full">
+				<div class="border-2 border-gray-200 hover:border-green-500 px-4 py-6 rounded-lg">
+					<a href="/brand-guide" class=" text-white leading-relaxed">
+						<h2 class="title-font font-medium text-3xl text-gray-100">Athlete guide</h2>
+					</a>
 				</div>
 			</div>
 		</div>
@@ -393,6 +420,53 @@
 	</div>
 </section>
 
+<section class="bg-gray-900 -mt-5">
+	<div class="py-4 lg:py-16 px-4 mx-auto max-w-screen-md">
+		<h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center text-white">Contact Us</h2>
+		<p class="mb-8 lg:mb-16 font-light text-center text-gray-300 dark:text-gray-400 sm:text-xl">
+			Got a technical issue? Want to send feedback? Let us know.
+		</p>
+		<form action="#" class="space-y-8">
+			<div>
+				<label for="email" class="block mb-2 text-sm font-medium text-gray-300">Your email</label>
+				<input
+					type="email"
+					id="email"
+					class="shadow-sm bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
+					placeholder="name@flowbite.com"
+					required
+				/>
+			</div>
+			<div>
+				<label for="subject" class="block mb-2 text-sm font-medium text-gray-300">Subject</label>
+				<input
+					type="text"
+					id="subject"
+					class="block p-3 w-full text-sm bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
+					placeholder="Let us know how we can help you"
+					required
+				/>
+			</div>
+			<div class="sm:col-span-2">
+				<label for="message" class="block mb-2 text-sm font-medium text-gray-300"
+					>Your message</label
+				>
+				<textarea
+					id="message"
+					rows="6"
+					class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+					placeholder="Leave a comment..."
+				/>
+			</div>
+			<button
+				type="submit"
+				class="py-3 px-5 text-sm font-medium text-center bg-blue-600 text-white rounded-lg sm:w-fit border-2 hover:border-2 hover:border-green-500"
+				>Send message</button
+			>
+		</form>
+	</div>
+</section>
+
 <!-- Testinomials -->
 <!-- <section class="text-gray-600 body-font">
 	<div class="container px-5 py-24 mx-auto">
@@ -544,7 +618,7 @@
 </footer>
 
 <!-- DROPZONE -->
-<!-- <div use:filedrop={filedropOptions} on:filedrop={(e) => { handleDrop(e) }} class="mx-6 my-6 rounded-md bg-white border-2 border-dashed border-gray-600 px-20 pt-10 pb-10">
+<!-- <div use:filedrop={filedropOptions} on:filedrop={(u) => { handleDrop(e) }} class="mx-6 my-6 rounded-md bg-white border-2 border-dashed border-gray-600 px-20 pt-10 pb-10">
     <div class="mt-1 flex justify-center ">
         <div class="mt-1 flex justify-center ">
             <div class="space-y-1 text-center">

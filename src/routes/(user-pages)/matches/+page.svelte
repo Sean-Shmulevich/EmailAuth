@@ -97,6 +97,7 @@
 			<div class="flex flex-col md:flex-row">
 				{#if currDeal.dealImages.length !== 0}
 					<img
+						alt={currDeal.brandName}
 						class="mt-5 rounded-2xl mx-auto sm:mx-[unset] h-[500px] w-[400px]"
 						src="/api/s3object/{currDeal.dealImages[0].id}"
 					/>

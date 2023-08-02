@@ -18,7 +18,7 @@
 		'sports',
 		'NFTs',
 		'crypto',
-		'buisness',
+		'business',
 		'health and wellness',
 		'fashion',
 		'engineering'

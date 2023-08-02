@@ -52,7 +52,7 @@
 	//Image after cropping
 	let croppedImage = null;
 	//basically a parameter to the ImageCropper.svelte component to change the crop aspect ratio and other associated values
-	let squareInput = false;
+	let squareInput = true;
 
 	//the current image being modified in the images object
 	let currImage = null;
@@ -290,7 +290,6 @@
 						? 'nah'
 						: ''} text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
 					on:click={() => {
-						squareInput = true;
 						isModalOpen = true;
 						currImage = 'main-image';
 					}}
@@ -304,7 +303,6 @@
 						on:click={() => {
 							images['main-image'] = '';
 							isModalOpen = true;
-							squareInput = true;
 							//!!!
 							currImage = 'main-image';
 						}}>Change Image</button

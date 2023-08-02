@@ -7,8 +7,6 @@
 
 	const dispatch = createEventDispatcher();
 
-
-
 	let crop = { x: 0, y: 0 };
 	let zoom = 1;
 	let image, fileinput, pixelCrop;
@@ -29,27 +27,15 @@
 	let aspect;
 	let width;
 	let height;
+	aspect = 1;
+	width = 300;
+	height = 300;
+	aspect = aspect;
+	width = width;
+	height = height;
 	//this reactive block Im not sure if it needs to be in the block
-	$: {
-		if (square) {
-			aspect = 1;
-			width = 300;
-			height = 300;
-			aspect = aspect;
-			width = width;
-			height = height;
-		} else {
-			aspect = 3 / 4;
-			width = 300;
-			height = 400;
-			aspect = aspect;
-			width = width;
-			height = height;
-		}
-	}
 
 	let profilePicture, style;
-
 
 	function previewCrop(e) {
 		pixelCrop = e.detail.pixels;
@@ -112,8 +98,11 @@
 		{#if croppedImage}
 			<h2 class="font-bold text-xl mb-3">Cropped Output</h2>
 			<!-- URL.createObjectURL(croppedImage) turns the file type into a temporary blob that can be seen right away -->
-			<img src={URL.createObjectURL(croppedImage)} style="width:{width}px;height:{height}px" alt="Cropped profile" /><br
-			/>
+			<img
+				src={URL.createObjectURL(croppedImage)}
+				style="width:{width}px;height:{height}px"
+				alt="Cropped profile"
+			/><br />
 			<button
 				type="button"
 				on:click={() => {

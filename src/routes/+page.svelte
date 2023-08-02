@@ -27,19 +27,20 @@
 	<input type="submit" value="Sign out" />
 </form> -->
 <section
-	class="text-white body-font mx-0"
-	style="height:95vh; background-image: url('https://shmul.dev/assets/dapupmainimg.png'); background-size: cover; background-position: center center"
+	class="img-section sm:bg-[url('https://shmul.dev/assets/dapupmainimg.png')] text-white body-font mx-0"
+	style="height:85vh; background-size:cover; background-position: center center; "
 >
 	<div class="container mx-auto flex px-5 py-24 items-center justify-center">
 		<div class="text-center mt-[15vh] lg:w-full xl:w-full">
 			<h1
-				class="text-4xl mb-[10vh] md:text-6xl lg:text-6xl xl:text-8xl font-bold leading-tight"
+				class="text-4xl -mt-32 sm:mt-0 md:text-6xl lg:text-6xl xl:text-8xl font-bold leading-tight"
 				style="text-shadow: 0 0 5px black;"
 			>
 				The premier matchmaking platform for athletes and brands
 			</h1>
 		</div>
 	</div>
+	<img class="sm:hidden block mx-auto -mt-10" src="https://shmul.dev/assets/dapupmainimg.png" />
 	<a
 		href="#learn-more"
 		class="inline-flex w-full mx-auto text-center mt-10 flex-col-reverse items-center hover:text-yellow-500"
@@ -577,6 +578,11 @@
 	}
 	.white-icon {
 		filter: invert(1); /* Inverts the colors, making black white */
+	}
+	@media (max-width: 768px) {
+		/* Adjust the background-size value to control the zoom level on small screens */
+		.img-section {
+		}
 	}
 	.gold {
 		color: #d5ad6d; /*if no support for background-clip*/

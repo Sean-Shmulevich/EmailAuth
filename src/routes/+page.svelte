@@ -365,19 +365,17 @@
 	<div class="text-center w-full mb-12">
 		<h1 class="sm:text-3xl text-2xl font-extrabold title-font mb-4 text-gold">Meet the team</h1>
 	</div>
-	<div class="mx-20 sm:mx-20 flex flex-col md:flex-row justify-center text-center items-center">
+	<div class="sm:mx-10 flex flex-col md:flex-row justify-center text-center items-center">
 		<!-- svelte-ignore a11y-mouse-events-have-key-events -->
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<div
 			class="p-2 mb-5 mx-5 text-center bg-transparent rounded-xl border border-white w-full md:w-1/3"
-			on:mouseenter|preventDefault={() => {
-				showImage = false;
-			}}
-			on:mouseleave|preventDefault={() => {
-				showImage = true;
+			on:click|preventDefault={() => {
+				showImage = !showImage;
 			}}
 		>
 			{#if showImage}
-				<div class="hover:hidden lg:mx-[40px] flex justify-center">
+				<div class="lg:mx-[40px] flex justify-center">
 					<img src="https://shmul.dev/assets/ayden.png" alt="founder Ayden Owens-Delerme" />
 				</div>
 			{:else}
@@ -402,7 +400,7 @@
 				class="text-[15px] hidden md:block text-right text-gray-500"
 				style="transform: translateY(9px)"
 			>
-				hover for more info >
+				click for more info >
 			</p>
 			<p
 				class="text-[15px] lg:hidden md:hidden text-right text-gray-500"
@@ -413,15 +411,12 @@
 		</div>
 		<div
 			class="p-2 mb-5 mx-5 text-center bg-transparent rounded-xl border border-white w-full md:w-1/3"
-			on:mouseenter|preventDefault={() => {
-				showImage0 = false;
-			}}
-			on:mouseleave|preventDefault={() => {
-				showImage0 = true;
+			on:click|preventDefault={() => {
+				showImage0 = !showImage0;
 			}}
 		>
 			{#if showImage0}
-				<div class=" hover:hidden lg:mx-[40px] flex justify-center">
+				<div class=" lg:mx-[40px] flex justify-center">
 					<img src="https://shmul.dev/assets/quintin.png" alt="founder quintin owens" />
 				</div>
 			{:else}
@@ -440,7 +435,7 @@
 				class="text-[15px] hidden md:block text-right text-gray-500"
 				style="transform: translateY(9px)"
 			>
-				hover for more info >
+				click more info >
 			</p>
 			<p
 				class="text-[15px] lg:hidden md:hidden text-right text-gray-500"

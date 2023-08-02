@@ -219,7 +219,7 @@
 						<div class="h-full w-1 bg-gray-200 pointer-events-none" />
 					</div>
 					<div
-						class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500 inline-flex items-center justify-center text-white relative z-10"
+						class="flex-shrink-0 w-10 h-10 rounded-full bg-gray-900 border border-white inline-flex items-center justify-center text-white relative z-10"
 					>
 						<svg
 							fill="none"
@@ -248,7 +248,7 @@
 						<div class="h-full w-1 bg-gray-200 pointer-events-none" />
 					</div>
 					<div
-						class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500 inline-flex items-center justify-center text-white relative z-10"
+						class="flex-shrink-0 w-10 h-10 rounded-full bg-gray-900 border border-white inline-flex items-center justify-center text-white relative z-10"
 					>
 						<svg
 							fill="none"
@@ -275,7 +275,7 @@
 						<div class="h-full w-1 bg-gray-200 pointer-events-none" />
 					</div>
 					<div
-						class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500 inline-flex items-center justify-center text-white relative z-10"
+						class="flex-shrink-0 w-10 h-10 rounded-full bg-gray-900 border border-white inline-flex items-center justify-center text-white relative z-10"
 					>
 						<svg
 							fill="none"
@@ -303,7 +303,7 @@
 						<div class="h-full w-1 bg-gray-200 pointer-events-none" />
 					</div>
 					<div
-						class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500 inline-flex items-center justify-center text-white relative z-10"
+						class="flex-shrink-0 w-10 h-10 rounded-full bg-gray-900 border border-white inline-flex items-center justify-center text-white relative z-10"
 					>
 						<svg
 							fill="none"
@@ -328,7 +328,7 @@
 				</div>
 				<div class="flex relative">
 					<div
-						class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500 inline-flex items-center justify-center text-white relative z-10"
+						class="flex-shrink-0 w-10 h-10 rounded-full bg-gray-900 border border-white inline-flex items-center justify-center text-white relative z-10"
 					>
 						<svg
 							fill="none"

@@ -32,7 +32,7 @@
 				name="goal"
 				value={option}
 			/>
-			<span class="mr-5">{option}</span>
+			<span class="ml-3 mr-5">{option}</span>
 		</label>
 	{/each}
 </div>

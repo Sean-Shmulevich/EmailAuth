@@ -18,10 +18,15 @@
 		sport: 'empty',
 		college: 'empty',
 		year: 'empty',
+		goal: 'empty',
+		industries: ['empty'],
+		socialMedia: {},
+		hometown: 'empty',
 		bio: 'empty'
 	};
 	//set the user data to the data from the database from load in +page.server.ts
 	user = { ...user, ...data.currUserProfile };
+	// console.log(user);
 	user.name = data.name;
 
 	//index keeps track of the current image in the slidedeck
@@ -69,7 +74,7 @@
 	}
 </script>
 
-<div class="mt-[30px] bg-gray-900 text-white flex flex-col items-center justify-center space-y-8">
+<div class="mt-[30px] lg:p-5 bg-gray-900 text-white flex flex-col items-center justify-center">
 	<div
 		class="profile-card flex flex-col md:flex-row bg-gray-800 shadow rounded-lg max-w-7xl w-full p-6 overflow-hidden"
 	>
@@ -142,21 +147,38 @@
 					{@html user.bio}
 				</p>
 			</div>
-			<div class="flex flex-row items-center pt-2 justify-center mt-5 bottom-0">
+			<div class="border border-white p-2 rounded-xl -mb-2 mt-5 flex flex-col">
+				<div class="flex flex-row items-baseline pt-2 justify-start bottom-0">
+					<h4 class="text-lg leading-6 mr-8 font-medium text-white">Industries of interest</h4>
+					<p class="mt-2 text-base text-gray-400">
+						{user.industries
+							.map((industry) => industry.charAt(0).toUpperCase() + industry.slice(1))
+							.join(', ')}
+					</p>
+				</div>
+				<div class="flex flex-row items-baseline pt-2 mb-2 justify-start bottom-0">
+					<h4 class="text-lg leading-6 mr-8 font-medium text-white">#1 Goal of NIL marketing</h4>
+					<p class="mt-2 text-base text-gray-400">
+						{user.goal}
+					</p>
+				</div>
+			</div>
+			<div
+				class="flex flex-col sm:flex-row items-start space-y-2 sm:space-y-0 sm:items-center pt-2 justify-start space-x-2 mt-5 bottom-0"
+			>
 				<div
-					class="border p-2 rounded-full flex items-center text-xs sm:text-sm mx-0 sm:mx-5 text-gray-400"
+					class="border p-2 rounded-full flex items-center text-xs ml-[9px] sm:ml-0 sm:text-sm text-gray-400"
 				>
 					Sport: {user.sport}
 				</div>
-				<div
-					class="border p-2 rounded-full flex items-center text-xs sm:text-sm mx-0 sm:mx-5 text-gray-400"
-				>
+				<div class="border p-2 rounded-full flex items-center text-xs sm:text-sm text-gray-400">
 					{user.college}
 				</div>
-				<div
-					class="border p-2 rounded-full flex items-center text-xs sm:text-sm mx-0 sm:mx-5 text-gray-400"
-				>
+				<div class="border p-2 rounded-full flex items-center text-xs sm:text-sm text-gray-400">
 					Graduation: {user.year}
+				</div>
+				<div class="border p-2 rounded-full flex items-center text-xs sm:text-sm text-gray-400">
+					Hometown: {user.hometown}
 				</div>
 			</div>
 		</div>

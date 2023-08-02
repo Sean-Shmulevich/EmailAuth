@@ -34,7 +34,7 @@
 		<div class="text-center mt-[15vh] lg:w-full xl:w-full">
 			<h1
 				class="text-4xl -mt-44 sm:mt-0 md:text-6xl lg:text-6xl xl:text-8xl font-bold leading-tight"
-				style="text-shadow: 0 0 5px black;"
+				style="text-shadow:3px 4px 0px black;"
 			>
 				The premier matchmaking platform for athletes and brands
 			</h1>
@@ -549,24 +549,11 @@
 		-webkit-text-fill-color: transparent;
 	}
 	.text-gold {
-		background: linear-gradient(
-				to right,
-				#b87333,
-				#c8a200,
-				#c3a604 10%,
-				#fffdd0 20%,
-				#c8a200 30%,
-				#e5c100 40%,
-				#fffdd0 50%,
-				#c8a200 60%,
-				#e5c100 70%,
-				#fffdd0 80%,
-				#c8a200 90%,
-				#b87333 100%
-			)
-			repeat;
+		background: linear-gradient(45deg, #fde586 0%, #c29441 50%, #9b5d0e 100%);
+		background-clip: text;
 		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
+		color: transparent;
+		letter-spacing: 0.1em;
 	}
 
 	@keyframes shine {

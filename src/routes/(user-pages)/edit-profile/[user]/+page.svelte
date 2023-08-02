@@ -411,6 +411,13 @@
 					bind:value={user.year}
 				/>
 			</div>
+			<div class="mb-4 mt-4">
+				<label class="block text-gray-300 text-sm font-bold mb-2" for="bio"
+					>Social Media links</label
+				>
+				<p class="text-gray-500 text-xs mb-5">Submit upto 3 forms of social media</p>
+				<SocialMediaPicker />
+			</div>
 			<div class="mb-4">
 				<label class="block text-gray-300 text-sm font-bold mb-2" for="bio"> Bio </label>
 				<p class="text-gray-500 text-xs mb-2">Tell us a little about yourself.</p>
@@ -429,13 +436,6 @@
 				>
 					{deltaContent}
 				</div>
-			</div>
-			<div class="mb-4 mt-4">
-				<label class="block text-gray-300 text-sm font-bold mb-2" for="bio"
-					>Social Media links</label
-				>
-				<p class="text-gray-500 text-xs mb-5">Submit upto 3 forms of social media</p>
-				<SocialMediaPicker />
 			</div>
 
 			<div class="flex items-center justify-between">

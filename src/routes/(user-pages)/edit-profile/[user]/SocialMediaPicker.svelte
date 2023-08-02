@@ -8,15 +8,7 @@
 	// dont allow more then 3
 	// send a message when there is more then 3
 
-	let socialMediaTypes = [
-		'Instagram',
-		'LinkedIn',
-		'Website',
-		'Twitter',
-		'Facebook',
-		'MySpace',
-		'Doordash'
-	];
+	let socialMediaTypes = ['Instagram', 'twitter', 'Facebook', 'tik tok', 'snapchat', 'linkedin'];
 	let links = {};
 	let mediaType;
 	let open = false;

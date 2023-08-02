@@ -374,12 +374,12 @@
 				/>
 			</div>
 			<p class="text-xl text-white">Ayden Owens-Delerme</p>
-			<p class="text-md text-white">Short description overview thing</p>
+			<p class="text-md text-white">MBA Founder & Chief Executive Officer 3x NCAA Champion</p>
 			<p class="text-[15px] text-right text-gray-500" style="transform: translateY(9px)">
 				hover for more info >
 			</p>
 		</div>
-		<div
+		<!-- <div
 			class="p-4 mb-5 mx-5 text-center bg-transparent rounded-xl border border-white w-fit md:w-1/3"
 		>
 			<div class="flex justify-center">
@@ -389,12 +389,12 @@
 					alt="founder Ayden Owens-Delerme"
 				/>
 			</div>
-			<p class="text-xl text-white">Ayden Owens-Delerme</p>
-			<p class="text-md text-white">Short description overview thing</p>
+			<p class="text-xl text-white">Quintin Owens</p>
+			<p class="text-md text-white">Chief Sales Officer</p>
 			<p class="text-[15px] text-right text-gray-500" style="transform: translateY(9px)">
 				hover for more info >
 			</p>
-		</div>
+		</div> -->
 		<!-- <div class="p-4 sm:w-1/2 w-full" /> -->
 	</div>
 </section>

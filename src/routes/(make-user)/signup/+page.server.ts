@@ -19,8 +19,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 export const actions: Actions = {
 	default: async ({ request, locals }) => {
 		const formData = await request.formData();
-		console.log(formData);
-		const email = formData.get('email')?.toString() ?? '';
+		const email = (formData.get('email')?.toString() ?? '').toLowerCase() ?? '';
 		const name = formData.get('name')?.toString() ?? '';
 		const phoneNumber = formData.get('phone-number')?.toString() ?? '';
 		const uni = formData.get('university')?.toString() ?? '';

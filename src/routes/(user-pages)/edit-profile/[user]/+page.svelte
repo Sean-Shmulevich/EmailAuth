@@ -425,7 +425,9 @@
 			</div>
 			<div class="mb-4">
 				<label class="block text-gray-300 text-sm font-bold mb-2" for="bio"> Bio </label>
-				<p class="text-gray-500 text-xs mb-2">Tell us a little about yourself.</p>
+				<p class="text-gray-500 text-xs mb-2">
+					Tell us a little about yourself. (achievements, accolades, hobbies, etc.)
+				</p>
 				<!-- JANKY way of getting the user.bio into form data -->
 				<input
 					class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"

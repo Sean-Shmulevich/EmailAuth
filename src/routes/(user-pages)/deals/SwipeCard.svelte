@@ -135,37 +135,36 @@
 						</div>
 					{/if}
 					{#if pageNum === 1}
-						<div class="w-full p-5 text-white text-center h-full bg-gray-700">
-							<div class="grid grid-cols-3 gap-4 mb-4 p-5">
-								<div class="p-2 rounded-xl border border-white h-20">
-									Looking for: <br />{offer.sportPreference} players
-								</div>
-								{#if !offer.isCampaign}
-									<div class="p-2 rounded-xl border border-white h-20">
-										Location: <br />{offer.location}
-										{#if offer.location === ''}
-											Virtual
-										{/if}
-									</div>
-								{/if}
-								<div class="p-2 rounded-xl border border-white h-20">
-									{#if offer.isCampaign && offer.eventDate}
-										Start Date: <br />{offer.eventDate.toString().slice(0, 10)}<br />
-									{:else if !offer.isCampaign && offer.eventDate}
-										Date: <br />{offer.eventDate.toString().slice(0, 10)}
-									{/if}
-								</div>
-								{#if offer.isCampaign}
-									<div class="p-2 rounded-xl border border-white h-20">
-										End Date: <br />{offer.endDate.toString().slice(0, 10)}
-									</div>
-								{/if}
-								<!-- <div class="p-2 rounded-xl border border-white h-20">Item 3</div> -->
-							</div>
-							<div class="p-2 text-left rounded-xl border border-white w-full">
+						<div
+							class="w-full flex flex-col space-y-5 p-5 text-white text-center h-full bg-gray-700"
+						>
+							<div class="mb-10 p-2 text-left rounded-xl border border-white w-full">
 								<p class="text-lg underline text-center">Description</p>
 								<p>{offer.shortDescription}</p>
 							</div>
+							<div class="p-2 rounded-xl border border-white h-20">
+								Looking for: <br />{offer.sportPreference} players
+							</div>
+							{#if !offer.isCampaign}
+								<div class="p-2 rounded-xl border border-white h-20">
+									Location: <br />{offer.location}
+									{#if offer.location === ''}
+										Virtual
+									{/if}
+								</div>
+							{/if}
+							<div class="p-2 rounded-xl border border-white h-20">
+								{#if offer.isCampaign && offer.eventDate}
+									Start Date: <br />{offer.eventDate.toString().slice(0, 10)}<br />
+								{:else if !offer.isCampaign && offer.eventDate}
+									Date: <br />{offer.eventDate.toString().slice(0, 10)}
+								{/if}
+							</div>
+							{#if offer.isCampaign}
+								<div class="p-2 rounded-xl border border-white h-20">
+									End Date: <br />{offer.endDate.toString().slice(0, 10)}
+								</div>
+							{/if}
 						</div>
 						<!-- <div class="w-full p-5 text-white text-center h-full bg-gray-700">
 								<div class="flex flex-col mt-4 h-[65%]">

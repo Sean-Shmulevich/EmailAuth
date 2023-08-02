@@ -28,10 +28,10 @@
 </form> -->
 <section
 	class="text-white body-font mx-0"
-	style="height:75vh; background-image: url('https://shmul.dev/assets/dapupmainimg.png'); background-size: cover; background-position: center center"
+	style="height:95vh; background-image: url('https://shmul.dev/assets/dapupmainimg.png'); background-size: cover; background-position: center center"
 >
 	<div class="container mx-auto flex px-5 py-24 items-center justify-center">
-		<div class="text-center lg:w-full xl:w-full">
+		<div class="text-center mt-[15vh] lg:w-full xl:w-full">
 			<h1
 				class="text-4xl mb-[10vh] md:text-6xl lg:text-6xl xl:text-8xl font-bold leading-tight"
 				style="text-shadow: 0 0 5px black;"

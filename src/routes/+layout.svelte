@@ -36,12 +36,12 @@
 				style="margin-bottom:18px"
 			>
 				{#if data.msg === 'not authenticated'}
-					<span class="mr-6 text-white">Login/Sign Up: </span>
+					<!-- <span class="mr-6 text-white">Login/Sign Up: </span> -->
 					<a
 						href="/login"
 						class="hover:text-yellow-500 hover:bg-gray-800 bg-gray-500 text-white font-semibold inline-flex items-center mr-5 px-4 py-2 rounded-full bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30"
 					>
-						Athletes
+						Athlete login
 					</a>
 
 					<!-- TODO COMING SOON /brand-login-->
@@ -49,7 +49,7 @@
 						href="/coming-soon"
 						class="hover:text-yellow-500 hover:bg-gray-800 bg-gray-500 text-white font-semibold inline-flex items-center px-4 py-2 rounded-full bg-grey-400 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30"
 					>
-						Brands
+						Brand login
 					</a>
 					<!-- if data.msg === 'email authenticated' -->
 				{:else}

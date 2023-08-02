@@ -33,7 +33,7 @@
 	<div class="container mx-auto flex px-5 py-24 items-center justify-center">
 		<div class="text-center mt-[15vh] lg:w-full xl:w-full">
 			<h1
-				class="text-4xl text-white sm:text-black -mt-44 sm:mt-0 md:text-6xl lg:text-6xl xl:text-8xl font-bold leading-tight"
+				class="text-4xl text-white sm:text-gray-900 -mt-44 sm:mt-0 md:text-6xl lg:text-6xl xl:text-8xl font-bold leading-tight"
 				style=""
 			>
 				The premier matchmaking platform for athletes and brands
@@ -362,35 +362,39 @@
 	<div class="text-center w-full mb-12">
 		<h1 class="sm:text-3xl text-2xl font-extrabold title-font mb-4 text-gold">Meet the team</h1>
 	</div>
-	<div class="flex flex-col md:flex-row flex-wrap justify-center text-center mx-auto items-center">
+	<div class="mx-20 sm:mx-20 flex flex-col md:flex-row justify-center text-center items-center">
 		<div
-			class="p-4 mb-5 mx-5 text-center bg-transparent rounded-xl border border-white w-fit md:w-1/3"
+			class="p-2 mb-5 mx-5 text-center bg-transparent rounded-xl border border-white w-full md:w-1/3"
 		>
-			<div class="flex justify-center">
-				<img
-					class="w-[80%] h-[80%]"
-					src="https://shmul.dev/assets/ayden.png"
-					alt="founder Ayden Owens-Delerme"
-				/>
+			<div class="lg:mx-[40px] flex justify-center">
+				<img src="https://shmul.dev/assets/ayden.png" alt="founder Ayden Owens-Delerme" />
 			</div>
-			<p class="text-xl text-white">Ayden Owens-Delerme, MBA</p>
-			<p class="text-md text-white">Founder & Chief Executive Officer <br /> 3x NCAA Champion</p>
+			<p class="text-lg text-white">Ayden Owens-Delerme, MBA</p>
+			<p class="text-sm text-white">Founder & Chief Executive Officer <br /> 3x NCAA Champion</p>
+			<p class="text-[15px] text-right text-gray-500" style="transform: translateY(9px)">
+				hover for more info >
+			</p>
+		</div>
+		<div
+			class="p-2 mb-5 mx-5 text-center bg-transparent rounded-xl border border-white w-full md:w-1/3"
+		>
+			<div class="lg:mx-[40px] flex justify-center">
+				<img src="https://shmul.dev/assets/quintin.png" alt="founder quintin owens" />
+			</div>
+			<p class="text-lg text-white">Quintin Owens</p>
+			<p class="text-sm text-white">Chief Sales Officer<br /><br /></p>
 			<p class="text-[15px] text-right text-gray-500" style="transform: translateY(9px)">
 				hover for more info >
 			</p>
 		</div>
 		<!-- <div
-			class="p-4 mb-5 mx-5 text-center bg-transparent rounded-xl border border-white w-fit md:w-1/3"
+			class="p-2 mb-5 mx-5 text-center bg-transparent rounded-xl border border-white w-full md:w-1/3"
 		>
-			<div class="flex justify-center">
-				<img
-					class="w-[80%] h-[80%]"
-					src="https://shmul.dev/assets/ayden.png"
-					alt="founder Ayden Owens-Delerme"
-				/>
+			<div class="lg:mx-[80px] flex justify-center">
+				<img class="" src="https://shmul.dev/assets/quintin.jpg" alt="chief sales officer" />
 			</div>
-			<p class="text-xl text-white">Quintin Owens</p>
-			<p class="text-md text-white">Chief Sales Officer</p>
+			<p class="text-lg text-white">Quintin Owens</p>
+			<p class="text-sm text-white">Chief Sales Officer<br /><br /></p>
 			<p class="text-[15px] text-right text-gray-500" style="transform: translateY(9px)">
 				hover for more info >
 			</p>

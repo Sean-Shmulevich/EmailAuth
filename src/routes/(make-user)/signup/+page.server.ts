@@ -30,6 +30,7 @@ export const actions: Actions = {
 
 		// Check for missing fields
 		const missingFields: string[] = [];
+
 		if (!email) missingFields.push('email');
 		if (!name) missingFields.push('name');
 		if (!phoneNumber) missingFields.push('phone-number');

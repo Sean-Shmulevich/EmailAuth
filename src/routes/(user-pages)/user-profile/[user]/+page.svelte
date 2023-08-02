@@ -115,7 +115,7 @@
 			{#if user.socialMedia}
 				<div
 					data-sveltekit-preload-data="false"
-					class="flex flex-row absolute -bottom-5 transform -translate-y-1/2 right-0 rounded-full bg-gray-400 bg-opacity-60 space-x-2 px-2"
+					class="flex flex-row absolute -bottom-5 transform -translate-y-1/2 right-0 rounded-full bg-gray-400 py-1 bg-opacity-60 space-x-2 px-2"
 				>
 					{#if user.socialMedia['Instagram']}
 						<a href={user.socialMedia['Instagram']} target="_blank">

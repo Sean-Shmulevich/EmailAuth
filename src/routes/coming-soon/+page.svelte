@@ -1,3 +1,4 @@
 <h1 class="text-3xl text-center mt-14 text-red-500">
-	Brand portal launching soon! Check back later.
+	Brand portal is in private acess mode, interested brands contact admin@dapup.co in order to
+	request acess
 </h1>

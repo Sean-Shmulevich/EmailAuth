@@ -347,8 +347,9 @@
 				</div>
 			</div>
 			<img
-				class="lg:w-3/5 md:w-1/2 object-cover object-center rounded-lg md:mt-0 mt-12"
-				src="https://shmul.dev/assets/dappingup.jpeg"
+				class="lg:w-3/5 md:w-1/2 object-contain object-center rounded-lg md:mt-0 mt-12"
+				style="transform: scale(0.8) translateY(-90px)"
+				src="https://shmul.dev/assets/selfie.png"
 				alt="step"
 			/>
 		</div>

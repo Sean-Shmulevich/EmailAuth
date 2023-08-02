@@ -398,7 +398,7 @@
 				<label class="block text-gray-300 text-sm font-bold mb-2" for="industries"
 					>Industries of interest</label
 				>
-				<p class="text-gray-500 text-xs mb-2">Pick 1-3 industries</p>
+				<p class="text-gray-500 text-xs mb-2">Choose industries of interest</p>
 				<Industries
 					pickedTypes={data.currUserProfile.industries.length === 0
 						? []

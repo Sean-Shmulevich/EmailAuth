@@ -379,7 +379,7 @@
 					<img src="https://shmul.dev/assets/ayden.png" alt="founder Ayden Owens-Delerme" />
 				</div>
 			{:else}
-				<p class="relative h-full my-[18px] text-gray-200">
+				<p class="relative my-[30px] text-gray-200">
 					Ayden is a former Arkansas student-athlete, 3x NCAA champion, and a World Championship
 					competitor in track and field with a highly monetized NIL portfolio. He possesses a
 					Bachelor's degree from the University of Michigan and a Master’s in Business

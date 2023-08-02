@@ -46,7 +46,7 @@
 	/>
 	<a
 		href="#learn-more"
-		class="text-white sm:text-black fond-bold inline-flex w-full mx-auto text-center mt-10 flex-col-reverse items-center hover:text-blue-700"
+		class="text-white sm:text-black font-extrabold inline-flex w-full mx-auto text-center mt-10 flex-col-reverse items-center hover:text-blue-700"
 	>
 		<svg
 			class="w-5 h-5 ml-2 text-white sm:text-black"

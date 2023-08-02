@@ -384,7 +384,7 @@
 					competitor in track and field with a highly monetized NIL portfolio. He possesses a
 					Bachelor's degree from the University of Michigan and a Master’s in Business
 					Administration with a focus in Entrepreneurship from the Sam M. Walton College of Business
-					at the University of Arkansas. Leveraging <br /><br /> his unique experience in college athletics
+					at the University of Arkansas.<br /><br /> Leveraging his unique experience in college athletics
 					before and after NIL’s legalization, Ayden was driven to create DapUp to eliminate the friction
 					and ambiguity around brand-athlete partnerships. Ayden’s passion lies at the intersection of
 					business and sport, where two industries join to drive the world forward. He is also invested

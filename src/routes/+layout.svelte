@@ -21,11 +21,14 @@
 				class="flex title-font font-mediums items-center text-white mb-4 md:mb-0"
 				style="margin-top:-18px"
 			>
-				<img class=" w-40 hidden md:block" src={'https://shmul.dev/assets/dapuplogo.png'} />
 				<img
+					class=" transform scale-80 mr-6 md:mr-0 mt-3 md:mt-0 sm:scale-100 w-40"
+					src={'https://shmul.dev/assets/dapuplogo.png'}
+				/>
+				<!-- <img
 					class=" w-14 mt-4 mr-5 ml-2 md:hidden"
 					src={'https://shmul.dev/assets/dapupsmall.png'}
-				/>
+				/> -->
 				<!-- <span class="ml-3 text-3xl gold">DapUp</span> -->
 			</a>
 			<nav

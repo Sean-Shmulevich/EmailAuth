@@ -416,7 +416,7 @@
 				<label class="block text-gray-300 text-sm font-bold mb-2" for="bio"
 					>Social Media links</label
 				>
-				<p class="text-gray-500 text-xs mb-5">Submit upto 3 forms of social media</p>
+				<p class="text-gray-500 text-xs mb-5">Submit up to 3 forms of social media</p>
 				<SocialMediaPicker
 					links={data.currUserProfile.socialMedia === null ? {} : data.currUserProfile.socialMedia}
 				/>

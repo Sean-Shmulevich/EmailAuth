@@ -75,7 +75,7 @@ export const actions = {
 		const formData = await request.formData();
 		console.log(formData);
 		// let college = formData.get('college')?.toString();
-		let industries = formData.get('industries')?.toString();
+		let industries = formData.get('industries')?.toString() ?? '[]';
 		let bio = formData.get('bio')?.toString();
 		let socialMedia = formData.get('social-media');
 		let venmo = formData.get('venmo')?.toString();
@@ -97,7 +97,7 @@ export const actions = {
 		if (!venmo) missingFields.push('venmo');
 		if (!bio) missingFields.push('bio');
 		if (!socialMedia) missingFields.push('Social media');
-		if (!industries) missingFields.push('Industries of interest');
+		// if (!industries) missingFields.push('Industries of interest');
 		if (!goal) missingFields.push('goal');
 
 		if (missingFields.length > 0) {

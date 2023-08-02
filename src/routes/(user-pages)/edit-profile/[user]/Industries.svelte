@@ -45,7 +45,7 @@
 	}
 </script>
 
-<Button class="border border-white "><Chevron /></Button>
+<Button class="border border-white "><Chevron>Pick upto 3 industries of interest</Chevron></Button>
 <Dropdown
 	bind:open
 	placement="top"

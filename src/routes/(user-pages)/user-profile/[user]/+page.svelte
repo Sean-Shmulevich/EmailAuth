@@ -207,14 +207,16 @@
 				</p>
 			</div>
 			<div class="border border-white p-2 rounded-xl -mb-2 mt-5 flex flex-col">
-				<div class="flex flex-row items-baseline pt-2 justify-start bottom-0">
-					<h4 class="text-lg leading-6 mr-8 font-medium text-white">Industries of interest</h4>
-					<p class="mt-2 text-base text-gray-400">
-						{user.industries
-							.map((industry) => industry.charAt(0).toUpperCase() + industry.slice(1))
-							.join(', ')}
-					</p>
-				</div>
+				{#if user.industries.length !== 0}
+					<div class="flex flex-row items-baseline pt-2 justify-start bottom-0">
+						<h4 class="text-lg leading-6 mr-8 font-medium text-white">Industries of interest</h4>
+						<p class="mt-2 text-base text-gray-400">
+							{user.industries
+								.map((industry) => industry.charAt(0).toUpperCase() + industry.slice(1))
+								.join(', ')}
+						</p>
+					</div>
+				{/if}
 				<div class="flex flex-row items-baseline pt-2 mb-2 justify-start bottom-0">
 					<h4 class="text-lg leading-6 mr-8 font-medium text-white">#1 Goal of NIL</h4>
 					<p class="mt-2 text-base text-gray-400">

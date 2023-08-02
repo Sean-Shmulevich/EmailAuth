@@ -53,7 +53,7 @@ and grant access to brand opportunities once your account is verified.<br/><br/>
 Click the following link to begin verifying your account: <a href='${verificationLink}'>${verificationLink}</a><br/><br/>
 
 In the meantime, we invite you to explore our website, DapUp.co, familiarize yourself with our platform, share with your teammates, and stay tuned for incredible opportunities.
-Have questions? Contact our support team at [support@email.com]. We are here to help you every step of the way.<br/><br/>
+Have questions? Contact our support team at [support@dapup.co]. We are here to help you every step of the way.<br/><br/>
 
 Thank you for choosing DapUp, the premier matchmaking platform for athletes and brands. Get ready to DapUp Your Game!<br/><br/>
 
@@ -81,7 +81,7 @@ export const sendEmailVerificationEmailBrand = async (
 	<strong>Click the following link to begin verifying your account: <a href="${verificationLink}">${verificationLink}</a></strong><br/><br/>
 
 	In the meantime, we encourage you to explore our website, DapUp.co, familiarize yourself with our platform, and imagine the possibilities that await you.<br/>
-	Have questions? Contact our support team at [support@dapup.com] or submit an inquiry right from out homepage. We are here to help you every step of the way.</br></br>
+	Have questions? Contact our support team at [support@dapup.co] or submit an inquiry right from out homepage. We are here to help you every step of the way.</br></br>
 
 	Thank you for choosing DapUp, the premier matchmaking platform for athletes and brands. Get ready to DapUp Your Game!<br/><br/>
 

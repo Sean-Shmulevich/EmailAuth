@@ -12,7 +12,7 @@
 	];
 	export let selected;
 	let custom;
-	if (!interests.includes(selected)) {
+	if (selected !== null && !interests.includes(selected)) {
 		custom = selected;
 		selected = 'custom';
 	}
@@ -36,7 +36,7 @@
 		</label>
 	{/each}
 </div>
-{#if (selected && selected === 'custom') || !interests.includes(selected)}
+{#if (selected && selected === 'custom') || (selected !== null && !interests.includes(selected))}
 	<div class="mt-5">
 		<label class="text-gray-300 text-sm font-bold mb-4 text-center" for="event-type"
 			>Custom goal</label

@@ -1,6 +1,5 @@
 <script>
 	import { Button, Dropdown, DropdownItem, Chevron, Radio } from 'flowbite-svelte';
-	import { object_without_properties, onMount } from 'svelte/internal';
 	// First create a dropdown with different social media types
 	// then I need to put the current active social media types in a json list
 	// allow deletion

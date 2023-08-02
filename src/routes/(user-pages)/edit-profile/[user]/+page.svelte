@@ -7,6 +7,7 @@
 	import ImageCropper from './ImageCropper.svelte';
 	// import SportRadio from './SportRadio.svelte';
 	import SocialMediaPicker from './SocialMediaPicker.svelte';
+	import Industries from './Industries.svelte';
 	import { enhance } from '$app/forms';
 	export let data;
 	export let form;
@@ -283,7 +284,7 @@
 				<label class="block text-gray-300 text-sm font-bold mb-2" for="image">
 					Main Profile Picture
 				</label>
-				<p class="text-gray-400 text-xs mb-2">Please upload a profile picture.</p>
+				<p class="text-gray-500 text-xs mb-2">Please upload a profile picture.</p>
 				<button
 					class="gold {images['main-image'] !== ''
 						? 'nah'
@@ -315,7 +316,7 @@
 				<label class="block text-gray-300 text-sm font-bold mb-2" for="image">
 					Additional Profile Images
 				</label>
-				<p class="text-gray-400 text-xs -mb-10">Please upload additional profile pictures.</p>
+				<p class="text-gray-500 text-xs -mb-10">Please upload additional profile pictures.</p>
 				<div class="space-y-4 p-10">
 					{#each buttons as button}
 						<button
@@ -384,10 +385,10 @@
 			</div>
 			<div class="mb-4">
 				<label class="block text-gray-300 text-sm font-bold mb-2" for="venmo"> Venmo </label>
-				<p class="text-gray-400 text-xs">
+				<p class="text-gray-500 text-xs">
 					Please input your venmo so you can get paid for potential deals
 				</p>
-				<p class="text-gray-400 text-xs mb-2">format @venmoName</p>
+				<p class="text-gray-500 text-xs mb-2">format @venmoName</p>
 				<input
 					class="shadow bg-gray-700 appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
 					name="venmo"
@@ -397,21 +398,19 @@
 					bind:value={user.venmo}
 				/>
 			</div>
-			<!-- <div class="mb-4">
-				<label class="block text-gray-300 text-sm font-bold mb-2" for="college"> College </label>
-				<p class="text-gray-400 text-xs mb-2">Where did you go to college?</p>
-				<input
-					class="shadow bg-gray-700 appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
-					name="college"
-					id="college"
-					type="text"
-					placeholder="Harvard University"
-					bind:value={user.college}
+			<div class="mb-4">
+				<label class="block text-gray-300 text-sm font-bold mb-2" for="industries"
+					>Industries of interest</label
+				>
+				<Industries
+					pickedTypes={data.currUserProfile.industries.length === 0
+						? []
+						: data.currUserProfile.industries}
 				/>
 			</div>
-			<div class="mb-4">
+			<!-- <div class="mb-4">
 				<label class="block text-gray-300 text-sm font-bold mb-2" for="year"> Year </label>
-				<p class="text-gray-400 text-xs mb-2">When do you graduate?</p>
+				<p class="text-gray-500 text-xs mb-2">When do you graduate?</p>
 				<input
 					class="shadow appearance-none border rounded w-full py-2 px-3 text-white bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 					name="year"
@@ -425,14 +424,14 @@
 				<label class="block text-gray-300 text-sm font-bold mb-2" for="bio"
 					>Social Media links</label
 				>
-				<p class="text-gray-400 text-xs mb-5">Submit upto 3 forms of social media</p>
+				<p class="text-gray-500 text-xs mb-5">Submit upto 3 forms of social media</p>
 				<SocialMediaPicker
 					links={data.currUserProfile.socialMedia === null ? {} : data.currUserProfile.socialMedia}
 				/>
 			</div>
 			<div class="mb-4">
 				<label class="block text-gray-300 text-sm font-bold mb-2" for="bio"> Bio </label>
-				<p class="text-gray-400 text-xs mb-2">Tell us a little about yourself.</p>
+				<p class="text-gray-500 text-xs mb-2">Tell us a little about yourself.</p>
 				<!-- JANKY way of getting the user.bio into form data -->
 				<input
 					class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"

@@ -76,7 +76,7 @@ export const actions = {
 		console.log(formData);
 		let sport = formData.get('sport')?.toString();
 		// let college = formData.get('college')?.toString();
-		let year = formData.get('year')?.toString();
+		let industries = formData.get('industries')?.toString();
 		let bio = formData.get('bio')?.toString();
 		let socialMedia = formData.get('social-media');
 		let venmo = formData.get('venmo')?.toString();
@@ -92,7 +92,8 @@ export const actions = {
 		// if (!year) missingFields.push('year');
 		if (!venmo) missingFields.push('venmo');
 		if (!bio) missingFields.push('bio');
-		if (!socialMedia) missingFields.push('socialMedia');
+		if (!socialMedia) missingFields.push('Social media');
+		if (!industries) missingFields.push('Industries of interest');
 
 		if (missingFields.length > 0) {
 			return {
@@ -107,7 +108,7 @@ export const actions = {
 			data: {
 				venmo: venmo,
 				socialMedia: JSON.parse(socialMedia),
-				year: year,
+				industries: JSON.parse(industries),
 				bio: bio
 			}
 		});

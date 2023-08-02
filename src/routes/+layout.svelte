@@ -41,8 +41,9 @@
 						Athletes
 					</a>
 
+					<!-- TODO COMING SOON /brand-login-->
 					<a
-						href="/brand-login"
+						href="/coming-soon"
 						class="hover:text-yellow-500 hover:bg-gray-800 bg-gray-500 text-white font-semibold inline-flex items-center px-4 py-2 rounded-full bg-grey-400 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30"
 					>
 						Brands

@@ -379,19 +379,18 @@
 					<img src="https://shmul.dev/assets/ayden.png" alt="founder Ayden Owens-Delerme" />
 				</div>
 			{:else}
-				<p class="relative my-[30px] text-gray-200">
+				<p class="relative text-left my-[30px] text-gray-200">
 					Ayden is a former Arkansas student-athlete, 3x NCAA champion, and a World Championship
 					competitor in track and field with a highly monetized NIL portfolio. He possesses a
 					Bachelor's degree from the University of Michigan and a Master’s in Business
 					Administration with a focus in Entrepreneurship from the Sam M. Walton College of Business
-					at the University of Arkansas. Leveraging his unique experience in college athletics
-					before and after NIL’s legalization, Ayden was driven to create DapUp to eliminate the
-					friction and ambiguity around brand-athlete partnerships. Ayden’s passion lies at the
-					intersection of business and sport, where two industries join to drive the world forward.
-					He is also invested in social justice and promoting sports opportunities to underserved
-					communities by providing coaching services for youth athletes. Ayden’s mission is to
-					create an equitable and more accessible market for NIL allowing all businesses and
-					athletes to benefit.
+					at the University of Arkansas. Leveraging <br /><br /> his unique experience in college athletics
+					before and after NIL’s legalization, Ayden was driven to create DapUp to eliminate the friction
+					and ambiguity around brand-athlete partnerships. Ayden’s passion lies at the intersection of
+					business and sport, where two industries join to drive the world forward. He is also invested
+					in social justice and promoting sports opportunities to underserved communities by providing
+					coaching services for youth athletes. Ayden’s mission is to create an equitable and more accessible
+					market for NIL allowing all businesses and athletes to benefit.
 				</p>
 			{/if}
 			<p class="text-lg text-white">Ayden Owens-Delerme, MBA</p>
@@ -420,13 +419,13 @@
 					<img src="https://shmul.dev/assets/quintin.png" alt="founder quintin owens" />
 				</div>
 			{:else}
-				<p class="relative h-full my-[102px] text-gray-200">
+				<p class="text-left relative h-full my-[102px] text-gray-200">
 					Quintin is an entrepreneur, former athlete, and a sales professional at SAE International.
 					He holds a breadth of experience in understanding the needs of companies worldwide as he
-					ensures they are suited with up-to-date standards for business operation. As a small
-					business operator and founder of an apparel company, Quintin was drawn to DapUp for the
-					impact it has on helping brands like his reach the right audience. His objective is to
-					promote the growth of businesses at all levels through the DapUp platform.
+					ensures they are suited with up-to-date standards for business operation.<br /><br /> As a
+					small business operator and founder of an apparel company, Quintin was drawn to DapUp for the
+					impact it has on helping brands like his reach the right audience. His objective is to promote
+					the growth of businesses at all levels through the DapUp platform.
 				</p>
 			{/if}
 			<p class="text-lg text-white">Quintin Owens</p>

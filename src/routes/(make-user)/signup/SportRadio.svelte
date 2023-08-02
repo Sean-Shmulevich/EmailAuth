@@ -2,7 +2,6 @@
 	import { Button, Dropdown, DropdownItem, Chevron, Radio } from 'flowbite-svelte';
 	export let sportPref;
 	const sportsNames = [
-		'Any Sport',
 		'Baseball',
 		'Basketball',
 		'Bowling',
@@ -52,3 +51,4 @@
 		<div class="ml-10">{sportPref}</div>
 	{/if}
 </div>
+<input type="hidden" name="sport-preference" value={sportPref} />

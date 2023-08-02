@@ -33,14 +33,17 @@
 	<div class="container mx-auto flex px-5 py-24 items-center justify-center">
 		<div class="text-center mt-[15vh] lg:w-full xl:w-full">
 			<h1
-				class="text-4xl -mt-32 sm:mt-0 md:text-6xl lg:text-6xl xl:text-8xl font-bold leading-tight"
+				class="text-4xl -mt-44 sm:mt-0 md:text-6xl lg:text-6xl xl:text-8xl font-bold leading-tight"
 				style="text-shadow: 0 0 5px black;"
 			>
 				The premier matchmaking platform for athletes and brands
 			</h1>
 		</div>
 	</div>
-	<img class="sm:hidden block mx-auto -mt-10" src="https://shmul.dev/assets/dapupmainimg.png" />
+	<img
+		class="sm:hidden block mx-auto -mt-16 -mb-8"
+		src="https://shmul.dev/assets/dapupmainimg.png"
+	/>
 	<a
 		href="#learn-more"
 		class="inline-flex w-full mx-auto text-center mt-10 flex-col-reverse items-center hover:text-yellow-500"
@@ -62,7 +65,7 @@
 <section id="learn-more" class="text-gray-600 -mx-20 body-font">
 	<div class="mt-5 container px-5 py-24 mx-auto">
 		<div class="flex flex-col text-center w-full mb-20">
-			<h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gold">The DapUp ABC’s</h1>
+			<h1 class="sm:text-3xl text-2xl font-extrabold title-font mb-4 text-gold">The DapUp ABC’s</h1>
 			<p class="lg:w-2/3 mx-auto leading-relaxed text-base text-white">
 				DapUp is driven by 4 main pillars.
 				<br />Our mission is simple.
@@ -129,7 +132,7 @@
 <section class="text-gray-600 -mx-20 body-font">
 	<div class="mt-5 container px-5 mx-auto">
 		<div class="flex flex-col text-center w-full mb-12">
-			<h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gold">
+			<h1 class="sm:text-3xl text-2xl font-extrabold title-font mb-4 text-gold">
 				How does DapUp work?
 			</h1>
 		</div>
@@ -347,7 +350,7 @@
 				</div>
 			</div>
 			<img
-				class="lg:w-3/5 md:w-1/2 object-contain object-center rounded-lg md:mt-0 mt-12"
+				class="lg:w-3/5 md:w-1/2 object-contain object-center rounded-lg md:mt-0 mt-12 -mb-20"
 				style="transform: scale(0.8) translateY(-90px)"
 				src="https://shmul.dev/assets/selfie.png"
 				alt="step"
@@ -355,9 +358,9 @@
 		</div>
 	</div>
 </section>
-<section class="text-gray-600 body-font mb-20">
+<section class="text-gray-600 -mt-20 body-font mb-20">
 	<div class="text-center w-full mb-12">
-		<h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gold">Meet the team</h1>
+		<h1 class="sm:text-3xl text-2xl font-extrabold title-font mb-4 text-gold">Meet the team</h1>
 	</div>
 	<div class="flex flex-col md:flex-row flex-wrap justify-center text-center mx-auto items-center">
 		<div

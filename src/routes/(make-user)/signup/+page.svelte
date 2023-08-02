@@ -6,6 +6,12 @@
 
 	export let form: ActionData;
 	let genderPreference;
+	let sportPref;
+	$: {
+		if (form && form.sportPref) {
+			sportPref = form.sport;
+		}
+	}
 </script>
 
 <div class="rounded-xl bg-white px-10 pb-10 mx-6 pt-0 -mt-10 max-w-[800px] mx-auto">
@@ -21,7 +27,7 @@
 		<input id="university" name="university" value={form?.university ?? ''} /><br />
 
 		<label for="sport">Sport</label><br />
-		<SportRadio sportPref={form?.sportPref} /><br />
+		<SportRadio bind:sportPref /><br />
 
 		<label for="gender-preference">Gender</label><br />
 		<Radio
@@ -30,6 +36,13 @@
 			options={['male', 'female']}
 			flexDirection="row"
 		/>
+
+		<label for="hometown">Hometown</label><br />
+		<input id="hometown" name="hometown" value={form?.hometown ?? ''} /><br />
+
+		<label for="graduation">Graduation year</label><br />
+		<input id="graduation" name="graduation" value={form?.graduation ?? ''} /><br />
+
 		<label for="email">Email</label><br />
 		<input id="email" name="email" value={form?.email ?? ''} /><br />
 		<label for="password">Password</label>

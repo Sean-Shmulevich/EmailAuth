@@ -71,10 +71,18 @@ model object {
 }
 
 model Profile {
-  user_id   String    @id
-  sport     String
-  college   String
-  year      String
+  user_id     String  @id
+  sport       String
+  college     String
+  year        String
+  socialMedia Json?
+  venmo       String?
+
+  industries String[]
+  goal       String?
+
+  gender    String?
+  hometown  String?
   bio       String
   auth_user AuthUser? @relation(fields: [user_id], references: [id], onDelete: Cascade)
 

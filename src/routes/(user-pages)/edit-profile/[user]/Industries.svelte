@@ -18,6 +18,8 @@
 		'sports',
 		'NFTs',
 		'crypto',
+		'buisness',
+		'health and wellness',
 		'fashion',
 		'engineering'
 	];

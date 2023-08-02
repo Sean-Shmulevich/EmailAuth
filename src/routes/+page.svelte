@@ -371,8 +371,17 @@
 			</div>
 			<p class="text-lg text-white">Ayden Owens-Delerme, MBA</p>
 			<p class="text-sm text-white">Founder & Chief Executive Officer <br /> 3x NCAA Champion</p>
-			<p class="text-[15px] text-right text-gray-500" style="transform: translateY(9px)">
+			<p
+				class="text-[15px] hidden sm:block text-right text-gray-500"
+				style="transform: translateY(9px)"
+			>
 				hover for more info >
+			</p>
+			<p
+				class="text-[15px] lg:hidden md:hidden text-right text-gray-500"
+				style="transform: translateY(9px)"
+			>
+				tap for more info
 			</p>
 		</div>
 		<div

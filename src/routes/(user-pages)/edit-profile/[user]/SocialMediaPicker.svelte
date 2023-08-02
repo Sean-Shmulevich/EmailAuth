@@ -88,7 +88,7 @@
 	<div class="h-2 w-full" />
 </Dropdown>
 {#each pickedTypes as input, i}
-	<div class="flex flex-col sm:flex-row my-4 space-x-4">
+	<div class="flex flex-col justify-center items-center sm:flex-row my-4 space-x-4">
 		<p class="w-[20%]">{input}</p>
 
 		<div class="flex w-full sm:w-[80%] flex-row">

@@ -5,7 +5,7 @@
 	let interests = [
 		'grow personal network',
 		'increase career opportunities',
-		'make money',
+		'build wealth',
 		'increase social media footprint',
 		'connect with community',
 		'custom'

@@ -1,5 +1,6 @@
 <script>
 	import { Button, Dropdown, DropdownItem, Chevron, Radio } from 'flowbite-svelte';
+	import { object_without_properties, onMount } from 'svelte/internal';
 	// First create a dropdown with different social media types
 	// then I need to put the current active social media types in a json list
 	// allow deletion
@@ -8,8 +9,17 @@
 	// dont allow more then 3
 	// send a message when there is more then 3
 
-	let socialMediaTypes = ['Instagram', 'twitter', 'Facebook', 'tik tok', 'snapchat', 'linkedin'];
-	let links = {};
+	let socialMediaTypes = [
+		'Instagram',
+		'Twitter',
+		'Facebook',
+		'Tik Tok',
+		'Snapchat',
+		'Linkedin',
+		'Website'
+	];
+	export let links;
+
 	let mediaType;
 	let open = false;
 	let pickedTypes = [];
@@ -22,11 +32,19 @@
 			}, 3000);
 		}
 	}
-	$: {
-		if (pickedTypes.length > 0) {
-			console.log(pickedTypes);
+	if (links !== undefined) {
+		for (let key in links) {
+			pickedTypes = [...pickedTypes, key];
 		}
 	}
+	// $: {
+	// 	if (links !== undefined) {
+	// 		for (let key in links) {
+	// 			console.log(key);
+	// 			pickedTypes = [...pickedTypes, key];
+	// 		}
+	// 	}
+	// }
 	function handleValueChange(event, input) {
 		links[input] = event.target.value;
 		links = { ...links };
@@ -63,7 +81,6 @@
 				}
 			}}
 			class="text-black ml-2 mt-2"
-			name="social-media"
 			bind:group={socialMedia}
 			value={socialMedia}>{socialMedia}</DropdownItem
 		>
@@ -71,16 +88,18 @@
 	<div class="h-2 w-full" />
 </Dropdown>
 {#each pickedTypes as input, i}
-	<div class="flex my-4 space-x-4">
-		<p class="w-50">{input}</p>
+	<div class="flex flex-col sm:flex-row my-4 space-x-4">
+		<p class="w-[20%]">{input}</p>
 
-		<input
-			class="w-full rounded-md text-black p-2"
-			name={`social-${i}`}
-			on:input={(event) => handleValueChange(event, input)}
-			placeholder="link"
-		/>
-		<button on:click|preventDefault={() => deleteInput(input)}>-</button>
+		<div class="flex w-full sm:w-[80%] flex-row">
+			<input
+				class="bg-gray-700 rounded-md text-white w-full p-2 mr-5"
+				on:input={(event) => handleValueChange(event, input)}
+				placeholder="link"
+				value={links[input] === undefined ? '' : links[input]}
+			/>
+			<button on:click|preventDefault={() => deleteInput(input)}>-</button>
+		</div>
 	</div>
 {/each}
 {#if pickedTypes.length > 0}

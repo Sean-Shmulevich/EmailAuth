@@ -5,12 +5,12 @@
 	//check type of input and make sure it is correct
 	// @ts-nocheck
 	import ImageCropper from './ImageCropper.svelte';
-	import SportRadio from './SportRadio.svelte';
+	// import SportRadio from './SportRadio.svelte';
 	import SocialMediaPicker from './SocialMediaPicker.svelte';
 	import { enhance } from '$app/forms';
 	export let data;
 	export let form;
-	let sportPref;
+	// let sportPref;
 	import Delta from 'quill-delta';
 	import { onMount } from 'svelte';
 
@@ -37,8 +37,7 @@
 
 	let user = {
 		name: '',
-		sport: '',
-		college: '',
+		venmo: '',
 		year: '',
 		bio: '',
 		image: ''
@@ -59,6 +58,7 @@
 
 	//variabe for quill to save the current state of the html content
 	let deltaContent = '';
+	let links = {};
 
 	onMount(async () => {
 		if (typeof window !== 'undefined') {
@@ -85,7 +85,8 @@
 				// console.log(data.currUserProfile);
 				//set the user data fields from the fetched data of the user profile from the db
 				user = { ...user, ...data.currUserProfile };
-				sportPref = data.currUserProfile.sport;
+				// links = data.currUserProfile.socialMedia;
+				// sportPref = data.currUserProfile.sport;
 
 				//get the bio html from the db convert it to delta and set the quill editor
 				deltaContent = htmlToDelta(data.currUserProfile.bio);
@@ -282,7 +283,7 @@
 				<label class="block text-gray-300 text-sm font-bold mb-2" for="image">
 					Main Profile Picture
 				</label>
-				<p class="text-gray-500 text-xs mb-2">Please upload a profile picture.</p>
+				<p class="text-gray-400 text-xs mb-2">Please upload a profile picture.</p>
 				<button
 					class="gold {images['main-image'] !== ''
 						? 'nah'
@@ -314,7 +315,7 @@
 				<label class="block text-gray-300 text-sm font-bold mb-2" for="image">
 					Additional Profile Images
 				</label>
-				<p class="text-gray-500 text-xs -mb-10">Please upload additional profile pictures.</p>
+				<p class="text-gray-400 text-xs -mb-10">Please upload additional profile pictures.</p>
 				<div class="space-y-4 p-10">
 					{#each buttons as button}
 						<button
@@ -382,14 +383,23 @@
 				<p class="text-white text-4xl mb-2">{data.user.name}</p>
 			</div>
 			<div class="mb-4">
-				<label class="block text-gray-300 text-sm font-bold mb-2" for="sport"> Sport </label>
-				<p class="text-gray-500 text-xs mb-2">What is your primary sport?</p>
-				<SportRadio bind:sportPref />
-				<input type="hidden" name="sport" value={sportPref} />
+				<label class="block text-gray-300 text-sm font-bold mb-2" for="venmo"> Venmo </label>
+				<p class="text-gray-400 text-xs">
+					Please input your venmo so you can get paid for potential deals
+				</p>
+				<p class="text-gray-400 text-xs mb-2">format @venmoName</p>
+				<input
+					class="shadow bg-gray-700 appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+					name="venmo"
+					id="venmo"
+					type="text"
+					placeholder="@janeDoe17"
+					bind:value={user.venmo}
+				/>
 			</div>
-			<div class="mb-4">
+			<!-- <div class="mb-4">
 				<label class="block text-gray-300 text-sm font-bold mb-2" for="college"> College </label>
-				<p class="text-gray-500 text-xs mb-2">Where did you go to college?</p>
+				<p class="text-gray-400 text-xs mb-2">Where did you go to college?</p>
 				<input
 					class="shadow bg-gray-700 appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
 					name="college"
@@ -401,7 +411,7 @@
 			</div>
 			<div class="mb-4">
 				<label class="block text-gray-300 text-sm font-bold mb-2" for="year"> Year </label>
-				<p class="text-gray-500 text-xs mb-2">When do you graduate?</p>
+				<p class="text-gray-400 text-xs mb-2">When do you graduate?</p>
 				<input
 					class="shadow appearance-none border rounded w-full py-2 px-3 text-white bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 					name="year"
@@ -410,17 +420,19 @@
 					placeholder="2018"
 					bind:value={user.year}
 				/>
-			</div>
+			</div> -->
 			<div class="mb-4 mt-4">
 				<label class="block text-gray-300 text-sm font-bold mb-2" for="bio"
 					>Social Media links</label
 				>
-				<p class="text-gray-500 text-xs mb-5">Submit upto 3 forms of social media</p>
-				<SocialMediaPicker />
+				<p class="text-gray-400 text-xs mb-5">Submit upto 3 forms of social media</p>
+				<SocialMediaPicker
+					links={data.currUserProfile.socialMedia === null ? {} : data.currUserProfile.socialMedia}
+				/>
 			</div>
 			<div class="mb-4">
 				<label class="block text-gray-300 text-sm font-bold mb-2" for="bio"> Bio </label>
-				<p class="text-gray-500 text-xs mb-2">Tell us a little about yourself.</p>
+				<p class="text-gray-400 text-xs mb-2">Tell us a little about yourself.</p>
 				<!-- JANKY way of getting the user.bio into form data -->
 				<input
 					class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"

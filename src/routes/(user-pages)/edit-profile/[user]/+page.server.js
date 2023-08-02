@@ -73,10 +73,13 @@ export const actions = {
 
 		let userId = user.userId;
 		const formData = await request.formData();
+		console.log(formData);
 		let sport = formData.get('sport')?.toString();
-		let college = formData.get('college')?.toString();
+		// let college = formData.get('college')?.toString();
 		let year = formData.get('year')?.toString();
 		let bio = formData.get('bio')?.toString();
+		let socialMedia = formData.get('social-media');
+		let venmo = formData.get('venmo')?.toString();
 
 		// console.log(formData);
 		// If user does not exist, throw an error
@@ -84,31 +87,26 @@ export const actions = {
 		if (!user) throw new Error('User not found');
 
 		let missingFields = [];
-		if (!sport) missingFields.push('sport');
-		if (!college) missingFields.push('college');
-		if (!year) missingFields.push('year');
+		// if (!sport) missingFields.push('sport');
+		// if (!college) missingFields.push('college');
+		// if (!year) missingFields.push('year');
+		if (!venmo) missingFields.push('venmo');
 		if (!bio) missingFields.push('bio');
+		if (!socialMedia) missingFields.push('socialMedia');
 
-		if (missingFields.length) {
+		if (missingFields.length > 0) {
 			return {
-				message: `Please fill out the following fields: ${missingFields.join(', ')}`,
-				user: { sport, college, year, bio }
+				message: `Please fill out the following fields: ${missingFields.join(', ')}`
 			};
 		}
 
 		// If user exists, create a profile
-		const profile = await prismaClient.profile.upsert({
+
+		const profile = await prismaClient.profile.update({
 			where: { user_id: userId },
-			create: {
-				sport: sport,
-				college: college,
-				year: year,
-				bio: bio,
-				user_id: userId
-			},
-			update: {
-				sport: sport,
-				college: college,
+			data: {
+				venmo: venmo,
+				socialMedia: JSON.parse(socialMedia),
 				year: year,
 				bio: bio
 			}
@@ -116,8 +114,7 @@ export const actions = {
 
 		// I mean i could just return the profile
 		return {
-			message: 'Profile updated successfully',
-			user: { sport, college, year, bio }
+			message: 'Profile updated successfully'
 		};
 	},
 	logout: async ({ locals }) => {

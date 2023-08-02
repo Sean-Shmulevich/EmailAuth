@@ -3,6 +3,7 @@
 	// @ts-nocheck
 
 	import { fade } from 'svelte/transition';
+
 	import { afterUpdate } from 'svelte';
 
 	// default image for profiles without any uploaded images yet.
@@ -23,6 +24,15 @@
 		socialMedia: {},
 		hometown: 'empty',
 		bio: 'empty'
+	};
+	let iconLinks = {
+		Instagram: 'https://shmul.dev/assets/instagram.png',
+		Twitter: 'https://shmul.dev/assets/twitter.png',
+		Facebook: 'https://shmul.dev/assets/facebook.png',
+		'Tik Tok': 'https://shmul.dev/assets/tiktok.png',
+		Snapchat: 'https://shmul.dev/assets/snapchat.png',
+		Linkedin: 'https://shmul.dev/assets/linkedin.png',
+		Website: 'https://shmul.dev/assets/website.png'
 	};
 	//set the user data to the data from the database from load in +page.server.ts
 	user = { ...user, ...data.currUserProfile };
@@ -102,9 +112,58 @@
 				/>
 			{/if}
 
+			{#if user.socialMedia}
+				<div
+					data-sveltekit-preload-data="false"
+					class="flex flex-row absolute -bottom-5 transform -translate-y-1/2 right-0 rounded-full bg-gray-400 bg-opacity-60 space-x-2 px-2"
+				>
+					{#if user.socialMedia['Instagram']}
+						<a href={user.socialMedia['Instagram']} target="_blank">
+							<img src={iconLinks.Instagram} width="40" height="40" alt="Instagram" />
+						</a>
+					{/if}
+
+					{#if user.socialMedia['Twitter']}
+						<a href={user.socialMedia['Twitter']} target="_blank">
+							<img src={iconLinks.Twitter} width="40" height="40" alt="Twitter" />
+						</a>
+					{/if}
+
+					{#if user.socialMedia['Facebook']}
+						<a href={user.socialMedia['Facebook']} target="_blank">
+							<img src={iconLinks.Facebook} width="40" height="40" alt="Facebook" />
+						</a>
+					{/if}
+
+					{#if user.socialMedia['Tik Tok']}
+						<a href={user.socialMedia['Tik Tok']} target="_blank">
+							<img src={iconLinks['Tik Tok']} width="40" height="40" alt="Tik Tok" />
+						</a>
+					{/if}
+
+					{#if user.socialMedia['Snapchat']}
+						<a href={user.socialMedia['Snapchat']} target="_blank">
+							<img src={iconLinks.Snapchat} width="40" height="40" alt="Snapchat" />
+						</a>
+					{/if}
+
+					{#if user.socialMedia['Linkedin']}
+						<a href={user.socialMedia['Linkedin']} target="_blank">
+							<img src={iconLinks.Linkedin} width="40" height="40" alt="LinkedIn" />
+						</a>
+					{/if}
+
+					{#if user.socialMedia['Website']}
+						<a href={user.socialMedia['Website']} target="_blank">
+							<img src={iconLinks.Website} width="40" height="40" alt="Website" />
+						</a>
+					{/if}
+				</div>
+			{/if}
+
 			<div class="absolute top-1/2 transform -translate-y-1/2 left-3">
 				<button
-					class="bg-transparent text-white text-4xl font-semibold hover:text-gray-300 transition-colors duration-200"
+					class="bg-transparent text-gray-900 text-4xl font-semibold hover:text-gray-300 transition-colors duration-200"
 					on:click={switchImage}
 					disabled={transitioning}
 				>
@@ -114,7 +173,7 @@
 
 			<div class="absolute top-1/2 transform -translate-y-1/2 right-3">
 				<button
-					class="bg-transparent text-white text-4xl font-semibold hover:text-gray-300 transition-colors duration-200"
+					class="bg-transparent text-gray-900 text-4xl font-semibold hover:text-gray-300 transition-colors duration-200"
 					on:click={switchImage}
 					disabled={transitioning}
 				>

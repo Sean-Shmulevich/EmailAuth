@@ -216,7 +216,7 @@
 					</p>
 				</div>
 				<div class="flex flex-row items-baseline pt-2 mb-2 justify-start bottom-0">
-					<h4 class="text-lg leading-6 mr-8 font-medium text-white">#1 Goal of NIL marketing</h4>
+					<h4 class="text-lg leading-6 mr-8 font-medium text-white">#1 Goal of NIL</h4>
 					<p class="mt-2 text-base text-gray-400">
 						{#if user.goal === null}
 							empty

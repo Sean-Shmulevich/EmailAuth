@@ -385,10 +385,8 @@
 			</div>
 			<div class="mb-4">
 				<label class="block text-gray-300 text-sm font-bold mb-2" for="venmo"> Venmo </label>
-				<p class="text-gray-500 text-xs">
-					Please input your venmo so you can get paid for potential deals
-				</p>
-				<p class="text-gray-500 text-xs mb-2">format @venmoName</p>
+				<p class="text-gray-500 text-xs">Input Venmo to recieve payment for finalized deals</p>
+				<p class="text-gray-500 text-xs mb-2">format @venmoname</p>
 				<input
 					class="shadow bg-gray-700 appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
 					name="venmo"

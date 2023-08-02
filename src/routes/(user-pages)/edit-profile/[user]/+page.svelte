@@ -383,7 +383,7 @@
 			</div>
 			<div class="mb-4">
 				<label class="block text-gray-300 text-sm font-bold mb-2" for="sport"> Sport </label>
-				<p class="text-gray-500 bg-black text-xs mb-2">What is your primary sport?</p>
+				<p class="text-gray-500 text-xs mb-2">What is your primary sport?</p>
 				<SportRadio bind:sportPref />
 				<input type="hidden" name="sport" value={sportPref} />
 			</div>

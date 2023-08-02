@@ -33,8 +33,8 @@
 	<div class="container mx-auto flex px-5 py-24 items-center justify-center">
 		<div class="text-center mt-[15vh] lg:w-full xl:w-full">
 			<h1
-				class="text-4xl -mt-44 sm:mt-0 md:text-6xl lg:text-6xl xl:text-8xl font-bold leading-tight"
-				style="text-shadow:3px 4px 0px black;"
+				class="text-4xl text-white sm:text-black -mt-44 sm:mt-0 md:text-6xl lg:text-6xl xl:text-8xl font-bold leading-tight"
+				style=""
 			>
 				The premier matchmaking platform for athletes and brands
 			</h1>
@@ -46,16 +46,16 @@
 	/>
 	<a
 		href="#learn-more"
-		class="inline-flex w-full mx-auto text-center mt-10 flex-col-reverse items-center hover:text-yellow-500"
+		class="text-white sm:text-black fond-bold inline-flex w-full mx-auto text-center mt-10 flex-col-reverse items-center hover:text-blue-700"
 	>
 		<svg
-			class="w-5 h-5 ml-2"
+			class="w-5 h-5 ml-2 text-white sm:text-black"
 			xmlns="http://www.w3.org/2000/svg"
 			fill="none"
 			viewBox="0 0 24 24"
 			stroke="currentColor"
 		>
-			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 9-9-9" />
 		</svg>
 		Learn more about us
 	</a>

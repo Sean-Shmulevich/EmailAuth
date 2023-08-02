@@ -74,12 +74,16 @@ export const actions = {
 		let userId = user.userId;
 		const formData = await request.formData();
 		console.log(formData);
-		let sport = formData.get('sport')?.toString();
 		// let college = formData.get('college')?.toString();
 		let industries = formData.get('industries')?.toString();
 		let bio = formData.get('bio')?.toString();
 		let socialMedia = formData.get('social-media');
 		let venmo = formData.get('venmo')?.toString();
+		let goal = formData.get('goal')?.toString();
+
+		if (goal && goal === 'custom') {
+			goal = formData.get('goal-custom')?.toString();
+		}
 
 		// console.log(formData);
 		// If user does not exist, throw an error
@@ -94,6 +98,7 @@ export const actions = {
 		if (!bio) missingFields.push('bio');
 		if (!socialMedia) missingFields.push('Social media');
 		if (!industries) missingFields.push('Industries of interest');
+		if (!goal) missingFields.push('goal');
 
 		if (missingFields.length > 0) {
 			return {
@@ -109,6 +114,7 @@ export const actions = {
 				venmo: venmo,
 				socialMedia: JSON.parse(socialMedia),
 				industries: JSON.parse(industries),
+				goal: goal,
 				bio: bio
 			}
 		});

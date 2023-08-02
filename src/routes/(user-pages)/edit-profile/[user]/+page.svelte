@@ -8,6 +8,7 @@
 	// import SportRadio from './SportRadio.svelte';
 	import SocialMediaPicker from './SocialMediaPicker.svelte';
 	import Industries from './Industries.svelte';
+	import Goals from './Goals.svelte';
 	import { enhance } from '$app/forms';
 	export let data;
 	export let form;
@@ -39,7 +40,6 @@
 	let user = {
 		name: '',
 		venmo: '',
-		year: '',
 		bio: '',
 		image: ''
 	};
@@ -409,18 +409,13 @@
 						: data.currUserProfile.industries}
 				/>
 			</div>
-			<!-- <div class="mb-4">
-				<label class="block text-gray-300 text-sm font-bold mb-2" for="year"> Year </label>
-				<p class="text-gray-500 text-xs mb-2">When do you graduate?</p>
-				<input
-					class="shadow appearance-none border rounded w-full py-2 px-3 text-white bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-					name="year"
-					id="year"
-					type="text"
-					placeholder="2018"
-					bind:value={user.year}
-				/>
-			</div> -->
+			<div class="mb-4">
+				<label class="block text-gray-300 text-sm font-bold mb-2" for="year">
+					#1 goal of NIL marketing</label
+				>
+				<p class="text-gray-500 text-xs mb-2">Pick one goal or create a custom one</p>
+				<Goals selected={data.currUserProfile.goal} />
+			</div>
 			<div class="mb-4 mt-4">
 				<label class="block text-gray-300 text-sm font-bold mb-2" for="bio"
 					>Social Media links</label

@@ -21,24 +21,22 @@ export const actions: Actions = {
 		const formData = await request.formData();
 		const email = (formData.get('email')?.toString() ?? '').toLowerCase() ?? '';
 		const name = formData.get('name')?.toString() ?? '';
-		const phoneNumber = formData.get('phone-number')?.toString() ?? '';
+		// const phoneNumber = formData.get('phone-number')?.toString() ?? '';
 		const uni = formData.get('university')?.toString() ?? '';
 		const sport = formData.get('sport-preference')?.toString() ?? '';
 		const gender = formData.get('gender-preference')?.toString() ?? '';
-		const hometown = formData.get('hometown')?.toString() ?? '';
-		const graduation = formData.get('graduation')?.toString() ?? '';
+		// const hometown = formData.get('hometown')?.toString() ?? '';
+		// const graduation = formData.get('graduation')?.toString() ?? '';
 
 		// Check for missing fields
 		const missingFields: string[] = [];
 
 		if (!email) missingFields.push('email');
 		if (!name) missingFields.push('name');
-		if (!phoneNumber) missingFields.push('phone-number');
+		// if (!phoneNumber) missingFields.push('phone-number');
 		if (!uni) missingFields.push('university');
 		if (!sport) missingFields.push('sport-preference');
 		if (!gender) missingFields.push('gender-preference');
-		if (!hometown) missingFields.push('hometown');
-		if (!graduation) missingFields.push('graduation');
 
 		if (missingFields.length > 0) {
 			return fail(400, {
@@ -59,12 +57,9 @@ export const actions: Actions = {
 				message: 'Invalid email',
 				email,
 				name,
-				phoneNumber,
 				uni,
 				sport,
-				gender,
-				hometown,
-				graduation
+				gender
 			});
 		}
 		const password = formData.get('password');
@@ -73,12 +68,9 @@ export const actions: Actions = {
 				message: 'Invalid password',
 				email,
 				name,
-				phoneNumber,
 				uni,
 				sport,
-				gender,
-				hometown,
-				graduation
+				gender
 			});
 		}
 		try {
@@ -91,7 +83,6 @@ export const actions: Actions = {
 				attributes: {
 					email,
 					name,
-					phoneNumber,
 					email_verified: false,
 					admin_verified: false,
 					is_admin: false,
@@ -102,11 +93,9 @@ export const actions: Actions = {
 				data: {
 					sport: sport,
 					college: uni,
-					year: graduation,
 					bio: '',
 					user_id: user.userId,
-					gender,
-					hometown
+					gender
 				}
 			});
 			const session = await auth.createSession(user.userId);
@@ -121,12 +110,9 @@ export const actions: Actions = {
 					message: 'Email is already taken',
 					email,
 					name,
-					phoneNumber,
 					uni,
 					sport,
-					gender,
-					hometown,
-					graduation
+					gender
 				});
 			}
 			// duplication error
@@ -135,24 +121,18 @@ export const actions: Actions = {
 					message: 'Email is already taken',
 					email,
 					name,
-					phoneNumber,
 					uni,
 					sport,
-					gender,
-					hometown,
-					graduation
+					gender
 				});
 			}
 			return fail(500, {
 				message: 'An unknown error occurred',
 				email,
 				name,
-				phoneNumber,
 				uni,
 				sport,
-				gender,
-				hometown,
-				graduation
+				gender
 			});
 		}
 	}

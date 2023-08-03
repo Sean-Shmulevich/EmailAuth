@@ -19,9 +19,9 @@
 	<form method="post" use:enhance>
 		<label for="name">Full Name</label><br />
 		<input id="name" name="name" value={form?.name ?? ''} /><br />
-		<label for="phone-number">Phone Number</label><br />
+		<!-- <label for="phone-number">Phone Number</label><br />
 		<p>xxx-xxx-xxxx format</p>
-		<input id="phone-number" name="phone-number" value={form?.phoneNumber ?? ''} /><br />
+		<input id="phone-number" name="phone-number" value={form?.phoneNumber ?? ''} /><br /> -->
 
 		<label for="university">University</label><br />
 		<input id="university" name="university" value={form?.university ?? ''} /><br />
@@ -37,11 +37,11 @@
 			flexDirection="row"
 		/>
 
-		<label for="hometown">Hometown</label><br />
+		<!-- <label for="hometown">Hometown</label><br />
 		<input id="hometown" name="hometown" value={form?.hometown ?? ''} /><br />
 
 		<label for="graduation">Graduation year</label><br />
-		<input id="graduation" name="graduation" value={form?.graduation ?? ''} /><br />
+		<input id="graduation" name="graduation" value={form?.graduation ?? ''} /><br /> -->
 
 		<label for="email">Email</label><br />
 		<input id="email" name="email" value={form?.email ?? ''} /><br />

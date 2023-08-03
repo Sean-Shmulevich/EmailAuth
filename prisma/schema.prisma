@@ -74,7 +74,7 @@ model Profile {
   user_id     String  @id
   sport       String
   college     String
-  year        String
+  year        String?
   socialMedia Json?
   venmo       String?
 

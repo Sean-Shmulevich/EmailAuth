@@ -29,8 +29,10 @@ export const actions: Actions = {
 		}
 		try {
 			const token = await emailVerificationToken.issue(user.userId);
+			const checksum = [...token.toString()].reduce((acc, char) => acc + char.charCodeAt(0), 0);
+			const numericToken = checksum % 1000000; // limit to 6 digits
 			if (!user.isBrand) {
-				await sendEmailVerificationEmail(user.email, token.toString());
+				await sendEmailVerificationEmail(user.email, numericToken.toString());
 			} else {
 				await sendEmailVerificationEmailBrand(user.email, token.toString());
 			}

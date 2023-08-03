@@ -17,9 +17,9 @@ export const GET: RequestHandler = async ({ params, locals }) => {
 		locals.auth.setSession(session);
 	} catch (e) {
 		console.log(e);
-		return new Response(null, {
-			status: 401
-		});
+		// return new Response(null, {
+		// 	status: 401
+		// });
 	}
 	throw redirect(302, '/');
 };

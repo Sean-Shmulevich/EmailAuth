@@ -14,7 +14,6 @@
 	<form action="?/sendEmail" method="post" use:enhance>
 		<input type="submit" value="Resend email" />
 	</form>
-	<input type="text" bind:value={currToken} />
 
 	{#if form?.message}
 		<p class="error">{form.message}</p>

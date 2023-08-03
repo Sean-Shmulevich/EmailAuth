@@ -33,7 +33,7 @@
 		<Radio
 			inputName={'gender-preference'}
 			bind:selected={genderPreference}
-			options={['male', 'female']}
+			options={['Male', 'Female']}
 			flexDirection="row"
 		/>
 

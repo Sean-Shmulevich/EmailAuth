@@ -5,6 +5,8 @@ import type { RequestHandler } from './$types';
 
 export const GET: RequestHandler = async ({ params, locals }) => {
 	const tokenParams = params.token;
+	console.log(params, locals);
+
 	try {
 		const token = await emailVerificationToken.validate(tokenParams);
 		await auth.invalidateAllUserSessions(token.userId);

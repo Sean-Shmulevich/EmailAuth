@@ -28,7 +28,7 @@
 				name={inputName}
 				value={option}
 			/>
-			<span class="mr-5">{option}</span>
+			<span class="ml-3">{option}</span>
 		</label>
 	{/each}
 </div>

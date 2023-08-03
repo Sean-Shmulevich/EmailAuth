@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { fade } from 'svelte/transition';
+	// import { fade } from 'svelte/transition';
 	import type { PageData } from './$types';
 	import AthleteGuide from './AthleteGuide.svelte';
 	import BrandGuide from './BrandGuide.svelte';
@@ -44,7 +44,7 @@
 		</div>
 	</div>
 	<img
-		class="sm:hidden block mx-auto -mt-[100px] -mb-6"
+		class="sm:hidden block mx-auto -mt-[100px] -mb-2"
 		src="https://shmul.dev/assets/dapupmainimg.png"
 	/>
 	<a

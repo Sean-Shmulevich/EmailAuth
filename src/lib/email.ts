@@ -50,6 +50,7 @@ While we verify your account, please complete your profile with relevant details
 A complete profile expedites the verification process and enhances your DapUp experience. Our team will review your information swiftly 
 and grant access to brand opportunities once your account is verified.<br/><br/>
 
+<strong>Click the following link to begin verifying your account: <a href="${verificationLink}">${verificationLink}</a></strong><br/><br/>
 <span style="color:red"> Copy and paste this link into the browser to begin verifying your account:</span><br/> ${verificationLink}<br/><br/>
 
 In the meantime, we invite you to explore our website, DapUp.co, familiarize yourself with our platform, share with your teammates, and stay tuned for incredible opportunities.

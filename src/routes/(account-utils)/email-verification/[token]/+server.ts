@@ -1,5 +1,5 @@
 import { auth, emailVerificationToken } from '$lib/lucia';
-import { redirect } from '@sveltejs/kit';
+import { redirect, fail } from '@sveltejs/kit';
 
 import type { RequestHandler } from './$types';
 
@@ -17,9 +17,7 @@ export const GET: RequestHandler = async ({ params, locals }) => {
 		locals.auth.setSession(session);
 	} catch (e) {
 		console.log(e);
-		// return new Response(null, {
-		// 	status: 401
-		// });
+		// return fail(500, { msg: 'Unable to authenticate' });
 	}
 	throw redirect(302, '/');
 };

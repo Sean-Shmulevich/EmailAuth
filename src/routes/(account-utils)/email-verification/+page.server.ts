@@ -4,6 +4,7 @@ import { fail, redirect } from '@sveltejs/kit';
 
 import type { Actions, PageServerLoad } from './$types';
 import { ElasticBeanstalk } from 'aws-sdk';
+import { createHash } from 'crypto';
 
 export const load: PageServerLoad = async ({ locals }) => {
 	const { user } = await locals.auth.validateUser();
@@ -20,7 +21,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 };
 
 export const actions: Actions = {
-	default: async ({ locals }) => {
+	sendEmail: async ({ locals }) => {
 		const { user } = await locals.auth.validateUser();
 		if (!user || user.emailVerified) {
 			return fail(401, {
@@ -29,10 +30,12 @@ export const actions: Actions = {
 		}
 		try {
 			const token = await emailVerificationToken.issue(user.userId);
-			const checksum = [...token.toString()].reduce((acc, char) => acc + char.charCodeAt(0), 0);
-			const numericToken = checksum % 1000000; // limit to 6 digits
+			const hash = createHash('md5').update(token.toString()).digest('hex');
+			const bigNumber = parseInt(hash, 16);
+			const numericToken = bigNumber % 1000000;
+			console.log(numericToken);
 			if (!user.isBrand) {
-				await sendEmailVerificationEmail(user.email, numericToken.toString());
+				await sendEmailVerificationEmail(user.email, token.toString());
 			} else {
 				await sendEmailVerificationEmailBrand(user.email, token.toString());
 			}

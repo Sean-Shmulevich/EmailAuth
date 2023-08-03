@@ -50,7 +50,7 @@ While we verify your account, please complete your profile with relevant details
 A complete profile expedites the verification process and enhances your DapUp experience. Our team will review your information swiftly 
 and grant access to brand opportunities once your account is verified.<br/><br/>
 
-Copy and paste this link into the browser to begin verifying your account:<br/> '${verificationLink}'<br/><br/>
+<span style="color:red"> Copy and paste this link into the browser to begin verifying your account:</span><br/> ${verificationLink}<br/><br/>
 
 In the meantime, we invite you to explore our website, DapUp.co, familiarize yourself with our platform, share with your teammates, and stay tuned for incredible opportunities.
 Have questions? Contact our support team at [support@dapup.co]. We are here to help you every step of the way.<br/><br/>
@@ -78,8 +78,7 @@ export const sendEmailVerificationEmailBrand = async (
 	A complete profile expedites the verification process and enhances your DapUp experience. <br/>
 	Our team will review your information swiftly and grant full access to the DapUp platform once your account is verified.<br/><br/>
 
-	// <strong>Click the following link to begin verifying your account: <a href="${verificationLink}">${verificationLink}</a></strong><br/><br/>
-	Copy and paste this link into the browser to begin verifying your account:<br/> '${verificationLink}'<br/><br/>
+	<span style="color:red"> Copy and paste this link into the browser to begin verifying your account:</span><br/> ${verificationLink}<br/><br/>
 
 	In the meantime, we encourage you to explore our website, DapUp.co, familiarize yourself with our platform, and imagine the possibilities that await you.<br/>
 	Have questions? Contact our support team at [support@dapup.co] or submit an inquiry right from out homepage. We are here to help you every step of the way.</br></br>

@@ -106,7 +106,7 @@ model BrandProfile {
   industry         String
   size             String
   goals            String
-  socialMediaLinks String
+  socialMediaLinks Json?
   bio              String?
   auth_user        AuthUser? @relation(fields: [user_id], references: [id], onDelete: Cascade)
 

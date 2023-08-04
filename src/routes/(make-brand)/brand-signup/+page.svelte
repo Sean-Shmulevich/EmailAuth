@@ -27,6 +27,7 @@
 	];
 
 	let sports = [
+		'any',
 		'basketball',
 		'baseball (men)',
 		'beach volleyball (women)',
@@ -49,8 +50,7 @@
 		'skiing (coeducational)',
 		'track and field',
 		'swimming and diving',
-		'wrestling (men)',
-		'any'
+		'wrestling (men)'
 	];
 
 	export let form: ActionData;

@@ -532,7 +532,7 @@
 				{/if}
 				{#if pageNum <= 1}
 					<button
-						class="bg-green-600 p-3 mt-4 rounded-full w-fit"
+						class="bg-green-600 mx-3 p-3 mt-4 rounded-full w-fit"
 						on:click|preventDefault={() => {
 							pageNum += 1;
 							pageNum = pageNum;
@@ -544,7 +544,7 @@
 					on:click|preventDefault={() => {
 						showPreview = !showPreview;
 					}}
-					class="mx-10 bg-red-500 rounded-full p-3 text-right">Show preview</button
+					class="mx-3 bg-red-500 rounded-full p-3 text-right">Show preview</button
 				>
 			{/if}
 			{#if data && data.deal}

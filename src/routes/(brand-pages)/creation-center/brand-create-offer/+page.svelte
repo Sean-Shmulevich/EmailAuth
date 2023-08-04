@@ -360,7 +360,7 @@
 							<button
 								class="{croppedImage
 									? 'nah'
-									: ''} text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+									: ''} gold text-white hover:bg-gradient-to-br focus:ring-4 focus:outline-none shadow-green-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
 								on:click|preventDefault={() => {
 									squareInput = false;
 									isModalOpen = true;
@@ -474,7 +474,7 @@
 								/> -->
 							</div>
 						</div>
-						<div class="border mt-5 rounded-xl align-left">
+						<div class="border mt-5 p-4 rounded-xl text-left">
 							<Compensation bind:jsonData={payJson} bind:eventCampaignOrSingle bind:pay />
 						</div>
 					</div>
@@ -560,5 +560,23 @@
 <style>
 	.nah {
 		display: none;
+	}
+	.gold {
+		background: radial-gradient(
+				ellipse farthest-corner at right bottom,
+				#fedb37 0%,
+				#fdb931 8%,
+				#9f7928 30%,
+				#8a6e2f 40%,
+				transparent 80%
+			),
+			radial-gradient(
+				ellipse farthest-corner at left top,
+				#ffffff 0%,
+				#ffffac 8%,
+				#d1b464 25%,
+				#5d4a1f 62.5%,
+				#5d4a1f 100%
+			);
 	}
 </style>

@@ -19,5 +19,6 @@ export const GET: RequestHandler = async ({ params, locals }) => {
 		console.log(e);
 		// return fail(500, { msg: 'Unable to authenticate' });
 	}
-	throw redirect(302, '/');
+	// TODO!
+	throw redirect(302, '/login');
 };

@@ -45,9 +45,14 @@
 	/>
 </div> -->
 <p>Compensation Type</p>
-<Radio options={compensationTypes} bind:selected={pay} inputName="Compensation type" />
+<Radio
+	options={compensationTypes}
+	justify="left"
+	bind:selected={pay}
+	inputName="Compensation type"
+/>
 {#if pay === 'Product' || pay === 'Both'}
-	<p class="text-center text-xl text-white mt-5">Product</p>
+	<p class="text-left text-xl text-white mt-5">Product</p>
 	<input
 		bind:value={product}
 		type="text"
@@ -57,7 +62,7 @@
 {/if}
 
 {#if pay === 'Money' || pay === 'Both'}
-	<Button class="w-full text-center bg-gray-700 border border-white mb-2"
+	<Button class="w-full text-left bg-gray-700 border border-white mb-2"
 		><Chevron>{compSelected}</Chevron></Button
 	>
 	<Dropdown bind:open>

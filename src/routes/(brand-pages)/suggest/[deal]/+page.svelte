@@ -34,7 +34,15 @@
 		let imgNum = data.images[1][i].image_number;
 		images[1][imgNum] = `${s3 + '/' + encodeURIComponent(data.images[1][i].id)}`;
 	}
-
+	let iconLinks = {
+		Instagram: 'https://shmul.dev/assets/instagram.png',
+		Twitter: 'https://shmul.dev/assets/twitter.png',
+		Facebook: 'https://shmul.dev/assets/facebook.png',
+		'Tik Tok': 'https://shmul.dev/assets/tiktok.png',
+		Snapchat: 'https://shmul.dev/assets/snapchat.png',
+		Linkedin: 'https://shmul.dev/assets/linkedin.png',
+		Website: 'https://shmul.dev/assets/website.png'
+	};
 	// let update = false;
 	// $: {
 	// 	update = true;
@@ -74,11 +82,11 @@
 </div>
 {#if data.matchingProfiles !== undefined}
 	{#each users as user, i}
-		<div class="bg-gray-950 my-5 text-white flex flex-col items-center justify-center space-y-8">
+		<div class="bg-gray-900 my-5 text-white flex flex-col items-center justify-center space-y-8">
 			<div
 				class="profile-card flex flex-col md:flex-row bg-gray-800 shadow rounded-lg max-w-7xl w-full p-6 overflow-hidden"
 			>
-				<div class="image w-3/4 md:w-[43%] mx-auto md:mx-0 relative">
+				<div class="image w-3/4 md:w-[83%] relative">
 					{#if i === 0}
 						<img
 							src={images[i][index0]}
@@ -94,6 +102,54 @@
 						/>
 					{/if}
 
+					{#if user.socialMedia}
+						<div
+							data-sveltekit-preload-data="false"
+							class="flex flex-row absolute -bottom-5 transform -translate-y-1/2 right-0 rounded-full bg-gray-400 py-1 bg-opacity-60 space-x-2 px-2"
+						>
+							{#if user.socialMedia['Instagram']}
+								<a href={user.socialMedia['Instagram']} target="_blank">
+									<img src={iconLinks.Instagram} width="40" height="40" alt="Instagram" />
+								</a>
+							{/if}
+
+							{#if user.socialMedia['Twitter']}
+								<a href={user.socialMedia['Twitter']} target="_blank">
+									<img src={iconLinks.Twitter} width="40" height="40" alt="Twitter" />
+								</a>
+							{/if}
+
+							{#if user.socialMedia['Facebook']}
+								<a href={user.socialMedia['Facebook']} target="_blank">
+									<img src={iconLinks.Facebook} width="40" height="40" alt="Facebook" />
+								</a>
+							{/if}
+
+							{#if user.socialMedia['Tik Tok']}
+								<a href={user.socialMedia['Tik Tok']} target="_blank">
+									<img src={iconLinks['Tik Tok']} width="40" height="40" alt="Tik Tok" />
+								</a>
+							{/if}
+
+							{#if user.socialMedia['Snapchat']}
+								<a href={user.socialMedia['Snapchat']} target="_blank">
+									<img src={iconLinks.Snapchat} width="40" height="40" alt="Snapchat" />
+								</a>
+							{/if}
+
+							{#if user.socialMedia['Linkedin']}
+								<a href={user.socialMedia['Linkedin']} target="_blank">
+									<img src={iconLinks.Linkedin} width="40" height="40" alt="LinkedIn" />
+								</a>
+							{/if}
+
+							{#if user.socialMedia['Website']}
+								<a href={user.socialMedia['Website']} target="_blank">
+									<img src={iconLinks.Website} width="40" height="40" alt="Website" />
+								</a>
+							{/if}
+						</div>
+					{/if}
 					<div class="absolute top-1/2 transform -translate-y-1/2 left-3">
 						<button
 							class="bg-transparent text-white text-4xl font-semibold hover:text-gray-300 transition-colors duration-200"
@@ -127,26 +183,54 @@
 					</div>
 				</div>
 
-				<div
-					class="profile-text mt-5 md:mt-0 md:pl-6 w-full md:w-1/2 flex flex-col"
-					style="height:inherit"
-				>
-					<div class="text-5xl my-5 leading-6 font-medium text-white">{data.names[i]}</div>
+				<div class="profile-text mt-5 md:mt-0 md:pl-6 w-full flex flex-col" style="height:inherit">
+					<div class="text-5xl my-5 font-medium text-white leading-10">{user.name}</div>
 					<div class="mt-5 flex-grow overflow-y-auto overflow-wrap break-word">
 						<h4 class="text-lg leading-6 font-medium text-white">Biography</h4>
 						<p class="mt-2 text-base text-gray-400">
 							{@html user.bio}
 						</p>
 					</div>
-					<div class="flex flex-row items-center justify-between mt-5 bottom-0 info-container">
-						<div class="flex items-center text-sm leading-5 text-gray-400 info-item">
-							{user.sport}
+					<div class="border border-white p-2 rounded-xl -mb-2 mt-5 flex flex-col">
+						{#if user.industries.length !== 0}
+							<div class="flex flex-row items-baseline pt-2 justify-start bottom-0">
+								<h4 class="text-lg leading-6 mr-8 font-medium text-white">
+									Industries of interest
+								</h4>
+								<p class="mt-2 text-base text-gray-400">
+									{user.industries
+										.map((industry) => industry.charAt(0).toUpperCase() + industry.slice(1))
+										.join(', ')}
+								</p>
+							</div>
+						{/if}
+						<div class="flex flex-row items-baseline pt-2 mb-2 justify-start bottom-0">
+							<h4 class="text-lg leading-6 mr-8 font-medium text-white">#1 Goal of NIL</h4>
+							<p class="mt-2 text-base text-gray-400">
+								{#if user.goal === null}
+									empty
+								{:else}
+									{user.goal}
+								{/if}
+							</p>
 						</div>
-						<div class="flex items-center text-sm text-center leading-5 text-gray-400 info-item">
+					</div>
+					<div
+						class="flex flex-col sm:flex-row items-start space-y-2 sm:space-y-0 sm:items-center pt-2 justify-start space-x-2 mt-5 bottom-0"
+					>
+						<div
+							class="border p-2 rounded-full flex items-center text-xs ml-[9px] sm:ml-0 sm:text-sm text-gray-400"
+						>
+							Sport: {user.sport}
+						</div>
+						<div class="border p-2 rounded-full flex items-center text-xs sm:text-sm text-gray-400">
 							{user.college}
 						</div>
-						<div class="flex items-center text-sm leading-5 text-gray-400 info-item">
-							{user.year}
+						<div class="border p-2 rounded-full flex items-center text-xs sm:text-sm text-gray-400">
+							Graduation: {user.year}
+						</div>
+						<div class="border p-2 rounded-full flex items-center text-xs sm:text-sm text-gray-400">
+							Hometown: {user.hometown}
 						</div>
 					</div>
 				</div>
@@ -162,3 +246,68 @@
 {:else}
 	<p class="text-center text-red-500 text-3xl mt-20">No athletes found</p>
 {/if}
+
+<style>
+	.centerAll {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		-webkit-transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%);
+	}
+	.hidden {
+		opacity: 0;
+		transition: opacity 0.5s ease-in-out;
+		position: absolute;
+		top: 0;
+	}
+
+	.show {
+		opacity: 1;
+	}
+
+	.info-container {
+		border-top: 1px solid gray;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.info-item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		font-size: 1.25rem;
+		border-right: 1px solid gray;
+		padding: 0 1rem;
+		flex-grow: 1;
+		flex-basis: 0;
+	}
+
+	.info-item:last-child {
+		border-right: none;
+	}
+
+	.info-item svg {
+		height: 32px;
+		width: 32px;
+		margin-top: 8px;
+		margin-bottom: 3px;
+	}
+
+	@media (max-width: 950px) {
+		.profile-card {
+			flex-direction: column;
+			width: 80%;
+		}
+		.image {
+			width: 100%;
+		}
+		.profile-text {
+			margin-top: 0px;
+			padding-left: 6px;
+			width: 100%;
+		}
+	}
+</style>

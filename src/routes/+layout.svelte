@@ -22,7 +22,7 @@
 				style="margin-top:-18px"
 			>
 				<img
-					class=" transform scale-80 mr-6 md:mr-0 mt-3 md:mt-0 sm:scale-100 w-40"
+					class=" transform scale-80 sm:mr-6 md:mr-0 mt-3 md:mt-0 sm:scale-100 w-40"
 					src={'https://shmul.dev/assets/dapuplogo.png'}
 				/>
 				<!-- <img

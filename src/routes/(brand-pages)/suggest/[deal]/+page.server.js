@@ -12,6 +12,7 @@ export const load = async ({ url, route, params, locals }) => {
 	if (!user || !user.isBrand || !user.emailVerified || !user.adminVerified) {
 		throw redirect(302, '/');
 	}
+	//TOOD sql injection account
 	matchingProfiles = await prismaClient.$queryRaw`
     SELECT *
     FROM "profile"
@@ -20,11 +21,12 @@ export const load = async ({ url, route, params, locals }) => {
     LIMIT 2;`;
 	if (matchingProfiles.length === 0) {
 		matchingProfiles = await prismaClient.$queryRaw`
-			SELECT *
-			FROM "profile"
-			ORDER BY RANDOM()
-			LIMIT 2;
-		`;
+    	SELECT *
+    	FROM "profile"
+    	INNER JOIN "auth_user" ON "profile"."user_id" = "auth_user"."id"
+  	 	WHERE "admin_verified" = true
+    	ORDER BY RANDOM()
+    	LIMIT 2;`;
 	}
 	let images = [];
 	let names = [];

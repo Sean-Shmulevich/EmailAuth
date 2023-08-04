@@ -128,7 +128,7 @@
 		location: 'Where is your company located?',
 		size: 'Company Size',
 		industry: 'What industry is your company in?',
-		athlete: 'Has your company sponsor a college athlete before?',
+		athlete: 'Has your company sponsored a college athlete before?',
 		sportPref: 'What sports do you prefer to sponsor?',
 		goals: 'Top 3 goals of athlete marketing'
 	};
@@ -188,12 +188,14 @@
 	let yesNo = ['Yes', 'No'];
 </script>
 
-<div class="flex w-full bg-gray-900 justify-center items-center mt-20">
-	<div class="w-[90%] sm:w-[60%] border border-white bg-gray-700 p-4 h-2/3 lg:h-1/2 rounded-xl">
+<div class="flex justify-center pt-10 mx-auto h-[85vh]">
+	<div
+		class="w-[90%] overflow-hidden sm:w-[60%] border border-white h-fit bg-gray-700 p-4 rounded-xl"
+	>
 		{#if currIndex < questionKeys.length}
 			<h2 class="text-center text-5xl mb-4 text-white">{questions[currQuestion]}</h2>
 			<hr />
-			<form on:submit|preventDefault={questionSubmited}>
+			<form class="" on:submit|preventDefault={questionSubmited}>
 				<!-- <input type="hidden" name="hiddenField" value="someValue" /> -->
 				{#if currIndex !== 2 && currIndex !== 4 && currIndex !== 5 && currIndex !== 6}
 					<input
@@ -237,9 +239,16 @@
 					<Checkboxes bind:checkboxes={goalBoxes} bind:activeOptions={goalActive} />
 				{/if}
 				<br />
-				<input class="float-right mt-3 rounded-full" type="submit" value="Continue" />
+				<input
+					class="float-right mt-3 rounded-full"
+					on:click={() => {
+						questionSubmited;
+					}}
+					type="submit"
+					value="Continue"
+				/>
 				<button
-					class="text-right mt-1 border border-white rounded-full bg-black p-2 text-white"
+					class="text-left mt-1 border border-white rounded-full bg-black p-2 text-white"
 					on:click|preventDefault={questionBack}>Back</button
 				>
 			</form>
@@ -294,6 +303,13 @@
 {/if}
 <a href="/brand-login">Sign in</a> -->
 <style lang="postcss">
+	.centerAll {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		-webkit-transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%);
+	}
 	h1 {
 		/* TODO this styles could be problematic */
 		@apply lg:mt-20 md:mt-24 sm:mt-28 mt-32  mb-2 w-full text-3xl font-semibold;

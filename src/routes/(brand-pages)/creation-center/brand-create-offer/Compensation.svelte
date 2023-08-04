@@ -14,7 +14,7 @@
 	let open = false;
 	let product = '';
 	let customPay = '';
-	let jsonData;
+	export let jsonData;
 	$: {
 		if (compSelected !== 'Custom') {
 			jsonData = JSON.stringify({ pay, compSelected, product });

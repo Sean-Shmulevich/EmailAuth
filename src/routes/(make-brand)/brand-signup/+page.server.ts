@@ -42,6 +42,7 @@ export const actions: Actions = {
 				},
 				attributes: {
 					email,
+					name: formData.get('name')?.toString() ?? '',
 					email_verified: false,
 					admin_verified: false,
 					is_admin: false,

@@ -33,6 +33,7 @@
 	let title;
 	let shortDescription;
 	let eventTypeCustom;
+	let payJson;
 	let location;
 	let athNum;
 	let sportPref;
@@ -210,6 +211,9 @@
 		return fields.key;
 	}
 	let showPreview = false;
+	$: {
+		console.log(deliverables);
+	}
 </script>
 
 <ImageCropper bind:croppedImage bind:square={squareInput} bind:open={isModalOpen} />
@@ -221,9 +225,10 @@
 	bind:eventType
 	bind:shortDescription
 	bind:sportPreference={sportPref}
+	brandName={data.user.name}
 	bind:location
 	bind:inPersonOrVirtual
-	bind:estimatedPayment={pay}
+	bind:estimatedPayment={payJson}
 	bind:endDate
 	bind:eventDate
 	bind:isCampaign={eventCampaignOrSingle}
@@ -245,12 +250,7 @@
 		: ''} bg-gray-900 text-white flex flex-col items-center text-center justify-center space-y-8"
 >
 	<h2 class="text-2xl mt-10">Create Offer</h2>
-	<button
-		on:click={() => {
-			showPreview = !showPreview;
-		}}
-		class="underline text-xl text-right">Show preview</button
-	>
+
 	<div
 		class=" profile-card flex flex-col bg-gray-800 shadow overflow-hidden mt-10 rounded-lg max-w-5xl w-[80%] mb-10 p-6"
 	>
@@ -475,7 +475,7 @@
 							</div>
 						</div>
 						<div class="border mt-5 rounded-xl align-left">
-							<Compensation bind:eventCampaignOrSingle bind:pay />
+							<Compensation bind:jsonData={payJson} bind:eventCampaignOrSingle bind:pay />
 						</div>
 					</div>
 				{/if}
@@ -540,6 +540,12 @@
 						}}>Continue Deal</button
 					>
 				{/if}
+				<button
+					on:click|preventDefault={() => {
+						showPreview = !showPreview;
+					}}
+					class="mx-10 bg-red-500 rounded-full p-3 text-right">Show preview</button
+				>
 			{/if}
 			{#if data && data.deal}
 				<input type="hidden" name="deal-id" value={data.deal.id} />

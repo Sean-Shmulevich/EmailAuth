@@ -10,15 +10,20 @@
 	export let inPersonOrVirtual;
 	export let estimatedPayment;
 	export let endDate;
-	export let isCampaign;
 	export let eventDate;
+	export let isCampaign;
 	export let recommendedDeliverables;
+	export let brandName;
 	// export let checkGoals;
 	// export let customGoals;
 	// let goals = [...checkGoals, ...customGoals];
+	$: {
+		// console.log(reccomenedDeliverables);
+	}
 </script>
 
 <div class={showPreview ? '' : 'nah'}>
+	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<h2
 		on:click={() => {
 			showPreview = false;
@@ -35,105 +40,84 @@
 						{#if croppedImage}
 							<img src={URL.createObjectURL(croppedImage)} alt="Profile" />
 						{:else}
-							<img
-								src="/api/s3object/1690047383938a750a7168ff2492899697beefcb7dc6e"
-								alt="Profile"
-							/>
+							<img src="https://shmul.dev/assets/placeholder.png" alt="Profile" />
 						{/if}
-						<div class="info">
-							<div class="name">{title}</div>
-							<p>{eventType} event</p>
-							<div class="interest">{shortDescription}</div>
+						<div class="info bg-black bg-opacity-70 rounded-xl">
+							<div class="name -mt-5">{title}</div>
+							{#if isCampaign === 'Single Event'}
+								<p>{eventType} event</p>
+							{/if}
+							<div class="interest">Brand: {brandName}</div>
+							{#if estimatedPayment}
+								{#if JSON.parse(estimatedPayment)['pay'] === 'Both'}
+									<p>Product: {JSON.parse(estimatedPayment).product}</p>
+									<p>Compensation: {JSON.parse(estimatedPayment).compSelected}</p>
+								{:else if JSON.parse(estimatedPayment)['pay'] === 'Money'}
+									<p>Compensation: {JSON.parse(estimatedPayment).compSelected}</p>
+								{:else if JSON.parse(estimatedPayment)['pay'] === 'Product'}
+									<p>Product {JSON.parse(estimatedPayment).product}</p>
+								{/if}
+							{/if}
+							{#if recommendedDeliverables}
+								{#each recommendedDeliverables as del, i}
+									{#if del.title !== '' && del.value !== ''}
+										<li class="">
+											{del.title} <br />
+										</li>
+									{/if}
+								{/each}
+							{/if}
 						</div>
 					{/if}
 					{#if pageNum === 1}
-						<div class="w-full p-5 text-white text-center h-full bg-gray-700">
-							<div class="flex w-full flex-row">
-								<div class="p-2 w-1/2 rounded-xl">
-									<div class="border border-white rounded-xl p-4">
-										<p>Looking for</p>
-										<hr />
-										<p class="mt-2">
-											{sportPreference} players
-										</p>
-									</div>
-									<div class="border p-4 mt-4 border-white rounded-xl">
-										<p class="">Location</p>
-										<hr />
-										<p class="p-2">
-											{#if inPersonOrVirtual === 'In Person'}
-												{location}
-											{:else}
-												Location: Virtual
-											{/if}
-										</p>
-									</div>
-								</div>
-								<div class="p-2 w-1/2">
-									<div class=" border p-4 border-white rounded-xl">
-										<p>Estimated Pay</p>
-										<hr />
-										<p class="mt-2">
-											${estimatedPayment}
-										</p>
-									</div>
-									<div class="mt-4 border p-4 border-white rounded-xl">
-										<p>Dates</p>
-										<hr />
-										<p class="p-2">
-											<!-- {new Date(offer.endDate).toLocaleDateString('en-GB', {
-                                    day: 'numeric',
-                                    month: 'short',
-                                    year: 'numeric'
-                                })} -->
-											{#if isCampaign}
-												<p>Start Date: {eventDate}</p>
-												<p>End Date: {endDate}</p>
-											{:else}
-												<p>Date: {eventDate}</p>
-											{/if}
-										</p>
-									</div>
-								</div>
+						<div
+							class="w-full flex flex-col space-y-5 p-5 text-white text-center h-full bg-gray-700"
+						>
+							<div class="mb-10 p-2 text-left rounded-xl border border-white w-full">
+								<p class="text-lg underline text-center">Description</p>
+								<p>{shortDescription}</p>
 							</div>
-							<div class="flex flex-col mt-4 h-[65%]">
-								<div class="flex-grow mb-4 w-full text-center border rounded-xl border-white p-4">
-									<p class="mb-2">Deliverables</p>
-									<hr class="mb-2" />
-									{#each recommendedDeliverables as deliverable, i}
-										<p class="text-left">{i + 1}. {deliverable.value}</p>
-									{/each}
+							<div class="p-2 rounded-xl border border-white h-20">
+								Looking for: <br />{sportPreference} players
+							</div>
+							{#if !isCampaign}
+								<div class="p-2 rounded-xl border border-white h-20">
+									Location: <br />{location}
+									{#if location === ''}
+										Virtual
+									{/if}
 								</div>
-								<!-- <div class="flex-grow w-full text-center border rounded-xl border-white p-4">
-									<p class="mb-2">Goals</p>
-									<hr />
-									{#each goals as goal, i}
-										<p class="text-left">{i + 1}. {goal.value}</p>
+							{/if}
+							<div class="p-2 rounded-xl border border-white h-20">
+								{#if isCampaign && eventDate}
+									Start Date: <br />{eventDate.toString().slice(0, 10)}<br />
+								{:else if !isCampaign && eventDate}
+									Date: <br />{eventDate.toString().slice(0, 10)}
+								{/if}
+							</div>
+							{#if isCampaign}
+								<div class="p-2 rounded-xl border border-white h-20">
+									End Date: <br />{endDate.toString().slice(0, 10)}
+								</div>
+							{/if}
+						</div>
+					{/if}
+					{#if pageNum === 2}
+						<div class="w-full p-5 text-white text-center h-full bg-gray-700">
+							<div class="text-left w-full">
+								<p class="text-lg underline text-center">Deliverables</p>
+								{#if recommendedDeliverables}
+									{#each recommendedDeliverables as del, i}
+										{#if del.title !== '' && del.value !== ''}
+											<li class="m-5">
+												{del.title}: <br />{del.value}
+											</li>
+										{/if}
 									{/each}
-								</div> -->
+								{/if}
 							</div>
 						</div>
 					{/if}
-					<!-- {#if pageNum === 2}
-            <img
-                src="https://www.3dwiggle.com/wp-content/uploads/2016/06/hiroshi-yoshinaga-wired-lathyrus-blog-3dwiggle-1.gif"
-                alt="Profile picture"
-            />
-            <div class="info">
-                <div class="name">Влад, 20</div>
-                <div class="interest">2 Common Interest</div>
-            </div>
-        {/if}
-        {#if pageNum === 3}
-            <img
-                src="https://www.3dwiggle.com/wp-content/uploads/2016/06/hiroshi-yoshinaga-wired-lathyrus-blog-3dwiggle-1.gif"
-                alt="Profile picture"
-            />
-            <div class="info">
-                <div class="name">Влад, 20</div>
-                <div class="interest">3 Common Interest</div>
-            </div>
-        {/if} -->
 					<div class="like">Like</div>
 					<div class="nope">Nope</div>
 				</div>
@@ -144,7 +128,7 @@
 					on:click={() => {
 						pageNum = pageNum - 1;
 						if (pageNum < 0) {
-							pageNum = 1;
+							pageNum = 2;
 						}
 					}}
 				/>
@@ -153,7 +137,7 @@
 					style=""
 					on:click={() => {
 						pageNum = pageNum + 1;
-						if (pageNum > 1) {
+						if (pageNum > 2) {
 							pageNum = 0;
 						}
 					}}
@@ -291,7 +275,7 @@
 		width: 100%;
 		box-sizing: border-box;
 		text-shadow: 2px 2px 5px gray;
-		background: linear-gradient(rgba(40, 40, 40, 0), rgba(40, 40, 40, 0.6));
+		/* background: linear-gradient(rgba(40, 40, 40, 0), rgba(40, 40, 40, 0.6)); */
 	}
 	.name {
 		font-size: 1.4em;

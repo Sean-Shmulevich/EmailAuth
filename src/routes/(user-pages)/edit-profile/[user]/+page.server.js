@@ -112,12 +112,18 @@ export const actions = {
 		}
 
 		// If user exists, create a profile
+		let media = JSON.parse(socialMedia);
+		for (let platform in media) {
+			if (!media[platform].startsWith('http://') && !media[platform].startsWith('https://')) {
+				media[platform] = 'https://' + media[platform];
+			}
+		}
 
 		const profile = await prismaClient.profile.update({
 			where: { user_id: userId },
 			data: {
 				venmo: venmo,
-				socialMedia: JSON.parse(socialMedia),
+				socialMedia: media,
 				industries: JSON.parse(industries),
 				goal: goal,
 				hometown,

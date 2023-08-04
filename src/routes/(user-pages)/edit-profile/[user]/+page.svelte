@@ -42,7 +42,7 @@
 		venmo: '',
 		bio: '',
 		hometown: '',
-		graduation: '',
+		year: '',
 		phoneNumber: '',
 		image: ''
 	};
@@ -408,8 +408,8 @@
 					name="graduation"
 					id="graduation"
 					type="text"
-					placeholder="Pittsburgh, PA"
-					bind:value={user.graduation}
+					placeholder="2025"
+					bind:value={user.year}
 				/>
 			</div>
 			<div class="mb-4">

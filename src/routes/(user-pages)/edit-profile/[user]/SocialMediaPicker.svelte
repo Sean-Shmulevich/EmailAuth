@@ -45,7 +45,9 @@
 	// 	}
 	// }
 	function handleValueChange(event, input) {
-		links[input] = event.target.value;
+		let url = event.target.value;
+
+		links[input] = url;
 		links = { ...links };
 		console.log(links);
 	}

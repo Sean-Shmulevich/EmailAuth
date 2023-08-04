@@ -19,12 +19,14 @@ export const load: PageServerLoad = async ({ locals }) => {
 export const actions: Actions = {
 	default: async ({ request, locals }) => {
 		const formData = await request.formData();
+		console.log(formData);
 		const email = (formData.get('email')?.toString() ?? '').toLowerCase() ?? '';
 		const name = formData.get('name')?.toString() ?? '';
 		// const phoneNumber = formData.get('phone-number')?.toString() ?? '';
 		const uni = formData.get('university')?.toString() ?? '';
 		const sport = formData.get('sport-preference')?.toString() ?? '';
 		const gender = formData.get('gender-preference')?.toString() ?? '';
+		const tos = formData.get('terms-of-service')?.toString() ?? '';
 		// const hometown = formData.get('hometown')?.toString() ?? '';
 		// const graduation = formData.get('graduation')?.toString() ?? '';
 
@@ -34,6 +36,7 @@ export const actions: Actions = {
 		if (!email) missingFields.push('email');
 		if (!name) missingFields.push('name');
 		// if (!phoneNumber) missingFields.push('phone-number');
+		if (!tos) missingFields.push('Agree to our terms of service');
 		if (!uni) missingFields.push('university');
 		if (!sport) missingFields.push('sport-preference');
 		if (!gender) missingFields.push('gender-preference');
@@ -43,12 +46,9 @@ export const actions: Actions = {
 				message: `Missing fields: ${missingFields.join(', ')}`,
 				email,
 				name,
-				phoneNumber,
 				uni,
 				sport,
-				gender,
-				hometown,
-				graduation
+				gender
 			});
 		}
 

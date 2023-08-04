@@ -41,6 +41,9 @@
 		name: '',
 		venmo: '',
 		bio: '',
+		hometown: '',
+		graduation: '',
+		phoneNumber: '',
 		image: ''
 	};
 
@@ -392,6 +395,47 @@
 					type="text"
 					placeholder="@janeDoe17"
 					bind:value={user.venmo}
+				/>
+			</div>
+
+			<div class="mb-4">
+				<label class="block text-gray-300 text-sm font-bold mb-2" for="graduation"
+					>Graduation year</label
+				>
+				<p class="text-gray-500 mb-2 text-xs">When will you graduate</p>
+				<input
+					class="shadow bg-gray-700 appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+					name="graduation"
+					id="graduation"
+					type="text"
+					placeholder="Pittsburgh, PA"
+					bind:value={user.graduation}
+				/>
+			</div>
+			<div class="mb-4">
+				<label class="block text-gray-300 text-sm font-bold mb-2" for="phoneNumber"
+					>Phone number</label
+				>
+				<p class="text-gray-500 text-xs mb-2">input in xxx-xxx-xxxx format</p>
+				<input
+					class="shadow bg-gray-700 appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+					name="phoneNumber"
+					id="phoneNumber"
+					type="text"
+					placeholder="267-733-9999"
+					bind:value={user.phoneNumber}
+				/>
+			</div>
+			<div class="mb-4">
+				<label class="block text-gray-300 text-sm font-bold mb-2" for="venmo">Hometown</label>
+				<p class="text-gray-500 text-xs mb-2">Input hometown</p>
+				<input
+					class="shadow bg-gray-700 appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+					name="hometown"
+					id="hometown"
+					type="text"
+					placeholder="Pittsburgh, PA"
+					bind:value={user.hometown}
 				/>
 			</div>
 			<div class="mb-4">

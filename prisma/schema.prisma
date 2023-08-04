@@ -19,7 +19,6 @@ model AuthUser {
   admin_verified Boolean
   is_admin       Boolean
   is_brand       Boolean
-  phoneNumber    String?
   name           String?
   profile        Profile?
   brand_profile  BrandProfile?
@@ -77,6 +76,7 @@ model Profile {
   year        String?
   socialMedia Json?
   venmo       String?
+  phoneNumber String?
 
   industries String[]
   goal       String?

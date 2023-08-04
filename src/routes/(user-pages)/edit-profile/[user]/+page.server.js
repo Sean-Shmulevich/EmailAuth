@@ -80,6 +80,9 @@ export const actions = {
 		let socialMedia = formData.get('social-media');
 		let venmo = formData.get('venmo')?.toString();
 		let goal = formData.get('goal')?.toString();
+		let hometown = formData.get('hometown')?.toString();
+		let phoneNumber = formData.get('phoneNumber')?.toString() ?? '';
+		let graduation = formData.get('graduation')?.toString();
 
 		if (goal && goal === 'custom') {
 			goal = formData.get('goal-custom')?.toString();
@@ -97,6 +100,8 @@ export const actions = {
 		if (!venmo) missingFields.push('venmo');
 		if (!bio) missingFields.push('bio');
 		if (!socialMedia) missingFields.push('Social media');
+		if (!hometown) missingFields.push('hometown');
+		if (!graduation) missingFields.push('graduation year');
 		// if (!industries) missingFields.push('Industries of interest');
 		if (!goal) missingFields.push('goal');
 
@@ -115,6 +120,9 @@ export const actions = {
 				socialMedia: JSON.parse(socialMedia),
 				industries: JSON.parse(industries),
 				goal: goal,
+				hometown,
+				phoneNumber,
+				year: graduation,
 				bio: bio
 			}
 		});

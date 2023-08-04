@@ -23,6 +23,15 @@
 		goals: 'empty',
 		bio: 'empty'
 	};
+	let iconLinks = {
+		Instagram: 'https://shmul.dev/assets/instagram.png',
+		Twitter: 'https://shmul.dev/assets/twitter.png',
+		Facebook: 'https://shmul.dev/assets/facebook.png',
+		'Tik Tok': 'https://shmul.dev/assets/tiktok.png',
+		Snapchat: 'https://shmul.dev/assets/snapchat.png',
+		Linkedin: 'https://shmul.dev/assets/linkedin.png',
+		Website: 'https://shmul.dev/assets/website.png'
+	};
 	// console.log(data.currUserProfile);
 	//TODO: implement social media links
 
@@ -99,7 +108,54 @@
 					&lt;
 				</button>
 			</div>
+			{#if user.socialMediaLinks}
+				<div
+					data-sveltekit-preload-data="false"
+					class="flex flex-row absolute -bottom-5 transform -translate-y-1/2 right-0 rounded-full bg-gray-400 py-1 bg-opacity-60 space-x-2 px-2"
+				>
+					{#if user.socialMediaLinks['Instagram']}
+						<a href={user.socialMediaLinks['Instagram']} target="_blank">
+							<img src={iconLinks.Instagram} width="40" height="40" alt="Instagram" />
+						</a>
+					{/if}
 
+					{#if user.socialMediaLinks['Twitter']}
+						<a href={user.socialMediaLinks['Twitter']} target="_blank">
+							<img src={iconLinks.Twitter} width="40" height="40" alt="Twitter" />
+						</a>
+					{/if}
+
+					{#if user.socialMediaLinks['Facebook']}
+						<a href={user.socialMediaLinks['Facebook']} target="_blank">
+							<img src={iconLinks.Facebook} width="40" height="40" alt="Facebook" />
+						</a>
+					{/if}
+
+					{#if user.socialMediaLinks['Tik Tok']}
+						<a href={user.socialMediaLinks['Tik Tok']} target="_blank">
+							<img src={iconLinks['Tik Tok']} width="40" height="40" alt="Tik Tok" />
+						</a>
+					{/if}
+
+					{#if user.socialMediaLinks['Snapchat']}
+						<a href={user.socialMediaLinks['Snapchat']} target="_blank">
+							<img src={iconLinks.Snapchat} width="40" height="40" alt="Snapchat" />
+						</a>
+					{/if}
+
+					{#if user.socialMediaLinks['Linkedin']}
+						<a href={user.socialMediaLinks['Linkedin']} target="_blank">
+							<img src={iconLinks.Linkedin} width="40" height="40" alt="LinkedIn" />
+						</a>
+					{/if}
+
+					{#if user.socialMediaLinks['Website']}
+						<a href={user.socialMediaLinks['Website']} target="_blank">
+							<img src={iconLinks.Website} width="40" height="40" alt="Website" />
+						</a>
+					{/if}
+				</div>
+			{/if}
 			<div class="absolute top-1/2 transform -translate-y-1/2 right-3">
 				<button
 					class="bg-transparent text-white text-4xl font-semibold hover:text-gray-300 transition-colors duration-200"
@@ -130,6 +186,14 @@
 					<p class="mt-2 text-base break-words text-gray-400">{@html user.goals}</p>
 				{/if}
 			</div>
+
+			<div class="text-sm leading-5 text-gray-400">
+				<ul class="list-disc ml-4 text-lg">
+					<li><span class="font-semibold">Location:</span> {user.location}</li>
+					<li><span class="font-semibold">Industry:</span> {user.industry}</li>
+					<li><span class="font-semibold">Size:</span> {user.size}</li>
+				</ul>
+			</div>
 			<!-- <div class="overflow-y-auto overflow-wrap break-word">
 			</div> -->
 			<!-- <div class="flex flex-col mt-5">
@@ -138,8 +202,8 @@
 		</div>
 	</div>
 
-	<div class="w-full px-6 lg:px-0 max-w-7xl min-h-40 flex mb-8 mt-5 md:flex-row flex-col">
-		<div class=" md:w-[30%] w-full rounded-xl p-5 pl-8 border border-white mr-10">
+	<!-- <div class="w-full px-6 lg:px-0 max-w-7xl min-h-40 flex mb-8 mt-5 md:flex-row flex-col">
+		<div class=" md:w-[100%] mx-10 w-full rounded-xl p-5 pl-8 border border-white mr-10">
 			<div class="text-sm leading-5 text-gray-400">
 				<ul class="list-disc ml-4 text-lg">
 					<li><span class="font-semibold">Location:</span> {user.location}</li>
@@ -156,8 +220,8 @@
 					<li><span class="font-semibold">Size:</span> {user.size}</li>
 				</ul>
 			</div>
-		</div>
-	</div>
+		</div> -->
+	<!-- </div> -->
 </div>
 
 <style>

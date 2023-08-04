@@ -15,6 +15,9 @@ export const load = async ({ params, locals }) => {
 		},
 		include: {
 			dealImages: true
+		},
+		orderBy: {
+			publishDate: 'desc'
 		}
 	});
 	const unpublishedDeals = await prismaClient.deal.findMany({
@@ -24,6 +27,9 @@ export const load = async ({ params, locals }) => {
 		},
 		include: {
 			dealImages: true
+		},
+		orderBy: {
+			publishDate: 'desc'
 		}
 	});
 	const completedDeals = await prismaClient.deal.findMany({
@@ -33,6 +39,9 @@ export const load = async ({ params, locals }) => {
 		},
 		include: {
 			dealImages: true
+		},
+		orderBy: {
+			publishDate: 'desc'
 		}
 	});
 	return {

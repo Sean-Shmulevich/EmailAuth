@@ -77,9 +77,9 @@ export default DelData = {
 				'Create catchy Instagram Reels featuring the athletes using or endorsing your products, with information about the store appearance in the caption.'
 		}
 	],
-	sponsored_social_media_post: [
+	sponsored_post: [
 		{
-			name: 'Sponsored Posts',
+			name: 'Sponsored Post',
 			value:
 				"Athletes can create regular sponsored posts on their social media profiles featuring your brand's products or services. These posts should showcase the athletes using or endorsing your offerings."
 		},

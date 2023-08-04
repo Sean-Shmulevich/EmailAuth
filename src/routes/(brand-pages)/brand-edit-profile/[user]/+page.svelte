@@ -50,6 +50,9 @@
 		bio: 'empty'
 	};
 
+	$: {
+		console.log(links);
+	}
 	// upload window open or closed
 	let isModalOpen = false;
 	//Image after cropping
@@ -61,6 +64,7 @@
 	let currImage = null;
 
 	let socialMediaLinks = [{ name: '', link: '' }];
+	let links;
 
 	onMount(async () => {
 		if (typeof window !== 'undefined') {
@@ -98,11 +102,9 @@
 				//set the user data fields from the fetched data of the user profile from the db
 				user = { ...user, ...data.currUserProfile };
 
-				//get the bio html from the db convert it to delta and set the quill editor
+				//get the bio html from the db convert it to delta and set the quil editor
 				deltaContent = JSON.parse(data.currUserProfile.bio);
 				deltaContentGoals = JSON.parse(data.currUserProfile.goals);
-
-				socialMediaLinks = JSON.parse(data.currUserProfile.socialMediaLinks);
 
 				quill.setContents(deltaContent);
 				quillGoals.setContents(deltaContentGoals);
@@ -134,6 +136,7 @@
 		}
 	};
 	import { afterUpdate } from 'svelte';
+	import SocialMediaPicker from './SocialMediaPicker.svelte';
 	afterUpdate(() => {
 		images = { ...images };
 	});
@@ -292,7 +295,7 @@
 				<button
 					class="{images['main-image'] !== ''
 						? 'nah'
-						: ''} text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+						: ''} text-white gold font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
 					on:click={() => {
 						squareInput = true;
 						isModalOpen = true;
@@ -304,6 +307,7 @@
 					<h2 class="text-2xl">Main Image</h2>
 					<img src={images['main-image']} alt="Profile example" class="w-1/2 mx-auto" />
 					<button
+						class="rounded-full mt-4 border border-white p-2"
 						on:click={() => {
 							images['main-image'] = '';
 							isModalOpen = true;
@@ -318,14 +322,14 @@
 				<label class="block text-gray-300 text-sm font-bold mb-2" for="image">
 					Additional Profile Images
 				</label>
-				<p class="text-gray-500 text-xs mb-2">Please upload a profile picture.</p>
-				<div class="space-y-4 p-10">
+				<p class="text-gray-500 text-xs">Please upload a profile picture.</p>
+				<div class="space-y-4 px-10 pt-5">
 					{#each buttons as button (button)}
 						<button
 							disabled={images[button] !== ''}
 							class="{images[button] !== ''
 								? 'nah'
-								: ''} text-white w-full bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+								: ''} text-white w-full gold font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
 							on:click={() => {
 								isModalOpen = true;
 								currImage = button;
@@ -344,6 +348,7 @@
 							</h2>
 							<img src={images[button]} alt="Profile example" class="w-1/2 mx-auto" />
 							<button
+								class="rounded-full mt-4 border border-white p-2"
 								on:click={() => {
 									images[button] = '';
 									isModalOpen = true;
@@ -354,7 +359,7 @@
 					{/each}
 					{#if buttons.length < 8}
 						<div
-							class="w-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition duration-300"
+							class="w-40 mx-auto gold text-white font-bold py-2 px-4 rounded-full text-center"
 							on:click={addNewButton}
 						>
 							<svg
@@ -371,7 +376,7 @@
 									d="M12 4v16m8-8H4"
 								/>
 							</svg>
-							Add
+							Add image
 						</div>
 					{/if}
 				</div>
@@ -431,41 +436,13 @@
 			<div class="mb-4">
 				<label class="block text-gray-300 text-sm font-bold mb-2">Social Media Links</label>
 				<!-- <p class="text-gray-500 text-xs mb-2"></p> -->
-				{#each socialMediaLinks as link, i (link)}
-					<div class="flex flex-col sm:flex-row w-3/4 mx-auto">
-						<input
-							class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-							id="social-name-{i}"
-							name="social-name-{i}"
-							type="text"
-							placeholder="name"
-							bind:value={link.name}
-						/>
-						<div class="w-8" />
-						<input
-							class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-							id="social-link-{i}"
-							name="social-link-{i}"
-							type="text"
-							placeholder="link"
-							bind:value={link.link}
-						/>
-					</div>
-				{/each}
+				<SocialMediaPicker
+					links={data.currUserProfile.socialMediaLinks === null
+						? {}
+						: data.currUserProfile.socialMediaLinks}
+				/>
 
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<div
-					class={'text-white mx-auto bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5  mr-2 mb-2'}
-					on:click={() => {
-						//Check if the last social media link is empty or if the name is empty
-						//there should only be one empty at a time
-						if (socialMediaLinks.length < 5) {
-							socialMediaLinks = [...socialMediaLinks, { name: '', link: '' }];
-						}
-					}}
-				>
-					Add new social media
-				</div>
 			</div>
 
 			<div class="flex items-center justify-between">
@@ -486,5 +463,23 @@
 <style>
 	.nah {
 		display: none;
+	}
+	.gold {
+		background: radial-gradient(
+				ellipse farthest-corner at right bottom,
+				#fedb37 0%,
+				#fdb931 8%,
+				#9f7928 30%,
+				#8a6e2f 40%,
+				transparent 80%
+			),
+			radial-gradient(
+				ellipse farthest-corner at left top,
+				#ffffff 0%,
+				#ffffac 8%,
+				#d1b464 25%,
+				#5d4a1f 62.5%,
+				#5d4a1f 100%
+			);
 	}
 </style>

@@ -80,21 +80,8 @@ export const actions = {
 		let size = formData.get('size')?.toString();
 		let bio = formData.get('bio')?.toString();
 		let goals = formData.get('goals')?.toString();
-		let socialLinks = [];
 
-		//get social links a maximum of 5
-		for (let i = 0; i < 5; i++) {
-			if (
-				formData.get('social-name-' + i) !== null &&
-				formData.get('social-link-' + i) !== null &&
-				formData.get('social-name-' + i) !== '' &&
-				formData.get('social-link-' + i) !== ''
-			) {
-				let socialname = formData.get('social-name-' + i)?.toString();
-				let socialink = formData.get('social-link-' + i)?.toString();
-				socialLinks.push({ name: socialname, link: socialink });
-			}
-		}
+		let socialMediaLinks = formData.get('social-media')?.toString();
 
 		// console.log(socialLinks);
 		// If user does not exist, throw an error
@@ -122,7 +109,7 @@ export const actions = {
 				bio: bio,
 				goals: goals,
 				user_id: userId,
-				socialMediaLinks: JSON.stringify(socialLinks)
+				socialMediaLinks: JSON.parse(socialMediaLinks)
 			}
 		});
 

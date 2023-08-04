@@ -2,124 +2,55 @@
 	import { enhance } from '$app/forms';
 	import type { ActionData } from './$types';
 	import { Button, Dropdown, DropdownItem, Chevron, Radio } from 'flowbite-svelte';
+	import DropdownPick from './DropdownPick.svelte';
 	import Checkboxes from './Checkboxes.svelte';
-	let checkboxes = [
-		{
-			value: 'basketball',
-			checked: false
-		},
-		{
-			value: 'baseball (men)',
-			checked: false
-		},
-		{
-			value: 'beach volleyball (women)',
-			checked: false
-		},
-		{
-			value: 'softball (women)',
-			checked: false
-		},
-		{
-			value: 'football (men)',
-			checked: false
-		},
-		{
-			value: 'cross country',
-			checked: false
-		},
-		{
-			value: 'field hockey (women)',
-			checked: false
-		},
-		{
-			value: 'bowling (women)',
-			checked: false
-		},
-		{
-			value: 'golf',
-			checked: false
-		},
-		{
-			value: 'fencing (coeducational)',
-			checked: false
-		},
-		{
-			value: 'lacrosse',
-			checked: false
-		},
-		{
-			value: 'soccer',
-			checked: false
-		},
-		{
-			value: 'gymnastics',
-			checked: false
-		},
-		{
-			value: 'rowing (women)',
-			checked: false
-		},
-		{
-			value: 'volleyball',
-			checked: false
-		},
-		{
-			value: 'ice hockey',
-			checked: false
-		},
-		{
-			value: 'water polo',
-			checked: false
-		},
-		{
-			value: 'rifle (coeducational)',
-			checked: false
-		},
-		{
-			value: 'tennis',
-			checked: false
-		},
-		{
-			value: 'skiing (coeducational)',
-			checked: false
-		},
-		{
-			value: 'track and field',
-			checked: false
-		},
-		{
-			value: 'swimming and diving',
-			checked: false
-		},
-		{
-			value: 'wrestling (men)',
-			checked: false
-		},
-		{
-			value: 'any',
-			checked: false
-		}
-	];
+
 	let activeOptions = [];
 	let goalActive = [];
-	let goalBoxes = [
-		{ value: 'Increase brand awareness regionally', checked: false },
-		{ value: 'Expand reach and exposure', checked: false },
-		{ value: 'Drive traffic and generate leads', checked: false },
-		{ value: 'Enhance brand credibility and trust', checked: false },
-		{ value: 'Connect with Community', checked: false },
-		{ value: 'Increase social media engagement', checked: false },
-		{ value: 'Launch and promote new products', checked: false },
-		{ value: 'Drive conversions and sales', checked: false },
-		{ value: 'Build brand affinity and loyalty', checked: false },
-		{ value: 'Create engaging and authentic content', checked: false },
-		{ value: 'Gain insights and market research', checked: false },
-		{ value: 'Leverage athlete credibility and trust', checked: false },
-		{ value: 'Drive product endorsement and sales', checked: false },
-		{ value: 'Increase brand association with athleticism and performance', checked: false },
-		{ value: 'Drive In store traffic', checked: false },
-		{ value: 'Drive event attendance and participation', checked: false }
+	let goals = [
+		'Increase brand awareness regionally',
+		'Expand reach and exposure',
+		'Drive traffic and generate leads',
+		'Enhance brand credibility and trust',
+		'Connect with Community',
+		'Increase social media engagement',
+		'Launch and promote new products',
+		'Drive conversions and sales',
+		'Build brand affinity and loyalty',
+		'Create engaging and authentic content',
+		'Gain insights and market research',
+		'Leverage athlete credibility and trust',
+		'Drive product endorsement and sales',
+		'Increase brand association with athleticism and performance',
+		'Drive In store traffic',
+		'Drive event attendance and participation'
+	];
+
+	let sports = [
+		'basketball',
+		'baseball (men)',
+		'beach volleyball (women)',
+		'softball (women)',
+		'football (men)',
+		'cross country',
+		'field hockey (women)',
+		'bowling (women)',
+		'golf',
+		'fencing (coeducational)',
+		'lacrosse',
+		'soccer',
+		'gymnastics',
+		'rowing (women)',
+		'volleyball',
+		'ice hockey',
+		'water polo',
+		'rifle (coeducational)',
+		'tennis',
+		'skiing (coeducational)',
+		'track and field',
+		'swimming and diving',
+		'wrestling (men)',
+		'any'
 	];
 
 	export let form: ActionData;
@@ -234,9 +165,10 @@
 						{/each}
 					</Dropdown>
 				{:else if currIndex === 5}
-					<Checkboxes bind:checkboxes bind:activeOptions />
+					<DropdownPick dropdownName="Choose up to 3 sports" dropdownTypes={sports} />
 				{:else}
-					<Checkboxes bind:checkboxes={goalBoxes} bind:activeOptions={goalActive} />
+					<DropdownPick dropdownName="Choose upto 3 goals" dropdownTypes={goals} />
+					<!-- <Checkboxes bind:checkboxes={goalBoxes} bind:activeOptions={goalActive} /> -->
 				{/if}
 				<br />
 				<input

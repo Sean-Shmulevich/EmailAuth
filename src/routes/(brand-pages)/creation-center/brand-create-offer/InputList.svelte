@@ -32,7 +32,7 @@
 
 <div class="flex flex-col">
 	{#each inputs as input, i}
-		<div class="flex my-4 space-x-4">
+		<div class="flex flex-col sm:flex-row space-y-4 my-4 space-x-4">
 			<p>{showName} {i + 1}</p>
 
 			<input
@@ -49,7 +49,9 @@
 				on:input={(event) => handleValueChange(event, input)}
 				placeholder="Enter deliverable"
 			/>
-			<button on:click|preventDefault={() => deleteInput(input.id)}>-</button>
+			<button class="text-xl font-extrabold" on:click|preventDefault={() => deleteInput(input.id)}
+				>-</button
+			>
 		</div>
 	{/each}
 	{#if inputs.length > 0}
@@ -63,5 +65,5 @@
 			)}
 		/>
 	{/if}
-	<button class="text-xl" on:click|preventDefault={addInput}>+</button>
+	<button class="text-xl font-extrabold" on:click|preventDefault={addInput}>+</button>
 </div>

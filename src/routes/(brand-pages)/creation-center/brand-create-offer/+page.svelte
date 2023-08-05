@@ -544,7 +544,7 @@
 					on:click|preventDefault={() => {
 						showPreview = !showPreview;
 					}}
-					class="mx-3 bg-red-500 rounded-full p-3 text-right">Show preview</button
+					class="mx-3 bg-red-500 rounded-full p-3 text-right mt-5">Show preview</button
 				>
 			{/if}
 			{#if data && data.deal}

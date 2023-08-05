@@ -103,7 +103,7 @@
 			}}
 			class="w-1/3 p-3 rounded-xl {activeButton === 'published'
 				? 'border-4 border-green-400'
-				: ''} bg-gray-800 text-center mt-10 text-lg">Active</button
+				: ''} bg-gray-800 text-center mt-10 text-sm sm:text-lg">Active</button
 		>
 		<button
 			on:click|preventDefault={() => {
@@ -112,7 +112,8 @@
 			}}
 			class="{activeButton === 'unpublished'
 				? 'border-4 border-green-400'
-				: ''} bg-gray-800 w-1/3 p-3 rounded-xl text-center mt-10 text-lg">Unpublished</button
+				: ''} bg-gray-800 w-1/3 p-3 rounded-xl text-center mt-10 text-sm sm:text-lg"
+			>Unpublished</button
 		>
 		<button
 			on:click|preventDefault={() => {
@@ -121,7 +122,8 @@
 			}}
 			class=" {activeButton === 'completed'
 				? 'border-4 border-green-400'
-				: ''} bg-gray-800 w-1/3 p-3 rounded-xl text-center mt-10 text-lg">Completed</button
+				: ''} bg-gray-800 w-1/3 p-3 rounded-xl text-center mt-10 text-sm sm:text-lg"
+			>Completed</button
 		>
 	</div>
 	{#each currentDealList as deal}

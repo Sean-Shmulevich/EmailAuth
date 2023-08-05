@@ -27,6 +27,7 @@
 	let aspect;
 	let width;
 	let height;
+	export let mobile = false;
 	//this reactive block Im not sure if it needs to be in the block
 	$: {
 		if (square) {
@@ -39,6 +40,14 @@
 		} else {
 			aspect = 3 / 4;
 			width = 300;
+			height = 400;
+			aspect = aspect;
+			width = width;
+			height = height;
+		}
+		if (mobile) {
+			aspect = 9 / 16;
+			width = 225;
 			height = 400;
 			aspect = aspect;
 			width = width;

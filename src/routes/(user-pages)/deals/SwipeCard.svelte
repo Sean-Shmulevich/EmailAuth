@@ -106,10 +106,16 @@
 				<div class="boxcontent">
 					{#if pageNum === 0}
 						{#if offer.dealImages && offer.dealImages.length !== 0}
-							<img src="/api/s3object/{offer.dealImages[0].id}" alt="Profile" />
+							<!-- TODO object contain vs object cover -->
+							<img
+								class="bg-gray-900 object-contain"
+								src="/api/s3object/{offer.dealImages[0].id}"
+								alt="Profile"
+							/>
 						{:else}
 							<img
-								src="/api/s3object/1690047383938a750a7168ff2492899697beefcb7dc6e"
+								class="bg-gray-900 object-contain"
+								src="https://shmul.dev/assets/cardplaceholder.png"
 								alt="Profile"
 							/>
 						{/if}
@@ -257,23 +263,23 @@
 		align-items: center;
 		justify-content: center;
 		width: 100%;
-		height: 100%;
+		height: 100vh;
 		/* !!!! */
-		margin-top: 3vh;
+		margin-top: -3vh;
 	}
 
 	#container {
 		display: flex;
-		width: 60vh;
-		height: 80vh;
+		width: 47.25vh;
+		height: 84vh;
 		overflow: hidden;
 	}
 
 	.background {
 		position: absolute;
-		width: 60vh;
+		width: 47.25vh;
 		max-width: 100vw;
-		height: 80vh;
+		height: 84vh;
 	}
 
 	#select {
@@ -297,10 +303,10 @@
 
 	.box {
 		position: absolute;
-		width: 60vh;
-		height: 80vh;
+		width: 47.25vh;
+		height: 84vh;
 		max-width: 95vw;
-		margin-left: 10px;
+		margin-left: 6px;
 	}
 
 	.boxcontent {
@@ -485,9 +491,5 @@
 	.overlay:target {
 		visibility: visible;
 		opacity: 1;
-	}
-
-	.box {
-		margin-bottom: 60px; /* Increase the margin to make space for the modal */
 	}
 </style>

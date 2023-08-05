@@ -32,7 +32,7 @@
 				<!-- <span class="ml-3 text-3xl gold">DapUp</span> -->
 			</a>
 			<nav
-				class="md:ml-auto block flex-wrap items-center text-base justify-center z-[100]"
+				class="md:ml-auto block items-center text-base justify-center z-[100]"
 				style="margin-bottom:18px"
 			>
 				{#if data.msg === 'not authenticated'}
@@ -60,7 +60,7 @@
 						id="avatar_with_name"
 					>
 						<Avatar src={data.profilePicture} class="mr-2" />
-						<p class="p-2">{data.user.email}</p>
+						<p class="p-2">{data.user.name}</p>
 					</Button>
 				{/if}
 			</nav>

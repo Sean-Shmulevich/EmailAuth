@@ -29,7 +29,7 @@
 		}
 	}
 
-	let defaultImg = '/api/s3object/1690047383938a750a7168ff2492899697beefcb7dc6e';
+	let defaultImg = 'https://shmul.dev/cardplaceholder.png';
 </script>
 
 {#if loading}
@@ -99,12 +99,12 @@
 				{#if currDeal.dealImages.length !== 0}
 					<img
 						alt={currDeal.brandName}
-						class="mt-5 rounded-2xl mx-auto sm:mx-[unset] h-[500px] w-[400px]"
+						class="object-contain mt-5 rounded-2xl mx-auto sm:mx-[unset] h-[500px] w-full"
 						src="/api/s3object/{currDeal.dealImages[0].id}"
 					/>
 				{:else}
 					<img
-						class="mt-5 rounded-2xl mx-auto sm:mx-[unset] h-[500px] w-[400px]"
+						class="mt-5 object-contain rounded-2xl mx-auto sm:mx-[unset] h-[500px] w-full"
 						src={defaultImg}
 					/>
 				{/if}

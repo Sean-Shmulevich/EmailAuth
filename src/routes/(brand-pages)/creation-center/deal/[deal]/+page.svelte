@@ -8,7 +8,7 @@
 	if (currDeal.location === '') {
 		currDeal.location = 'Virtual';
 	}
-	let dealImg = '/api/s3object/1690047383938a750a7168ff2492899697beefcb7dc6e';
+	let dealImg = 'https://shmul.dev/cardplaceholder.png';
 	if (data.dealImage) {
 		dealImg = `/api/s3object/${data.dealImage.id}`;
 	}
@@ -16,13 +16,13 @@
 </script>
 
 <!-- <p class="text-white">{JSON.stringify(data.dealImage)}</p> -->
-<div class=" mb-52 mx-20">
+<div class=" mb-52 mx-3 sm:mx-20">
 	<div class="w-fit mx-auto bg-gray-800 rounded-xl mt-5 p-5 mb-10 pb-5">
 		<h2 class="text-center text-3xl mb-2 text-white">{currDeal.title}</h2>
 		<hr />
 		<div class="flex flex-col md:flex-row">
 			<img
-				class="mt-5 rounded-2xl mx-auto sm:mx-[unset] h-[500px] w-[400px]"
+				class="object-contain mt-5 rounded-2xl mx-auto sm:mx-[unset] h-[500px] w-full"
 				src={dealImg}
 				alt="deal main {data.dealImage}"
 			/>

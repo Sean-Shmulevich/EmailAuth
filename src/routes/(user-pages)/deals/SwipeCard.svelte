@@ -263,7 +263,7 @@
 		align-items: center;
 		justify-content: center;
 		width: 100%;
-		height: 100vh;
+		height: 92vh;
 		/* !!!! */
 		margin-top: -3vh;
 	}

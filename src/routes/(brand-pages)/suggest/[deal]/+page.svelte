@@ -25,7 +25,7 @@
 	// console.log(users);
 	let index0 = 0;
 	let index1 = 0;
-	let images = [[], []];
+	let images = [[defaultImage], [defaultImage]];
 	for (let i = 0; data.images && i < data.images[0].length; i++) {
 		let imgNum = data.images[0][i].image_number;
 		images[0][imgNum] = `${s3 + '/' + encodeURIComponent(data.images[0][i].id)}`;
@@ -34,6 +34,7 @@
 		let imgNum = data.images[1][i].image_number;
 		images[1][imgNum] = `${s3 + '/' + encodeURIComponent(data.images[1][i].id)}`;
 	}
+	console.log(images);
 	let iconLinks = {
 		Instagram: 'https://shmul.dev/assets/instagram.png',
 		Twitter: 'https://shmul.dev/assets/twitter.png',
@@ -43,6 +44,7 @@
 		Linkedin: 'https://shmul.dev/assets/linkedin.png',
 		Website: 'https://shmul.dev/assets/website.png'
 	};
+	console.log(users);
 	// let update = false;
 	// $: {
 	// 	update = true;
@@ -102,7 +104,7 @@
 						/>
 					{/if}
 
-					{#if user.socialMedia}
+					{#if user.socialMedia !== null}
 						<div
 							data-sveltekit-preload-data="false"
 							class="flex flex-row absolute -bottom-5 transform -translate-y-1/2 right-0 rounded-full bg-gray-400 py-1 bg-opacity-60 space-x-2 px-2"
@@ -184,7 +186,7 @@
 				</div>
 
 				<div class="profile-text mt-5 md:mt-0 md:pl-6 w-full flex flex-col" style="height:inherit">
-					<div class="text-5xl my-5 font-medium text-white leading-10">{user.name}</div>
+					<div class="text-5xl my-5 font-medium text-white leading-10">{data.names[i]}</div>
 					<div class="mt-5 flex-grow overflow-y-auto overflow-wrap break-word">
 						<h4 class="text-lg leading-6 font-medium text-white">Biography</h4>
 						<p class="mt-2 text-base text-gray-400">
@@ -192,7 +194,7 @@
 						</p>
 					</div>
 					<div class="border border-white p-2 rounded-xl -mb-2 mt-5 flex flex-col">
-						{#if user.industries.length !== 0}
+						{#if user.industries && user.industries.length !== 0}
 							<div class="flex flex-row items-baseline pt-2 justify-start bottom-0">
 								<h4 class="text-lg leading-6 mr-8 font-medium text-white">
 									Industries of interest

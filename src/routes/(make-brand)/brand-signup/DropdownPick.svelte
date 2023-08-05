@@ -36,10 +36,9 @@
 				if (pickedTypes.length < 3 && !pickedTypes.includes(industry)) {
 					pickedTypes = [...pickedTypes, industry];
 				} else if (pickedTypes.length === 3) {
-					message =
-						'you have already picked 3 different main goals delete one in order to replace it';
+					message = 'you have already picked 3 different options delete one in order to replace it';
 				} else {
-					message = 'you have already picked this goal';
+					message = 'you have already picked this option';
 				}
 			}}
 			class="text-black ml-2 mt-2"

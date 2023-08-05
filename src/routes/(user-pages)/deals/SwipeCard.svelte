@@ -212,28 +212,47 @@
 					{/if}  -->
 					<div class="like">Like</div>
 					<div class="nope">Nope</div>
-				</div>
 
-				<button
-					class="hover:bg-white rounded-2xl absolute left-0 mt-6 w-10 h-[95%] opacity-20"
-					style=""
-					on:click={() => {
-						pageNum = pageNum - 1;
-						if (pageNum < 0) {
-							pageNum = 2;
-						}
-					}}
-				/>
-				<button
-					class="hover:bg-white rounded-2xl absolute right-0 mt-6 w-10 h-[95%] opacity-20"
-					style=""
-					on:click={() => {
-						pageNum = pageNum + 1;
-						if (pageNum > 2) {
-							pageNum = 0;
-						}
-					}}
-				/>
+					<div class="absolute top-1/2 transform -translate-y-1/2 left-3">
+						<button
+							class="bg-transparent border-text text-4xl font-semibold hover:text-gray-300 transition-colors duration-200"
+							on:click={() => {
+								pageNum = pageNum - 1;
+								if (pageNum < 0) {
+									pageNum = 2;
+								}
+							}}
+							on:touchstart={() => {
+								pageNum = pageNum - 1;
+								if (pageNum < 0) {
+									pageNum = 2;
+								}
+							}}
+						>
+							&lt;
+						</button>
+					</div>
+
+					<div class="absolute top-1/2 transform -translate-y-1/2 right-3">
+						<button
+							on:touchstart|preventDefault={() => {
+								pageNum = pageNum + 1;
+								if (pageNum > 2) {
+									pageNum = 0;
+								}
+							}}
+							on:click|capture={() => {
+								pageNum = pageNum + 1;
+								if (pageNum > 2) {
+									pageNum = 0;
+								}
+							}}
+							class="bg-transparent text-gray-900 border-text text-4xl font-semibold hover:text-gray-300 transition-colors duration-200"
+						>
+							&gt;
+						</button>
+					</div>
+				</div>
 			</div>
 		{/each}
 	</div>
@@ -242,6 +261,10 @@
 <style>
 	@import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto:900');
 
+	.border-text {
+		color: white;
+		text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+	}
 	.centerAll {
 		position: absolute;
 		left: 50%;

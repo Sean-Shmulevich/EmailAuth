@@ -203,7 +203,7 @@
 					<div class="w-full text-center">
 						<a class="mx-auto" href="{dealLink}{deal.id}">
 							<button
-								class="bg-green-500 hover:bg-green-700 text-white transform translate-y-5 font-bold py-2 px-4 rounded-full"
+								class="bg-green-500 hover:bg-green-700 text-white transform translate-y-5 font-bold p-2 rounded-full"
 							>
 								{#if activeButton === 'unpublished'}
 									Finish creating deal

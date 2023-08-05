@@ -57,7 +57,7 @@
 	</div>
 {/if}
 
-<div class="overflow-y-auto mt-10">
+<div class="mx-20 mt-10">
 	<div
 		class="flex flex-row -mt-5 w-[80%] sm:w-[60%] mb-5 text-white text-center justify-center mx-auto"
 	>
@@ -107,14 +107,23 @@
 						src={defaultImg}
 					/>
 				{/if}
-				<div class="text-white mt-5 w-full md:w-[25%] min-w-[300px]">
+				<div class="text-white mt-5 w-full flex flex-col min-w-[200px]">
 					<div class="border border-white p-5 text-lg rounded-xl">
-						<p>Event Type</p>
-						<p class="mb-5">{currDeal.eventType}</p>
+						{#if !currDeal.isCampaign}
+							<p>Event Type</p>
+							<p class="mb-5">{currDeal.eventType}</p>
+						{/if}
 						<p>Sport Preference</p>
 						<p class="mb-5">{currDeal.sportPreference}</p>
-						<p>Gender Preference:</p>
-						<p>{currDeal.genderPreference}</p>
+						<p>Gender Preference: {currDeal.genderPreference}</p>
+						<br />
+						{#if !currDeal.isCampaign && currDeal.location !== ''}
+							<p class="">Location: {currDeal.location}</p>
+						{:else if !currDeal.isCampaign && currDeal.location === ''}
+							<p>Location</p>
+							<p class="">{currDeal.inPersonOrVirtual}</p>
+						{/if}
+						<p class="mt-5">Description: {currDeal.shortDescription}</p>
 					</div>
 					<!-- <p>{currDeal.shortDescription}</p> -->
 					<!-- <p>{currDeal.endDate}</p> -->
@@ -125,13 +134,6 @@
 					<!-- <p>{currDeal.}</p> -->
 
 					<div class="border border-white p-5 text-lg rounded-xl">
-						<p>Location</p>
-						{#if currDeal.location !== ''}
-							<p class="mb-5">{currDeal.location}</p>
-						{:else}
-							<p class="mb-5">{currDeal.inPersonOrVirtual}</p>
-						{/if}
-
 						<p class="mb-5">
 							{#if currDeal.isCampaign}
 								Start Date: {currDeal.eventDate.toISOString().slice(0, 10)}

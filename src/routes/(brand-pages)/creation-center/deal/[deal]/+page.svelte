@@ -16,7 +16,7 @@
 </script>
 
 <!-- <p class="text-white">{JSON.stringify(data.dealImage)}</p> -->
-<div class="overflow-y-scroll mb-52">
+<div class=" mb-52 mx-20">
 	<div class="w-fit mx-auto bg-gray-800 rounded-xl mt-5 p-5 mb-10 pb-5">
 		<h2 class="text-center text-3xl mb-2 text-white">{currDeal.title}</h2>
 		<hr />
@@ -26,7 +26,7 @@
 				src={dealImg}
 				alt="deal main {data.dealImage}"
 			/>
-			<div class="text-white mt-5 w-full md:w-[25%] flex flex-col min-w-[300px]">
+			<div class="text-white mt-5 w-full flex flex-col min-w-[200px]">
 				<div class="border border-white p-5 text-lg grow rounded-xl">
 					{#if !currDeal.isCampaign}
 						<p>Event Type</p>
@@ -35,6 +35,7 @@
 					<p>Sport Preference</p>
 					<p class="mb-5">{currDeal.sportPreference}</p>
 					<p>Gender Preference: {currDeal.genderPreference}</p>
+					<br />
 					{#if !currDeal.isCampaign && currDeal.location !== ''}
 						<p class="">Location: {currDeal.location}</p>
 					{:else if !currDeal.isCampaign && currDeal.location === ''}

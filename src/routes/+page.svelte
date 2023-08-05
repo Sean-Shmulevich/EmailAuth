@@ -221,17 +221,11 @@
 					<div
 						class="flex-shrink-0 w-10 h-10 rounded-full bg-gray-900 border border-white inline-flex items-center justify-center text-white relative z-10"
 					>
-						<svg
-							fill="none"
-							stroke="currentColor"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							class="w-5 h-5"
-							viewBox="0 0 24 24"
-						>
-							<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-						</svg>
+						<img
+							src="https://shmul.dev/assets/customize.png"
+							alt="launch"
+							class="object-cover w-6 h-6"
+						/>
 					</div>
 					<div class="flex-grow pl-4">
 						<h2 class="font-bold title-font text-sm text-gray-200 mb-1 tracking-wider">
@@ -250,17 +244,11 @@
 					<div
 						class="flex-shrink-0 w-10 h-10 rounded-full bg-gray-900 border border-white inline-flex items-center justify-center text-white relative z-10"
 					>
-						<svg
-							fill="none"
-							stroke="currentColor"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							class="w-5 h-5"
-							viewBox="0 0 24 24"
-						>
-							<path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-						</svg>
+						<img
+							src="https://shmul.dev/assets/launch.png"
+							alt="launch"
+							class="object-cover w-7 h-7 transform translate-x-[-1px] translate-y-[1px]"
+						/>
 					</div>
 					<div class="flex-grow pl-4">
 						<h2 class="font-bold title-font text-sm mb-1 tracking-wider text-white">Launch</h2>
@@ -277,18 +265,11 @@
 					<div
 						class="flex-shrink-0 w-10 h-10 rounded-full bg-gray-900 border border-white inline-flex items-center justify-center text-white relative z-10"
 					>
-						<svg
-							fill="none"
-							stroke="currentColor"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							class="w-5 h-5"
-							viewBox="0 0 24 24"
-						>
-							<circle cx="12" cy="5" r="3" />
-							<path d="M12 22V8M5 12H2a10 10 0 0020 0h-3" />
-						</svg>
+						<img
+							src="https://shmul.dev/assets/match.png"
+							alt="launch"
+							class="object-cover w-7 h-7"
+						/>
 					</div>
 					<div class="flex-grow pl-4">
 						<h2 class="font-bold title-font text-sm text-white mb-1 tracking-wider">Match</h2>
@@ -305,18 +286,11 @@
 					<div
 						class="flex-shrink-0 w-10 h-10 rounded-full bg-gray-900 border border-white inline-flex items-center justify-center text-white relative z-10"
 					>
-						<svg
-							fill="none"
-							stroke="currentColor"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							class="w-5 h-5"
-							viewBox="0 0 24 24"
-						>
-							<path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
-							<circle cx="12" cy="7" r="4" />
-						</svg>
+						<img
+							src="https://shmul.dev/assets/contract.png"
+							alt="launch"
+							class="object-cover w-6 h-6 transform translate-x-[3px]"
+						/>
 					</div>
 					<div class="flex-grow pl-4">
 						<h2 class="font-bold title-font text-sm text-white mb-1 tracking-wider">Contract</h2>

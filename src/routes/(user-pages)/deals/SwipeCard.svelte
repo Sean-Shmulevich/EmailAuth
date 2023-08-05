@@ -213,16 +213,16 @@
 					<div class="like">Like</div>
 					<div class="nope">Nope</div>
 
-					<div class="absolute top-1/2 transform -translate-y-1/2 left-3">
+					<div class="absolute top-0 bottom-0 left-0 flex items-center">
 						<button
-							class="bg-transparent border-text text-4xl font-semibold hover:text-gray-300 transition-colors duration-200"
+							class="w-full h-full px-3 py-3 bg-transparent text-gray-900 border-text text-2xl font-semibold hover:text-gray-300 transition-colors duration-200"
 							on:click={() => {
 								pageNum = pageNum - 1;
 								if (pageNum < 0) {
 									pageNum = 2;
 								}
 							}}
-							on:touchstart={() => {
+							on:touchstart|preventDefault|capture={() => {
 								pageNum = pageNum - 1;
 								if (pageNum < 0) {
 									pageNum = 2;
@@ -233,9 +233,9 @@
 						</button>
 					</div>
 
-					<div class="absolute top-1/2 transform -translate-y-1/2 right-3">
+					<div class="absolute top-0 bottom-0 right-0 flex items-center">
 						<button
-							on:touchstart|preventDefault={() => {
+							on:touchstart|preventDefault|capture={() => {
 								pageNum = pageNum + 1;
 								if (pageNum > 2) {
 									pageNum = 0;
@@ -247,7 +247,7 @@
 									pageNum = 0;
 								}
 							}}
-							class="bg-transparent text-gray-900 border-text text-4xl font-semibold hover:text-gray-300 transition-colors duration-200"
+							class="w-full h-full px-3 py-3 bg-transparent text-gray-900 border-text text-2xl font-semibold hover:text-gray-300 transition-colors duration-200"
 						>
 							&gt;
 						</button>

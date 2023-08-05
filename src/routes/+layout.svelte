@@ -60,7 +60,22 @@
 						id="avatar_with_name"
 					>
 						<Avatar src={data.profilePicture} />
-						<p class="p-2">{data.user.name}</p>
+						<p class="pl-1 mr-0 sm:mr-2">{data.user.name}</p>
+						<svg
+							class="mx-1 sm:mx-2"
+							width="24"
+							height="24"
+							viewBox="0 0 24 24"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<!-- Top Line -->
+							<rect x="3" y="4.5" width="18" height="1.5" rx="0.75" fill="currentColor" />
+							<!-- Middle Line -->
+							<rect x="3" y="11" width="18" height="1.5" rx="0.75" fill="currentColor" />
+							<!-- Bottom Line -->
+							<rect x="3" y="17.5" width="18" height="1.5" rx="0.75" fill="currentColor" />
+						</svg>
 					</Button>
 				{/if}
 			</nav>

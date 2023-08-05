@@ -13,7 +13,7 @@
 
 <body class="bg-gray-900 overflow-x-hidden font-sans" style="touch-action: manipulation;">
 	<!-- TODO make it fixed if we want it to be sticky -->
-	<header class="w-full body-font bg-black">
+	<header class="w-full body-font bg-gray-900">
 		<div class="container sticky mx-auto flex flex-wrap pt-5 flex-row justify-center items-center">
 			<!-- svelte-ignore a11y-missing-attribute -->
 			<a
@@ -113,6 +113,7 @@
 		<slot />
 	</main>
 </body>
+
 <!-- 
 <style lang="postcss">
 	(main h1) {
@@ -144,3 +145,24 @@
 		@apply text-sm text-zinc-500;
 	}
 </style> -->
+
+<style>
+	.gold {
+		background: radial-gradient(
+				ellipse farthest-corner at right bottom,
+				#fedb37 0%,
+				#fdb931 8%,
+				#9f7928 30%,
+				#8a6e2f 40%,
+				transparent 80%
+			),
+			radial-gradient(
+				ellipse farthest-corner at left top,
+				#ffffff 0%,
+				#ffffac 8%,
+				#d1b464 25%,
+				#5d4a1f 62.5%,
+				#5d4a1f 100%
+			);
+	}
+</style>

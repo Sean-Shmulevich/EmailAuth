@@ -28,7 +28,7 @@
 				{i + 1}
 			</p>
 			<p class="text-white w-[90%] -mb-3 sm:w-1/2 mx-auto">{athleteGuideSteps[i]}</p>
-			<img src={link} class="my-5 w-[90%] sm:w-1/2 mx-auto w-1/2" alt="athlete guide image" />
+			<img src={link} class="mt-5 w-[90%] sm:w-1/2 mx-auto w-1/2" alt="athlete guide image" />
 		</div>
 		{#if links.length - 1 === i}
 			<!-- <hr class="w-[90%] sm:w-1/2 mx-auto" style="margin-top: -21px" /> -->

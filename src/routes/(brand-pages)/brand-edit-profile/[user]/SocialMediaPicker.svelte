@@ -67,7 +67,7 @@
 <Dropdown
 	bind:open
 	placement="top"
-	class=" w-64 h-32 bg-white overflow-y-scroll overflow-x-hidden text-black  text-left whitespace-nowrap text-sm"
+	class=" bg-gray-700 w-64 h-32 overflow-y-scroll overflow-x-hidden text-black  text-left whitespace-nowrap text-sm"
 >
 	{#each socialMediaTypes as socialMedia}
 		<DropdownItem
@@ -82,7 +82,7 @@
 					message = 'you have already picked this social media type';
 				}
 			}}
-			class="text-black ml-2 mt-2"
+			class="text-white ml-2 mt-2"
 			bind:group={socialMedia}
 			value={socialMedia}>{socialMedia}</DropdownItem
 		>

@@ -33,7 +33,7 @@
 <div class="flex flex-row bg-gray-700 rounded-xl items-center">
 	<Button><Chevron>What is your primary sport</Chevron></Button>
 	<Dropdown
-		class="w-54 h-32 overflow-y-scroll text-black  text-left whitespace-nowrap space-y-3 text-sm"
+		class="w-54 h-32 overflow-y-scroll bg-gray-700 text-white  text-left whitespace-nowrap space-y-3 text-sm"
 	>
 		{#each sportsNames as sportName}
 			<Radio

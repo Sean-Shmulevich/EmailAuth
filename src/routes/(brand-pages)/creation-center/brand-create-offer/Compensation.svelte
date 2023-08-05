@@ -65,7 +65,7 @@
 	<Button class="w-full text-left bg-gray-700 border border-white mb-2"
 		><Chevron>{compSelected}</Chevron></Button
 	>
-	<Dropdown bind:open placement="top">
+	<Dropdown class="bg-gray-700" bind:open placement="top">
 		{#each priceRanges as comp}
 			<DropdownItem
 				class="text-white"

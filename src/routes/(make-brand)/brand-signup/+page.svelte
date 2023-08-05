@@ -140,7 +140,7 @@
 					<Button class="w-full text-center bg-gray-700 border border-white mb-2"
 						><Chevron>{sizeSelected}</Chevron></Button
 					>
-					<Dropdown bind:open>
+					<Dropdown bind:open class="bg=gray-700">
 						{#each companySize as size}
 							<DropdownItem
 								class="text-white"
@@ -155,7 +155,7 @@
 					<Button class="w-full text-center bg-gray-700 border border-white mb-2"
 						><Chevron>{hasSponcered}</Chevron></Button
 					>
-					<Dropdown bind:open>
+					<Dropdown class="bg-gray-700" bind:open>
 						{#each yesNo as answer}
 							<DropdownItem
 								class="text-white"

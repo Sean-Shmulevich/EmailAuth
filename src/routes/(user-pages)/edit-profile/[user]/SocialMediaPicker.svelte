@@ -66,7 +66,7 @@
 <Dropdown
 	bind:open
 	placement="top"
-	class=" w-64 h-32 bg-white overflow-y-scroll overflow-x-hidden text-black  text-left whitespace-nowrap text-sm"
+	class=" w-64 h-32 bg-gray-700 overflow-y-scroll overflow-x-hidden text-white  text-left whitespace-nowrap text-sm"
 >
 	{#each socialMediaTypes as socialMedia}
 		<DropdownItem

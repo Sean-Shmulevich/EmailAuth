@@ -30,16 +30,16 @@
 	let open = false;
 </script>
 
-<div class="flex bg-white flex-row bg-gray-700 rounded-xl items-center">
+<div class="flex flex-row bg-gray-700 rounded-xl items-center">
 	<Button class="bg-white text-black"><Chevron>What is your primary sport?</Chevron></Button>
 	<Dropdown
 		bind:open
-		class="bg-white w-54 h-32 overflow-y-scroll text-black  text-left whitespace-nowrap space-y-3 text-sm"
+		class="bg-gray-700 w-54 h-32 overflow-y-scroll text-black  text-left whitespace-nowrap space-y-3 text-sm"
 	>
 		{#each sportsNames as sportName}
 			<Radio
 				on:click={() => (open = false)}
-				class="text-black ml-2 mt-2"
+				class="text-white ml-2 mt-2"
 				name="sport-preference"
 				bind:group={sportPref}
 				value={sportName}>{sportName}</Radio

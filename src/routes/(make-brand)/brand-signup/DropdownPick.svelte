@@ -27,7 +27,7 @@
 <Button class="border border-white w-full "><Chevron>{dropdownName}</Chevron></Button>
 <Dropdown
 	bind:open
-	class=" w-fit rounded-xl h-48 bg-white overflow-y-scroll overflow-x-hidden text-black  text-left whitespace-nowrap text-sm"
+	class=" w-fit rounded-xl h-48 bg-gray-700 overflow-y-scroll overflow-x-hidden text-white text-left whitespace-nowrap text-sm"
 >
 	{#each dropdownTypes as industry}
 		<DropdownItem
@@ -41,7 +41,7 @@
 					message = 'you have already picked this option';
 				}
 			}}
-			class="text-black ml-2 mt-2"
+			class="text-white ml-2 mt-2"
 			value={industry}>{industry}</DropdownItem
 		>
 	{/each}

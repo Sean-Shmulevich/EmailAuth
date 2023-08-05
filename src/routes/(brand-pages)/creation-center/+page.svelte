@@ -137,7 +137,7 @@
 					/>
 				{:else}
 					<img
-						src="/api/s3object/1690047383938a750a7168ff2492899697beefcb7dc6e"
+						src="https://shmul.dev/assets/cardplaceholder.png"
 						alt="Brand deal to athlete {deal.title}"
 						class="w-full h-full object-cover"
 					/>

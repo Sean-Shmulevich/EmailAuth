@@ -61,7 +61,7 @@
 		</Dropdown>
 		<!-- <br /> -->
 	{/each}
-{:else if eventType}
+{:else if eventType && eventType !== 'custom'}
 	<Button><Chevron>{eventType}</Chevron></Button>
 	<Dropdown {placement} bind:open={dropdownOpen} class="overflow-y-scroll bg-gray-700 h-52">
 		{#each DelData[eventTypeParsed] as del}

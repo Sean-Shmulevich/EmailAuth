@@ -375,6 +375,7 @@
 						{#if currImage !== null}
 							<img src={currImage} alt="Profile example" class="w-1/2 mx-auto" />
 							<button
+								class="border border-white rounded-full mt-3 p-3"
 								on:click|preventDefault={() => {
 									croppedImage = null;
 									isModalOpen = true;
@@ -389,6 +390,7 @@
 								class="w-1/2 mx-auto"
 							/>
 							<button
+								class="border border-white rounded-full mt-3 p-3"
 								on:click|preventDefault={() => {
 									croppedImage = null;
 									isModalOpen = true;

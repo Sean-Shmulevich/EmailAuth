@@ -62,7 +62,7 @@
 {/if}
 
 {#if pay === 'Money' || pay === 'Both'}
-	<Button class="w-full text-left bg-gray-700 border border-white mb-2"
+	<Button class="w-full text-left mt-2 bg-gray-700 border border-white mb-2"
 		><Chevron>{compSelected}</Chevron></Button
 	>
 	<Dropdown class="bg-gray-700" bind:open placement="top">

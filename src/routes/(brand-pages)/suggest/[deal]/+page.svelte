@@ -239,7 +239,7 @@
 		</div>
 		<form class="mx-auto text-center mb-5" method="POST" action="?/pickUser">
 			<input type="hidden" name="userId" value={user.user_id} />
-			<button class="text-center rounded-full p-2 bg-green-400" type="submit"
+			<button class="text-center rounded-full p-2 bg-green-500" type="submit"
 				>Work with this athlete</button
 			>
 		</form>

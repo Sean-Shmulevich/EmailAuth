@@ -44,7 +44,7 @@
 		</div>
 	</div>
 	<img
-		class="sm:hidden block mx-auto -mt-[100px] -mb-2"
+		class="sm:hidden block mx-auto -mt-[65px] -mb-2"
 		src="https://shmul.dev/assets/dapupmainimg.png"
 	/>
 	<a

@@ -8,7 +8,7 @@
 
 	// default image for profiles without any uploaded images yet.
 	//TODO change default image
-	let defaultImage = 'https://shmul.dev/assets/dapupsmall.png';
+	let defaultImage = 'https://shmul.dev/assets/dapupprofile.png';
 
 	export let data;
 	let s3 = '/api/s3object';

@@ -5,7 +5,7 @@
 	let user1;
 	let user2;
 	let suggestedUsers;
-	let defaultImage = 'https://shmul.dev/assets/dapupsmall.png';
+	let defaultImage = 'https://shmul.dev/assets/dapupprofile.png';
 
 	let s3 = '/api/s3object';
 

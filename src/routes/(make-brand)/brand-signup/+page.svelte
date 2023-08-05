@@ -140,7 +140,7 @@
 					<Button class="w-full text-center bg-gray-700 border border-white mb-2"
 						><Chevron>{sizeSelected}</Chevron></Button
 					>
-					<Dropdown bind:open class="bg=gray-700">
+					<Dropdown bind:open class="bg-gray-700">
 						{#each companySize as size}
 							<DropdownItem
 								class="text-white"

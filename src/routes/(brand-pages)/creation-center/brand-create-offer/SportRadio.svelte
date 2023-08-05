@@ -35,7 +35,7 @@
 	<Button><Chevron>Sport Preference</Chevron></Button>
 	<Dropdown
 		bind:open
-		class="w-54 h-32 overflow-y-scroll text-black  text-left whitespace-nowrap space-y-3 text-sm"
+		class="w-54 bg-gray-700 h-32 overflow-y-scroll text-black  text-left whitespace-nowrap space-y-3 text-sm"
 	>
 		{#each sportsNames as sportName}
 			<Radio

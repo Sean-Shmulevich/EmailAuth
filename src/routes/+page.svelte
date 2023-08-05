@@ -459,7 +459,7 @@
 <section class="bg-gray-900 -mt-5">
 	<div class="py-4 lg:py-16 px-4 mx-auto max-w-screen-md">
 		<h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center text-gold">Contact Us</h2>
-		<p class="mb-8 lg:mb-16 font-light text-center text-gray-300 dark:te-gray-400 sm:text-xl">
+		<p class="mb-8 lg:mb-16 font-light text-center text-gray-300 sm:text-xl">
 			Got a technical issue? Want to send feedback? Let us know.
 		</p>
 		<form method="POST" action="?/contactForm" class="space-y-8">

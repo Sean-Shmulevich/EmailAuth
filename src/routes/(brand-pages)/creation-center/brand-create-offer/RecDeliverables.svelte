@@ -28,7 +28,7 @@
 {#if eventCampaignOrSingle === 'Campaign'}
 	{#each Object.entries(DelData) as [eType, dels], i}
 		<Button><Chevron>{eType}</Chevron></Button>
-		<Dropdown bind:open={dropdownOpenArr[i]} {placement} class="overflow-y-scroll h-52">
+		<Dropdown bind:open={dropdownOpenArr[i]} {placement} class="overflow-y-scroll bg-gray-700 h-52">
 			{#each dels as deliverable}
 				<DropdownItem
 					class="text-white"
@@ -63,7 +63,7 @@
 	{/each}
 {:else if eventType}
 	<Button><Chevron>{eventType}</Chevron></Button>
-	<Dropdown {placement} bind:open={dropdownOpen} class="overflow-y-scroll h-52">
+	<Dropdown {placement} bind:open={dropdownOpen} class="overflow-y-scroll bg-gray-700 h-52">
 		{#each DelData[eventTypeParsed] as del}
 			<DropdownItem
 				class="text-white"

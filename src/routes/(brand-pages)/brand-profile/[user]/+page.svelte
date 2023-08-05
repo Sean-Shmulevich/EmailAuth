@@ -9,8 +9,7 @@
 	let quill;
 	// default image for profiles without any uploaded images yet.
 	//TODO change default image
-	let defaultImage =
-		'https://arkansasrazorbacks.com/wp-content/uploads/2022/10/Ayden-Owens-Delerme-MTR-2022-23.jpg';
+	let defaultImage = 'https://shmul.dev/assets/dapupsmall.png';
 
 	export let data;
 	let s3 = '/api/s3object';

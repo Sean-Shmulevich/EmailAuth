@@ -10,10 +10,12 @@
 	export let inPersonOrVirtual;
 	export let estimatedPayment;
 	export let endDate;
+	export let eventTypeCustom;
 	export let eventDate;
 	export let isCampaign;
 	export let recommendedDeliverables;
 	export let brandName;
+	export let currImage;
 	// export let checkGoals;
 	// export let customGoals;
 	// let goals = [...checkGoals, ...customGoals];
@@ -39,13 +41,19 @@
 					{#if pageNum === 0}
 						{#if croppedImage}
 							<img src={URL.createObjectURL(croppedImage)} alt="Profile" />
+						{:else if currImage}
+							<img src={currImage} alt="Profile" />
 						{:else}
 							<img src="https://shmul.dev/assets/cardplaceholder.png" alt="Profile" />
 						{/if}
 						<div class="info bg-black bg-opacity-70 rounded-xl">
 							<div class="name -mt-5">{title}</div>
 							{#if isCampaign === 'Single Event'}
-								<p>{eventType} event</p>
+								{#if eventTypeCustom}
+									<p>{eventTypeCustom} event</p>
+								{:else}
+									<p>{eventType} event</p>
+								{/if}
 							{/if}
 							<div class="interest">Brand: {brandName}</div>
 							{#if estimatedPayment}
@@ -78,7 +86,9 @@
 								<p>{shortDescription}</p>
 							</div>
 							<div class="p-2 rounded-xl border border-white h-20">
-								Looking for: <br />{sportPreference} players
+								{#if sportPreference && sportPreference !== 'undefined'}
+									Looking for: <br />{sportPreference}
+								{/if}
 							</div>
 							{#if !isCampaign}
 								<div class="p-2 rounded-xl border border-white h-20">

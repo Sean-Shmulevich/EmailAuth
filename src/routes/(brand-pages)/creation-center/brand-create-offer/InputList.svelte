@@ -32,11 +32,11 @@
 
 <div class="flex flex-col">
 	{#each inputs as input, i}
-		<div class="flex flex-col sm:flex-row space-y-4 my-4 space-x-4">
+		<div class="flex pr-5 md:pr-0 flex-col md:flex-row space-y-4 md:space-y-0 my-4 space-x-4">
 			<p>{showName} {i + 1}</p>
 
 			<input
-				class="w-40 rounded-md text-black p-2"
+				class="w-full md:w-[35%] max-h-[45px] rounded-md text-black p-2"
 				type="text"
 				value={input.title}
 				on:input={(event) => handleTitleChange(event, input)}

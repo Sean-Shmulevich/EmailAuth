@@ -225,6 +225,7 @@
 	bind:croppedImage
 	bind:title
 	bind:eventType
+	bind:eventTypeCustom
 	bind:shortDescription
 	bind:sportPreference={sportPref}
 	brandName={data.user.name}
@@ -233,6 +234,7 @@
 	bind:estimatedPayment={payJson}
 	bind:endDate
 	bind:eventDate
+	bind:currImage
 	bind:isCampaign={eventCampaignOrSingle}
 	bind:recommendedDeliverables={deliverables}
 />
@@ -484,8 +486,10 @@
 
 				{#if pageNum >= 2}
 					<div class="border rounded-xl mt-5 p-3">
-						<h2 class="text-xl mb-2">Recommended Deliverables</h2>
-						<RecDeliverables bind:eventType bind:eventCampaignOrSingle bind:deliverables />
+						{#if eventType !== 'custom'}
+							<h2 class="text-xl mb-2">Recommended Deliverables</h2>
+							<RecDeliverables bind:eventType bind:eventCampaignOrSingle bind:deliverables />
+						{/if}
 						<!-- <div class="border rounded-xl mt-5 p-3">
 							<h2 class="text-center text-xl mb-5">Main Goals</h2>
 							<Checkboxes
@@ -513,7 +517,7 @@
 					</div>
 					<div class="text-right mr-auto mt-5">
 						<button
-							class="rounded-full p-5 bg-green-800"
+							class="rounded-full p-3 bg-green-700"
 							on:click|once={() => {
 								formSubmitted = true;
 							}}
@@ -522,7 +526,7 @@
 							type="submit">Publish Deal</button
 						>
 						<button
-							class="rounded-full p-5 bg-red-800"
+							class="rounded-full p-3 bg-red-700"
 							name="deal-submit"
 							on:click|once={() => {
 								formSubmitted = true;
@@ -546,7 +550,8 @@
 					on:click|preventDefault={() => {
 						showPreview = !showPreview;
 					}}
-					class="mx-3 bg-red-500 rounded-full p-3 text-right mt-5">Show preview</button
+					class="mx-3 bg-yellow-400 text-black rounded-full p-3 text-right mt-5"
+					>Show preview</button
 				>
 			{/if}
 			{#if data && data.deal}

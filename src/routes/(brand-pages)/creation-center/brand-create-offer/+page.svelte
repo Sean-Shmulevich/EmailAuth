@@ -218,7 +218,7 @@
 	}
 </script>
 
-<ImageCropper bind:croppedImage bind:square={squareInput} bind:open={isModalOpen} />
+<ImageCropper bind:croppedImage mobile={true} bind:square={squareInput} bind:open={isModalOpen} />
 
 <PreviewCard
 	bind:showPreview

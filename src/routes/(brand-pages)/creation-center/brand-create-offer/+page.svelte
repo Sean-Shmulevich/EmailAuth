@@ -110,7 +110,9 @@
 			athNum = deal.athleteCount;
 		}
 		genderPreference = deal.genderPreference;
-		sportPref = deal.sportPreference;
+		if (deal.sportPreference) {
+			sportPref = deal.sportPreference;
+		}
 		// pay = deal.estimatedPayment;
 		// let goals = deal.goals;
 		// let custGoals = [];
@@ -137,7 +139,7 @@
 			});
 		}
 		// console.log(deal.recommendedDeliverables.set, del);
-		if (deal.recommendedDeliverables.length !== 0) {
+		if (deal.recommendedDeliverables['set'].length !== 0) {
 			deliverables = del;
 		}
 		// console.log(deal.dealImages);

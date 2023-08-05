@@ -29,6 +29,7 @@
 		'Wrestling'
 	];
 	let open = false;
+	console.log('SPORTPREF', sportPref);
 </script>
 
 <div class="flex flex-row items-center">
@@ -48,7 +49,7 @@
 		{/each}
 		<div class="h-2 w-full" />
 	</Dropdown>
-	{#if sportPref}
+	{#if sportPref && sportPref !== 'undefined'}
 		<div class="ml-10">{sportPref}</div>
 	{/if}
 </div>

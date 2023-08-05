@@ -51,7 +51,7 @@
 	};
 
 	$: {
-		console.log(links);
+		console.log(data.currUserProfile.socialMediaLinks);
 	}
 	// upload window open or closed
 	let isModalOpen = false;
@@ -63,7 +63,6 @@
 	//the current image being modified in the images object
 	let currImage = null;
 
-	let socialMediaLinks = [{ name: '', link: '' }];
 	let links;
 
 	onMount(async () => {
@@ -103,8 +102,12 @@
 				user = { ...user, ...data.currUserProfile };
 
 				//get the bio html from the db convert it to delta and set the quil editor
-				deltaContent = JSON.parse(data.currUserProfile.bio);
-				deltaContentGoals = JSON.parse(data.currUserProfile.goals);
+				if (data.currUserProfile.bio) {
+					deltaContent = JSON.parse(data.currUserProfile.bio);
+				}
+				if (data.currUserProfile.goals) {
+					deltaContentGoals = JSON.parse(data.currUserProfile.goals);
+				}
 
 				quill.setContents(deltaContent);
 				quillGoals.setContents(deltaContentGoals);
@@ -435,12 +438,14 @@
 
 			<div class="mb-4">
 				<label class="block text-gray-300 text-sm font-bold mb-2">Social Media Links</label>
-				<!-- <p class="text-gray-500 text-xs mb-2"></p> -->
 				<SocialMediaPicker
-					links={data.currUserProfile.socialMediaLinks === null
-						? {}
-						: data.currUserProfile.socialMediaLinks}
+					links={data.currUserProfile &&
+					data.currUserProfile.socialMediaLinks !== null &&
+					data.currUserProfile.socialMediaLinks !== ''
+						? data.currUserProfile.socialMediaLinks
+						: {}}
 				/>
+				<!-- <p class="text-gray-500 text-xs mb-2"></p> -->
 
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 			</div>

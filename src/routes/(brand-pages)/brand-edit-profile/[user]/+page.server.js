@@ -93,6 +93,7 @@ export const actions = {
 		// if (!sport) missingFields.push('');
 		if (!bio) missingFields.push('bio');
 		if (!goals) missingFields.push('goals');
+		if (!socialMediaLinks) missingFields.push('add at least one social media link');
 
 		if (missingFields.length) {
 			return {

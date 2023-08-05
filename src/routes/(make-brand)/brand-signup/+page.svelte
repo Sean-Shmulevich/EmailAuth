@@ -143,6 +143,7 @@
 					<Dropdown bind:open>
 						{#each companySize as size}
 							<DropdownItem
+								class="text-white"
 								on:click={(e) => {
 									open = false;
 									sizeSelected = size;
@@ -157,6 +158,7 @@
 					<Dropdown bind:open>
 						{#each yesNo as answer}
 							<DropdownItem
+								class="text-white"
 								on:click={(e) => {
 									open = false;
 									hasSponcered = answer;

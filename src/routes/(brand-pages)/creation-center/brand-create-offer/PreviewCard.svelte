@@ -40,7 +40,7 @@
 						{#if croppedImage}
 							<img src={URL.createObjectURL(croppedImage)} alt="Profile" />
 						{:else}
-							<img src="https://shmul.dev/assets/dapupprofile.png" alt="Profile" />
+							<img src="https://shmul.dev/assets/cardplaceholder.png" alt="Profile" />
 						{/if}
 						<div class="info bg-black bg-opacity-70 rounded-xl">
 							<div class="name -mt-5">{title}</div>

@@ -5,7 +5,7 @@ import { ROOT_URL } from '$env/static/private';
 export const load: PageServerLoad = async ({ locals }) => {
 	const { user } = await locals.auth.validateUser();
 	//default profile picture
-	let profilePicture = `https://shmul.dev/assets/dapupsmall.png`;
+	let profilePicture = `https://shmul.dev/assets/dapupprofile.png`;
 
 	//if there is no user return nothing to the frontend
 	//if there is a user that is email verified but not admin verified return the user the menu will allow uers to edit profile and logout only

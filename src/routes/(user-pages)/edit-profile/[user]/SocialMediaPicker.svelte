@@ -81,7 +81,7 @@
 					message = 'you have already picked this social media type';
 				}
 			}}
-			class="text-black ml-2 mt-2"
+			class="text-white ml-2 mt-2"
 			bind:group={socialMedia}
 			value={socialMedia}>{socialMedia}</DropdownItem
 		>
@@ -96,10 +96,12 @@
 			<input
 				class="bg-gray-700 rounded-md text-white w-full p-2 mr-5"
 				on:input={(event) => handleValueChange(event, input)}
-				placeholder="link"
+				placeholder="https://social-media.com/my-profile"
 				value={links[input] === undefined ? '' : links[input]}
 			/>
-			<button on:click|preventDefault={() => deleteInput(input)}>-</button>
+			<button class="text-xl font-extrabold" on:click|preventDefault={() => deleteInput(input)}
+				>-</button
+			>
 		</div>
 	</div>
 {/each}

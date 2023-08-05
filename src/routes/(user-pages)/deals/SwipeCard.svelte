@@ -95,7 +95,7 @@
 				</div>
 			{:else if offers.length === 0}
 				<div
-					class="text-white border border-white p-5 text-2xl rounded-full centerAll max-w-12 bg-red-500"
+					class="text-white border border-white p-5 text-2xl rounded-full centerAll text-center max-w-12 bg-red-500"
 				>
 					Check back later for more deals
 				</div>
@@ -216,7 +216,7 @@
 					<div class="absolute top-0 bottom-0 left-0 flex items-center">
 						<button
 							class="w-full h-full px-3 py-3 bg-transparent text-gray-900 border-text text-2xl font-semibold hover:text-gray-300 transition-colors duration-200"
-							on:click={() => {
+							on:click|preventDefault={() => {
 								pageNum = pageNum - 1;
 								if (pageNum < 0) {
 									pageNum = 2;
@@ -241,7 +241,7 @@
 									pageNum = 0;
 								}
 							}}
-							on:click|capture={() => {
+							on:click|preventDefault={() => {
 								pageNum = pageNum + 1;
 								if (pageNum > 2) {
 									pageNum = 0;

@@ -64,7 +64,7 @@
 					message = 'you have already picked this industry';
 				}
 			}}
-			class="text-black ml-2 mt-2"
+			class="text-white ml-2 mt-2"
 			value={industry}>{industry}</DropdownItem
 		>
 	{/each}
@@ -75,7 +75,9 @@
 		<div class="flex bg-gray-700 rounded-xl w-full flex-row">
 			<p class="p-2 text-bold mr-10 text-center">{input}</p>
 		</div>
-		<button class="p-2 font-bold" on:click|preventDefault={() => deleteInput(input)}>-</button>
+		<button class="p-2 font-extrabold text-xl" on:click|preventDefault={() => deleteInput(input)}
+			>-</button
+		>
 	</div>
 {/each}
 {#if pickedTypes.length > 0}

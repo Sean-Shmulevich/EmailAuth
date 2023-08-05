@@ -60,7 +60,7 @@
 						id="avatar_with_name"
 					>
 						<Avatar src={data.profilePicture} />
-						<p class="pl-1 mr-0 sm:mr-2">{data.user.name}</p>
+						<p class="pl-1">{data.user.name}</p>
 						<svg
 							class="mx-1 sm:mx-2"
 							width="24"

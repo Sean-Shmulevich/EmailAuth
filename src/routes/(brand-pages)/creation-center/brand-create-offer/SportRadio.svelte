@@ -28,16 +28,19 @@
 		'Water polo',
 		'Wrestling'
 	];
+	let open = false;
 </script>
 
 <div class="flex flex-row items-center">
 	<Button><Chevron>Sport Preference</Chevron></Button>
 	<Dropdown
+		bind:open
 		class="w-54 h-32 overflow-y-scroll text-black  text-left whitespace-nowrap space-y-3 text-sm"
 	>
 		{#each sportsNames as sportName}
 			<Radio
-				class="text-black ml-2 mt-2"
+				on:click={() => (open = false)}
+				class="text-white ml-2 mt-2"
 				name="sport-preference"
 				bind:group={sportPref}
 				value={sportName}>{sportName}</Radio

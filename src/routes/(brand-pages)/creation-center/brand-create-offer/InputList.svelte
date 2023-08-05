@@ -25,6 +25,7 @@
 	function deleteInput(inputId) {
 		if (inputs.length > 1) {
 			inputs = inputs.filter((input) => input.id !== inputId);
+			inputs = [...inputs];
 		}
 	}
 </script>

@@ -505,7 +505,7 @@
 							<InputList
 								inputName={'deliverables'}
 								showName={'Deliverable'}
-								inputs={deliverables}
+								bind:inputs={deliverables}
 							/>
 						</div>
 					</div>

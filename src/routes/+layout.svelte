@@ -14,7 +14,7 @@
 <body class="bg-gray-900 overflow-x-hidden font-sans" style="touch-action: manipulation;">
 	<!-- TODO make it fixed if we want it to be sticky -->
 	<header class="w-full body-font bg-gray-800">
-		<div class="container sticky mx-auto flex flex-wrap pt-5 flex-row justify-center items-center">
+		<div class="container sticky mx-auto flex pt-5 flex-row justify-center items-center">
 			<!-- svelte-ignore a11y-missing-attribute -->
 			<a
 				href="/"
@@ -39,7 +39,7 @@
 					<!-- <span class="mr-6 text-white">Login/Sign Up: </span> -->
 					<a
 						href="/login"
-						class="hover:text-yellow-500 hover:bg-gray-800 bg-gray-500 text-white font-semibold inline-flex items-center mr-5 px-4 py-2 rounded-full bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30"
+						class="hover:text-yellow-500 text-sm sm:text-lg hover:bg-gray-800 bg-gray-500 text-white font-semibold inline-flex items-center mr-0 sm:mr-5 px-2 sm:px-4 py-2 rounded-full bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30"
 					>
 						Athlete login
 					</a>
@@ -47,7 +47,7 @@
 					<!-- TODO COMING SOON /brand-login-->
 					<a
 						href="/brand-login"
-						class="hover:text-yellow-500 hover:bg-gray-800 bg-gray-500 text-white font-semibold inline-flex items-center px-4 py-2 rounded-full bg-grey-400 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30"
+						class="hover:text-yellow-500 text-sm sm:text-lg hover:bg-gray-800 bg-gray-500 text-white font-semibold inline-flex items-center px-2 sm:px-4 py-2 rounded-full bg-grey-400 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30"
 					>
 						Brand login
 					</a>
@@ -59,7 +59,7 @@
 						text-white !p-1"
 						id="avatar_with_name"
 					>
-						<Avatar src={data.profilePicture} class="mr-2" />
+						<Avatar src={data.profilePicture} />
 						<p class="p-2">{data.user.name}</p>
 					</Button>
 				{/if}

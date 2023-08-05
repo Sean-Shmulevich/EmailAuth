@@ -1,5 +1,6 @@
 <script>
 	import { enhance } from '$app/forms';
+	import { goto } from '$app/navigation';
 	export let data;
 	export let form;
 	let showModal = false;
@@ -182,26 +183,28 @@
 				{/each}
 			</div> -->
 			</div>
-			<div class="text-center text-white mx-auto flex flex-row">
+			<div class="text-center items-center text-white mx-auto flex flex-row">
 				{#if activeButton !== 'completed'}
 					<button
 						on:click={() => {
 							showModal = true;
 							brandEmail = currDeal.authUser.email;
 						}}
-						class="p-3i border border-white bg-gray-700 w-1/3 rounded-xl"
+						class="p-3 border border-white bg-gray-700 w-1/3 rounded-xl"
 					>
 						Contact Brand
 					</button>
-					<a
-						href="/brand-profile/{currDeal.authUserId}"
+					<button
 						class="p-3 border border-white bg-gray-700 w-1/3 rounded-xl"
+						on:click={() => {
+							goto(`/brand-profile/${currDeal.authUserId}`);
+						}}
 					>
-						View Profile
-					</a>
+						View brand Profile
+					</button>
 					{#if activeButton === 'new'}
 						<form
-							class="w-1/3 border bg-gray-700 rounded-xl border-white"
+							class="w-1/3 p-3 border bg-gray-700 rounded-xl border-white"
 							method="POST"
 							use:enhance
 							action="?/agree"

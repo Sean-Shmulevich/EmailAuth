@@ -13,7 +13,7 @@
 
 <body class="bg-gray-900 overflow-x-hidden font-sans" style="touch-action: manipulation;">
 	<!-- TODO make it fixed if we want it to be sticky -->
-	<header class="w-full body-font bg-gray-800">
+	<header class="w-full body-font bg-black">
 		<div class="container sticky mx-auto flex flex-wrap pt-5 flex-row justify-center items-center">
 			<!-- svelte-ignore a11y-missing-attribute -->
 			<a

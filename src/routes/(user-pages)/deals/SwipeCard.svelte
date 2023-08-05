@@ -87,7 +87,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <div id="wrapper">
-	<div class="-mb-10 sm:mt-0 sm:mb-5" id="container">
+	<div class="-mb-10 sm:mt-10 sm:mb-5" id="container">
 		<div class="background">
 			{#if isLoading}
 				<div class="centerAll">

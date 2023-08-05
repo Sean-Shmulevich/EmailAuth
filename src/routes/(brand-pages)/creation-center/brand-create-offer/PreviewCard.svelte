@@ -40,11 +40,19 @@
 				<div class="boxcontent">
 					{#if pageNum === 0}
 						{#if croppedImage}
-							<img src={URL.createObjectURL(croppedImage)} alt="Profile" />
+							<img
+								class="bg-gray-900 object-contain"
+								src={URL.createObjectURL(croppedImage)}
+								alt="Profile"
+							/>
 						{:else if currImage}
-							<img src={currImage} alt="Profile" />
+							<img class="bg-gray-900 object-contain" src={currImage} alt="Profile" />
 						{:else}
-							<img src="https://shmul.dev/assets/cardplaceholder.png" alt="Profile" />
+							<img
+								class="bg-gray-900 object-contain"
+								src="https://shmul.dev/assets/cardplaceholder.png"
+								alt="Profile"
+							/>
 						{/if}
 						<div class="info bg-black bg-opacity-70 rounded-xl">
 							<div class="name -mt-5">{title}</div>
@@ -190,16 +198,17 @@
 
 	#container {
 		display: flex;
-		width: 60vh;
-		height: 80vh;
+		justify-content: center;
+		width: 47.25vh;
+		height: 84vh;
 		overflow: hidden;
 	}
 
 	.background {
 		position: absolute;
-		width: 60vh;
+		width: 47.25vh;
+		height: 84vh;
 		max-width: 100vw;
-		height: 80vh;
 	}
 
 	#select {
@@ -224,8 +233,8 @@
 	.box {
 		position: absolute;
 		transform: translateY(100px);
-		width: 60vh;
 		height: 80vh;
+		width: 47.25vh;
 		max-width: 95vw;
 	}
 

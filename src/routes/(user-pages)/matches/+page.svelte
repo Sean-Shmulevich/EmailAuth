@@ -57,9 +57,9 @@
 	</div>
 {/if}
 
-<div class="mx-20 mt-10">
+<div class="lg:mx-20 mt-10">
 	<div
-		class="flex flex-row -mt-5 w-[80%] sm:w-[60%] mb-5 text-white text-center justify-center mx-auto"
+		class="flex flex-row -mt-5 w-full sm:w-[60%] mb-5 text-white text-center justify-center mx-auto"
 	>
 		<button
 			on:click|preventDefault={() => {

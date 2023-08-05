@@ -265,8 +265,8 @@
 					<div class="flex-grow pl-4">
 						<h2 class="font-bold title-font text-sm mb-1 tracking-wider text-white">Launch</h2>
 						<p class="leading-relaxed text-white">
-							Publish campaign locally or nationally. Get exposure for your brand in front of
-							athletes all over the NCAA actively using DapUp.
+							Publish campaign and get exposure for your brand in front of NCAA athletes actively
+							using DapUp.
 						</p>
 					</div>
 				</div>
@@ -321,8 +321,7 @@
 					<div class="flex-grow pl-4">
 						<h2 class="font-bold title-font text-sm text-white mb-1 tracking-wider">Contract</h2>
 						<p class="leading-relaxed text-white">
-							Hire athletes for campaigns in a rule compliant and legal manner. Sign transparent
-							contracts within the app.
+							Hire athletes for campaigns and receive contract templates from DapUp to work from.
 						</p>
 					</div>
 				</div>
@@ -346,8 +345,7 @@
 					<div class="flex-grow pl-4">
 						<h2 class="font-bold title-font text-sm text-white mb-1 tracking-wider">Manage</h2>
 						<p class="leading-relaxed text-white">
-							Get notified when athletes complete deliverables. Track campaign progress in one
-							place.
+							Keep track of all unpublished, active, and completed campaigns in one place.
 						</p>
 					</div>
 				</div>
@@ -365,7 +363,7 @@
 	<div class="text-center w-full mb-12">
 		<h1 class="sm:text-3xl text-2xl font-extrabold title-font mb-4 text-gold">Meet the team</h1>
 	</div>
-	<div class="sm:mx-10 flex flex-col md:flex-row justify-center text-center items-center">
+	<div class="mx-10 flex flex-col md:flex-row justify-center text-center items-center">
 		<!-- svelte-ignore a11y-mouse-events-have-key-events -->
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<div

@@ -146,6 +146,7 @@
 			result in disqualification to participate in the Campaign and reduced or non-payment of
 			associated compensation.
 		</p>
+		<br />
 		<p class="text-lg font-extrabold">5. USE OF PLATFORM</p>
 		<br />
 		<p>
@@ -201,6 +202,7 @@
 			or detrimental to the Platform, DapUp, or any Business or any person or entity accessing or
 			using the DapUp website or Platform (“User”).
 		</p>
+		<br />
 		<p class="text-lg font-extrabold">6. YOUR ACCOUNT, PASSWORDS AND ACCOUNT SECURITY</p>
 		<br />
 		<p>
@@ -212,6 +214,7 @@
 			aware of any unauthorized use of Your password or of Your account or any other breach of
 			security, You agree to immediately notify DapUp.
 		</p>
+		<br />
 		<p class="text-lg font-extrabold">7. PRIVACY AND YOUR PERSONAL INFORMATION</p>
 		<br />
 		<p>
@@ -225,6 +228,7 @@
 			agree to the use of Your data in accordance with DapUp’s Privacy Policy, which is incorporated
 			into and made part of this Agreement.
 		</p>
+		<br />
 		<p class="text-lg font-extrabold">8. ELIGIBILITY</p>
 		<br />
 		<p>
@@ -248,6 +252,7 @@
 			qualify Athletes FEC/49697.0001/10191431 according to its internal criteria and DapUp may
 			accept or reject Athletes for participation in any Campaign in its sole discretion.
 		</p>
+		<br />
 		<p class="text-lg font-extrabold">9. Fees</p>
 		<br />
 		<p>
@@ -261,6 +266,7 @@
 			requirements imposed by the federal, state or local government; and (iv) responsible for
 			compliance with all other applicable laws, rules and regulations.
 		</p>
+		<br />
 		<p class="text-lg font-extrabold">10. CONTENT INFORMATION</p>
 		<br />
 		<p>
@@ -293,6 +299,7 @@
 			infringement that it becomes aware of and will take immediate action to address any violation
 			of copyright or other violation of proprietary rights of third parties and applicable laws.
 		</p>
+		<br />
 		<p class="text-lg font-extrabold">11. DISCLOSURE AND ATHLETE REQUIREMENTS</p>
 		<br />
 		<p>
@@ -309,6 +316,7 @@
 			Disclosure Guidelines [shall/may] not be permitted to participate in any future Campaigns and
 			[will/may] be removed from our Platform.
 		</p>
+		<br />
 		<p class="text-lg font-extrabold">12. CONFIDENTIALITY</p>
 		<br />
 		<p>
@@ -342,6 +350,7 @@
 			may not issue any press release or other public statement regarding this Agreement, DapUp, its
 			parent and/or its aﬃliates without DapUp’s prior written consent.
 		</p>
+		<br />
 		<p class="text-lg font-extrabold">13. PLATFORM GUIDELINES</p>
 		<br />
 		<p>
@@ -374,6 +383,7 @@
 			through to a site that is unrelated to content. There shall be no harassment, threats,
 			invasion of privacy, predatory behavior, or stalking.
 		</p>
+		<br />
 		<p class="text-lg font-extrabold">14. UNAUTHORIZED USE AND REMEDIES</p>
 		<br />
 		<p>
@@ -386,6 +396,7 @@
 			DapUp will not be liable or responsible for any such actions. The oﬀending party will be
 			immediately removed and banned from the Platform and may be liable to third parties.
 		</p>
+		<br />
 		<p class="text-lg font-extrabold">15. MODIFICATIONS</p>
 		<br />
 		<p>
@@ -398,6 +409,7 @@
 			of the User after the entry into eﬀect of new Terms of Use will signify the User´s acceptance
 			of the same.
 		</p>
+		<br />
 		<p class="text-lg font-extrabold">16. REPRESENTATIONS AND WARRANTIES</p>
 		<br />
 		<p>
@@ -431,6 +443,7 @@
 			with all applicable laws including complying with all applicable laws such as the CAN-SPAM Act
 			of 2003.
 		</p>
+		<br />
 		<p class="text-lg font-extrabold">17. COPYRIGHT, TRADEMARKS AND PROPRIETARY RIGHTS</p>
 		<br />
 		<p>
@@ -517,6 +530,7 @@
 			discretion, it deems appropriate, including removal of the challenged use or termination of
 			the posting account.
 		</p>
+		<br />
 		<p class="text-lg font-extrabold">18. INDEMNIFICATION</p>
 		<br />
 		<p>
@@ -539,6 +553,7 @@
 			and such entity shall be jointly and severally liable for all of Indemnitors promises and
 			obligations pursuant to this this Section [18].
 		</p>
+		<br />
 		<p class="text-lg font-extrabold">19. INTERNATIONAL USE</p>
 		<br />
 		<p>
@@ -549,6 +564,7 @@
 			regarding the transmission of technical data exported from the United States or the country
 			from which You access the Platform.
 		</p>
+		<br />
 		<p class="text-lg font-extrabold">20. WARRANTY DISCLAIMER</p>
 		<br />
 		<p>
@@ -571,6 +587,7 @@
 			OR IMPLIED WARRANTIES, THE ABOVE LIMITATIONS MAY NOT APPLY TO YOU. IN SUCH JURISDICTIONS,
 			DAPUP´S LIABILITY IS LIMITED TO THE GREATEST EXTENT PERMITTED BY LAW.
 		</p>
+		<br />
 		<p class="text-lg font-extrabold">21. LIMITATION OF LIABILITY</p>
 		<br />
 		<p>
@@ -602,6 +619,7 @@
 			OF INCIDENTAL OR CONSEQUENTIAL DAMAGES, DAPUP´S LIABILITY IN SUCH JURISDICTIONS SHALL BE
 			LIMITED TO THE FULLEST EXTENT PERMITTED BY LAW.
 		</p>
+		<br />
 		<p class="text-lg font-extrabold">22. NOTICES</p>
 		<br />
 		<p>
@@ -620,6 +638,7 @@
 			in an email notice or generally designated in advance for this purpose. Notices provided to
 			You via email will be deemed given and received on the transmission date.
 		</p>
+		<br />
 		<p class="text-lg font-extrabold">23. GOVERNING LAW; JURISDICTION AND VENUE</p>
 		<br />
 		<p>
@@ -630,6 +649,7 @@
 			jurisdiction and irrevocably waives any objection such party may have as to the venue of any
 			such proceeding brought in such court as an inconvenient forum.
 		</p>
+		<br />
 		<p class="text-lg font-extrabold">24. ELECTRONIC SIGNATURES EFFECTIVE</p>
 		<br />
 		<p>
@@ -653,12 +673,14 @@
 			survive such termination or expiration, including but not limited to Sections 3, 5, 6, 8, 10
 			through 15, and 16 through 28.
 		</p>
+		<br />
 		<p class="text-lg font-extrabold">26. CEASING OF PERFORMANCE OF SERVICES</p>
 		<br />
 		<p>
 			Athlete will immediately cease performing the Services, and/or return all work created in
 			connection with my Services, upon notice by DapUp or Business.
 		</p>
+		<br />
 		<p class="text-lg font-extrabold">27. ASSIGNMENT; THIRD-PARTY BENEFICIARY</p>
 		<br />
 		<p>
@@ -673,6 +695,7 @@
 			hereof as if it were a party hereto and (ii) Business has no liability or obligations to you
 			under this Agreement.
 		</p>
+		<br />
 		<p class="text-lg font-extrabold">28. MISCELLANEOUS</p>
 		<br />
 		<p>
@@ -686,6 +709,7 @@
 			provision in respect to this Agreement or a breach thereof it shall not constitute a waiver of
 			such provision.
 		</p>
+		<br />
 		<p>Any questions?</p>
 		<br />
 		<p>If You have questions, queries or suggestions, please contact us at:</p>

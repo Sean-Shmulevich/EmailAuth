@@ -6,7 +6,6 @@
 	let user2;
 	let suggestedUsers;
 	let defaultImage = 'https://shmul.dev/assets/dapupprofile.png';
-	import { lockSuggest } from '../../lockSuggest.js';
 
 	let s3 = '/api/s3object';
 	import { onMount } from 'svelte';

@@ -22,7 +22,10 @@
 	let loading = false;
 	$: {
 		if (form?.status === 'ok' && delId !== '' && loading === true) {
-			interestedBrands = interestedBrands.filter((deal) => deal.id !== delId);
+			if (activeButton === 'new') {
+				newDeals = newDeals.filter((deal) => deal.id !== delId);
+				interestedBrands = interestedBrands.filter((deal) => deal.id !== delId);
+			}
 			form = null;
 			loading = false;
 			delId = '';
@@ -134,7 +137,7 @@
 					<!-- <p>{currDeal.athleteCount}</p> -->
 					<!-- <p>{currDeal.}</p> -->
 
-					<div class="border border-white p-5 text-lg rounded-xl">
+					<div class="border border-white p-5 text-lg rounded-xl h-full">
 						<p class="mb-5">
 							{#if currDeal.isCampaign}
 								Start Date: {currDeal.eventDate.toISOString().slice(0, 10)}
@@ -195,7 +198,7 @@
 						Contact Brand
 					</button> -->
 					<button
-						class="p-3 border border-white bg-gray-700 w-1/3 rounded-xl"
+						class="p-3 whitespace-nowrap border border-white bg-gray-700 min-w-fit w-1/3 rounded-xl"
 						on:click={() => {
 							goto(`/brand-profile/${currDeal.authUserId}`);
 						}}
@@ -204,7 +207,7 @@
 					</button>
 					{#if activeButton === 'new'}
 						<form
-							class="w-1/3 p-3 border bg-gray-700 rounded-xl border-white"
+							class="w-1/3 min-w-fit p-3 whitespace-nowrap border bg-gray-700 rounded-xl border-white"
 							method="POST"
 							use:enhance
 							action="?/agree"
@@ -212,6 +215,7 @@
 							<button
 								on:click={() => {
 									delId = currDeal.id;
+									ongoingDeals.push(currDeal);
 									loading = true;
 								}}
 								name="agree-deal"

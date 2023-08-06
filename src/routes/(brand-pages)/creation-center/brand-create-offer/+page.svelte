@@ -11,8 +11,6 @@
 	import { navigating } from '$app/stores';
 	import { enhance } from '$app/forms';
 
-	import { lockSuggest } from '../../lockSuggest.js';
-
 	import Compensation from './Compensation.svelte';
 	import { goto } from '$app/navigation';
 	let endDate = new Date().toISOString().slice(0, 10);

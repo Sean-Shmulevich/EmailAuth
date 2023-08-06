@@ -41,7 +41,7 @@
 					{#if pageNum === 0}
 						{#if croppedImage}
 							<img
-								class="bg-gray-900 object-contain"
+								class="bg-gray-900 object-cover"
 								src={URL.createObjectURL(croppedImage)}
 								alt="Profile"
 							/>
@@ -49,7 +49,7 @@
 							<img class="bg-gray-900 object-contain" src={currImage} alt="Profile" />
 						{:else}
 							<img
-								class="bg-gray-900 object-contain"
+								class="bg-gray-900 object-cover"
 								src="https://shmul.dev/assets/cardplaceholder.png"
 								alt="Profile"
 							/>
@@ -91,16 +91,22 @@
 						>
 							<div class="mb-10 p-2 text-left rounded-xl border border-white w-full">
 								<p class="text-lg underline text-center">Description</p>
-								<p>{shortDescription}</p>
+								{#if shortDescription}
+									<p>{shortDescription}</p>
+								{/if}
 							</div>
 							<div class="p-2 rounded-xl border border-white h-20">
+								<p class="text-lg underline text-center">Looking for</p>
 								{#if sportPreference && sportPreference !== 'undefined'}
-									Looking for: <br />{sportPreference}
+									{sportPreference}
 								{/if}
 							</div>
 							{#if !isCampaign}
 								<div class="p-2 rounded-xl border border-white h-20">
-									Location: <br />{location}
+									Location: <br />
+									{#if location}
+										{location}
+									{/if}
 									{#if location === ''}
 										Virtual
 									{/if}
@@ -138,9 +144,48 @@
 					{/if}
 					<div class="like">Like</div>
 					<div class="nope">Nope</div>
+					<div class="absolute top-0 bottom-0 left-0 flex items-center">
+						<button
+							class="w-full h-full px-3 py-3 bg-transparent text-gray-900 border-text text-2xl font-semibold hover:text-gray-300 transition-colors duration-200"
+							on:click|preventDefault={() => {
+								pageNum = pageNum - 1;
+								if (pageNum < 0) {
+									pageNum = 2;
+								}
+							}}
+							on:touchstart|preventDefault|capture={() => {
+								pageNum = pageNum - 1;
+								if (pageNum < 0) {
+									pageNum = 2;
+								}
+							}}
+						>
+							&lt;
+						</button>
+					</div>
+
+					<div class="absolute top-0 bottom-0 right-0 flex items-center">
+						<button
+							on:touchstart|preventDefault|capture={() => {
+								pageNum = pageNum + 1;
+								if (pageNum > 2) {
+									pageNum = 0;
+								}
+							}}
+							on:click|preventDefault={() => {
+								pageNum = pageNum + 1;
+								if (pageNum > 2) {
+									pageNum = 0;
+								}
+							}}
+							class="w-full h-full px-3 py-3 bg-transparent text-gray-900 border-text text-2xl font-semibold hover:text-gray-300 transition-colors duration-200"
+						>
+							&gt;
+						</button>
+					</div>
 				</div>
 
-				<button
+				<!-- <button
 					class="hover:bg-white rounded-2xl absolute left-0 mt-6 w-10 h-[95%] opacity-20"
 					style=""
 					on:click={() => {
@@ -159,7 +204,7 @@
 							pageNum = 0;
 						}
 					}}
-				/>
+				/> -->
 			</div>
 		</div>
 	</div>
@@ -424,5 +469,9 @@
 
 	.box {
 		margin-bottom: 60px; /* Increase the margin to make space for the modal */
+	}
+	.border-text {
+		color: white;
+		text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 	}
 </style>

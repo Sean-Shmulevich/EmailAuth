@@ -168,7 +168,8 @@
 								<p>{offer.shortDescription}</p>
 							</div>
 							<div class="p-2 rounded-xl border border-white h-20">
-								Looking for: <br />{offer.sportPreference} players
+								<p class="text-lg underline text-center">Looking for</p>
+								{offer.sportPreference}
 							</div>
 							{#if !offer.isCampaign}
 								<div class="p-2 rounded-xl border border-white h-20">

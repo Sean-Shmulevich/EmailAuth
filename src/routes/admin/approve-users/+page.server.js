@@ -60,8 +60,11 @@ async function verifyUser(email) {
 	sendEmail(
 		email,
 		'Congratulations! Your DapUp Account is Verified and Approved!',
-		`We are thrilled to inform you that your DapUp account has been successfully verified and approved! Welcome to the DapUp community where college athletes and brands create winning partnerships.
-		You can now explore exclusive deals, connect with brands, and DapUp Your Game! Best regards,`
+		`We are thrilled to inform you that your DapUp account has been successfully verified and approved!<br/><br/>
+		Welcome to the DapUp community where college athletes and brands create winning partnerships.<br/>
+		You can now explore exclusive deals, connect with brands, and DapUp Your Game!<br/><br/>
+		Best regards,<br/>
+		DapUp Team`
 	);
 	return updatedUser;
 }

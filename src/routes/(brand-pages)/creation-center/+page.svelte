@@ -59,7 +59,7 @@
 		alt="create deal"
 		src="https://shmul.dev/assets/createDeal.png"
 	/>
-	<p class="hidden sm:block text-white text-center text-xs mr-2">Create offer</p>
+	<p class="hidden sm:block text-white text-center text-xs mr-2">Create Offer</p>
 	<p class="sm:hidden block text-white text-center text-xs -mr-3">Create</p>
 </a>
 {#if showModal}

@@ -140,34 +140,50 @@
 			</h1>
 		</div>
 		<div class="flex flex-wrap -m-4 text-center max-w-[90vw] mx-auto">
-			<div class="p-4 sm:w-1/2 w-full">
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<div
+				class="p-4 sm:w-1/2 w-full cursor-pointer"
+				on:click={() => {
+					if (activeInfo === 'brand') {
+						activeInfo = null;
+					} else {
+						activeInfo = 'brand';
+					}
+				}}
+				on:touchstart={() => {
+					if (activeInfo === 'brand') {
+						activeInfo = null;
+					} else {
+						activeInfo = 'brand';
+					}
+				}}
+			>
 				<div class="border-2 border-gray-200 hover:border-green-500 px-4 py-6 rounded-lg">
-					<button
-						on:click={() => {
-							if (activeInfo === 'brand') {
-								activeInfo = null;
-							} else {
-								activeInfo = 'brand';
-							}
-						}}
-						class=" w-full text-white leading-relaxed"
-					>
+					<button class=" w-full text-white leading-relaxed">
 						<h2 class="title-font font-medium text-3xl text-gray-100">Brand guide</h2>
 					</button>
 				</div>
 			</div>
-			<div class="p-4 sm:w-1/2 w-full">
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<div
+				class="p-4 sm:w-1/2 w-full cursor-pointer"
+				on:click={() => {
+					if (activeInfo === 'athlete') {
+						activeInfo = null;
+					} else {
+						activeInfo = 'athlete';
+					}
+				}}
+				on:touchstart={() => {
+					if (activeInfo === 'athlete') {
+						activeInfo = null;
+					} else {
+						activeInfo = 'athlete';
+					}
+				}}
+			>
 				<div class="border-2 border-gray-200 hover:border-green-500 px-4 py-6 rounded-lg">
-					<button
-						on:click={() => {
-							if (activeInfo === 'athlete') {
-								activeInfo = null;
-							} else {
-								activeInfo = 'athlete';
-							}
-						}}
-						class=" w-full h-full text-white leading-relaxed"
-					>
+					<button class=" w-full h-full text-white leading-relaxed">
 						<h2 class="title-font font-medium text-3xl text-gray-100">Athlete guide</h2>
 					</button>
 				</div>
@@ -188,6 +204,7 @@
 	</section>
 	<!-- <AthleteGuide /> -->
 {/if}
+<!-- Just the dropdown back up bottom att the bottom of the component -->
 {#if activeInfo !== null}
 	<div style="display: grid; place-items: center;">
 		<button

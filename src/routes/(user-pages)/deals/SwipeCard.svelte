@@ -34,38 +34,49 @@
 	//since offers is linked to +page.svelte it will be saved there
 	//and when the component is reloaded it will be set to
 	//the new offers that were fetched at the end of the previous offers
+	let swiped = 0;
 
 	let onCardAction = async (status) => {
 		swipeStatusList.push(status); // Ad the swipe status to the list
+		swiped++;
 		pageNum = 0;
 		console.log(swipeStatusList, swipeStatusList.length - 1);
-		if (swipeStatusList.length - 1 === MAX_SWIPE_COUNT) {
-			//fetch the next five deals with a post request to /deals
-			let objArr = [];
-			for (let i = 0; i < currDealIds.length; i++) {
-				let obj = { dealId: currDealIds[i], decision: swipeStatusList[i] };
-				objArr.push(obj);
-			}
-			//post array of the past 5 decisions to /deals POST
-			swipeStatusList = [];
-			currDealIds = [];
-			// console.log(objArr);
-			let nextDeals = await add(JSON.stringify(objArr));
+		// if (swipeStatusList.length - 1 === MAX_SWIPE_COUNT) {
+		//fetch the next five deals with a post request to /deals
+		let objArr = [];
+		for (let i = 0; i < currDealIds.length; i++) {
+			let obj = { dealId: currDealIds[i], decision: swipeStatusList[i] };
+			objArr.push(obj);
+		}
+		//post array of the past 5 decisions to /deals POST
+		swipeStatusList = [];
+		currDealIds = [];
+		// console.log(objArr);
+
+		await add(JSON.stringify(objArr));
+
+		isLoading = false;
+		// this code will not run after 5 swipes like I want it to
+		//TODO the loader is always running
+		if (swiped - 1 === MAX_SWIPE_COUNT) {
+			swiped = 0;
+			let nextDeals = await moreDeals();
 			isLoading = false;
-			// swipe(onCardAction);
-			//!!! this makes it more seamless by loading in the last deal and running
-			//TODO check for invalid json
-			//this code one before it gets there.
 			if (nextDeals.length < 5) {
 				MAX_SWIPE_COUNT = nextDeals.length - 1;
 			}
 			offers = [...nextDeals];
 			refreshCounter += 1;
-
-			//request the next 5 deals set offers and make sure the swipeCardComponent updates
-			//reset the swipeStatusList and the currDealIds
-			//set offers to the new offers
 		}
+		// swipe(onCardAction);
+		//!!! this makes it more seamless by loading in the last deal and running
+		//TODO check for invalid json
+		//this code one before it gets there.
+
+		//request the next 5 deals set offers and make sure the swipeCardComponent updates
+		//reset the swipeStatusList and the currDealIds
+		//set offers to the new offers
+		// }
 	};
 	onMount(async () => {
 		swipe(onCardAction);
@@ -82,6 +93,14 @@
 
 		return await response.json();
 	}
+	async function moreDeals() {
+		isLoading = true;
+		const response = await fetch('/deals', {
+			method: 'GET'
+		});
+
+		return await response.json();
+	}
 </script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -91,7 +110,7 @@
 		<div class="background">
 			{#if isLoading}
 				<div class="centerAll">
-					<Wave size="160" color="#FF3E00" unit="px" duration="3s" />
+					<Wave size="130" color="#FF3E00" unit="px" duration="3s" />
 				</div>
 			{:else if offers.length === 0}
 				<div

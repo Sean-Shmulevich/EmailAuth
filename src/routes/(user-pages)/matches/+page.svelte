@@ -183,9 +183,9 @@
 				{/each}
 			</div> -->
 			</div>
-			<div class="text-center items-center text-white mx-auto flex flex-row">
+			<div class="text-center items-center text-white mx-auto justify-between flex flex-row">
 				{#if activeButton !== 'completed'}
-					<button
+					<!-- <button
 						on:click={() => {
 							showModal = true;
 							brandEmail = currDeal.authUser.email;
@@ -193,7 +193,7 @@
 						class="p-3 border border-white bg-gray-700 w-1/3 rounded-xl"
 					>
 						Contact Brand
-					</button>
+					</button> -->
 					<button
 						class="p-3 border border-white bg-gray-700 w-1/3 rounded-xl"
 						on:click={() => {

@@ -86,7 +86,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<div id="wrapper">
+<div id="wrapper" class="justify-left sm:justify-center -ml-[2px] sm:ml-0">
 	<div class="-mb-10 sm:mt-10 sm:mb-5" id="container">
 		<div class="background">
 			{#if isLoading}
@@ -284,7 +284,6 @@
 	#wrapper {
 		display: flex;
 		align-items: center;
-		justify-content: center;
 		width: 100%;
 		height: 92vh;
 		/* !!!! */

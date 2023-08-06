@@ -507,7 +507,7 @@
 				on:click={() => {
 					showPolicy = true;
 				}}
-				class=" text-blue-600 underline sm:ml-auto"
+				class=" text-blue-600 underline cursor-pointer sm:ml-auto"
 			>
 				Privacy policy
 			</p>

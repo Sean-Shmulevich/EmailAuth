@@ -10,6 +10,9 @@
 	import { Wave } from 'svelte-loading-spinners';
 	import { navigating } from '$app/stores';
 	import { enhance } from '$app/forms';
+
+	import { lockSuggest } from '../../lockSuggest.js';
+
 	import Compensation from './Compensation.svelte';
 	import { goto } from '$app/navigation';
 	let endDate = new Date().toISOString().slice(0, 10);
@@ -29,6 +32,7 @@
 	// let mainGoalCheckboxes = [];
 	let deliverables = [{ id: 0, value: '', title: '' }];
 	// let customGoals = [{ id: 0, value: '' }];
+
 	let pageNum = 0;
 	let title;
 	let shortDescription;
@@ -38,8 +42,22 @@
 	let athNum;
 	let sportPref;
 	let pay;
+
 	import { onMount } from 'svelte';
 	import SportRadio from './SportRadio.svelte';
+	onMount(() => {
+		if (typeof window !== 'undefined' && window.localStorage) {
+			const storedValue = localStorage.getItem('suggested-users');
+			//if it doesnt exist make an empty one
+			//if it does exist clear it
+			if (storedValue) {
+				localStorage.setItem('suggested-users', JSON.stringify({}));
+			} else {
+				localStorage.setItem('suggested-users', JSON.stringify({}));
+			}
+			// ...
+		}
+	});
 
 	let presignUrl = '/api/presign';
 	let s3 = '/api/s3object';
@@ -128,8 +146,10 @@
 		// if (goals.length !== 0) {
 		// 	customGoals = custGoals;
 		// }
+
 		//TODO this code will not work how it is right now!!!!
 		//Responce okay maybe itll work rn
+
 		let del = [];
 		for (let i = 0; i < deal.recommendedDeliverables['set'].length; i++) {
 			del.push({
@@ -158,13 +178,12 @@
 			if (croppedImage !== null) {
 				upload(croppedImage, form.dealId);
 			}
-			if (!form?.message) {
-				if (form.noPublish) {
-					goto(`/creation-center`);
-				} else {
-					goto(`/suggest/${form.dealId}?sportPref=${sportPref}`);
-				}
+			if (form.noPublish) {
+				goto(`/creation-center`);
+			} else {
+				goto(`/suggest/${form.dealId}?sportPref=${sportPref}`);
 			}
+			// Global store to lock the suggest
 		}
 	}
 	let radioValue;

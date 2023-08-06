@@ -6,21 +6,46 @@
 	let user2;
 	let suggestedUsers;
 	let defaultImage = 'https://shmul.dev/assets/dapupprofile.png';
+	import { lockSuggest } from '../../lockSuggest.js';
 
 	let s3 = '/api/s3object';
+	import { onMount } from 'svelte';
 
 	let users = [];
 	//set the user data to the data from the database from load in +page.server.ts
-	if (data && data.matchingProfiles) {
-		user1 = data.matchingProfiles[0];
-		users[0] = { ...users[0], ...user1 };
-		// console.log(data.matchingProfiles);
-		if (data.matchingProfiles.length > 1) {
-			user2 = data.matchingProfiles[1];
-			users[1] = { ...users[1], ...user2 };
+
+	onMount(() => {
+		if (typeof window !== 'undefined' && window.localStorage) {
+			const storedValue = JSON.parse(localStorage.getItem('suggested-users'));
+			if (data && data.matchingProfiles && Object.keys(storedValue).length === 0) {
+				user1 = data.matchingProfiles[0];
+				users[0] = { ...users[0], ...user1 };
+				// console.log(data.matchingProfiles);
+				if (data.matchingProfiles.length > 1) {
+					user2 = data.matchingProfiles[1];
+					users[1] = { ...users[1], ...user2 };
+				}
+
+				localStorage.setItem('suggested-users', JSON.stringify(data.matchingProfiles));
+				suggestedUsers = data.matchingProfiles;
+			} else {
+				user1 = storedValue[0];
+				users[0] = { ...users[0], ...user1 };
+
+				if (storedValue.length > 1) {
+					user2 = storedValue[1];
+					users[1] = { ...users[1], ...user2 };
+				}
+				console.log('Stored value' + JSON.stringify(storedValue));
+				suggestedUsers = storedValue;
+			}
 		}
-		suggestedUsers = data.matchingProfiles;
-	}
+		//if it doesnt exist make an empty one
+		//if it does exist clear it
+
+		// ...
+	});
+
 	// console.log(users);
 	let index0 = 0;
 	let index1 = 0;
@@ -33,7 +58,7 @@
 		let imgNum = data.images[1][i].image_number;
 		images[1][imgNum] = `${s3 + '/' + encodeURIComponent(data.images[1][i].id)}`;
 	}
-	console.log(images);
+	// console.log(images);
 	let iconLinks = {
 		Instagram: 'https://shmul.dev/assets/instagram.png',
 		Twitter: 'https://shmul.dev/assets/twitter.png',
@@ -43,7 +68,7 @@
 		Linkedin: 'https://shmul.dev/assets/linkedin.png',
 		Website: 'https://shmul.dev/assets/website.png'
 	};
-	console.log(users);
+	// console.log(users);
 	// let update = false;
 	// $: {
 	// 	update = true;

@@ -51,10 +51,16 @@
 
 <a
 	title="Create a new Deal"
-	class="absolute transform scale-75 sm:scale-100 top-5 -right-5 p-5"
+	class="absolute transform scale-75 sm:scale-100 -right-4 top-4 sm:top-5 sm:-right-5 p-5"
 	href="/creation-center/brand-create-offer"
 >
-	<img class="w-14" alt="create deal" src="https://shmul.dev/assets/createDeal.png" />
+	<img
+		class="w-14 mr-0 transform translate-x-[10px]"
+		alt="create deal"
+		src="https://shmul.dev/assets/createDeal.png"
+	/>
+	<p class="hidden sm:block text-white text-center text-xs mr-2">Create offer</p>
+	<p class="sm:hidden block text-white text-center text-xs -mr-3">Create</p>
 </a>
 {#if showModal}
 	<div

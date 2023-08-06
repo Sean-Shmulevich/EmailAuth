@@ -7,8 +7,6 @@
 
 	const dispatch = createEventDispatcher();
 
-
-
 	let crop = { x: 0, y: 0 };
 	let zoom = 1;
 	let image, fileinput, pixelCrop;
@@ -49,7 +47,6 @@
 	}
 
 	let profilePicture, style;
-
 
 	function previewCrop(e) {
 		pixelCrop = e.detail.pixels;
@@ -112,8 +109,11 @@
 		{#if croppedImage}
 			<h2 class="font-bold text-xl mb-3">Cropped Output</h2>
 			<!-- URL.createObjectURL(croppedImage) turns the file type into a temporary blob that can be seen right away -->
-			<img src={URL.createObjectURL(croppedImage)} style="width:{width}px;height:{height}px" alt="Cropped profile" /><br
-			/>
+			<img
+				src={URL.createObjectURL(croppedImage)}
+				style="width:{width}px;height:{height}px"
+				alt="Cropped profile"
+			/><br />
 			<button
 				type="button"
 				on:click={() => {

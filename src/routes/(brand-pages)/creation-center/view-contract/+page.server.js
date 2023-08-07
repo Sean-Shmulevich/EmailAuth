@@ -25,7 +25,8 @@ export const load = async ({ params, locals, url }) => {
 						include: {
 							profile: true // Include the profile
 						}
-					}
+					},
+					contract: true
 				}
 			}
 		}

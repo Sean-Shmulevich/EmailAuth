@@ -105,6 +105,18 @@ export async function POST({ request, locals }) {
 					userId: data.get('athlete_id')
 				}
 			});
+			console.log(document);
+			await prismaClient.userDealStatus.update({
+				where: {
+					userId_dealId: {
+						userId: data.get('athlete_id'),
+						dealId: data.get('deal_id')
+					}
+				},
+				data: {
+					contractId: document.id
+				}
+			});
 		} else {
 			// Get existing image details from the database
 			const position = parseInt(data.get('position'));

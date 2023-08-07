@@ -11,7 +11,8 @@
 	import SampleNonExclusiveNIL from '$lib/assets/SampleNonExclusiveNILDapUp.pdf';
 	let s3 = '/api/s3object';
 
-	let currFile = '';
+	let currFile;
+	let modal = false;
 
 	const url = $page.url;
 
@@ -29,6 +30,9 @@
 	}
 	console.log(data.deal);
 	let presignUrl = '/api/presign';
+
+	let hasContract = false;
+	let contractLink;
 	async function upload(file) {
 		console.log(file);
 		// Get presigned POST URL and form fields
@@ -74,11 +78,42 @@
 			return false;
 		}
 
-		console.log('fields.key: https://localhost:5173/api/s3object/' + fields.key);
 		return fields.key;
+	}
+
+	if (data.deal.userDealStatus[0].contractId) {
+		hasContract = true;
+		contractLink = '/api/s3object/' + data.deal.userDealStatus[0].contractId;
 	}
 </script>
 
+{#if modal}
+	<div
+		class="centerAll w-[80%] sm:w-[40%] text-white p-5 rounded-xl border border-white text-lg bg-gray-700"
+	>
+		<button
+			on:click={() => {
+				modal = false;
+			}}
+			class="text-red-500 font-extrabold text-xl absolute right-2 top-1">X</button
+		>
+		<p class="text-red-500">
+			Finialized contracts cannot be resubmitted make sure you have sucessfully agreed on the terms
+			of the deal with the athlete
+		</p>
+
+		<button
+			on:click|once={async () => {
+				let id = await upload(currFile);
+				contractLink = '/api/s3object/' + id;
+				hasContract = true;
+				modal = false;
+			}}
+			type="submit"
+			class="p-2 bg-green-500 mt-5 rounded-full">Submit Contract</button
+		>
+	</div>
+{/if}
 <div class="text-white p-10">
 	<h1 class="text-center font-extrabold -mt-8 text-4xl">
 		Contract for {data.deal.userDealStatus[0].user.name}
@@ -89,11 +124,11 @@
 	<h1 class="text-center font-extrabold text-2xl mb-2">Contract templates</h1>
 	<div class="flex flex-row w-full justify-center mb-10 space-x-0 sm:space-x-5">
 		<a
-			class="w-40 p-4 bg-gray-700 min-width-[70px] border rounded-xl border-white"
+			class="w-40 p-4 bg-gray-700 border rounded-xl border-white"
 			href={NILQuickFacts}
 			target="_blank"
 		>
-			<img class="mb-5 w-[80%] mx-auto" src="https://shmul.dev/assets/contract.png" />
+			<img class="mb-5 w-[10vw] mx-auto" src="https://shmul.dev/assets/contract.png" />
 			<p class="text-center">NIL quick facts</p>
 		</a>
 		<a
@@ -101,7 +136,7 @@
 			href={SponsorshipAgreement}
 			target="_blank"
 		>
-			<img class="mb-5 w-[80%] mx-auto" src="https://shmul.dev/assets/contract.png" />
+			<img class="mb-5 w-[10vw] mx-auto" src="https://shmul.dev/assets/contract.png" />
 			<p class="text-center">Sponsorship agreement</p>
 		</a>
 		<a
@@ -109,7 +144,7 @@
 			href={SampleExclusiveNIL}
 			target="_blank"
 		>
-			<img class="mb-5 w-[80%] mx-auto" src="https://shmul.dev/assets/contract.png" />
+			<img class="mb-5 w-[10vw] mx-auto" src="https://shmul.dev/assets/contract.png" />
 			<p class="text-center">Exclusive NIL</p>
 		</a>
 		<a
@@ -117,7 +152,7 @@
 			href={SampleNonExclusiveNIL}
 			target="_blank"
 		>
-			<img class="mb-5 w-[80%] mx-auto" src="https://shmul.dev/assets/contract.png" />
+			<img class="mb-5 w-[10vw] mx-auto" src="https://shmul.dev/assets/contract.png" />
 			<p class="text-center">Non Exclusive NIL</p>
 		</a>
 	</div>
@@ -132,7 +167,8 @@
 			{athlete.profile.phoneNumber}
 		</p>
 		<a
-			href="/profile/{athlete.id}"
+			href="/user-profile/{athlete.id}"
+			target="_blank"
 			class="p-5 border border-white text-sm md:text-lg bg-gray-700 rounded-full"
 		>
 			View Profile
@@ -162,20 +198,29 @@
 		</div>
 	</div>
 	<div class="w-full sm:w-1/2 mx-auto">
+		{#if contractLink}
+			<a href={contractLink}>Contract Link</a>
+		{/if}
+
 		{#if files}
 			<h3 class="text-green-500">Accepted files</h3>
 			<ul class="text-white rounded-xl bg-gray-700 p-3 flex flex-row items-center justify-between">
-				{#each files.accepted as file}
-					<li>{file.name} - {formatFileSize(file.size)}</li>
-				{/each}
-				<button
-					on:click={() => {
-						currFile = undefined;
-						files = undefined;
-					}}
-				>
-					<img class="w-10 h-10" src="https://shmul.dev/assets/trash.png" />
-				</button>
+				{#if hasContract}
+					<a href={contractLink} target="_blank">
+						<!-- This stuff doesnt exist yet when the page is uploaded cause even tho it gets pushed it doesnt come back right away -->
+						<li class="underline">{currFile.name} - {formatFileSize(currFile.size)}</li>
+					</a>
+				{:else}
+					<li>{currFile.name} - {formatFileSize(currFile.size)}</li>
+					<button
+						on:click={() => {
+							currFile = undefined;
+							files = undefined;
+						}}
+					>
+						<img class="w-10 h-10" src="https://shmul.dev/assets/trash.png" />
+					</button>
+				{/if}
 			</ul>
 			{#if files.rejected.length > 0}
 				<h3 class="text-red-500">Rejected files</h3>
@@ -186,5 +231,24 @@
 				</ul>
 			{/if}
 		{/if}
+		{#if !contractLink && currFile}
+			<button
+				on:click={() => {
+					modal = true;
+				}}
+				class="bg-blue-500 rounded-xl text-white p-3 float-right mt-5 mb-10"
+				>Send finalized contract</button
+			>
+		{/if}
 	</div>
 </div>
+
+<style>
+	.centerAll {
+		position: fixed;
+		left: 50%;
+		top: 50%;
+		-webkit-transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%);
+	}
+</style>

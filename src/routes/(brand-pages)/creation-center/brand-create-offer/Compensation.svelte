@@ -19,7 +19,7 @@
 		if (compSelected !== 'Custom') {
 			jsonData = JSON.stringify({ pay, compSelected, product });
 		} else {
-			jsonData = JSON.stringify({ pay, compSelected, customPay });
+			jsonData = JSON.stringify({ pay, compSelected, customPay, product });
 		}
 		console.log(jsonData);
 		if (eventCampaignOrSingle === 'Campaign') {
@@ -78,7 +78,7 @@
 	</Dropdown>
 {/if}
 
-{#if compSelected === 'Custom'}
+{#if compSelected === 'Custom' && (pay === 'Money' || pay === 'Both')}
 	<label
 		class="text-gray-300 text-sm font-bold text-left w-fit sm:mr-5 whitespace-nowrap"
 		for="estimated-payment">Custom Payment</label

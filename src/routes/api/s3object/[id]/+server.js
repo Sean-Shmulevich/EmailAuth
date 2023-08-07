@@ -48,7 +48,7 @@ export async function POST({ request, locals }) {
 	}
 	let document;
 	try {
-		if (data.get('deal_id')) {
+		if (data.get('deal_id') && !data.get('athlete_id')) {
 			const existingImage = await prismaClient.dealImages.findFirst({
 				where: {
 					dealId: data.get('deal_id')
@@ -75,33 +75,34 @@ export async function POST({ request, locals }) {
 					dealId: data.get('deal_id')
 				}
 			});
-		} else if (data.get('deal_id_contract')) {
-			const existingContract = await prismaClient.contract.findFirst({
+		} else if (data.get('athlete_id')) {
+			const dealStatus = await prismaClient.userDealStatus.findFirst({
 				where: {
-					dealId: data.get('deal_id_contract')
+					userId: data.get('athlete_id'),
+					dealId: data.get('deal_id')
 				}
 			});
 			//TODO
 			//THEY SHOUDNT RLY BE ABLE TO ADD A NEW CONTRACT
-			if (existingContract) {
+			if (dealStatus.contractId) {
 				const s3 = new S3Client();
 				let obj = await s3.send(
-					new DeleteObjectCommand({ Bucket: S3_BUCKET, Key: existingContract.id })
+					new DeleteObjectCommand({ Bucket: S3_BUCKET, Key: dealStatus.contractId })
 				);
 
 				// Delete the existing image record from the database
-				await prismaClient.dealContractImages.delete({
-					where: { id: existingContract.id }
+				await prismaClient.contract.delete({
+					where: { id: dealStatus.contractId }
 				});
 			}
+
 			document = await prismaClient.contract.create({
 				data: {
 					id: data.get('objectId'),
 					file_name: data.get('fileName'),
 					file_size: parseInt(data.get('fileSize')),
 					file_type: data.get('fileType'),
-					image_number: parseInt(data.get('position')),
-					dealId: data.get('deal_id_contract')
+					userId: data.get('athlete_id')
 				}
 			});
 		} else {

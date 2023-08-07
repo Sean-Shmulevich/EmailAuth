@@ -66,12 +66,24 @@
 							<div class="interest">Brand: {brandName}</div>
 							{#if estimatedPayment}
 								{#if JSON.parse(estimatedPayment)['pay'] === 'Both'}
-									<p>Product: {JSON.parse(estimatedPayment).product}</p>
-									<p>Compensation: {JSON.parse(estimatedPayment).compSelected}</p>
+									{#if JSON.parse(estimatedPayment).product !== ''}
+										<p>Product: {JSON.parse(estimatedPayment).product}</p>
+									{/if}
+									{#if JSON.parse(estimatedPayment).compSelected !== 'Custom'}
+										<p>Compensation: {JSON.parse(estimatedPayment).compSelected}</p>
+									{:else}
+										<p>Compensation: {JSON.parse(estimatedPayment).customPay}</p>
+									{/if}
 								{:else if JSON.parse(estimatedPayment)['pay'] === 'Money'}
-									<p>Compensation: {JSON.parse(estimatedPayment).compSelected}</p>
+									{#if JSON.parse(estimatedPayment).compSelected !== 'Custom'}
+										<p>Compensation: {JSON.parse(estimatedPayment).compSelected}</p>
+									{:else}
+										<p>Compensation: {JSON.parse(estimatedPayment).customPay}</p>
+									{/if}
 								{:else if JSON.parse(estimatedPayment)['pay'] === 'Product'}
-									<p>Product {JSON.parse(estimatedPayment).product}</p>
+									{#if JSON.parse(estimatedPayment).product !== ''}
+										<p>Product: {JSON.parse(estimatedPayment).product}</p>
+									{/if}
 								{/if}
 							{/if}
 							{#if recommendedDeliverables}

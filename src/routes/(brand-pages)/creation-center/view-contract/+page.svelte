@@ -4,6 +4,10 @@
 	import FileDrop from 'filedrop-svelte';
 	let files;
 	let options = {};
+	import { page } from '$app/stores';
+	let s3 = '/api/s3object';
+
+	const url = $page.url;
 
 	let value = [];
 
@@ -16,8 +20,10 @@
 		size /= 1024;
 		return size.toFixed(2) + ' GB';
 	}
+	console.log(data.deal);
 	let presignUrl = '/api/presign';
 	async function upload(file) {
+		console.log(file);
 		// Get presigned POST URL and form fields
 		let { url, fields } = await fetch(`${presignUrl}?fileType=${file.type}`)
 			.then((response) => response.json())
@@ -47,6 +53,8 @@
 		form.append('fileName', file.name);
 		form.append('fileSize', file.size);
 		form.append('fileType', file.type);
+		form.append('deal_id', data.deal.id);
+		form.append('athlete_id', data.deal.userDealStatus[0].userId);
 
 		//!!!
 		//Turn index into a key arry and find the index of the current Image when uploaded
@@ -59,12 +67,19 @@
 			return false;
 		}
 
+		console.log('fields.key: https://localhost:5173/api/s3object/' + fields.key);
 		return fields.key;
 	}
 </script>
 
 <div class="text-white p-10">
-	<FileDrop accept=".pdf" on:filedrop={(e) => (files = e.detail.files)} />
+	<FileDrop
+		accept=".pdf"
+		on:filedrop={(e) => {
+			files = e.detail.files;
+			upload(files.accepted[0]);
+		}}
+	/>
 	{#if files}
 		<h3>Accepted files</h3>
 		<ul>
@@ -80,36 +95,3 @@
 		</ul>
 	{/if}
 </div>
-<!-- <Dropzone
-	id="dropzone"
-	bind:files
-	accept="pdf"
-	on:drop={dropHandle}
-	on:dragover={(event) => {
-		event.preventDefault();
-	}}
-	on:change={handleChange}
->
-	<svg
-		aria-hidden="true"
-		class="mb-3 w-10 h-10 text-gray-400"
-		fill="none"
-		stroke="currentColor"
-		viewBox="0 0 24 24"
-		xmlns="http://www.w3.org/2000/svg"
-		><path
-			stroke-linecap="round"
-			stroke-linejoin="round"
-			stroke-width="2"
-			d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-		/></svg
-	>
-	{#if value.length === 0}
-		<p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-			<span class="font-semibold">Click to upload</span> or drag and drop
-		</p>
-		<p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
-	{:else}
-		<p>{showFiles(value)}</p>
-	{/if}
-</Dropzone> -->

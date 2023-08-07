@@ -145,12 +145,24 @@
 							{/if}
 							<div class="interest">Brand: {offer.brandName}</div>
 							{#if JSON.parse(offer.estimatedPayment)['pay'] === 'Both'}
-								<p>Product: {JSON.parse(offer.estimatedPayment).product}</p>
-								<p>Compensation: {JSON.parse(offer.estimatedPayment).compSelected}</p>
+								{#if JSON.parse(offer.estimatedPayment).product !== ''}
+									<p>Product: {JSON.parse(offer.estimatedPayment).product}</p>
+								{/if}
+								{#if JSON.parse(offer.estimatedPayment).compSelected !== 'Custom'}
+									<p>Compensation: {JSON.parse(offer.estimatedPayment).compSelected}</p>
+								{:else}
+									<p>Compensation: {JSON.parse(offer.estimatedPayment).customPay}</p>
+								{/if}
 							{:else if JSON.parse(offer.estimatedPayment)['pay'] === 'Money'}
-								<p>Compensation: {JSON.parse(offer.estimatedPayment).compSelected}</p>
+								{#if JSON.parse(offer.estimatedPayment).compSelected !== 'Custom'}
+									<p>Compensation: {JSON.parse(offer.estimatedPayment).compSelected}</p>
+								{:else}
+									<p>Compensation: {JSON.parse(offer.estimatedPayment).customPay}</p>
+								{/if}
 							{:else if JSON.parse(offer.estimatedPayment)['pay'] === 'Product'}
-								<p>Product {JSON.parse(offer.estimatedPayment).product}</p>
+								{#if JSON.parse(offer.estimatedPayment).product !== ''}
+									<p>Product: {JSON.parse(offer.estimatedPayment).product}</p>
+								{/if}
 							{/if}
 							{#each offer.recommendedDeliverables['set'] as del, i}
 								<li class="">

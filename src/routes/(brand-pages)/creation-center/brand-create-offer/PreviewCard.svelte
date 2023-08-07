@@ -127,7 +127,7 @@
 							<div class="p-2 rounded-xl border border-white h-20">
 								{#if isCampaign === 'Campaign' && eventDate}
 									Start Date: <br />{eventDate.toString().slice(0, 10)}<br />
-								{:else if isCampaign !== 'Single Event' && eventDate}
+								{:else if isCampaign === 'Single Event' && eventDate}
 									Date: <br />{eventDate.toString().slice(0, 10)}
 								{/if}
 							</div>

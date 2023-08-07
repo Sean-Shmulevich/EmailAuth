@@ -15,6 +15,14 @@
 	// console.log(currDeal.recommendedDeliverables['set']);
 </script>
 
+<div class="flex flex-row justify-center mt-8">
+	<div class="mx-auto text-center rounded-3xl py-4 w-[20%] bg-black text-white">
+		<a class="text-center" href="/admin/approve-users">go to approve users</a>
+	</div>
+	<div class="mx-auto text-center rounded-3xl py-4 w-[20%] bg-black text-white">
+		<a class="text-center" href="/admin/approve-brands">go to approve brands</a>
+	</div>
+</div>
 {#if !noDeals}
 	{#each contractDeals as currDeal}
 		<div class="w-fit mx-auto bg-gray-800 rounded-xl mt-5 p-5 mb-10 pb-5">

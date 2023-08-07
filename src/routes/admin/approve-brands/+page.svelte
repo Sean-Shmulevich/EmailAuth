@@ -15,6 +15,9 @@
 		<div class="mx-auto mb-10 text-center rounded-3xl py-4 w-[20%] bg-black text-white">
 			<a class="text-center" href="/admin/approve-users">go to approve users</a>
 		</div>
+		<div class="mx-auto mb-10 text-center rounded-3xl py-4 w-[20%] bg-black text-white">
+			<a class="text-center" href="/admin/deal-contracts">View deal contracts</a>
+		</div>
 
 		<h2 class="text-4xl text-center">Brands waiting for approval</h2>
 		{#if data.allBrands.length === 0}

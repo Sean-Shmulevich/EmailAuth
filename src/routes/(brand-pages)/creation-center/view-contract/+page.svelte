@@ -11,6 +11,8 @@
 	import SampleNonExclusiveNIL from '$lib/assets/SampleNonExclusiveNILDapUp.pdf';
 	let s3 = '/api/s3object';
 
+	let currFile = '';
+
 	const url = $page.url;
 
 	let value = [];
@@ -85,9 +87,9 @@
 		Deal Title: {data.deal.title}
 	</h1>
 	<h1 class="text-center font-extrabold text-2xl mb-2">Contract templates</h1>
-	<div class="flex flex-row w-full justify-center mb-10 space-x-5">
+	<div class="flex flex-row w-full justify-center mb-10 space-x-0 sm:space-x-5">
 		<a
-			class="w-40 p-4 bg-gray-700 border rounded-xl border-white"
+			class="w-40 p-4 bg-gray-700 min-width-[70px] border rounded-xl border-white"
 			href={NILQuickFacts}
 			target="_blank"
 		>
@@ -121,41 +123,60 @@
 	</div>
 	<h1 class="text-center font-extrabold mt-10 text-4xl">Athlete Contact Info</h1>
 	<div
-		class="w-[80%] md:w-[60%] flex flex-col sm:flex-row justify-between space-y-5 sm:space-y-0 my-10 mx-auto items-center"
+		class="w-[85%] md:w-[60%] flex flex-col sm:flex-row justify-between space-y-5 sm:space-y-0 my-10 mx-auto items-center"
 	>
-		<p class="p-5 border border-white text-lg bg-gray-700 rounded-full">
+		<p class="p-5 border border-white text-sm md:text-lg bg-gray-700 rounded-full">
 			{athlete.email}
 		</p>
-		<p class="p-5 border border-white text-lg bg-gray-700 rounded-full">
+		<p class="p-5 border border-white text-sm md:text-lg bg-gray-700 rounded-full">
 			{athlete.profile.phoneNumber}
 		</p>
 		<a
 			href="/profile/{athlete.id}"
-			class="p-5 border border-white text-lg bg-gray-700 rounded-full"
+			class="p-5 border border-white text-sm md:text-lg bg-gray-700 rounded-full"
 		>
 			View Profile
 		</a>
 	</div>
-	<h1 class="text-center font-extrabold my-10 text-4xl">Upload finalized contract</h1>
-	<FileDrop
-		accept=".pdf"
-		on:filedrop={(e) => {
-			files = e.detail.files;
-			upload(files.accepted[0]);
-		}}
-	/>
-	{#if files}
-		<h3>Accepted files</h3>
-		<ul>
-			{#each files.accepted as file}
-				<li>{file.name} - {formatFileSize(file.size)}</li>
-			{/each}
-		</ul>
-		<h3>Rejected files</h3>
-		<ul>
-			{#each files.rejected as rejected}
-				<li>{rejected.file.name} - {rejected.error.message}</li>
-			{/each}
-		</ul>
-	{/if}
+	<div class="w-full">
+		<h1 class="text-center font-extrabold my-10 text-4xl">Upload finalized contract</h1>
+		<div class="w-full sm:w-1/2 mx-auto">
+			<FileDrop
+				accept=".pdf"
+				on:filedrop={(e) => {
+					let allFiles = [...e.detail.files.accepted, ...e.detail.files.rejected];
+					if (allFiles.length > 1) {
+						alert('Please upload only one file');
+						return;
+					}
+					// here i need to know if theres already a file
+					if (currFile) {
+						alert('You already uploaded a file');
+						return;
+					}
+					files = e.detail.files;
+					currFile = files.accepted[0];
+					// upload(files.accepted[0]);
+				}}
+			/>
+		</div>
+	</div>
+	<div class="w-full sm:w-1/2 mx-auto">
+		{#if files}
+			<h3 class="text-green-500">Accepted files</h3>
+			<ul class="text-white rounded-xl bg-gray-700 p-3">
+				{#each files.accepted as file}
+					<li>{file.name} - {formatFileSize(file.size)}</li>
+				{/each}
+			</ul>
+			{#if files.rejected.length > 0}
+				<h3 class="text-red-500">Rejected files</h3>
+				<ul class="text-white">
+					{#each files.rejected as rejected}
+						<li>{rejected.file.name} - {rejected.error.message}</li>
+					{/each}
+				</ul>
+			{/if}
+		{/if}
+	</div>
 </div>

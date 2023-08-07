@@ -18,6 +18,9 @@ export async function GET({ locals }) {
 					}
 				}
 			}
+		},
+		include: {
+			dealImages: true
 		}
 	});
 

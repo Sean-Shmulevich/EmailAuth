@@ -29,6 +29,7 @@ model AuthUser {
   userDealStatus UserDealStatus[]
   // for users
   // acceptedDeals  String[]
+  Contract       Contract[]
 
   @@map("auth_user")
 }
@@ -156,12 +157,27 @@ model DealImages {
 }
 
 model UserDealStatus {
-  userId String
-  dealId String
-  status String   @default("pending") // can be "accepted", "rejected", or "pending"
-  user   AuthUser @relation(fields: [userId], references: [id], onDelete: Cascade)
-  deal   Deal     @relation(fields: [dealId], references: [id], onDelete: Cascade)
+  userId     String
+  dealId     String
+  status     String    @default("pending") // can be "accepted", "rejected", or "pending"
+  user       AuthUser  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  deal       Deal      @relation(fields: [dealId], references: [id], onDelete: Cascade)
+  contract   Contract? @relation(fields: [contractId], references: [id]) // 'unique' ensures one-to-one relationship
+  contractId String?   @unique
 
   @@id([userId, dealId])
   @@map("user_deal_status")
+}
+
+model Contract {
+  id             String          @id @default("1")
+  created        DateTime?       @default(now())
+  file_name      String?
+  file_size      Int?
+  file_type      String?
+  authUser       AuthUser        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId         String
+  UserDealStatus UserDealStatus?
+
+  @@map("contract")
 }

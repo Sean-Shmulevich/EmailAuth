@@ -32,7 +32,7 @@ export async function POST({ request, locals }) {
 	// add object to db
 	const { user } = await locals.auth.validateUser();
 
-	if (!user) {
+	if (!user || !user.emailverified) {
 		throw error(401, 'unauthorized');
 	}
 
@@ -73,6 +73,35 @@ export async function POST({ request, locals }) {
 					file_type: data.get('fileType'),
 					image_number: parseInt(data.get('position')),
 					dealId: data.get('deal_id')
+				}
+			});
+		} else if (data.get('deal_id_contract')) {
+			const existingContract = await prismaClient.contract.findFirst({
+				where: {
+					dealId: data.get('deal_id_contract')
+				}
+			});
+			//TODO
+			//THEY SHOUDNT RLY BE ABLE TO ADD A NEW CONTRACT
+			if (existingContract) {
+				const s3 = new S3Client();
+				let obj = await s3.send(
+					new DeleteObjectCommand({ Bucket: S3_BUCKET, Key: existingContract.id })
+				);
+
+				// Delete the existing image record from the database
+				await prismaClient.dealContractImages.delete({
+					where: { id: existingContract.id }
+				});
+			}
+			document = await prismaClient.contract.create({
+				data: {
+					id: data.get('objectId'),
+					file_name: data.get('fileName'),
+					file_size: parseInt(data.get('fileSize')),
+					file_type: data.get('fileType'),
+					image_number: parseInt(data.get('position')),
+					dealId: data.get('deal_id_contract')
 				}
 			});
 		} else {

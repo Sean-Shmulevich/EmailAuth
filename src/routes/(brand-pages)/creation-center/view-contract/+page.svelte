@@ -2,53 +2,64 @@
 	import { Dropzone } from 'flowbite-svelte';
 	export let data;
 	import FileDrop from 'filedrop-svelte';
-	import * as fileSize from 'filesize';
 	let files;
 	let options = {};
 
 	let value = [];
-	const dropHandle = (event) => {
-		value = [];
-		event.preventDefault();
-		if (event.dataTransfer.items) {
-			[...event.dataTransfer.items].forEach((item, i) => {
-				if (item.kind === 'file') {
-					const file = item.getAsFile();
-					value.push(file.name);
-					value = value;
-				}
+
+	function formatFileSize(size) {
+		if (size < 1024) return size + ' B';
+		size /= 1024;
+		if (size < 1024) return size.toFixed(2) + ' KB';
+		size /= 1024;
+		if (size < 1024) return size.toFixed(2) + ' MB';
+		size /= 1024;
+		return size.toFixed(2) + ' GB';
+	}
+	let presignUrl = '/api/presign';
+	async function upload(file) {
+		// Get presigned POST URL and form fields
+		let { url, fields } = await fetch(`${presignUrl}?fileType=${file.type}`)
+			.then((response) => response.json())
+			.catch((error) => {
+				console.log(error);
+				return false;
 			});
-		} else {
-			[...event.dataTransfer.files].forEach((file, i) => {
-				value = file.name;
-			});
+
+		// Build a form for the request body
+		let form = new FormData();
+		Object.keys(fields).forEach((key) => form.append(key, fields[key]));
+		form.append('file', file);
+		form.append('Content-Type', file.type);
+
+		// Send the POST request
+		try {
+			await fetch(url, { method: 'POST', body: form });
+			files = { ...files };
+		} catch (error) {
+			console.log(error);
+			return false;
 		}
-	};
 
-	const handleChange = (event) => {
-		const files = event.target.files;
-		if (files.length > 0) {
-			value.push(files[0].name);
-			value = value;
+		// Save the document in the db using the api
+		form = new FormData();
+		form.append('objectId', fields.key); // fields.key is same as id
+		form.append('fileName', file.name);
+		form.append('fileSize', file.size);
+		form.append('fileType', file.type);
+
+		//!!!
+		//Turn index into a key arry and find the index of the current Image when uploaded
+		const keys = Object.keys(files); // convert keys to an array
+		try {
+			await fetch(s3 + '/' + encodeURIComponent(fields.key), { method: 'POST', body: form });
+			files = { ...files };
+		} catch (error) {
+			console.log(error);
+			return false;
 		}
-	};
 
-	const showFiles = (files) => {
-		if (files.length === 1) return files[0];
-		let concat = '';
-
-		files.map((file) => {
-			concat += file;
-			concat += ',';
-			concat += ' ';
-		});
-
-		if (concat.length > 40) concat = concat.slice(0, 40);
-		concat += '...';
-		return concat;
-	};
-	function handleDragOver(event) {
-		event.preventDefault();
+		return fields.key;
 	}
 </script>
 
@@ -58,7 +69,7 @@
 		<h3>Accepted files</h3>
 		<ul>
 			{#each files.accepted as file}
-				<li>{file.name} - {fileSize(file.size)}</li>
+				<li>{file.name} - {formatFileSize(file.size)}</li>
 			{/each}
 		</ul>
 		<h3>Rejected files</h3>

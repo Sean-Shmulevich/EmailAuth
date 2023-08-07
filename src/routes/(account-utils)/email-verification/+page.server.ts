@@ -21,7 +21,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 };
 
 export const actions: Actions = {
-	sendEmail: async ({ locals }) => {
+	sendEmail: async ({ locals, url }) => {
 		const { user } = await locals.auth.validateUser();
 		if (!user || user.emailVerified) {
 			return fail(401, {
@@ -35,9 +35,9 @@ export const actions: Actions = {
 			const numericToken = bigNumber % 1000000;
 			console.log(numericToken);
 			if (!user.isBrand) {
-				await sendEmailVerificationEmail(user.email, token.toString());
+				await sendEmailVerificationEmail(user.email, token.toString(), url.origin);
 			} else {
-				await sendEmailVerificationEmailBrand(user.email, token.toString());
+				await sendEmailVerificationEmailBrand(user.email, token.toString(), url.origin);
 			}
 		} catch (e) {
 			console.log(e);

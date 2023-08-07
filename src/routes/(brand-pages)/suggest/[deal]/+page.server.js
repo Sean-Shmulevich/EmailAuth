@@ -50,7 +50,7 @@ export const load = async ({ url, route, params, locals }) => {
 };
 
 export const actions = {
-	pickUser: async ({ params, request, locals }) => {
+	pickUser: async ({ params, request, locals, url }) => {
 		const { user } = await locals.auth.validateUser();
 		const data = await request.formData();
 		const userToApprove = data.get('userId')?.toString();
@@ -82,6 +82,7 @@ export const actions = {
 		});
 		sendEmail(
 			userToWorkWith.email,
+			url.origin,
 			'A brand is interested in working with you!',
 			`Deal info title: ${deal.title} \n Description: ${deal.shortDescription}`
 		);

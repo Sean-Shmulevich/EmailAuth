@@ -2,11 +2,16 @@ import { prismaClient } from '$lib/db';
 import type { Email as DatabaseEmail } from '@prisma/client';
 import { generateRandomString } from 'lucia-auth';
 import sgMail from '@sendgrid/mail';
-import { SEND_GRID_API, ROOT_URL } from '$env/static/private';
+import { SEND_GRID_API } from '$env/static/private';
 
 sgMail.setApiKey(SEND_GRID_API);
 
-export const sendEmail = async (emailAddress: string, subject: string, content: string) => {
+export const sendEmail = async (
+	emailAddress: string,
+	rootUrl: string,
+	subject: string,
+	content: string
+) => {
 	const msg = {
 		to: `${emailAddress}`, // Change to your recipient
 		from: {
@@ -39,6 +44,7 @@ export const sendEmail = async (emailAddress: string, subject: string, content: 
 export const sendEmailVerificationEmail = async (
 	emailAddress: string,
 	verificationToken: string
+	rootUrl: string
 ) => {
 	const verificationLink = `${ROOT_URL}/email-verification/${verificationToken}`;
 	const emailContent = `
@@ -61,12 +67,13 @@ Best regards,<br/><br/>
 
 DapUp Team<br/>
 `;
-	await sendEmail(emailAddress, 'Welcome to DapUp - Verification in Progress!', emailContent);
+	await sendEmail(emailAddress, rootUrl, 'Welcome to DapUp - Verification in Progress!', emailContent);
 };
 
 export const sendEmailVerificationEmailBrand = async (
 	emailAddress: string,
-	verificationToken: string
+	verificationToken: string,
+	rootUrl: string
 ) => {
 	const verificationLink = `${ROOT_URL}/email-verification/${verificationToken}`;
 	const emailContent = `
@@ -89,15 +96,15 @@ export const sendEmailVerificationEmailBrand = async (
 
 	DapUp Team<br/>
 `;
-	await sendEmail(emailAddress, 'Welcome to DapUp - Verification in Progress!', emailContent);
+	await sendEmail(emailAddress, rootUrl,  'Welcome to DapUp - Verification in Progress!', emailContent);
 };
 
-export const sendPasswordResetEmail = async (emailAddress: string, resetToken: string) => {
+export const sendPasswordResetEmail = async (emailAddress: string, resetToken: string, rootUrl:string) => {
 	const resetLink = `${ROOT_URL}/password-reset/${resetToken}`;
 	const emailContent = `Please reset your password via the link below:<br/><br/>
     
 <a href="${resetLink}">${resetLink}</a>`;
-	await sendEmail(emailAddress, 'Password reset', emailContent);
+	await sendEmail(emailAddress, rootUrl, 'Password reset', emailContent);
 };
 
 const transformDatabaseEmail = (databaseEmail: DatabaseEmail) => {

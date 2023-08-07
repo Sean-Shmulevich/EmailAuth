@@ -7,7 +7,7 @@ import { fail } from '@sveltejs/kit';
 import type { Actions } from './$types';
 
 export const actions: Actions = {
-	default: async ({ request }) => {
+	default: async ({ request, url }) => {
 		const formData = await request.formData();
 		const email = (formData.get('email')?.toString() ?? '').toLowerCase();
 		if (email === null || !emailRegex.test(email)) {
@@ -30,7 +30,7 @@ export const actions: Actions = {
 			}
 			const user = auth.transformDatabaseUser(databaseUser);
 			const token = await passwordResetToken.issue(user.userId);
-			await sendPasswordResetEmail(user.email, token.toString());
+			await sendPasswordResetEmail(user.email, token.toString(), url.origin);
 			return {
 				success: true
 			};

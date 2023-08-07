@@ -46,7 +46,7 @@ export const load = async ({ locals }) => {
 	};
 };
 
-async function verifyUser(email) {
+async function verifyUser(email, rootUrl) {
 	const updatedUser = await prismaClient.authUser.update({
 		where: {
 			email: email
@@ -61,6 +61,7 @@ async function verifyUser(email) {
 	// }
 	sendEmail(
 		email,
+		rootUrl,
 		'Congratulations! Your DapUp Account is Verified and Approved!',
 
 		`
@@ -75,7 +76,7 @@ async function verifyUser(email) {
 		Your active participation will shape a tailored and rewarding experience for you on DapUp! 
 		<br/><br/>
 
-  
+ 
 		You can now launch NIL deals, connect with athletes, and DapUp Your Game! 
 		<br/><br/>
 		Best regards,<br/>
@@ -90,7 +91,7 @@ async function verifyUser(email) {
 //     },
 // });
 export const actions = {
-	verify: async ({ request, locals }) => {
+	verify: async ({ request, locals, url }) => {
 		//TODO verify user post request here
 		const formData = await request.formData();
 		const email = formData.get('email')?.toString() ?? '';
@@ -98,7 +99,7 @@ export const actions = {
 			console.log('email is null or not valid');
 		}
 		try {
-			verifyUser(email);
+			verifyUser(email, url.origin);
 			//edit user
 			// await sendEmailVerificationEmail(user.email, token.toString());
 		} catch (e) {

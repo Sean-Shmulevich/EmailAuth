@@ -1,8 +1,7 @@
 import type { PageServerLoad } from './$types';
 import { prismaClient } from '$lib/db';
-import { ROOT_URL } from '$env/static/private';
 
-export const load: PageServerLoad = async ({ locals }) => {
+export const load: PageServerLoad = async ({ locals, url }) => {
 	const { user } = await locals.auth.validateUser();
 	//default profile picture
 	let profilePicture = `https://shmul.dev/assets/dapupprofile.png`;
@@ -20,7 +19,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 		}
 	});
 	if (profilePictureData && profilePictureData.id) {
-		profilePicture = `${ROOT_URL}/api/s3object/${profilePictureData.id}`;
+		profilePicture = `/api/s3object/${profilePictureData.id}`;
 	}
 	if (!user.adminVerified) {
 		//if the code execution comes here then the user is definitely logged in and email verified but not admin verified

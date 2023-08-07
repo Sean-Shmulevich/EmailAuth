@@ -20,6 +20,11 @@ export const actions: Actions = {
 	default: async ({ request, locals }) => {
 		const formData = await request.formData();
 		const email = (formData.get('email')?.toString() ?? '').toLowerCase();
+		const tos = formData.get('terms-of-service')?.toString();
+
+		if (!tos) {
+			return fail(400, { message: 'You must agree to our terms of service' });
+		}
 		if (email === null || !emailRegex.test(email)) {
 			return fail(400, {
 				message: 'Invalid email',

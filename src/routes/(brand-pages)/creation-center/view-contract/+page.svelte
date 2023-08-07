@@ -164,10 +164,18 @@
 	<div class="w-full sm:w-1/2 mx-auto">
 		{#if files}
 			<h3 class="text-green-500">Accepted files</h3>
-			<ul class="text-white rounded-xl bg-gray-700 p-3">
+			<ul class="text-white rounded-xl bg-gray-700 p-3 flex flex-row items-center justify-between">
 				{#each files.accepted as file}
 					<li>{file.name} - {formatFileSize(file.size)}</li>
 				{/each}
+				<button
+					on:click={() => {
+						currFile = undefined;
+						files = undefined;
+					}}
+				>
+					<img class="w-10 h-10" src="https://shmul.dev/assets/trash.png" />
+				</button>
 			</ul>
 			{#if files.rejected.length > 0}
 				<h3 class="text-red-500">Rejected files</h3>

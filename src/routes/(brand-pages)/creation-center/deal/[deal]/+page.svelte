@@ -148,7 +148,7 @@
 					<h2 class="text-xl font-bold mb-2">{user.name}</h2>
 					<a class="text-blue-500 underline" href="/user-profile/{user.id}">profile link</a>
 				</div>
-
+				<!-- TODO get rid of this here -->
 				<button
 					on:click={() => {
 						goto(`/creation-center/view-contract?deal=${currDeal.id}&user=${user.id}`);

@@ -32,7 +32,7 @@ export async function POST({ request, locals }) {
 	// add object to db
 	const { user } = await locals.auth.validateUser();
 
-	if (!user || !user.emailverified) {
+	if (!user || !user.emailVerified) {
 		throw error(401, 'unauthorized');
 	}
 

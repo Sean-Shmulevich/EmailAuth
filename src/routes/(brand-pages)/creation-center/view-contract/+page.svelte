@@ -73,6 +73,17 @@
 </script>
 
 <div class="text-white p-10">
+	<div class="flex flex-row w-full justify-center mb-10">
+		<div class="w-40 p-4 mr-2 bg-gray-700 border rounded-xl border-white">
+			<img class="mb-5 w-[80%] mx-auto" src="https://shmul.dev/assets/contract.png" />
+		</div>
+		<div class="w-40 p-4 border mx-2 bg-gray-700 rounded-xl border-white">
+			<img class="mb-5 w-[80%] mx-auto" src="https://shmul.dev/assets/contract.png" />
+		</div>
+		<div class="w-40 p-4 border ml-2 rounded-xl bg-gray-700 border-white">
+			<img class="mb-5 w-[80%] mx-auto" src="https://shmul.dev/assets/contract.png" />
+		</div>
+	</div>
 	<FileDrop
 		accept=".pdf"
 		on:filedrop={(e) => {

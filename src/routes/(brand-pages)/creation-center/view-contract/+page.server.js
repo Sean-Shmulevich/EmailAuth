@@ -7,7 +7,7 @@ export const load = async ({ params, locals, url }) => {
 	// get userID and deal ID params
 	const athleteId = url.searchParams.get('user');
 	const dealId = url.searchParams.get('deal');
-	console.log('athleteId', url.searchParams);
+	// console.log('athleteId', url.searchParams);
 	if (!user || !user.emailVerified || !user.adminVerified) {
 		throw redirect(302, '/');
 	}

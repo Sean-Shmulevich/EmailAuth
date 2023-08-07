@@ -174,41 +174,47 @@
 			View Profile
 		</a>
 	</div>
-	<div class="w-full">
-		<h1 class="text-center font-extrabold my-10 text-4xl">Upload finalized contract</h1>
-		<div class="w-full sm:w-1/2 mx-auto">
-			<FileDrop
-				accept=".pdf"
-				on:filedrop={(e) => {
-					let allFiles = [...e.detail.files.accepted, ...e.detail.files.rejected];
-					if (allFiles.length > 1) {
-						alert('Please upload only one file');
-						return;
-					}
-					// here i need to know if theres already a file
-					if (currFile) {
-						alert('You already uploaded a file');
-						return;
-					}
-					files = e.detail.files;
-					currFile = files.accepted[0];
-					// upload(files.accepted[0]);
-				}}
-			/>
+	{#if !hasContract}
+		<div class="w-full">
+			<h1 class="text-center font-extrabold my-10 text-4xl">Upload finalized contract</h1>
+			<div class="w-full sm:w-1/2 mx-auto">
+				<FileDrop
+					accept=".pdf"
+					on:filedrop={(e) => {
+						let allFiles = [...e.detail.files.accepted, ...e.detail.files.rejected];
+						if (allFiles.length > 1) {
+							alert('Please upload only one file');
+							return;
+						}
+						// here i need to know if theres already a file
+						if (currFile) {
+							alert('You already uploaded a file');
+							return;
+						}
+						files = e.detail.files;
+						currFile = files.accepted[0];
+						// upload(files.accepted[0]);
+					}}
+				/>
+			</div>
 		</div>
-	</div>
+	{/if}
 	<div class="w-full sm:w-1/2 mx-auto">
-		{#if contractLink}
-			<a href={contractLink}>Contract Link</a>
-		{/if}
-
-		{#if files}
-			<h3 class="text-green-500">Accepted files</h3>
+		{#if files || hasContract}
+			{#if !hasContract}
+				<h3 class="text-green-500">Accepted files</h3>
+			{:else}
+				<h3 class="text-green-500">Finalized Contract</h3>
+			{/if}
 			<ul class="text-white rounded-xl bg-gray-700 p-3 flex flex-row items-center justify-between">
-				{#if hasContract}
+				{#if data.deal.userDealStatus[0].contractId}
 					<a href={contractLink} target="_blank">
 						<!-- This stuff doesnt exist yet when the page is uploaded cause even tho it gets pushed it doesnt come back right away -->
-						<li class="underline">{currFile.name} - {formatFileSize(currFile.size)}</li>
+						<li class="underline">
+							{data.deal.userDealStatus[0].contract.file_name} - {formatFileSize(
+								data.deal.userDealStatus[0].contract.file_size
+							)}
+						</li>
 					</a>
 				{:else}
 					<li>{currFile.name} - {formatFileSize(currFile.size)}</li>
@@ -222,7 +228,7 @@
 					</button>
 				{/if}
 			</ul>
-			{#if files.rejected.length > 0}
+			{#if !hasContract && files.rejected.length > 0}
 				<h3 class="text-red-500">Rejected files</h3>
 				<ul class="text-white">
 					{#each files.rejected as rejected}

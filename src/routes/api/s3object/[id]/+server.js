@@ -38,7 +38,6 @@ export async function POST({ request, locals }) {
 
 	const data = await request.formData();
 	if (
-		!data.get('position') ||
 		!data.get('fileName') ||
 		!data.get('fileType') ||
 		!data.get('fileSize') ||
@@ -105,7 +104,6 @@ export async function POST({ request, locals }) {
 					userId: data.get('athlete_id')
 				}
 			});
-			console.log(document);
 			await prismaClient.userDealStatus.update({
 				where: {
 					userId_dealId: {

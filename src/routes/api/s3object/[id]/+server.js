@@ -112,7 +112,8 @@ export async function POST({ request, locals }) {
 					}
 				},
 				data: {
-					contractId: document.id
+					contractId: document.id,
+					status: 'brand-finalized'
 				}
 			});
 		} else {

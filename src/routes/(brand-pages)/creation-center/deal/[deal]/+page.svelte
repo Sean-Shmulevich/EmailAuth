@@ -71,12 +71,24 @@
 				</p> -->
 					<p class="mt-5 underline">Compensation</p>
 					{#if JSON.parse(currDeal.estimatedPayment)['pay'] === 'Both'}
-						<p>Product: {JSON.parse(currDeal.estimatedPayment).product}</p>
-						<p>Money: {JSON.parse(currDeal.estimatedPayment).compSelected}</p>
+						{#if JSON.parse(currDeal.estimatedPayment).product !== ''}
+							<p>Product: {JSON.parse(currDeal.estimatedPayment).product}</p>
+						{/if}
+						{#if JSON.parse(currDeal.estimatedPayment).compSelected !== 'Custom'}
+							<p>Compensation: {JSON.parse(currDeal.estimatedPayment).compSelected}</p>
+						{:else}
+							<p>Compensation: {JSON.parse(currDeal.estimatedPayment).customPay}</p>
+						{/if}
 					{:else if JSON.parse(currDeal.estimatedPayment)['pay'] === 'Money'}
-						<p>Money: {JSON.parse(currDeal.estimatedPayment).compSelected}</p>
+						{#if JSON.parse(currDeal.estimatedPayment).compSelected !== 'Custom'}
+							<p>Compensation: {JSON.parse(currDeal.estimatedPayment).compSelected}</p>
+						{:else}
+							<p>Compensation: {JSON.parse(currDeal.estimatedPayment).customPay}</p>
+						{/if}
 					{:else if JSON.parse(currDeal.estimatedPayment)['pay'] === 'Product'}
-						<p>Product {JSON.parse(currDeal.estimatedPayment).product}</p>
+						{#if JSON.parse(currDeal.estimatedPayment).product !== ''}
+							<p>Product: {JSON.parse(currDeal.estimatedPayment).product}</p>
+						{/if}
 					{/if}
 				</div>
 			</div>

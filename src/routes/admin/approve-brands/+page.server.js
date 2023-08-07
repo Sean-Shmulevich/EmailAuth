@@ -62,9 +62,19 @@ async function verifyUser(email) {
 	sendEmail(
 		email,
 		'Congratulations! Your DapUp Account is Verified and Approved!',
-		`We are thrilled to inform you that your DapUp account has been successfully verified and approved!
+
+		`
+		We are thrilled to inform you that your DapUp account has been successfully verified and approved!
 		<br/><br/>
 		Welcome to the DapUp community, where college athletes and brands create winning partnerships.
+		<br/><br/>
+		As you log on to DapUp, prepare to discover example offerings from potential local companies, 
+		even those not on our platform yet. We encourage you to explore these survey offers and swipe on them to help us 
+		fine-tune your future feeds with more accurate and personalized content. 
+		<br/>
+		Your active participation will shape a tailored and rewarding experience for you on DapUp! 
+		<br/><br/>
+
   
 		You can now launch NIL deals, connect with athletes, and DapUp Your Game! 
 		<br/><br/>

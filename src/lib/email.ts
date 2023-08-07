@@ -43,10 +43,10 @@ export const sendEmail = async (
 
 export const sendEmailVerificationEmail = async (
 	emailAddress: string,
-	verificationToken: string
+	verificationToken: string,
 	rootUrl: string
 ) => {
-	const verificationLink = `${ROOT_URL}/email-verification/${verificationToken}`;
+	const verificationLink = `${rootUrl}/email-verification/${verificationToken}`;
 	const emailContent = `
 Welcome to DapUp!<br/><br/> 
 
@@ -67,7 +67,12 @@ Best regards,<br/><br/>
 
 DapUp Team<br/>
 `;
-	await sendEmail(emailAddress, rootUrl, 'Welcome to DapUp - Verification in Progress!', emailContent);
+	await sendEmail(
+		emailAddress,
+		rootUrl,
+		'Welcome to DapUp - Verification in Progress!',
+		emailContent
+	);
 };
 
 export const sendEmailVerificationEmailBrand = async (
@@ -75,7 +80,7 @@ export const sendEmailVerificationEmailBrand = async (
 	verificationToken: string,
 	rootUrl: string
 ) => {
-	const verificationLink = `${ROOT_URL}/email-verification/${verificationToken}`;
+	const verificationLink = `${rootUrl}/email-verification/${verificationToken}`;
 	const emailContent = `
 	Welcome to DapUp!<br/><br/>
 	Thank you for choosing DapUp as your platform to grow your business by connecting with college athletes for NIL marketing campaigns.<br/>
@@ -96,11 +101,20 @@ export const sendEmailVerificationEmailBrand = async (
 
 	DapUp Team<br/>
 `;
-	await sendEmail(emailAddress, rootUrl,  'Welcome to DapUp - Verification in Progress!', emailContent);
+	await sendEmail(
+		emailAddress,
+		rootUrl,
+		'Welcome to DapUp - Verification in Progress!',
+		emailContent
+	);
 };
 
-export const sendPasswordResetEmail = async (emailAddress: string, resetToken: string, rootUrl:string) => {
-	const resetLink = `${ROOT_URL}/password-reset/${resetToken}`;
+export const sendPasswordResetEmail = async (
+	emailAddress: string,
+	resetToken: string,
+	rootUrl: string
+) => {
+	const resetLink = `${rootUrl}/password-reset/${resetToken}`;
 	const emailContent = `Please reset your password via the link below:<br/><br/>
     
 <a href="${resetLink}">${resetLink}</a>`;

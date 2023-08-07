@@ -16,16 +16,12 @@ export const load = async ({ params, locals, url }) => {
 			id: dealId
 		},
 		include: {
+			authUser: true,
 			userDealStatus: {
 				where: {
 					userId: athleteId
 				},
 				include: {
-					user: {
-						include: {
-							profile: true // Include the profile
-						}
-					},
 					contract: true
 				}
 			}

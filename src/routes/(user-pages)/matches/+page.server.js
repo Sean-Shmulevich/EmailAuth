@@ -36,7 +36,22 @@ export const load = async ({ locals }) => {
 			}
 		}
 	});
+	const contractSubmitted = await prismaClient.userDealStatus.findMany({
+		where: {
+			userId: user.userId,
+			status: 'brand-finalized'
+		},
+		include: {
+			deal: {
+				include: {
+					dealImages: true,
+					authUser: true
+				}
+			}
+		}
+	});
 	const completedDealStatus = await prismaClient.userDealStatus.findMany({
+		// TODO should be auth-completed
 		where: {
 			userId: user.userId,
 			status: 'auth-completed'
@@ -54,7 +69,14 @@ export const load = async ({ locals }) => {
 	const newDealProfiles = newDealStatus.map((status) => status.deal);
 	const ongoingDealProfiles = ongoingDealStatus.map((status) => status.deal);
 	const completedDealProfiles = completedDealStatus.map((status) => status.deal);
-	return { newDealProfiles, ongoingDealProfiles, completedDealProfiles };
+	const contractFinalized = contractSubmitted.map((status) => status.deal);
+	return {
+		newDealProfiles,
+		ongoingDealProfiles,
+		contractFinalized,
+		completedDealProfiles,
+		userId: user.userId
+	};
 	// if (dealStatus && dealStatus.length !== 0) {
 	// 	const dealProfiles = dealStatus.map((status) => status.deal);
 

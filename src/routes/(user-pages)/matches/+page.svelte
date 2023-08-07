@@ -7,16 +7,20 @@
 	let brandEmail;
 	import { Wave } from 'svelte-loading-spinners';
 
+	let ongoingLength = 0;
 	let activeButton = 'new';
 	let completedDeals;
 	let newDeals;
 	let ongoingDeals;
 	let interestedBrands;
 	let delId;
+	let contractFinalized;
 	if (data) {
+		console.log(data.userId);
 		completedDeals = data.completedDealProfiles;
 		newDeals = data.newDealProfiles;
 		ongoingDeals = data.ongoingDealProfiles;
+		contractFinalized = data.contractFinalized;
 		interestedBrands = newDeals;
 	}
 	let loading = false;
@@ -77,7 +81,9 @@
 		<button
 			on:click|preventDefault={() => {
 				activeButton = 'ongoing';
-				interestedBrands = ongoingDeals;
+				console.log('ongoing deals' + ongoingDeals);
+				ongoingLength = ongoingDeals.length;
+				interestedBrands = [...ongoingDeals, ...contractFinalized];
 			}}
 			class=" {activeButton === 'ongoing'
 				? 'border-4 border-green-400'
@@ -94,7 +100,13 @@
 				: ''} bg-gray-800 w-1/3 p-3 rounded-xl text-center mt-10 text-lg">Completed</button
 		>
 	</div>
-	{#each interestedBrands as currDeal}
+	{#each interestedBrands as currDeal, i}
+		{#if i === ongoingLength}
+			<h2 class="font-extrabold text-center text-3xl mb-2 text-white">
+				Contract Finalized awating payment
+			</h2>
+			<hr />
+		{/if}
 		<div class="w-fit mx-auto bg-gray-800 rounded-xl mb-5 p-5">
 			<h2 class="text-center text-3xl mb-2 text-white">{currDeal.title}</h2>
 			<hr />
@@ -241,12 +253,22 @@
 						</form>
 					{/if}
 					{#if activeButton === 'ongoing'}
-						<button class="p-3 border border-white bg-gray-700 w-1/3 rounded-xl">
+						<button
+							on:click={() => {
+								goto(`/deals/view-contract?deal=${currDeal.id}&user=${data.userId}`);
+							}}
+							class="p-3 border border-white bg-gray-700 w-1/3 rounded-xl"
+						>
 							View Contract
 						</button>
 					{/if}
 				{:else}
-					<button class="p-3 border mx-auto border-white bg-gray-700 w-1/3 rounded-xl">
+					<button
+						on:click={() => {
+							goto(`/deals/view-contract?deal=${currDeal.id}&user=${data.userId}`);
+						}}
+						class="p-3 border mx-auto border-white bg-gray-700 w-1/3 rounded-xl"
+					>
 						View Contract
 					</button>
 				{/if}

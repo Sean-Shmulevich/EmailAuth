@@ -91,34 +91,44 @@
 
 					{#if !data.user.isBrand}
 						{#if data.msg === 'fully authenticated'}
-							<DropdownItem class="text-center" href="/deals">Discover</DropdownItem>
-							<DropdownItem class="text-center" href="/matches">Matches</DropdownItem>
+							<DropdownItem class="hover:bg-gray-600 text-center" href="/deals"
+								>Discover</DropdownItem
+							>
+							<DropdownItem class="hover:bg-gray-600 text-center" href="/matches"
+								>Matches</DropdownItem
+							>
 						{/if}
-						<DropdownItem class="text-center" href="/user-profile/{data.user.userId}"
-							>View Profile</DropdownItem
+						<DropdownItem
+							class="hover:bg-gray-600 text-center"
+							href="/user-profile/{data.user.userId}">View Profile</DropdownItem
 						>
-						<DropdownItem class="text-center" href="/edit-profile/{data.user.userId}"
-							>Edit Profile</DropdownItem
+						<DropdownItem
+							class="hover:bg-gray-600 text-center"
+							href="/edit-profile/{data.user.userId}">Edit Profile</DropdownItem
 						>
 					{:else}
-						<DropdownItem class="text-center" href="/brand-profile/{data.user.userId}"
-							>View Profile</DropdownItem
+						<DropdownItem
+							class="hover:bg-gray-600 text-center"
+							href="/brand-profile/{data.user.userId}">View Profile</DropdownItem
 						>
-						<DropdownItem class="text-center" href="/brand-edit-profile/{data.user.userId}"
-							>Edit Profile</DropdownItem
+						<DropdownItem
+							class="hover:bg-gray-600 text-center"
+							href="/brand-edit-profile/{data.user.userId}">Edit Profile</DropdownItem
 						>
 						{#if data.msg === 'fully authenticated'}
-							<!-- <DropdownItem class="text-center" href="/brand-create-offer"
+							<!-- <DropdownItem  class="hover:bg-gray-600 text-center" href="/brand-create-offer"
 									>Create Deal</DropdownItem
 								> -->
-							<DropdownItem class="text-center" href="/creation-center"
+							<DropdownItem class="hover:bg-gray-600 text-center" href="/creation-center"
 								>Creation Center</DropdownItem
 							>
 						{/if}
 					{/if}
 
 					<form action="?/logout" class="text-center mx-auto" method="post" use:enhance>
-						<DropdownItem class="text-center" type="submit" slot="footer">Sign out</DropdownItem>
+						<DropdownItem class="text-center hover:bg-gray-600 " type="submit" slot="footer"
+							>Sign out</DropdownItem
+						>
 					</form>
 				</Dropdown>
 			{/if}

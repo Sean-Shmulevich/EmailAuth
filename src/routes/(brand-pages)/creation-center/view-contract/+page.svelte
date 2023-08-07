@@ -5,11 +5,16 @@
 	let files;
 	let options = {};
 	import { page } from '$app/stores';
+	import NILQuickFacts from '$lib/assets/NILQuickFacts.pdf';
+	import SponsorshipAgreement from '$lib/assets/ExampleNILSponsorshipAgreementDapUp.pdf';
+	import SampleExclusiveNIL from '$lib/assets/SampleExclusiveNILDapUp.pdf';
+	import SampleNonExclusiveNIL from '$lib/assets/SampleNonExclusiveNILDapUp.pdf';
 	let s3 = '/api/s3object';
 
 	const url = $page.url;
 
 	let value = [];
+	let athlete = data.deal.userDealStatus[0].user;
 
 	function formatFileSize(size) {
 		if (size < 1024) return size + ' B';
@@ -73,17 +78,59 @@
 </script>
 
 <div class="text-white p-10">
-	<div class="flex flex-row w-full justify-center mb-10">
-		<div class="w-40 p-4 mr-2 bg-gray-700 border rounded-xl border-white">
+	<h1 class="text-center font-extrabold -mt-8 text-4xl">
+		Contract for {data.deal.userDealStatus[0].user.name}
+	</h1>
+	<h1 class="text-center font-extrabold text-gray-400 mb-10 text-2xl">
+		Deal Title: {data.deal.title}
+	</h1>
+	<h1 class="text-center font-extrabold text-2xl mb-2">Contract templates</h1>
+	<div class="flex flex-row w-full justify-center mb-10 space-x-5">
+		<a
+			class="w-40 p-4 bg-gray-700 border rounded-xl border-white"
+			href={NILQuickFacts}
+			target="_blank"
+		>
 			<img class="mb-5 w-[80%] mx-auto" src="https://shmul.dev/assets/contract.png" />
-		</div>
-		<div class="w-40 p-4 border mx-2 bg-gray-700 rounded-xl border-white">
+			<p class="text-center">NIL quick facts</p>
+		</a>
+		<a
+			class="w-40 p-4 bg-gray-700 border rounded-xl border-white"
+			href={SponsorshipAgreement}
+			target="_blank"
+		>
 			<img class="mb-5 w-[80%] mx-auto" src="https://shmul.dev/assets/contract.png" />
-		</div>
-		<div class="w-40 p-4 border ml-2 rounded-xl bg-gray-700 border-white">
+			<p class="text-center">Sponsorship agreement</p>
+		</a>
+		<a
+			class="w-40 p-4 bg-gray-700 border rounded-xl border-white"
+			href={SampleExclusiveNIL}
+			target="_blank"
+		>
 			<img class="mb-5 w-[80%] mx-auto" src="https://shmul.dev/assets/contract.png" />
-		</div>
+			<p class="text-center">Exclusive NIL</p>
+		</a>
+		<a
+			class="w-40 p-4 bg-gray-700 border rounded-xl border-white"
+			href={SampleNonExclusiveNIL}
+			target="_blank"
+		>
+			<img class="mb-5 w-[80%] mx-auto" src="https://shmul.dev/assets/contract.png" />
+			<p class="text-center">Non Exclusive NIL</p>
+		</a>
 	</div>
+	<h1 class="text-center font-extrabold mt-10 text-4xl">Athlete Contact Info</h1>
+	<div
+		class="w-[70%] md:w-[50%] flex flex-col sm:flex-row justify-around space-y-5 sm:space-y-0 my-10 mx-auto items-center"
+	>
+		<p class="p-5 border border-white text-lg bg-gray-700 rounded-full">
+			{athlete.email}
+		</p>
+		<p class="p-5 border border-white text-lg bg-gray-700 rounded-full">
+			{athlete.profile.phoneNumber}
+		</p>
+	</div>
+	<h1 class="text-center font-extrabold my-10 text-4xl">Upload finalized contract</h1>
 	<FileDrop
 		accept=".pdf"
 		on:filedrop={(e) => {

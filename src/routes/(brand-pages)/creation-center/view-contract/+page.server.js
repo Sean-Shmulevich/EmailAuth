@@ -21,7 +21,11 @@ export const load = async ({ params, locals, url }) => {
 					userId: athleteId
 				},
 				include: {
-					user: true
+					user: {
+						include: {
+							profile: true // Include the profile
+						}
+					}
 				}
 			}
 		}

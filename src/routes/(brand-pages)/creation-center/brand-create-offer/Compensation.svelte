@@ -83,14 +83,6 @@
 		class="text-gray-300 text-sm font-bold text-left w-fit sm:mr-5 whitespace-nowrap"
 		for="estimated-payment">Custom Payment</label
 	>
-	<input
-		id="estimated-payment"
-		name="estimated-payment"
-		type="text"
-		bind:value={customPay}
-		class="shadow p-2 appearance-none border rounded m-2 w-3/4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-		placeholder="Estimated Pay or Range"
-	/>
 {/if}
 
 <!-- Hidden Input -->

@@ -22,7 +22,7 @@ async function getApprovedBrands() {
 	const users = await prismaClient.authUser.findMany({
 		where: {
 			is_admin: false,
-			is_brand: false,
+			is_brand: true,
 			email_verified: true,
 			admin_verified: true
 		}

@@ -121,7 +121,7 @@
 	</div>
 	<h1 class="text-center font-extrabold mt-10 text-4xl">Athlete Contact Info</h1>
 	<div
-		class="w-[70%] md:w-[50%] flex flex-col sm:flex-row justify-around space-y-5 sm:space-y-0 my-10 mx-auto items-center"
+		class="w-[80%] md:w-[60%] flex flex-col sm:flex-row justify-between space-y-5 sm:space-y-0 my-10 mx-auto items-center"
 	>
 		<p class="p-5 border border-white text-lg bg-gray-700 rounded-full">
 			{athlete.email}
@@ -129,6 +129,12 @@
 		<p class="p-5 border border-white text-lg bg-gray-700 rounded-full">
 			{athlete.profile.phoneNumber}
 		</p>
+		<a
+			href="/profile/{athlete.id}"
+			class="p-5 border border-white text-lg bg-gray-700 rounded-full"
+		>
+			View Profile
+		</a>
 	</div>
 	<h1 class="text-center font-extrabold my-10 text-4xl">Upload finalized contract</h1>
 	<FileDrop

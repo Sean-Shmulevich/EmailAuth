@@ -101,11 +101,22 @@
 		>
 	</div>
 	{#each interestedBrands as currDeal, i}
-		{#if i === ongoingLength}
-			<h2 class="font-extrabold text-center text-3xl mb-2 text-white">
-				Contract Finalized awating payment
-			</h2>
-			<hr />
+		{#if activeButton === 'ongoing'}
+			{#if i === 0 && ongoingDeals.length === 0}
+				<h2 class="font-extrabold text-center text-3xl mt-5 mb-2 text-white">
+					Pending contract negotiation
+				</h2>
+				<h2 class="text-center text-3xl mt-5 mb-2 text-red-500">Empty</h2>
+			{/if}
+			{#if i === ongoingLength}
+				<h2 class="font-extrabold text-center text-3xl mt-5 mb-2 text-white">
+					Contract Finalized awating payment
+				</h2>
+				<hr class="mb-10" />
+				{#if contractFinalized.length === 0}
+					<h2 class="text-center text-3xl mt-5 mb-2 text-red-500">Empty</h2>
+				{/if}
+			{/if}
 		{/if}
 		<div class="w-fit mx-auto bg-gray-800 rounded-xl mb-5 p-5">
 			<h2 class="text-center text-3xl mb-2 text-white">{currDeal.title}</h2>

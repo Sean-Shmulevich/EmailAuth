@@ -415,7 +415,7 @@
 				class="text-[15px] hidden md:block text-right text-gray-500"
 				style="transform: translateY(9px)"
 			>
-				click more info >
+				click for more info >
 			</p>
 			<p
 				class="text-[15px] lg:hidden md:hidden text-right text-gray-500"

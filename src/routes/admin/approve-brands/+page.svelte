@@ -8,7 +8,7 @@
 	// console.log(data.allBrands);
 </script>
 
-<div class="bg-white rounded-xl mx-auto max-w-[90%] px-10 pb-10 w-[85%] mb-12">
+<div class="bg-white rounded-xl mt-10 mx-auto max-w-[90%] px-10 pb-10 w-[85%] mb-12">
 	<h1 class="text-center text-6xl">Admin approve brands</h1>
 
 	<div class="mt-10">

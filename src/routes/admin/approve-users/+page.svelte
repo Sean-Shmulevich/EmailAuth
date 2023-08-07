@@ -7,7 +7,7 @@
 	export let data;
 </script>
 
-<div class="bg-white rounded-xl mx-auto -mt-14 max-w-[90%] px-10 pb-10 w-[85%] mb-12">
+<div class="bg-white rounded-xl mx-auto mt-10 max-w-[90%] px-10 pb-10 w-[85%] mb-12">
 	<h1 class="text-center pt-10 text-6xl">Admin approve users</h1>
 
 	<div class="mt-10">

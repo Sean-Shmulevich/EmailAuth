@@ -10,8 +10,8 @@
 <div class="rounded-xl bg-white px-10 pb-10 mx-6 pt-0 -mt-10 max-w-[800px] mx-auto">
 	<h1 class="pt-10">Email verification</h1>
 	<p>Please check your inbox ({data.user.email}) for a verification email</p>
-	<p>Be sure to check your spam if you do not receive the email</p>
-	<h2>Resend verification email</h2>
+	<p class="text-red-500">Be sure to check your spam if you do not receive the email</p>
+	<h2 class="mt-5">Resend verification email</h2>
 	<form action="?/sendEmail" method="post" use:enhance>
 		<input type="submit" value="Resend email" />
 	</form>

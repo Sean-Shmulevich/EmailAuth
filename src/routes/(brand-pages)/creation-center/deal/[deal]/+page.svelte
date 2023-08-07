@@ -2,6 +2,7 @@
 	export let data;
 	export let form;
 	import { enhance } from '$app/forms';
+	import { goto } from '$app/navigation';
 	// console.log(data.userDeals);
 
 	let currDeal = data.deal;
@@ -135,13 +136,13 @@
 					<h2 class="text-xl font-bold mb-2">{user.name}</h2>
 					<a class="text-blue-500 underline" href="/user-profile/{user.id}">profile link</a>
 				</div>
-				<form class="" method="post" action="?/verify" use:enhance>
-					<input id="email" name="email" hidden value={user.email} />
 
-					<button type="submit" class="p-2 bg-blue-500 text-white rounded"
-						>View/Edit deal contract</button
-					>
-				</form>
+				<button
+					on:click={() => {
+						goto(`/creation-center/view-contract?deal=${currDeal.id}&user=${user.id}`);
+					}}
+					class="p-2 bg-blue-500 text-white rounded">View/Edit deal contract</button
+				>
 			</div>
 		{:else}
 			<p class="mx-auto text-center text-2xl my-10 text-red-500">No approved users</p>

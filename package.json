@@ -50,6 +50,7 @@
 		"bcryptjs": "^2.4.3",
 		"date-picker-svelte": "^2.6.0",
 		"filedrop-svelte": "^0.1.2",
+		"filesize": "^10.0.8",
 		"flowbite-svelte": "^0.39.2",
 		"framework7-svelte": "^8.2.0",
 		"lucia-auth": "^1.0.0",

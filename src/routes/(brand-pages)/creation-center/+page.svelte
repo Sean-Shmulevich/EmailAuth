@@ -192,12 +192,24 @@
 
 						<p class="mt-5 underline">Compensation</p>
 						{#if JSON.parse(deal.estimatedPayment)['pay'] === 'Both'}
-							<p>Product: {JSON.parse(deal.estimatedPayment).product}</p>
-							<p>Money: {JSON.parse(deal.estimatedPayment).compSelected}</p>
+							{#if JSON.parse(deal.estimatedPayment).product !== ''}
+								<p>Product: {JSON.parse(deal.estimatedPayment).product}</p>
+							{/if}
+							{#if JSON.parse(deal.estimatedPayment).compSelected !== 'Custom'}
+								<p>Compensation: {JSON.parse(deal.estimatedPayment).compSelected}</p>
+							{:else}
+								<p>Compensation: {JSON.parse(deal.estimatedPayment).customPay}</p>
+							{/if}
 						{:else if JSON.parse(deal.estimatedPayment)['pay'] === 'Money'}
-							<p>Money: {JSON.parse(deal.estimatedPayment).compSelected}</p>
+							{#if JSON.parse(deal.estimatedPayment).compSelected !== 'Custom'}
+								<p>Compensation: {JSON.parse(deal.estimatedPayment).compSelected}</p>
+							{:else}
+								<p>Compensation: {JSON.parse(deal.estimatedPayment).customPay}</p>
+							{/if}
 						{:else if JSON.parse(deal.estimatedPayment)['pay'] === 'Product'}
-							<p>Product {JSON.parse(deal.estimatedPayment).product}</p>
+							{#if JSON.parse(deal.estimatedPayment).product !== ''}
+								<p>Product: {JSON.parse(deal.estimatedPayment).product}</p>
+							{/if}
 						{/if}
 						<div class="text-sm text-white mt-5">Athletes: {deal.athleteCount}</div>
 						<div class="flex items-center">

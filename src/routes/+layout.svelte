@@ -115,6 +115,9 @@
 							class="hover:bg-gray-600 text-center"
 							href="/brand-edit-profile/{data.user.userId}">Edit Profile</DropdownItem
 						>
+						<DropdownItem class="hover:bg-gray-600 text-center" href="/creation-center-clone"
+							>Creation Center</DropdownItem
+						>
 						<DropdownItem
 							class=" text-center hover:bg-blue-500 bg-blue-500"
 							target="_blank"

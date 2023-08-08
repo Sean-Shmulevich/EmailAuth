@@ -247,6 +247,17 @@
 				>
 					<img class="w-10" alt="delete deal" src="https://shmul.dev/assets/trash.png" />
 				</button>
+				<button
+					on:click|preventDefault={() => {
+						showModal = true;
+						nah = false;
+						deleteName = deal.title;
+						deleteId = deal.id;
+					}}
+					class="ml-auto -mt-14 mr-0 w-fit"
+				>
+					<img class="w-10" alt="delete deal" src="https://shmul.dev/assets/trash.png" />
+				</button>
 			{/if}
 		</div>
 	{:else}

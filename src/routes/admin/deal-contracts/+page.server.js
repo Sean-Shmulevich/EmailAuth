@@ -43,3 +43,11 @@ export const load = async ({ params, locals }) => {
 		deal: dealsWithContracts
 	};
 };
+export const actions = {
+	logout: async ({ locals }) => {
+		const session = await locals.auth.validate();
+		if (!session) return null;
+		await auth.invalidateSession(session.sessionId);
+		locals.auth.setSession(null);
+	}
+};

@@ -129,9 +129,10 @@
     </div> -->
 			</div>
 			{#each currDeal.userDealStatus as contract}
-				<div class="flex flex-row justify-between items-center">
+				<div class="flex flex-col space-y-5 sm:flex-row justify-between items-center">
 					<a
 						href="/api/s3object/{contract.contract.id}"
+						target="_blank"
 						class="p-3 my-5 text-xl text-white rounded-full bg-gray-600"
 					>
 						View Uploaded Contract
@@ -150,10 +151,15 @@
 							User phone: {contract.user.profile.phoneNumber}
 						</p>
 					{/if}
+					{#if contract.user.profile.venmo}
+						<p class="p-3 w-fit rounded-full bg-gray-600 text-white">
+							User Venmo: {contract.user.profile.venmo}
+						</p>
+					{/if}
 				</div>
 			{/each}
 			<div class="flex flex-row justify-center items-center">
-				<p class="p-3 w-fit rounded-full bg-gray-600 text-white">
+				<p class="p-3 mt-5 w-fit rounded-full bg-gray-600 text-white">
 					Brand email: {currDeal.authUser.email}
 				</p>
 			</div>

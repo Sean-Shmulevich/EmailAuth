@@ -4,6 +4,10 @@ import { fail, redirect } from '@sveltejs/kit';
 import { auth } from '$lib/lucia';
 
 export const load = async ({ params, locals }) => {
+	const { user } = await locals.auth.validateUser();
+	if (!user || !user.isAdmin) {
+		throw redirect(302, '/');
+	}
 	const dealsWithContracts = await prismaClient.deal.findMany({
 		where: {
 			userDealStatus: {

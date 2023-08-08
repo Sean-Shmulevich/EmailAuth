@@ -4,7 +4,7 @@
 
 	export let data;
 	export let form;
-	console.log(data.publishedDeals);
+
 	let publishedDeals = data.publishedDeals;
 	let unpublishedDeals = data.unpublishedDeals;
 	let completedDeals = data.completedDeals;
@@ -151,7 +151,7 @@
 	</div>
 {/if}
 
-<div class="text-black">
+<div class="text-black min-h-[90vh]">
 	<div class="flex flex-row -mt-5 w-[80%] lg:w-[40%] text-white text-center justify-center mx-auto">
 		<button
 			on:click|preventDefault={() => {

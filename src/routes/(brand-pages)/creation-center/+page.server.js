@@ -76,6 +76,23 @@ export const actions = {
 			showModal: false
 		};
 	},
+	endDeal: async ({ request, params, locals }) => {
+		//TODO security  check
+		const { user } = await locals.auth.validateUser();
+		const form = await request.formData();
+		const dealId = form.get('deal-id')?.toString() ?? '';
+		const updatedDeal = await prismaClient.deal.update({
+			where: {
+				id: dealId // replace dealId with the specific ID of the deal you want to update
+			},
+			data: {
+				active: 'completed' // replace "newStatus" with the desired status value
+			}
+		});
+		return {
+			showModalComplete: false
+		};
+	},
 	logout: async ({ locals }) => {
 		const session = await locals.auth.validate();
 		if (!session) return null;

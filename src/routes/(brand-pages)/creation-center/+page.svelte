@@ -11,12 +11,19 @@
 	let currentDealList = publishedDeals;
 	let activeButton = 'published';
 	let showModal = false;
+	let showModalComplete = false;
 	let loading = false;
 	let nah = false;
 	$: {
 		// console.log(form);
 		if (form?.showModal === false) {
 			showModal = false;
+			loading = false;
+			deleteId = '';
+			deleteName = '';
+		}
+		if (form?.showModalComplete === false) {
+			showModalComplete = false;
 			loading = false;
 			deleteId = '';
 			deleteName = '';
@@ -85,6 +92,50 @@
 			<button
 				on:click|preventDefault={() => {
 					showModal = false;
+				}}
+				class="{loading
+					? 'nah'
+					: ''} bg-green-500 mt-auto mb-10 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full"
+				>Cancel</button
+			>
+		</form>
+		{#if loading}
+			<div class="mx-auto">
+				<Jumper size="60" color="#FF3E00" unit="px" duration="6s" />
+			</div>
+		{/if}
+	</div>
+{/if}
+{#if showModalComplete}
+	<div
+		class="p-5 border-4 border-white fixed flex flex-col justify-between left-1/4 w-1/2 bg-gray-800 h-72 rounded-xl"
+	>
+		<p class="text-white text-center text-xl">
+			Are you sure you want to stop showing this offer, pending contracts will not be affected
+		</p>
+		<p class="text-white text-center text-lg">Deal Name: {deleteName}</p>
+		<form class="mx-auto" method="POST" action="?/endDeal" use:enhance>
+			<input type="hidden" name="deal-id" bind:value={deleteId} />
+			<button
+				on:click={() => {
+					loading = true;
+					// nah = true;
+					const deletedDeal =
+						currentDealList.find((deal) => deal.id === deleteId) ||
+						publishedDeals.find((deal) => deal.id === deleteId);
+					currentDealList = currentDealList.filter((deal) => deal.id !== deleteId);
+					publishedDeals = publishedDeals.filter((deal) => deal.id !== deleteId);
+					completedDeals = [...completedDeals, deletedDeal];
+				}}
+				type="submit"
+				class="{loading
+					? 'nah'
+					: ''} bg-green-500 mt-auto mb-10 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full"
+				>End offer</button
+			>
+			<button
+				on:click|preventDefault={() => {
+					showModalComplete = false;
 				}}
 				class="{loading
 					? 'nah'
@@ -227,7 +278,7 @@
 									Finish creating deal
 								{:else if activeButton === 'completed'}
 									View Details
-								{:else}
+								{:else if activeButton === 'published'}
 									See user activity
 								{/if}
 							</button>
@@ -235,17 +286,17 @@
 					</div>
 				</div>
 			</div>
-			{#if activeButton !== 'completed'}
+			{#if activeButton !== 'completed' && activeButton !== 'unpublished'}
 				<button
 					on:click|preventDefault={() => {
-						showModal = true;
+						showModalComplete = true;
 						nah = false;
 						deleteName = deal.title;
 						deleteId = deal.id;
 					}}
-					class="ml-auto -mt-14 mr-0 w-fit"
+					class="bg-yellow-300 text-black p-2 rounded-full mr-auto transform -translate-y-3"
 				>
-					<img class="w-10" alt="delete deal" src="https://shmul.dev/assets/trash.png" />
+					End offer
 				</button>
 				<button
 					on:click|preventDefault={() => {

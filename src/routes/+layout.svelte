@@ -115,6 +115,11 @@
 							class="hover:bg-gray-600 text-center"
 							href="/brand-edit-profile/{data.user.userId}">Edit Profile</DropdownItem
 						>
+						<DropdownItem
+							class=" text-center hover:bg-blue-500 bg-blue-500"
+							target="_blank"
+							href="https://buy.stripe.com/7sI8zt13w9zwclWdQS">Purchase Subscription</DropdownItem
+						>
 						{#if data.msg === 'fully authenticated'}
 							<!-- <DropdownItem  class="hover:bg-gray-600 text-center" href="/brand-create-offer"
 									>Create Deal</DropdownItem

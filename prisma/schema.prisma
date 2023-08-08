@@ -5,19 +5,19 @@ generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
-  provider  = "postgresql"
-  url       = "postgres://Sean-Shmulevich:UXgRDoeaNV96@ep-empty-sea-99486173-pooler.us-east-2.aws.neon.tech/neondb?pgbouncer=true&connect_timeout=10" // uses connection pooling
-  directUrl = "postgres://Sean-Shmulevich:UXgRDoeaNV96@ep-empty-sea-99486173.us-east-2.aws.neon.tech/neondb?connect_timeout=10"
-  // shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING") // used for migrations
-}
-
 // datasource db {
-//   provider          = "postgresql"
-//   url               = env("POSTGRES_PRISMA_URL") // uses connection pooling
-//   directUrl         = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
-//   shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING") // used for migrations
+//   provider  = "postgresql"
+//   url       = "postgres://Sean-Shmulevich:UXgRDoeaNV96@ep-empty-sea-99486173-pooler.us-east-2.aws.neon.tech/neondb?pgbouncer=true&connect_timeout=10" // uses connection pooling
+//   directUrl = "postgres://Sean-Shmulevich:UXgRDoeaNV96@ep-empty-sea-99486173.us-east-2.aws.neon.tech/neondb?connect_timeout=10"
+//   // shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING") // used for migrations
 // }
+
+datasource db {
+  provider          = "postgresql"
+  url               = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl         = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING") // used for migrations
+}
 
 model AuthUser {
   id             String           @id @unique

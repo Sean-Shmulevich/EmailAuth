@@ -17,7 +17,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 };
 
 export const actions: Actions = {
-	default: async ({ request, locals }) => {
+	default: async ({ request, locals, url }) => {
 		const formData = await request.formData();
 		const email = (formData.get('email')?.toString() ?? '').toLowerCase();
 		const tos = formData.get('terms-of-service')?.toString();
@@ -71,7 +71,7 @@ export const actions: Actions = {
 				}
 			});
 			const token = await emailVerificationToken.issue(user.userId);
-			await sendEmailVerificationEmailBrand(user.email, token.toString());
+			await sendEmailVerificationEmailBrand(user.email, token.toString(), url.origin);
 		} catch (e) {
 			if (e instanceof LuciaError && e.message === 'AUTH_DUPLICATE_KEY_ID') {
 				return fail(400, {

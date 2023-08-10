@@ -34,7 +34,7 @@
 				<p>To: {email.toAddress}</p>
 				<p class="text-zinc-400">{email.dateSent.toLocaleString()}</p>
 			</div>
-			<a class="mt-2 font-medium hover:underline" href={`/email/${email.emailId}`}>
+			<a class="mt-2 font-medium hover:underline" href={`/admin/email/${email.emailId}`}>
 				{email.subject}
 			</a>
 		</div>

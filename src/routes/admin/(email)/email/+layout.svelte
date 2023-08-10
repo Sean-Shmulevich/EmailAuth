@@ -1,5 +1,4 @@
 <script lang="ts">
-	import '../../../app.css';
 </script>
 
 <!-- default behavior causes weird css issues (in /email/[email_id]) -->
@@ -11,10 +10,7 @@
 		<title>Demo mailbox</title>
 	</head>
 	<body>
-		<header class="fixed top-0 w-full px-4 py-4">
-			<a href="/email" class="text-xl font-semibold">Mailbox</a>
-		</header>
-		<main class="mx-auto max-w-sm py-16 px-4">
+		<main class="mx-auto max-w-sm py-16 px-4 bg-white">
 			<slot />
 		</main>
 	</body>

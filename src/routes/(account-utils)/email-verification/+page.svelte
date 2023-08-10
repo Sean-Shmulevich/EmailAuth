@@ -22,28 +22,20 @@
 	let phoneNumber;
 	let showMessage = true;
 	$: {
-		if (form && form.textSent) {
+		if (textMsg) {
 			setTimeout(() => {
 				showMessage = false;
 			}, 10000);
+			showMessage = true;
 		}
 	}
 
 	//The timestamp should set after sending the first email or password request
 	//it is then set to the server
-	onMount(() => {
-		//if there is no timestamp in localStorage.
-		//set a timeStamp of now
-	});
 
-	function getTimeStampText() {
-		if (window !== undefined) {
-			return localStorage.getTimeStampText('sendTimeText');
-		}
-		return '';
-	}
 	//the first time they pick it set a timestamp
 	//send that timestamp to the server
+	let textMsg;
 </script>
 
 <div class="rounded-xl bg-white px-10 pb-10 pt-0 -mt-10 max-w-[800px] mx-auto">
@@ -54,19 +46,52 @@
 	</form>
 	<h2 class="mt-5">Send verification text</h2>
 	<form
-		on:submit={() => {
-			localStorage.setItem('sendTimeText', Date.now().toString());
+		on:submit={async (event) => {
+			let borm = new FormData();
+			const timeStamp = localStorage.getItem('sendTimeText');
+			if (timeStamp) {
+				//Maybe reset the lockconst now = Date.now();
+				const now = Date.now();
+				const elapsedTime = now - parseInt(timeStamp);
+				console.log(elapsedTime);
+
+				if (elapsedTime < 60 * 1000) {
+					borm.append('lock', 'exist');
+				} else {
+					localStorage.removeItem('sendTimeText');
+				}
+			} else {
+				localStorage.setItem('sendTimeText', Date.now().toString());
+			}
+
+			// Append the required fields to the form
+
+			borm.append('phoneNumber', phoneNumber);
+
+			try {
+				// Send the data to the specified endpoint
+				let response = await fetch('?/sendText', {
+					method: 'POST',
+					body: borm
+				});
+
+				// Handle the response if needed (e.g., convert to JSON)
+				let result = await response.json();
+
+				textMsg = JSON.parse(result.data)[1];
+
+				return result;
+			} catch (error) {
+				console.log(error);
+				return false;
+			}
 		}}
-		action="?/sendText"
-		method="post"
-		use:enhance
 	>
-		<input type="hidden" name="lastSentText" value={getTimeStampText()} />
 		<input type="tel" id="phone" name="phone" placeholder="267-321-9999" bind:value={phoneNumber} />
 		<input type="submit" value="Resend text" />
 	</form>
-	{#if form?.textSent && showMessage}
-		<p class="error">{form.textSent}</p>
+	{#if textMsg && showMessage}
+		<p class="error">{textMsg}</p>
 	{/if}
 	<p>Please check your inbox ({data.user.email}) for a verification email</p>
 	<p class="text-red-500">Be sure to check your spam if you do not receive the email</p>

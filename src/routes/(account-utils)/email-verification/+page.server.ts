@@ -46,13 +46,19 @@ export const actions: Actions = {
 	sendText: async ({ locals, url, request }) => {
 		const { user } = await locals.auth.validateUser();
 
-		const phoneNumber = await (await request.formData()).get('phone');
-		const timeStamp = await (await request.formData()).get('lastSentText');
-		console.log(phoneNumber);
+		const formData = await request.formData();
+		const phoneNumber = await formData.get('phoneNumber');
+		const lock = await formData.get('lock');
+		console.log(lock);
 
-		if (!phoneNumber) {
+		if (phoneNumber === 'undefined' || !phoneNumber) {
 			return fail(401, {
 				textSent: 'Please input a valid phone number'
+			});
+		}
+		if (lock === 'exist') {
+			return fail(401, {
+				textSent: 'Please wait 1 minute before resending the text'
 			});
 		}
 		if (!user || user.emailVerified) {
@@ -66,12 +72,12 @@ export const actions: Actions = {
 			if (!user.isBrand) {
 				await post('+1' + phoneNumber, token);
 				return {
-					textSent: 'Text Sent please wait upto a minute'
+					textSent: 'Text Sent please wait up to a minute'
 				};
 			} else {
 				await post('+1' + phoneNumber, token);
 				return {
-					textSent: 'Text Sent please wait upto a minute'
+					textSent: 'Text Sent please wait up to a minute'
 				};
 			}
 		} catch (e) {

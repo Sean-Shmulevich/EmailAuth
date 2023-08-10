@@ -19,8 +19,7 @@ async function getUserProfile(userId) {
 	return profile;
 }
 
-
-
+//Anybody can see user profiles???
 export const load = async ({ params, locals }) => {
 	const { user } = await locals.auth.validateUser();
 
@@ -68,4 +67,3 @@ export const actions = {
 		locals.auth.setSession(null);
 	}
 };
-

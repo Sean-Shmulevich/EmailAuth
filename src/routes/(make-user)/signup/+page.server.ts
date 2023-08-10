@@ -101,10 +101,9 @@ export const actions: Actions = {
 			const session = await auth.createSession(user.userId);
 			locals.auth.setSession(session);
 
-			const token = await emailVerificationToken.issue(user.userId);
-			await sendEmailVerificationEmail(user.email, token.toString(), url.origin);
+			// const token = await emailVerificationToken.issue(user.userId);
+			// await sendEmailVerificationEmail(user.email, token.toString(), url.origin);
 		} catch (e) {
-			console.log(e);
 			if (e instanceof LuciaError && e.message === 'AUTH_DUPLICATE_KEY_ID') {
 				return fail(400, {
 					message: 'Email is already taken',

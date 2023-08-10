@@ -8,7 +8,7 @@
 	import MyRadio from './Radio.svelte';
 	import InputList from './InputList.svelte';
 	import { Wave } from 'svelte-loading-spinners';
-	import { navigating } from '$app/stores';
+	// import { navigating } from '$app/stores';
 	import { enhance } from '$app/forms';
 
 	import Compensation from './Compensation.svelte';
@@ -97,6 +97,7 @@
 	];
 	let formSubmitted = false;
 	// $: {
+	//This code is ran when the brand is editing an offer from their unpublished
 	if (data.deal) {
 		pageNum = 2;
 		let deal = data.deal;
@@ -129,24 +130,6 @@
 		if (deal.sportPreference) {
 			sportPref = deal.sportPreference;
 		}
-		// pay = deal.estimatedPayment;
-		// let goals = deal.goals;
-		// let custGoals = [];
-		// for (let i = 0; i < checkboxes.length; i++) {
-		// 	if (goals.includes(checkboxes[i].value)) {
-		// 		checkboxes[i].checked = true;
-		// 	} else {
-		// 		if (goals[i] !== 'Custom goal') {
-		// 			custGoals.push({ id: i, value: goals[i] });
-		// 		}
-		// 	}
-		// }
-		// if (goals.length !== 0) {
-		// 	customGoals = custGoals;
-		// }
-
-		//TODO this code will not work how it is right now!!!!
-		//Responce okay maybe itll work rn
 
 		let del = [];
 		for (let i = 0; i < deal.recommendedDeliverables['set'].length; i++) {
@@ -171,6 +154,8 @@
 	//  Hidden input box unless the user picks custom
 	//this will exeecute when the form is submitted and when the image is changed
 	//(when it is changed on crop not on submit)
+	//TODO this code is braken when you publish deals that were previously unpublished
+	// the issue is that upload is not running !!! for the images and also the sport pref is undefined in the unbublished uploads
 	$: {
 		if (form) {
 			if (croppedImage !== null) {

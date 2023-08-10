@@ -9,7 +9,7 @@
 	let showTOS = false;
 	let sportPref;
 	$: {
-		if (form && form.sportPref) {
+		if (form && form.sport) {
 			sportPref = form.sport;
 		}
 	}

@@ -1,8 +1,5 @@
 import { prismaClient } from '$lib/db';
-import { Prisma } from '@prisma/client';
-import { fail, redirect } from '@sveltejs/kit';
-import { auth } from '$lib/lucia';
-import { sendEmail } from '$lib/email';
+import { redirect } from '@sveltejs/kit';
 
 export const load = async ({ url, locals }) => {
 	const { user } = await locals.auth.validateUser();
@@ -10,7 +7,6 @@ export const load = async ({ url, locals }) => {
 	if (!user || !user.isBrand || !user.emailVerified || !user.adminVerified) {
 		throw redirect(302, '/');
 	}
-	// console.log('biutch');
 	//this means that the page is being called with and existing pending deal
 	if (url.searchParams.get('dealId')) {
 		const deal = await prismaClient.deal.findFirst({

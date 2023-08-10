@@ -1,3 +1,4 @@
+//TODO get rid of this file
 export const createImage = (url) =>
 	new Promise((resolve, reject) => {
 		const image = new Image();
@@ -5,7 +6,6 @@ export const createImage = (url) =>
 		image.addEventListener('error', (error) => reject(error));
 		image.setAttribute('crossOrigin', 'anonymous'); // needed to avoid cross-origin issues on CodeSandbox
 		image.src = url;
-		
 	});
 
 export function getRadianAngle(degreeValue) {

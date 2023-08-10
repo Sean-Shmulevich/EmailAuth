@@ -58,7 +58,9 @@
 		"quill-delta": "^5.1.0",
 		"skeleton-elements": "^4.0.1",
 		"svelte-easy-crop": "^2.0.1",
+		"svelte-tel-input": "^3.3.1",
 		"three": "^0.154.0",
+		"twilio": "^4.14.1",
 		"yarn": "^1.22.19"
 	}
 }

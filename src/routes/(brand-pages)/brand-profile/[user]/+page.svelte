@@ -1,8 +1,6 @@
 <script>
 	//TODO-animation
-	// @ts-nocheck
 
-	import { fade } from 'svelte/transition';
 	import { onMount } from 'svelte';
 
 	let Quill;

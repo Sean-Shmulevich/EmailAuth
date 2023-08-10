@@ -30,6 +30,7 @@ export const GET: RequestHandler = async ({ params, locals }) => {
 		//Token verify, what does this return ?
 		//Does this consume the token?
 		const token = await emailVerificationToken.validate(tokenParams);
+		console.log(token);
 
 		await auth.invalidateAllUserSessions(token.userId);
 		await auth.updateUserAttributes(token.userId, {

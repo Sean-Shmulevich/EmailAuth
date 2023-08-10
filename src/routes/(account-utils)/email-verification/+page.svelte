@@ -6,6 +6,7 @@
 	export let data: PageData;
 	export let form: ActionData;
 	let currToken;
+	let code;
 	//TODO implement wait time for sending user email
 	// Implementation considerations
 	// Stores || LocalStorage.
@@ -21,12 +22,20 @@
 	//Create A phone number input allow to pick email or text verification
 	let phoneNumber;
 	let showMessage = true;
+	let emailMsg;
+	let message = true;
 	$: {
 		if (textMsg) {
 			setTimeout(() => {
 				showMessage = false;
 			}, 10000);
 			showMessage = true;
+		}
+		if (form && form.emailSent) {
+			setTimeout(() => {
+				message = false;
+			}, 8000);
+			message = true;
 		}
 	}
 
@@ -42,8 +51,14 @@
 	<h1 class="pt-10">Verify Your account</h1>
 	<h2 class="mt-5">Send verification email</h2>
 	<form action="?/sendEmail" method="post" use:enhance>
-		<input type="submit" value="Resend email" />
+		<input type="submit" value="Send email" />
+		{#if form?.emailSent && message}
+			<p class="error">{form.emailSent}</p>
+			<p>Please check your inbox ({data.user.email}) for a verification email</p>
+			<p class="text-red-500">Be sure to check your spam if you do not receive the email</p>
+		{/if}
 	</form>
+	<h1 class="text-center">OR</h1>
 	<h2 class="mt-5">Send verification text</h2>
 	<form
 		on:submit={async (event) => {
@@ -88,13 +103,13 @@
 		}}
 	>
 		<input type="tel" id="phone" name="phone" placeholder="267-321-9999" bind:value={phoneNumber} />
-		<input type="submit" value="Resend text" />
+		<input type="submit" value="Send verification text" />
 	</form>
 	{#if textMsg && showMessage}
 		<p class="error">{textMsg}</p>
 	{/if}
-	<p>Please check your inbox ({data.user.email}) for a verification email</p>
-	<p class="text-red-500">Be sure to check your spam if you do not receive the email</p>
+	<input type="text" bind:value={code} />
+	<a href="/email-verification/{code}">Submit SMS verification code</a>
 
 	{#if form?.message}
 		<p class="error">{form.message}</p>

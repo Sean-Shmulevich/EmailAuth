@@ -24,7 +24,7 @@ export const auth = lucia({
 export type Auth = typeof auth;
 
 export const emailVerificationToken = idToken(auth, 'email_verification', {
-	length: 8,
+	length: 6,
 	expiresIn: 60 * 60
 });
 

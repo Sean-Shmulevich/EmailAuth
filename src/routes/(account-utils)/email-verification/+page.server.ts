@@ -1,5 +1,5 @@
 import { sendEmailVerificationEmail, sendEmailVerificationEmailBrand } from '$lib/email';
-import { emailVerificationToken } from '$lib/lucia';
+import { auth, emailVerificationToken } from '$lib/lucia';
 import { fail, redirect } from '@sveltejs/kit';
 import { post } from '$lib/text';
 
@@ -20,9 +20,16 @@ export const load: PageServerLoad = async ({ locals }) => {
 };
 
 export const actions: Actions = {
-	sendEmail: async ({ locals, url }) => {
+	sendEmail: async ({ request, locals, url }) => {
 		const { user } = await locals.auth.validateUser();
+		const formData = await request.formData();
+		const lock = await formData.get('lock');
 
+		if (lock === 'exist') {
+			return fail(401, {
+				textSent: 'Please wait 1 minute before resending the text'
+			});
+		}
 		if (!user || user.emailVerified) {
 			return fail(401, {
 				message: 'Unauthorized'
@@ -36,6 +43,9 @@ export const actions: Actions = {
 			} else {
 				await sendEmailVerificationEmailBrand(user.email, token.toString(), url.origin);
 			}
+			return {
+				emailSent: 'Email Sent'
+			};
 		} catch (e) {
 			console.log(e);
 			return fail(500, {
@@ -43,11 +53,35 @@ export const actions: Actions = {
 			});
 		}
 	},
+	validateCode: async ({ locals, url, request }) => {
+		const formData = await request.formData();
+		const tokenData = await formData.get('token');
+		// console.log(params, locals);
+
+		try {
+			//Token verify, what does this return ?
+			//Does this consume the token?
+			const token = await emailVerificationToken.validate(tokenData.toString());
+			console.log(token);
+
+			await auth.invalidateAllUserSessions(token.userId);
+			await auth.updateUserAttributes(token.userId, {
+				email_verified: true
+			});
+			const session = await auth.createSession(token.userId);
+			locals.auth.setSession(session);
+		} catch (e) {
+			console.log(e);
+			return fail(500, { msg: 'Unable to authenticate' });
+		}
+		// TODO!
+		throw redirect(302, '/');
+	},
 	sendText: async ({ locals, url, request }) => {
 		const { user } = await locals.auth.validateUser();
 
 		const formData = await request.formData();
-		const phoneNumber = await formData.get('phoneNumber');
+		let phoneNumber = await formData.get('phoneNumber').toString();
 		const lock = await formData.get('lock');
 		console.log(lock);
 
@@ -56,6 +90,8 @@ export const actions: Actions = {
 				textSent: 'Please input a valid phone number'
 			});
 		}
+		phoneNumber = phoneNumber.replace(/-/g, '');
+		console.log(phoneNumber);
 		if (lock === 'exist') {
 			return fail(401, {
 				textSent: 'Please wait 1 minute before resending the text'

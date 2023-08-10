@@ -40,7 +40,7 @@ export const GET: RequestHandler = async ({ params, locals }) => {
 		locals.auth.setSession(session);
 	} catch (e) {
 		console.log(e);
-		return fail(500, { msg: 'Unable to authenticate' });
+		// return fail(500, { msg: 'Unable to authenticate' });
 	}
 	// TODO!
 	throw redirect(302, '/');

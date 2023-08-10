@@ -57,6 +57,7 @@ export const actions: Actions = {
 		const formData = await request.formData();
 		const tokenData = await formData.get('token');
 		// console.log(params, locals);
+		console.log(tokenData);
 
 		try {
 			//Token verify, what does this return ?
@@ -72,7 +73,7 @@ export const actions: Actions = {
 			locals.auth.setSession(session);
 		} catch (e) {
 			console.log(e);
-			return fail(500, { msg: 'Unable to authenticate' });
+			return fail(401, { message: 'Invalid Code' });
 		}
 		// TODO!
 		throw redirect(302, '/');
@@ -99,7 +100,7 @@ export const actions: Actions = {
 		}
 		if (!user || user.emailVerified) {
 			return fail(401, {
-				message: 'Unauthorized'
+				message: 'Expired session try again'
 			});
 		}
 		try {
@@ -119,7 +120,7 @@ export const actions: Actions = {
 		} catch (e) {
 			console.log(e);
 			return fail(500, {
-				message: 'An unknown error occurred'
+				message: 'Expired session try again'
 			});
 		}
 	}

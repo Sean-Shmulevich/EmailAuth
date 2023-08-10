@@ -108,8 +108,14 @@
 	{#if textMsg && showMessage}
 		<p class="error">{textMsg}</p>
 	{/if}
-	<input type="text" bind:value={code} />
-	<a href="/email-verification/{code}">Submit SMS verification code</a>
+	<form action="?/validateCode" method="post" use:enhance>
+		<input type="text" name="token" />
+		<input type="submit" value="Input SMS verification code" />
+		<p>Case sensitive</p>
+		{#if form?.emailSent && message}
+			<p class="error">{form.emailSent}</p>
+		{/if}
+	</form>
 
 	{#if form?.message}
 		<p class="error">{form.message}</p>

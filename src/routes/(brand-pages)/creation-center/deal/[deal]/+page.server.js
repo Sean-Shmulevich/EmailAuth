@@ -25,7 +25,11 @@ export const load = async ({ params, locals }) => {
 			status: 'pending'
 		},
 		include: {
-			user: true
+			user: {
+				include: {
+					profile: true
+				}
+			}
 		}
 	});
 	const confirmedUserData = await prismaClient.userDealStatus.findMany({

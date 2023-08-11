@@ -8,7 +8,7 @@ export async function post(phoneNumber, code) {
 	console.log('INPOST ' + phoneNumber);
 	try {
 		const message = await client.messages.create({
-			body: `DapUp.co verification code ${code}`,
+			body: `https://dapup.co verification code ${code}`,
 			from: '+14705708645',
 			to: phoneNumber
 		});

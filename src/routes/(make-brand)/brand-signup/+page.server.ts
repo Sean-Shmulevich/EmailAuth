@@ -70,8 +70,8 @@ export const actions: Actions = {
 					bio: ''
 				}
 			});
-			const token = await emailVerificationToken.issue(user.userId);
-			await sendEmailVerificationEmailBrand(user.email, token.toString(), url.origin);
+			// const token = await emailVerificationToken.issue(user.userId);
+			// await sendEmailVerificationEmailBrand(user.email, token.toString(), url.origin);
 		} catch (e) {
 			if (e instanceof LuciaError && e.message === 'AUTH_DUPLICATE_KEY_ID') {
 				return fail(400, {

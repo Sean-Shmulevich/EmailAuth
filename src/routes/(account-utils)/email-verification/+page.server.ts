@@ -84,7 +84,6 @@ export const actions: Actions = {
 		const formData = await request.formData();
 		let phoneNumber = await formData.get('phoneNumber').toString();
 		const lock = await formData.get('lock');
-		console.log(lock);
 
 		if (phoneNumber === 'undefined' || !phoneNumber) {
 			return fail(401, {

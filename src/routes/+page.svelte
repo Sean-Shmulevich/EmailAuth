@@ -397,7 +397,7 @@
 		>
 			{#if showImage0}
 				<div class=" lg:mx-[40px] flex justify-center">
-					<img src="https://shmul.dev/assets/quintin.png" alt="founder quintin owens" />
+					<img src="https://shmul.dev/assets/quintin.jpg" alt="founder quintin owens" />
 				</div>
 			{:else}
 				<p class="text-left relative h-full my-[102px] text-gray-200">

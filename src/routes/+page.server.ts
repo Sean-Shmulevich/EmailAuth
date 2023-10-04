@@ -47,7 +47,7 @@ export const actions: Actions = {
 		await auth.invalidateSession(session.sessionId);
 		locals.auth.setSession(null);
 	},
-	contactForm: async ({ request }) => {
+	contactForm: async ({ request, url }) => {
 		const formData = await request.formData();
 		console.log(JSON.stringify(formData));
 		const email = (formData.get('email')?.toString() ?? '').toLowerCase();

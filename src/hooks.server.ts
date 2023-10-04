@@ -5,17 +5,17 @@ import middleware from './middleware';
 
 export const handle: Handle = async ({ event, resolve }) => {
 	event.locals.auth = auth.handleRequest(event);
-	const checkRate = await middleware(event.request);
+	// const checkRate = await middleware(event.request);
 	const response = await resolve(event);
 
-	if (checkRate === "rate-exceeded") {
+	// if (checkRate === "rate-exceeded") {
 
-		throw error(
-			429,
-			`Too many requests. Please try again in ${5} seconds.`
-		);
-		return
-	}
+	// 	throw error(
+	// 		429,
+	// 		`Too many requests. Please try again in ${5} seconds.`
+	// 	);
+	// 	return
+	// }
 
 
 	return response;

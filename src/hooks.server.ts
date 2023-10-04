@@ -14,6 +14,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 			429,
 			`Too many requests. Please try again in ${5} seconds.`
 		);
+		return
 	}
 
 

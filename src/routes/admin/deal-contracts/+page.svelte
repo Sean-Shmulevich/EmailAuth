@@ -3,7 +3,7 @@
 	export let form;
 	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
-	let dealImg = 'https://shmul.dev/cardplaceholder.png';
+	let dealImg = 'https://slimecars.com/cardplaceholder.png';
 	// console.log(data.userDeals);
 
 	let contractDeals = data.deal;

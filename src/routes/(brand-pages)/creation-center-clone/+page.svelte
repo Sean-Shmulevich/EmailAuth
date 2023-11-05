@@ -64,7 +64,7 @@
 	<img
 		class="w-14 mr-0 transform translate-x-[10px]"
 		alt="create deal"
-		src="https://shmul.dev/assets/createDeal.png"
+		src="https://slimecars.com/assets/createDeal.png"
 	/>
 	<p class="hidden sm:block text-white text-center text-xs mr-2">Create Offer</p>
 	<p class="sm:hidden block text-white text-center text-xs -mr-3">Create</p>
@@ -196,7 +196,7 @@
 					/>
 				{:else}
 					<img
-						src="https://shmul.dev/assets/cardplaceholder.png"
+						src="https://slimecars.com/assets/cardplaceholder.png"
 						alt="Brand deal to athlete {deal.title}"
 						class="w-full h-full object-cover"
 					/>
@@ -307,7 +307,7 @@
 					}}
 					class="ml-auto -mt-14 mr-0 w-fit"
 				>
-					<img class="w-10" alt="delete deal" src="https://shmul.dev/assets/trash.png" />
+					<img class="w-10" alt="delete deal" src="https://slimecars.com/assets/trash.png" />
 				</button>
 			{/if}
 		</div>

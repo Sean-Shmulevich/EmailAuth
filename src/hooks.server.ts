@@ -1,5 +1,5 @@
 import { auth } from '$lib/lucia';
-import { error, type Handle, type HandleFetch } from '@sveltejs/kit';
+import type { Handle } from '@sveltejs/kit';
 import middleware from './middleware';
 
 

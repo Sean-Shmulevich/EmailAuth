@@ -42,7 +42,7 @@
 	if (currDeal.location === '') {
 		currDeal.location = 'Virtual';
 	}
-	let dealImg = 'https://shmul.dev/cardplaceholder.png';
+	let dealImg = 'https://slimecars.com/cardplaceholder.png';
 	if (data.dealImage) {
 		dealImg = `/api/s3object/${data.dealImage.id}`;
 	}

@@ -4,7 +4,7 @@ import { prismaClient } from '$lib/db';
 export const load: PageServerLoad = async ({ locals, url }) => {
 	const { user } = await locals.auth.validateUser();
 	//default profile picture
-	let profilePicture = `https://shmul.dev/assets/dapupprofile.png`;
+	let profilePicture = `https://slimecars.com/assets/dapupprofile.png`;
 
 	//if there is no user return nothing to the frontend
 	//if there is a user that is email verified but not admin verified return the user the menu will allow uers to edit profile and logout only

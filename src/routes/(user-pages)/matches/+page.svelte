@@ -36,7 +36,7 @@
 		}
 	}
 
-	let defaultImg = 'https://shmul.dev/cardplaceholder.png';
+	let defaultImg = 'https://slimecars.com/cardplaceholder.png';
 </script>
 
 {#if loading}

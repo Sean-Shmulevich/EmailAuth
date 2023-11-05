@@ -5,7 +5,7 @@
 	let user1;
 	let user2;
 	let suggestedUsers;
-	let defaultImage = 'https://shmul.dev/assets/dapupprofile.png';
+	let defaultImage = 'https://slimecars.com/assets/dapupprofile.png';
 
 	let s3 = '/api/s3object';
 	import { onMount } from 'svelte';
@@ -59,13 +59,13 @@
 	}
 	// console.log(images);
 	let iconLinks = {
-		Instagram: 'https://shmul.dev/assets/instagram.png',
-		Twitter: 'https://shmul.dev/assets/twitter.png',
-		Facebook: 'https://shmul.dev/assets/facebook.png',
-		'Tik Tok': 'https://shmul.dev/assets/tiktok.png',
-		Snapchat: 'https://shmul.dev/assets/snapchat.png',
-		Linkedin: 'https://shmul.dev/assets/linkedin.png',
-		Website: 'https://shmul.dev/assets/website.png'
+		Instagram: 'https://slimecars.com/assets/instagram.png',
+		Twitter: 'https://slimecars.com/assets/twitter.png',
+		Facebook: 'https://slimecars.com/assets/facebook.png',
+		'Tik Tok': 'https://slimecars.com/assets/tiktok.png',
+		Snapchat: 'https://slimecars.com/assets/snapchat.png',
+		Linkedin: 'https://slimecars.com/assets/linkedin.png',
+		Website: 'https://slimecars.com/assets/website.png'
 	};
 	// console.log(users);
 	// let update = false;

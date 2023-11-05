@@ -134,7 +134,7 @@
 						{:else}
 							<img
 								class="bg-gray-900 object-contain"
-								src="https://shmul.dev/assets/cardplaceholder.png"
+								src="https://slimecars.com/assets/cardplaceholder.png"
 								alt="Profile"
 							/>
 						{/if}

@@ -36,7 +36,7 @@
 {/if}
 
 <section
-	class="img-section -mb-[150px] sm:mb-[0px] sm:h-[90vh] sm:bg-[url('https://shmul.dev/assets/dapupmainimg.png')] text-white body-font mx-0"
+	class="img-section -mb-[150px] sm:mb-[0px] sm:h-[90vh] sm:bg-[url('https://slimecars.com/assets/dapupmainimg.png')] text-white body-font mx-0"
 	style="height:95vh; background-size:cover; background-position: center center; "
 >
 	<div class="container mx-auto flex px-5 py-24 items-center justify-center">
@@ -51,7 +51,7 @@
 	</div>
 	<img
 		class="sm:hidden block mx-auto -mt-[65px] -mb-2"
-		src="https://shmul.dev/assets/dapupmainimg.png"
+		src="https://slimecars.com/assets/dapupmainimg.png"
 	/>
 	<a
 		href="#learn-more"
@@ -84,7 +84,7 @@
 			<div class="p-4 md:w-1/4 sm:w-1/2 w-full">
 				<div class="border-2 border-gray-200 px-4 py-6 rounded-lg">
 					<img
-						src="https://shmul.dev/assets/athleteEmpowerment.png"
+						src="https://slimecars.com/assets/athleteEmpowerment.png"
 						alt="athlete empowerment"
 						class="w-14 white-icon h-14 mb-3 inline-block"
 					/>
@@ -97,7 +97,7 @@
 			<div class="p-4 md:w-1/4 sm:w-1/2 w-full">
 				<div class="border-2 border-gray-200 px-4 py-6 rounded-lg">
 					<img
-						src="https://shmul.dev/assets/brandAlignment.png"
+						src="https://slimecars.com/assets/brandAlignment.png"
 						alt="brand alignment"
 						class="w-14 white-icon h-14 mb-3 inline-block"
 					/>
@@ -111,7 +111,7 @@
 			<div class="p-4 md:w-1/4 sm:w-1/2 w-full">
 				<div class="border-2 border-gray-200 px-4 py-6 rounded-lg">
 					<img
-						src="https://shmul.dev/assets/community.png"
+						src="https://slimecars.com/assets/community.png"
 						alt="brand alignment"
 						class="w-14 white-icon h-14 mb-3 inline-block"
 					/>
@@ -124,7 +124,7 @@
 			<div class="p-4 md:w-1/4 sm:w-1/2 w-full">
 				<div class="border-2 border-gray-200 px-4 py-6 rounded-lg">
 					<img
-						src="https://shmul.dev/assets/Data.png"
+						src="https://slimecars.com/assets/Data.png"
 						alt="data"
 						class="w-14 white-icon h-14 mb-3 inline-block"
 					/>
@@ -231,7 +231,7 @@
 						class="flex-shrink-0 w-10 h-10 rounded-full bg-gray-900 border border-white inline-flex items-center justify-center text-white relative z-10"
 					>
 						<img
-							src="https://shmul.dev/assets/customize.png"
+							src="https://slimecars.com/assets/customize.png"
 							alt="launch"
 							class="object-cover w-6 h-6"
 						/>
@@ -254,7 +254,7 @@
 						class="flex-shrink-0 w-10 h-10 rounded-full bg-gray-900 border border-white inline-flex items-center justify-center text-white relative z-10"
 					>
 						<img
-							src="https://shmul.dev/assets/launch.png"
+							src="https://slimecars.com/assets/launch.png"
 							alt="launch"
 							class="object-cover w-7 h-7 transform translate-x-[-1px] translate-y-[1px]"
 						/>
@@ -275,7 +275,7 @@
 						class="flex-shrink-0 w-10 h-10 rounded-full bg-gray-900 border border-white inline-flex items-center justify-center text-white relative z-10"
 					>
 						<img
-							src="https://shmul.dev/assets/match.png"
+							src="https://slimecars.com/assets/match.png"
 							alt="launch"
 							class="object-cover w-7 h-7"
 						/>
@@ -296,7 +296,7 @@
 						class="flex-shrink-0 w-10 h-10 rounded-full bg-gray-900 border border-white inline-flex items-center justify-center text-white relative z-10"
 					>
 						<img
-							src="https://shmul.dev/assets/contract.png"
+							src="https://slimecars.com/assets/contract.png"
 							alt="launch"
 							class="object-cover w-6 h-6 transform translate-x-[3px]"
 						/>
@@ -336,7 +336,7 @@
 			<img
 				class="lg:w-3/5 md:w-1/2 object-contain object-center rounded-lg md:mt-0 mt-12 -mb-20"
 				style="transform: scale(0.8) translateY(-90px)"
-				src="https://shmul.dev/assets/selfie.png"
+				src="https://slimecars.com/assets/selfie.png"
 				alt="step"
 			/>
 		</div>
@@ -357,7 +357,7 @@
 		>
 			{#if showImage}
 				<div class="lg:mx-[40px] flex justify-center">
-					<img src="https://shmul.dev/assets/ayden.png" alt="founder Ayden Owens-Delerme" />
+					<img src="https://slimecars.com/assets/ayden.png" alt="founder Ayden Owens-Delerme" />
 				</div>
 			{:else}
 				<p class="relative text-left my-[20px] text-gray-200">
@@ -397,7 +397,7 @@
 		>
 			{#if showImage0}
 				<div class=" lg:mx-[40px] flex justify-center">
-					<img src="https://shmul.dev/assets/quintin.jpg" alt="founder quintin owens" />
+					<img src="https://slimecars.com/assets/quintin.jpg" alt="founder quintin owens" />
 				</div>
 			{:else}
 				<p class="text-left relative h-full my-[102px] text-gray-200">
@@ -428,7 +428,7 @@
 			class="p-2 mb-5 mx-5 text-center bg-transparent rounded-xl border border-white w-full md:w-1/3"
 		>
 			<div class="lg:mx-[80px] flex justify-center">
-				<img class="" src="https://shmul.dev/assets/quintin.jpg" alt="chief sales officer" />
+				<img class="" src="https://slimecars.com/assets/quintin.jpg" alt="chief sales officer" />
 			</div>
 			<p class="text-lg text-white">Quintin Owens</p>
 			<p class="text-sm text-white">Chief Sales Officer<br /><br /></p>
@@ -499,7 +499,11 @@
 			<a
 				class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900"
 			>
-				<img src="https://shmul.dev/assets/dapup.png" alt="logo" class="lg:-ml-12 w-[180px] p2" />
+				<img
+					src="https://slimecars.com/assets/dapup.png"
+					alt="logo"
+					class="lg:-ml-12 w-[180px] p2"
+				/>
 				<!-- <span class="ml-3 text-xl">Creative Solutions</span> -->
 			</a>
 			<p class="text-sm text-gray-500 sm:ml-6 sm:mt-0 mt-4" />

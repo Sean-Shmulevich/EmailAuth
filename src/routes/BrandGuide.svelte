@@ -2,7 +2,7 @@
 	let links = [];
 
 	for (let i = 1; i <= 17; i++) {
-		links.push(`https://shmul.dev/assets/brandGuide${i}.jpg`);
+		links.push(`https://slimecars.com/assets/brandGuide${i}.jpg`);
 	}
 	const brandGuideSteps = [
 		'Visit [www.dapup.co](http://www.dapup.co), click “Brand Login” in the top right, then “Create an account”. Fill out the required fields, agree to the DapUp terms of service, and click “Continue.”',

@@ -128,7 +128,7 @@
 			href={NILQuickFacts}
 			target="_blank"
 		>
-			<img class="mb-5 w-[10vw] mx-auto" src="https://shmul.dev/assets/contract.png" />
+			<img class="mb-5 w-[10vw] mx-auto" src="https://slimecars.com/assets/contract.png" />
 			<p class="text-center">NIL quick facts</p>
 		</a>
 		<a
@@ -136,7 +136,7 @@
 			href={SponsorshipAgreement}
 			target="_blank"
 		>
-			<img class="mb-5 w-[10vw] mx-auto" src="https://shmul.dev/assets/contract.png" />
+			<img class="mb-5 w-[10vw] mx-auto" src="https://slimecars.com/assets/contract.png" />
 			<p class="text-center">Sponsorship agreement</p>
 		</a>
 		<a
@@ -144,7 +144,7 @@
 			href={SampleExclusiveNIL}
 			target="_blank"
 		>
-			<img class="mb-5 w-[10vw] mx-auto" src="https://shmul.dev/assets/contract.png" />
+			<img class="mb-5 w-[10vw] mx-auto" src="https://slimecars.com/assets/contract.png" />
 			<p class="text-center">Exclusive NIL</p>
 		</a>
 		<a
@@ -152,7 +152,7 @@
 			href={SampleNonExclusiveNIL}
 			target="_blank"
 		>
-			<img class="mb-5 w-[10vw] mx-auto" src="https://shmul.dev/assets/contract.png" />
+			<img class="mb-5 w-[10vw] mx-auto" src="https://slimecars.com/assets/contract.png" />
 			<p class="text-center">Non Exclusive NIL</p>
 		</a>
 	</div>
@@ -224,7 +224,7 @@
 							files = undefined;
 						}}
 					>
-						<img class="w-10 h-10" src="https://shmul.dev/assets/trash.png" />
+						<img class="w-10 h-10" src="https://slimecars.com/assets/trash.png" />
 					</button>
 				{/if}
 			</ul>

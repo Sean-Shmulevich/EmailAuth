@@ -2,7 +2,7 @@
 	let links = [];
 
 	for (let i = 1; i <= 12; i++) {
-		links.push(`https://shmul.dev/assets/athleteGuide${i}.jpeg`);
+		links.push(`https://slimecars.com/assets/athleteGuide${i}.jpeg`);
 	}
 	const athleteGuideSteps = [
 		'Visit www.dapup.co, click “Athlete Login” in the top right, then “Create an account”. Fill out the required fields, agree to the DapUp terms of service, and click “Continue.”',

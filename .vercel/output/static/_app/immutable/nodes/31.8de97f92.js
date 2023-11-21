@@ -1,0 +1,3 @@
+import{S as o,i,s as d,k as l,q as p,l as m,m as h,r as u,h as r,n as x,b as _,E as f,F as n}from"../chunks/index.0a5d0d14.js";function q(c){let t,s;return{c(){t=l("h1"),s=p(`Brand portal is in private access mode, interested brands contact admin@dapup.co in order to
+	request access`),this.h()},l(e){t=m(e,"H1",{class:!0});var a=h(t);s=u(a,`Brand portal is in private access mode, interested brands contact admin@dapup.co in order to
+	request access`),a.forEach(r),this.h()},h(){x(t,"class","text-3xl text-center mt-14 text-red-500")},m(e,a){_(e,t,a),f(t,s)},p:n,i:n,o:n,d(e){e&&r(t)}}}class b extends o{constructor(t){super(),i(this,t,null,q,d,{})}}export{b as component};

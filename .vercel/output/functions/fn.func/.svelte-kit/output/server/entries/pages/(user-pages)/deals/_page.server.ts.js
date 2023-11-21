@@ -1,3 +1,4 @@
+import "../../../../chunks/email.js";
 import { p as prismaClient } from "../../../../chunks/db.js";
 import { a as auth } from "../../../../chunks/lucia.js";
 import { r as redirect } from "../../../../chunks/index.js";

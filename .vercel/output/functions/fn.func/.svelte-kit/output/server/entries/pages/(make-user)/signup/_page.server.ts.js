@@ -1,6 +1,7 @@
 import { e as emailRegex } from "../../../../chunks/form-submission.js";
 import { r as redirect, f as fail } from "../../../../chunks/index.js";
 import { a as auth, L as LuciaError } from "../../../../chunks/lucia.js";
+import "../../../../chunks/email.js";
 import "../../../../chunks/debug.js";
 import { Prisma } from "@prisma/client";
 import { p as prismaClient } from "../../../../chunks/db.js";

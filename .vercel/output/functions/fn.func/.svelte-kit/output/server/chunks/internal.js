@@ -137,7 +137,7 @@ const options = {
   service_worker: false,
   templates: {
     app: ({ head, body, assets: assets2, nonce, env }) => '<!DOCTYPE html>\n<html lang="en">\n\n<head>\n	<meta charset="utf-8" />\n	<link rel="icon" href="' + assets2 + '/favicon.png" />\n	<meta name="viewport" content="width=device-width" />\n	<title>DapUp</title>\n	<script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/2.3.22/rx.all.js"><\/script>\n	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"><\/script>\n	<script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-QueryBuilder/2.7.0/js/query-builder.min.js"><\/script>\n	<script src="https://hammerjs.github.io/dist/hammer.min.js"><\/script>\n	<link rel="apple-touch-icon" media="prefers-color-scheme: light" sizes="180x180"\n		href="' + assets2 + '/favicon_package_light/apple-touch-icon.png">\n	<link rel="icon" media="(prefers-color-scheme: light)" type="image/png" sizes="32x32"\n		href="' + assets2 + '/favicon_package_light/favicon-32x32.png">\n	<link rel="icon" media="(prefers-color-scheme: light)" type="image/png" sizes="16x16"\n		href="' + assets2 + '/favicon_package_light/favicon-16x16.png">\n	<link rel="mask-icon" media="(prefers-color-scheme: light)"\n		href="' + assets2 + '/favicon_package_light/safari-pinned-tab.svg" color="#5bbad5">\n\n	<link rel="apple-touch-icon" sizes="180x180" media="(prefers-color-scheme: dark)"\n		href="' + assets2 + '/favicon_package_dark/apple-touch-icon.png">\n	<link rel="icon" type="image/png" sizes="32x32" media="(prefers-color-scheme: dark)"\n		href="' + assets2 + '/favicon_package_dark/favicon-32x32.png">\n	<link rel="icon" type="image/png" sizes="16x16" media="(prefers-color-scheme: dark)"\n		href="' + assets2 + '/favicon_package_dark/favicon-16x16.png">\n	<link rel="mask-icon" media="(prefers-color-scheme: dark)"\n		href="' + assets2 + '/favicon_package_dark/safari-pinned-tab.svg" color="#5bbad5">\n	' + head + '\n</head>\n\n<body data-sveltekit-preload-data="hover">\n	<div style="display: contents; overflow-y: scroll">' + body + "</div>\n</body>\n\n</html>",
-    error: ({ status, message }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<title>' + message + `</title>
+    error: ({ status, message }) => '<!doctype html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<title>' + message + `</title>
 
 		<style>
 			body {
@@ -146,8 +146,18 @@ const options = {
 				--divider: #ccc;
 				background: var(--bg);
 				color: var(--fg);
-				font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-					Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+				font-family:
+					system-ui,
+					-apple-system,
+					BlinkMacSystemFont,
+					'Segoe UI',
+					Roboto,
+					Oxygen,
+					Ubuntu,
+					Cantarell,
+					'Open Sans',
+					'Helvetica Neue',
+					sans-serif;
 				display: flex;
 				align-items: center;
 				justify-content: center;
@@ -198,7 +208,7 @@ const options = {
 		<div class="error">
 			<span class="status">` + status + '</span>\n			<div class="message">\n				<h1>' + message + "</h1>\n			</div>\n		</div>\n	</body>\n</html>\n"
   },
-  version_hash: "14ld2nz"
+  version_hash: "dtpvmg"
 };
 function get_hooks() {
   return import("./hooks.server.js");

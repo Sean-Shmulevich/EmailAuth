@@ -1,6 +1,6 @@
 function client_method(key) {
   {
-    if (key === "before_navigate" || key === "after_navigate") {
+    if (key === "before_navigate" || key === "after_navigate" || key === "on_navigate") {
       return () => {
       };
     } else {

@@ -401,12 +401,12 @@
 				</div>
 			{:else}
 				<p class="text-left relative h-full my-[102px] text-gray-200">
-					Quintin is an entrepreneur, former athlete, and a sales professional at SAE International.
-					He holds a breadth of experience in understanding the needs of companies worldwide as he
-					ensures they are suited with up-to-date standards for business operation.<br /><br /> As a
-					small business operator and founder of an apparel company, Quintin was drawn to DapUp for the
-					impact it has on helping brands like his reach the right audience. His objective is to promote
-					the growth of businesses at all levels through the DapUp platform.
+					AAAAAA Quintin is an entrepreneur, former athlete, and a sales professional at SAE
+					International. He holds a breadth of experience in understanding the needs of companies
+					worldwide as he ensures they are suited with up-to-date standards for business operation.<br
+					/><br /> As a small business operator and founder of an apparel company, Quintin was drawn
+					to DapUp for the impact it has on helping brands like his reach the right audience. His objective
+					is to promote the growth of businesses at all levels through the DapUp platform.
 				</p>
 			{/if}
 			<p class="text-lg text-white">Quintin Owens</p>

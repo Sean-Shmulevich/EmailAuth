@@ -40,7 +40,7 @@
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
-	class="p-2 mb-5 mx-5 text-center bg-transparent rounded-xl border border-white md:max-w-[40%] lg:max-w-[33.33%]"
+	class="p-2 mb-5 mx-5 text-center bg-transparent rounded-xl border border-white w-[80%] md:w-[40%] lg:w-[33.33%]"
 	on:click|preventDefault={() => {
 		textActive = !textActive;
 	}}
@@ -59,7 +59,7 @@
 	{#if founderMap[founderName].subtitle}
 		<p class="text-sm text-white">{founderMap[founderName].subtitle}</p>
 	{:else}
-		<br />
+		<p class="text-sm text-white">&nbsp;</p>
 	{/if}
 	<p
 		class="text-[15px] hidden md:block text-right text-gray-500"

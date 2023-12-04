@@ -24,7 +24,7 @@ export const actions: Actions = {
 				email: email
 			}
 		});
-		if (!user || user.is_brand || user.is_admin) {
+		if (!user) {
 			return fail(400, {
 				message: 'wrong login try another one',
 				email

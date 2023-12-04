@@ -33,19 +33,10 @@
 				<!-- <span class="mr-6 text-white">Login/Sign Up: </span> -->
 				<a
 					href="/login"
-					class="hover:text-yellow-500 text-sm sm:text-lg hover:bg-gray-800 bg-gray-500 text-white font-semibold inline-flex items-center mr-0 sm:mr-5 px-2 sm:px-4 py-2 rounded-full bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30"
+					class="hover:text-yellow-500 tracking-wide text-sm sm:text-lg hover:bg-gray-800 bg-gray-500 text-white font-semibold inline-flex items-center sm:-mr-5 px-2 sm:px-4 py-2 rounded-full bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30"
 				>
-					Athlete login
+					Login/Sign Up
 				</a>
-
-				<!-- TODO COMING SOON /brand-login-->
-				<a
-					href="/brand-login"
-					class="hover:text-yellow-500 text-sm sm:text-lg hover:bg-gray-800 bg-gray-500 text-white font-semibold inline-flex items-center px-2 sm:px-4 py-2 rounded-full bg-grey-400 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30"
-				>
-					Brand login
-				</a>
-				<!-- if data.msg === 'email authenticated' -->
 			{:else}
 				<Button
 					pill

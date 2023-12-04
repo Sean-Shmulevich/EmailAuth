@@ -1,38 +1,20 @@
 <script lang="ts">
-	// import { fade } from 'svelte/transition';
 	import type { PageData } from './$types';
 	import AthleteGuide from './AthleteGuide.svelte';
 	import BrandGuide from './BrandGuide.svelte';
-	import PrivacyPolicy from './PrivacyPolicy.svelte';
+	import PrivacyPolicyModal from './PrivacyPolicyModal.svelte';
+	import FounderCard from './FounderCard.svelte';
+
 	let showPolicy = false;
-
 	export let data: PageData;
+
 	let activeInfo = null;
-	// console.log(data.user);
-	let showImage = true;
-	let showImage0 = true;
-
-	// let animation = new Animation();
-
-	// onDestroy(async () => {
-	// 	console.log('destroyed');
-	// 	await animation.delete();
-	// 	await stopAnimation(window);
-	// });
-
-	// onMount(async () => {
-	// 	console.log(animate.start());
-	// 	await animation.start();
-	// });
+	let textActive0 = false;
+	let textActive1 = false;
 </script>
 
-<!-- <h1>Welcome, user {data.msg}</h1>
-<p>Your email is {data.user.email}</p>
-<form method="post" use:enhance>
-	<input type="submit" value="Sign out" />
-</form> -->
 {#if showPolicy}
-	<PrivacyPolicy bind:showPolicy />
+	<PrivacyPolicyModal bind:showPolicy />
 {/if}
 
 <section
@@ -49,6 +31,7 @@
 			</h1>
 		</div>
 	</div>
+	<!-- svelte-ignore a11y-missing-attribute -->
 	<img
 		class="sm:hidden block mx-auto -mt-[65px] -mb-2"
 		src="https://slimecars.com/assets/dapupmainimg.png"
@@ -194,7 +177,6 @@
 	<section class="text-gray-600 body-font">
 		<AthleteGuide />
 	</section>
-	<!-- <AthleteGuide /> -->
 {/if}
 <!-- Just the dropdown back up bottom att the bottom of the component -->
 {#if activeInfo !== null}
@@ -346,97 +328,14 @@
 	<div class="text-center w-full mb-12">
 		<h1 class="sm:text-3xl text-2xl font-extrabold title-font mb-4 text-gold">Meet the team</h1>
 	</div>
-	<div class="mx-10 flex flex-col md:flex-row justify-center text-center items-center">
+	<div
+		class="mx-10 flex flex-col md:flex-row justify-center text-center items-center md:items-start"
+	>
 		<!-- svelte-ignore a11y-mouse-events-have-key-events -->
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<div
-			class="p-2 mb-5 mx-5 text-center bg-transparent rounded-xl border border-white w-full md:w-1/3"
-			on:click|preventDefault={() => {
-				showImage = !showImage;
-			}}
-		>
-			{#if showImage}
-				<div class="lg:mx-[40px] flex justify-center">
-					<img src="https://slimecars.com/assets/ayden.png" alt="founder Ayden Owens-Delerme" />
-				</div>
-			{:else}
-				<p class="relative text-left my-[20px] text-gray-200">
-					Ayden is a former Arkansas student-athlete, 3x NCAA champion, and a World Championship
-					competitor in track and field with a highly monetized NIL portfolio. He possesses a
-					Bachelor's degree from the University of Michigan and a Master’s in Business
-					Administration with a focus in Entrepreneurship from the Sam M. Walton College of Business
-					at the University of Arkansas.<br /><br /> Leveraging his unique experience in college athletics
-					before and after NIL’s legalization, Ayden was driven to create DapUp to eliminate the friction
-					and ambiguity around brand-athlete partnerships. Ayden’s passion lies at the intersection of
-					business and sport, where two industries join to drive the world forward. He is also invested
-					in social justice and promoting sports opportunities to underserved communities by providing
-					coaching services for youth athletes. Ayden’s mission is to create an equitable and more accessible
-					market for NIL allowing all businesses and athletes to benefit.
-				</p>
-			{/if}
-			<p class="text-lg text-white">Ayden Owens-Delerme, MBA</p>
-			<p class="text-sm text-white">Founder & Chief Executive Officer <br /> 3x NCAA Champion</p>
-			<p
-				class="text-[15px] hidden md:block text-right text-gray-500"
-				style="transform: translateY(9px)"
-			>
-				click for more info >
-			</p>
-			<p
-				class="text-[15px] lg:hidden md:hidden text-right text-gray-500"
-				style="transform: translateY(9px)"
-			>
-				tap for more info
-			</p>
-		</div>
-		<div
-			class="p-2 mb-5 mx-5 text-center bg-transparent rounded-xl border border-white w-full md:w-1/3"
-			on:click|preventDefault={() => {
-				showImage0 = !showImage0;
-			}}
-		>
-			{#if showImage0}
-				<div class=" lg:mx-[40px] flex justify-center">
-					<img src="https://slimecars.com/assets/quintin.jpg" alt="founder quintin owens" />
-				</div>
-			{:else}
-				<p class="text-left relative h-full my-[102px] text-gray-200">
-					Quintin is an entrepreneur, former athlete, and a sales professional at SAE International.
-					He holds a breadth of experience in understanding the needs of companies worldwide as he
-					ensures they are suited with up-to-date standards for business operation.<br /><br /> As a
-					small business operator and founder of an apparel company, Quintin was drawn to DapUp for the
-					impact it has on helping brands like his reach the right audience. His objective is to promote
-					the growth of businesses at all levels through the DapUp platform.
-				</p>
-			{/if}
-			<p class="text-lg text-white">Quintin Owens</p>
-			<p class="text-sm text-white">Chief Sales Officer<br /><br /></p>
-			<p
-				class="text-[15px] hidden md:block text-right text-gray-500"
-				style="transform: translateY(9px)"
-			>
-				click for more info >
-			</p>
-			<p
-				class="text-[15px] lg:hidden md:hidden text-right text-gray-500"
-				style="transform: translateY(9px)"
-			>
-				tap for more info
-			</p>
-		</div>
-		<!-- <div
-			class="p-2 mb-5 mx-5 text-center bg-transparent rounded-xl border border-white w-full md:w-1/3"
-		>
-			<div class="lg:mx-[80px] flex justify-center">
-				<img class="" src="https://slimecars.com/assets/quintin.jpg" alt="chief sales officer" />
-			</div>
-			<p class="text-lg text-white">Quintin Owens</p>
-			<p class="text-sm text-white">Chief Sales Officer<br /><br /></p>
-			<p class="text-[15px] text-right text-gray-500" style="transform: translateY(9px)">
-				hover for more info >
-			</p>
-		</div> -->
-		<!-- <div class="p-4 sm:w-1/2 w-full" /> -->
+		<FounderCard founderName="Ayden" textActive={textActive0} />
+		<FounderCard founderName="Quintin" textActive={textActive0} />
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
 	</div>
 </section>
 <section class="bg-gray-900 -mt-5">
@@ -491,11 +390,9 @@
 
 <!-- Footer -->
 <footer class="text-gray-600 body-font">
-	<!-- <div class="container px-5 py-24 mx-auto"> -->
-
-	<!-- </div> -->
 	<div class="bg-gray-800">
 		<div class="container px-5 py-6 mx-auto flex items-center sm:flex-row flex-col">
+			<!-- svelte-ignore a11y-missing-attribute -->
 			<a
 				class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900"
 			>
@@ -507,6 +404,7 @@
 				<!-- <span class="ml-3 text-xl">Creative Solutions</span> -->
 			</a>
 			<p class="text-sm text-gray-500 sm:ml-6 sm:mt-0 mt-4" />
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<p
 				on:click={() => {
 					showPolicy = true;
@@ -516,6 +414,7 @@
 				Privacy policy
 			</p>
 			<span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
+				<!-- svelte-ignore a11y-missing-attribute -->
 				<a class="text-gray-500">
 					<svg
 						fill="currentColor"
@@ -528,6 +427,7 @@
 						<path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
 					</svg>
 				</a>
+				<!-- svelte-ignore a11y-missing-attribute -->
 				<a class="ml-3 text-gray-500">
 					<svg
 						fill="currentColor"
@@ -542,6 +442,7 @@
 						/>
 					</svg>
 				</a>
+				<!-- svelte-ignore a11y-missing-attribute -->
 				<a class="ml-3 text-gray-500">
 					<svg
 						fill="none"
@@ -556,6 +457,7 @@
 						<path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01" />
 					</svg>
 				</a>
+				<!-- svelte-ignore a11y-missing-attribute -->
 				<a class="ml-3 text-gray-500">
 					<svg
 						fill="currentColor"
@@ -579,28 +481,6 @@
 </footer>
 
 <style>
-	.text-gold-gradient-title {
-		color: #d5ad6d; /*if no support for background-clip*/
-
-		background: linear-gradient(
-				to right,
-				#b87333,
-				#c8a200,
-				#c3a604 10%,
-				#fffdd0 20%,
-				#c8a200 30%,
-				#e5c100 40%,
-				#fffdd0 50%,
-				#c8a200 60%,
-				#e5c100 70%,
-				#fffdd0 80%,
-				#c8a200 90%,
-				#b87333 100%
-			)
-			repeat;
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-	}
 	.text-gold {
 		background: linear-gradient(45deg, #fde586 0%, #c29441 50%, #9b5d0e 100%);
 		background-clip: text;
@@ -627,24 +507,5 @@
 	}
 	.white-icon {
 		filter: invert(1); /* Inverts the colors, making black white */
-	}
-	@media (max-width: 768px) {
-		/* Adjust the background-size value to control the zoom level on small screens */
-		.img-section {
-		}
-	}
-	.gold {
-		color: #d5ad6d; /*if no support for background-clip*/
-		background: -webkit-linear-gradient(transparent, transparent),
-			-webkit-linear-gradient(top, rgba(213, 173, 109, 1) 0%, rgba(213, 173, 109, 1) 26%, rgba(
-							226,
-							186,
-							120,
-							1
-						)
-						35%, rgba(163, 126, 67, 1) 45%, rgba(145, 112, 59, 1) 61%, rgba(213, 173, 109, 1) 100%);
-		background: -o-linear-gradient(transparent, transparent);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
 	}
 </style>

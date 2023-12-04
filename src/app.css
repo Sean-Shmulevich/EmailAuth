@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-.ql-toolbar{
-    background: lightgrey;
+.ql-toolbar {
+	background: lightgrey;
+}
+body {
+	background: rgb(17 24 39);
 }

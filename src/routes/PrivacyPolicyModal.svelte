@@ -3,12 +3,14 @@
 </script>
 
 <div
-	class="fixed z-30 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border border-black w-[90%] overflow-y-scroll sm:w-[80%] h-[60vh] rounded-xl bg-white p-10"
+	class="z-30 top-1/2 left-1/2 transform fixed -translate-x-1/2 -translate-y-1/2 border border-black w-[90%] overflow-y-scroll sm:w-[80%] h-[60vh] rounded-xl bg-white p-10"
 >
 	<div class="flex flex-row w-full justify-between">
 		<p class="text-2xl font-bold">Privacy Policy</p>
 		<button
-			on:click={() => (showPolicy = false)}
+			on:click={() => {
+				showPolicy = false;
+			}}
 			class="ml-auto text-2xl transform -translate-y-10 translate-x-9 text-red-500 font-extrabold"
 		>
 			X

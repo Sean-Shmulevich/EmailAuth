@@ -1,7 +1,6 @@
 import { redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 import { auth } from '$lib/lucia';
-import { prismaClient } from '$lib/db';
 import { sendEmail } from '$lib/email';
 
 export const load: PageServerLoad = async ({ locals }) => {

@@ -3,6 +3,7 @@ import type { Actions, PageServerLoad } from './$types';
 import { auth } from '$lib/lucia';
 import { sendEmail } from '$lib/email';
 
+//this logic is used every time that that anybody acesses the homapage
 export const load: PageServerLoad = async ({ locals }) => {
 	const { user } = await locals.auth.validateUser();
 
@@ -21,10 +22,6 @@ export const load: PageServerLoad = async ({ locals }) => {
 		throw redirect(302, '/email-verification');
 	}
 
-	//only run this if the user is logged in and not the admin
-	// for (const object of objects) {
-	// 	object.created = shortDate(object.created);
-	// }
 
 	if (!user.adminVerified) {
 		//if the code execution comes here then the user is definitely logged in and email verified but not admin verified

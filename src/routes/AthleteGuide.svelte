@@ -31,7 +31,6 @@
 			<img src={link} class="mt-5 w-[90%] sm:w-1/2 mx-auto w-1/2" alt="athlete guide image" />
 		</div>
 		{#if links.length - 1 === i}
-			<!-- <hr class="w-[90%] sm:w-1/2 mx-auto" style="margin-top: -21px" /> -->
 			<hr class="w-[90%] sm:w-1/2 mx-auto" />
 		{:else}
 			<hr class="w-[90%] sm:w-1/2 mx-auto" />

@@ -500,11 +500,6 @@
 			background-position: 200% center;
 		}
 	}
-	ul {
-		list-style-type: disc;
-		list-style-position: inside;
-		color: black; /* Or whatever color you prefer */
-	}
 	.white-icon {
 		filter: invert(1); /* Inverts the colors, making black white */
 	}

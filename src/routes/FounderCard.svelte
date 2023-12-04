@@ -40,7 +40,7 @@
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
-	class="p-2 mb-5 mx-5 text-center bg-transparent rounded-xl border border-white md:w-[40%] lg:w-[33.33%]"
+	class="p-2 mb-5 mx-5 text-center bg-transparent rounded-xl border border-white md:max-w-[40%] lg:max-w-[33.33%]"
 	on:click|preventDefault={() => {
 		textActive = !textActive;
 	}}

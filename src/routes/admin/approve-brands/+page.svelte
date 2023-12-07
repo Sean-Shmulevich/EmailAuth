@@ -9,16 +9,7 @@
 </script>
 
 <div class="bg-white rounded-xl mt-10 mx-auto max-w-[90%] px-10 pb-10 w-[85%] mb-12">
-	<h1 class="text-center text-6xl">Admin approve brands</h1>
-
 	<div class="mt-10">
-		<div class="mx-auto mb-10 text-center rounded-3xl py-4 w-[20%] bg-black text-white">
-			<a class="text-center" href="/admin/approve-users">go to approve users</a>
-		</div>
-		<div class="mx-auto mb-10 text-center rounded-3xl py-4 w-[20%] bg-black text-white">
-			<a class="text-center" href="/admin/deal-contracts">View deal contracts</a>
-		</div>
-
 		<h2 class="text-4xl text-center">Brands waiting for approval</h2>
 		{#if data.allBrands.length === 0}
 			<div class="p-5 my-4 mx-auto text-center rounded-xl w-48 bg-gray-400">

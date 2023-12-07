@@ -28,12 +28,14 @@ export const actions: Actions = {
 		const formData = await request.formData();
 		const email = (formData.get('email')?.toString() ?? '').toLowerCase();
 
+		//TODO, this is probably bad auth
 		const user = await prismaClient.authUser.findUnique({
 			where: {
 				email: email,
 			},
 		});
-		if(!user || !user.is_admin){
+
+		if (!user || !user.is_admin) {
 			return fail(400, {
 				message: 'Not admin user',
 				email

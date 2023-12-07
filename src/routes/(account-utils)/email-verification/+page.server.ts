@@ -1,7 +1,7 @@
 import { sendEmailVerificationEmail, sendEmailVerificationEmailBrand } from '$lib/email';
 import { auth, emailVerificationToken } from '$lib/lucia';
 import { fail, redirect } from '@sveltejs/kit';
-import { post } from '$lib/text';
+import { sendText } from '$lib/text';
 
 import type { Actions, PageServerLoad } from './$types';
 
@@ -106,12 +106,12 @@ export const actions: Actions = {
 			const token = await emailVerificationToken.issue(user.userId);
 			//TODO dont allow a ton of requests in a row here.
 			if (!user.isBrand) {
-				await post('+1' + phoneNumber, token);
+				await sendText('+1' + phoneNumber, token);
 				return {
 					textSent: 'Text Sent please wait up to a minute'
 				};
 			} else {
-				await post('+1' + phoneNumber, token);
+				await sendText('+1' + phoneNumber, token);
 				return {
 					textSent: 'Text Sent please wait up to a minute'
 				};

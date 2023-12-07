@@ -10,7 +10,7 @@
 		<title>Demo mailbox</title>
 	</head>
 	<body>
-		<main class="mx-auto max-w-sm py-16 px-4 bg-white">
+		<main class="mx-auto py-16 px-4">
 			<slot />
 		</main>
 	</body>

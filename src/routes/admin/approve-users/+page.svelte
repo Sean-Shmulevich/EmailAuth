@@ -8,23 +8,7 @@
 </script>
 
 <div class="bg-white rounded-xl mx-auto mt-10 max-w-[90%] px-10 pb-10 w-[85%] mb-12">
-	<h1 class="text-center pt-10 text-6xl">Admin approve users</h1>
-
 	<div class="mt-10">
-		<div class="mx-auto mb-10 text-center rounded-3xl py-4 w-[20%] bg-black text-white">
-			<a class="text-center" href="/admin/approve-brands">go to approve brands</a>
-		</div>
-		<div class="mx-auto mb-10 text-center rounded-3xl py-4 w-[20%] bg-black text-white">
-			<a class="text-center" href="/admin/deal-contracts">View deal contracts</a>
-		</div>
-
-		<h2 class="text-4xl text-center">Users waiting for approval</h2>
-		{#if data.allUsers.length === 0}
-			<div class="p-5 my-4 mx-auto text-center rounded-xl w-48 bg-gray-400">
-				<p class="text-2xl">No users waiting for approval</p>
-			</div>
-		{/if}
-
 		{#each data.allUsers as user}
 			<div class="bg-white shadow-md p-4 flex items-center justify-between">
 				<div>

@@ -2,9 +2,9 @@ import twilio from 'twilio';
 
 //TODO API KEYS
 const accountSid = 'AC02236dcf3e7722b13c196c15719deee3';
-const authToken = '74d7a775da45edcd779fe04c885db973';
+const authToken = 'a2c31cc4145659ec0f3e23a8f497710e';
 const client = twilio(accountSid, authToken);
-export async function post(phoneNumber, code) {
+export async function sendText(phoneNumber, code) {
 	console.log('INPOST ' + phoneNumber);
 	try {
 		const message = await client.messages.create({

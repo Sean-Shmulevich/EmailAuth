@@ -4,27 +4,19 @@
 	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
 	let dealImg = 'https://slimecars.com/cardplaceholder.png';
-	// console.log(data.userDeals);
 
 	let contractDeals = data.deal;
+	console.log(data);
 	let noDeals = false;
 	if (data && data.status) {
 		noDeals = true;
 	}
 
-	// console.log(currDeal.recommendedDeliverables['set']);
+	console.log(contractDeals[0].dealImages);
 </script>
 
-<div class="flex flex-row justify-center mt-8">
-	<div class="mx-auto text-center rounded-3xl py-4 w-[20%] bg-black text-white">
-		<a class="text-center" href="/admin/approve-users">go to approve users</a>
-	</div>
-	<div class="mx-auto text-center rounded-3xl py-4 w-[20%] bg-black text-white">
-		<a class="text-center" href="/admin/approve-brands">go to approve brands</a>
-	</div>
-</div>
 {#if !noDeals}
-	{#each contractDeals as currDeal}
+	{#each data.deal as currDeal}
 		<div class="w-fit mx-auto bg-gray-800 rounded-xl mt-5 p-5 mb-10 pb-5">
 			<h2 class="text-center text-3xl mb-2 text-white">{currDeal.title}</h2>
 			<hr />
@@ -32,13 +24,13 @@
 				{#if currDeal.dealImages}
 					<img
 						class="object-contain mt-5 rounded-2xl mx-auto sm:mx-[unset] h-[500px] w-full"
-						src="/api/s3object/{currDeal.dealImages[0].id}"
+						src="/api/s3object/{currDeal.dealImages[0]?.id}"
 						alt="deal main"
 					/>
 				{:else}
 					<img
 						class="object-contain mt-5 rounded-2xl mx-auto sm:mx-[unset] h-[500px] w-full"
-						src="/api/s3object/{currDeal.dealImages[0].id}"
+						src="/https://slimecars.com/assets/cardplaceholder.png"
 						alt="deal main"
 					/>
 				{/if}
@@ -121,39 +113,39 @@
 					</ol>
 				</div>
 				<!-- <div class="border border-1 rounded-xl text-white p-5">
-        <p class="text-xl">Goals</p>
-        <hr class="mb-2" />
-        {#each currDeal.goals as goal}
-            <p>{goal}</p>
-        {/each}
-    </div> -->
+					<p class="text-xl">Goals</p>
+					<hr class="mb-2" />
+					{#each currDeal.goals as goal}
+						<p>{goal}</p>
+					{/each}
+				</div> -->
 			</div>
 			{#each currDeal.userDealStatus as contract}
 				<div class="flex flex-col space-y-5 sm:flex-row justify-between items-center">
 					<a
-						href="/api/s3object/{contract.contract.id}"
+						href="/api/s3object/{contract.contractId}"
 						target="_blank"
 						class="p-3 my-5 text-xl text-white rounded-full bg-gray-600"
 					>
 						View Uploaded Contract
 					</a>
 					<p class="p-3 w-fit rounded-full bg-gray-600 text-white">
-						User email: {contract.user.email}
+						User email: {contract.user?.email}
 					</p>
 					<a
-						href="/user-profile/{contract.user.id}"
+						href="/user-profile/{contract.user?.id}"
 						class="text-blue-400 underline p-3 w-fit rounded-full bg-gray-600"
 					>
-						User profile: {contract.user.email}
+						User profile: {contract.user?.email}
 					</a>
 					{#if contract.user.profile.phoneNumber}
 						<p class="p-3 w-fit rounded-full bg-gray-600 text-white">
-							User phone: {contract.user.profile.phoneNumber}
+							User phone: {contract.user?.profile.phoneNumber}
 						</p>
 					{/if}
-					{#if contract.user.profile.venmo}
+					{#if contract.user?.profile.venmo}
 						<p class="p-3 w-fit rounded-full bg-gray-600 text-white">
-							User Venmo: {contract.user.profile.venmo}
+							User Venmo: {contract.user?.profile.venmo}
 						</p>
 					{/if}
 				</div>

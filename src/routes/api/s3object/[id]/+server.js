@@ -4,7 +4,15 @@ import { prismaClient } from '$lib/db';
 import { auth } from '$lib/lucia';
 import { error } from '@sveltejs/kit';
 
-import { S3_BUCKET } from '$env/static/private';
+import { S3_BUCKET, S3_REGION, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY } from '$env/static/private'
+
+const s3ClientConfig = {
+	region: S3_REGION, // Specify the AWS Region
+	credentials: {
+		accessKeyId: AWS_ACCESS_KEY_ID, // AWS access key ID
+		secretAccessKey: AWS_SECRET_ACCESS_KEY, // AWS secret access key
+	},
+};
 
 export async function GET({ params, locals }) {
 	//if (!locals.authorized) { throw error(401, 'unauthorized') }
@@ -12,7 +20,14 @@ export async function GET({ params, locals }) {
 	const key = params.id;
 	const s3 = new AWS.S3();
 	let stream = s3.getObject({ Bucket: S3_BUCKET, Key: key }).createReadStream();
-	return new Response(stream, { status: 200 });
+	let readableStream = new ReadableStream({
+		start(controller) {
+			stream.on('data', chunk => controller.enqueue(chunk));
+			stream.on('end', () => controller.close());
+			stream.on('error', err => controller.error(err));
+		}
+	})
+	return new Response(readableStream, { status: 200 });
 }
 
 export async function DELETE({ params, locals }) {
@@ -20,9 +35,10 @@ export async function DELETE({ params, locals }) {
 	//todo: add check to make sure this user has permission to delete this object
 	//todo: remove from db
 	const key = params.id;
-	const s3 = new S3Client();
+
+	const s3 = new S3Client(s3ClientConfig);
 	let obj = await s3.send(new DeleteObjectCommand({ Bucket: S3_BUCKET, Key: key }));
-	return new Response(obj);
+	return new Response(JSON.stringify(obj));
 }
 
 export async function POST({ request, locals }) {
@@ -50,11 +66,11 @@ export async function POST({ request, locals }) {
 		if (data.get('deal_id') && !data.get('athlete_id')) {
 			const existingImage = await prismaClient.dealImages.findFirst({
 				where: {
-					dealId: data.get('deal_id')
+					dealId: data.get('deal_id')?.toString()
 				}
 			});
 			if (existingImage) {
-				const s3 = new S3Client();
+				const s3 = new S3Client(s3ClientConfig);
 				let obj = await s3.send(
 					new DeleteObjectCommand({ Bucket: S3_BUCKET, Key: existingImage.id })
 				);
@@ -66,25 +82,25 @@ export async function POST({ request, locals }) {
 			}
 			document = await prismaClient.dealImages.create({
 				data: {
-					id: data.get('objectId'),
-					file_name: data.get('fileName'),
-					file_size: parseInt(data.get('fileSize')),
-					file_type: data.get('fileType'),
-					image_number: parseInt(data.get('position')),
-					dealId: data.get('deal_id')
+					id: data.get('objectId')?.toString(),
+					file_name: data.get('fileName')?.toString(),
+					file_size: parseInt(data.get('fileSize')?.toString()),
+					file_type: data.get('fileType')?.toString(),
+					image_number: parseInt(data.get('position')?.toString()),
+					dealId: data.get('deal_id')?.toString()
 				}
 			});
-		} else if (data.get('athlete_id')) {
+		} else if (data.get('athlete_id')?.toString()) {
 			const dealStatus = await prismaClient.userDealStatus.findFirst({
 				where: {
-					userId: data.get('athlete_id'),
-					dealId: data.get('deal_id')
+					userId: data.get('athlete_id')?.toString(),
+					dealId: data.get('deal_id')?.toString()
 				}
 			});
 			//TODO
 			//THEY SHOUDNT RLY BE ABLE TO ADD A NEW CONTRACT
 			if (dealStatus.contractId) {
-				const s3 = new S3Client();
+				const s3 = new S3Client(s3ClientConfig);
 				let obj = await s3.send(
 					new DeleteObjectCommand({ Bucket: S3_BUCKET, Key: dealStatus.contractId })
 				);
@@ -97,18 +113,18 @@ export async function POST({ request, locals }) {
 
 			document = await prismaClient.contract.create({
 				data: {
-					id: data.get('objectId'),
-					file_name: data.get('fileName'),
-					file_size: parseInt(data.get('fileSize')),
-					file_type: data.get('fileType'),
-					userId: data.get('athlete_id')
+					id: data.get('objectId')?.toString(),
+					file_name: data.get('fileName')?.toString(),
+					file_size: parseInt(data.get('fileSize')?.toString()),
+					file_type: data.get('fileType')?.toString(),
+					userId: data.get('athlete_id')?.toString()
 				}
 			});
 			await prismaClient.userDealStatus.update({
 				where: {
 					userId_dealId: {
-						userId: data.get('athlete_id'),
-						dealId: data.get('deal_id')
+						userId: data.get('athlete_id')?.toString(),
+						dealId: data.get('deal_id')?.toString()
 					}
 				},
 				data: {
@@ -118,7 +134,7 @@ export async function POST({ request, locals }) {
 			});
 		} else {
 			// Get existing image details from the database
-			const position = parseInt(data.get('position'));
+			const position = parseInt(data.get('position')?.toString());
 			//if I make multiple users will it
 			// - find the object with the first image_number for a specific user?
 			// - find the first object with that existing image number?
@@ -131,7 +147,7 @@ export async function POST({ request, locals }) {
 
 			// If there is an existing image, delete it
 			if (existingImage) {
-				const s3 = new S3Client();
+				const s3 = new S3Client(s3ClientConfig);
 				let obj = await s3.send(
 					new DeleteObjectCommand({ Bucket: S3_BUCKET, Key: existingImage.id })
 				);
@@ -143,11 +159,11 @@ export async function POST({ request, locals }) {
 			}
 			document = await prismaClient.object.create({
 				data: {
-					id: data.get('objectId'),
-					file_name: data.get('fileName'),
-					file_size: parseInt(data.get('fileSize')),
-					file_type: data.get('fileType'),
-					image_number: parseInt(data.get('position')),
+					id: data.get('objectId')?.toString(),
+					file_name: data.get('fileName')?.toString(),
+					file_size: parseInt(data.get('fileSize')?.toString()),
+					file_type: data.get('fileType')?.toString(),
+					image_number: parseInt(data.get('position')?.toString()),
 					userId: user.userId
 				}
 			});

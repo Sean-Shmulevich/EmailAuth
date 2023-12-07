@@ -8,6 +8,7 @@ import { prismaClient } from '$lib/db';
 
 export const load: PageServerLoad = async ({ locals }) => {
 	const { user } = await locals.auth.validateUser();
+
 	if (user) {
 		if (!user.emailVerified) throw redirect(302, '/email-verification');
 		throw redirect(302, '/');

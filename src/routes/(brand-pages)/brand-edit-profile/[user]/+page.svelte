@@ -1,8 +1,9 @@
 <script>
 	//TODO - add text limits to the textboxes
 	//TODO - file.name is not coming through
-	//	its probably becauase of imagecropper.svelte or canvasUtils.js
+	//its probably becauase of imagecropper.svelte or canvasUtils.js
 	//check type of input and make sure it is correct
+
 	// @ts-nocheck
 	import ImageCropper from './ImageCropper.svelte';
 	import { enhance } from '$app/forms';

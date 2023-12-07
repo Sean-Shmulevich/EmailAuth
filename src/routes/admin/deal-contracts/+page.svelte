@@ -6,13 +6,10 @@
 	let dealImg = 'https://slimecars.com/cardplaceholder.png';
 
 	let contractDeals = data.deal;
-	console.log(data);
 	let noDeals = false;
 	if (data && data.status) {
 		noDeals = true;
 	}
-
-	console.log(contractDeals[0].dealImages);
 </script>
 
 {#if !noDeals}

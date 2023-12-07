@@ -29,7 +29,6 @@ export async function load({ url }) {
     const links = allPages.filter(page => page !== title).map(page => { return { link: `/admin/${page}`, title: pages[page].gotoButton } });
 
     pages[title].links = links;
-    console.log(pages[title])
 
     // Return the value corresponding to the title, or a default value if title not found
     return pages[title]

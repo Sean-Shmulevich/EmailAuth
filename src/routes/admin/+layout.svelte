@@ -1,9 +1,10 @@
 <!-- src/routes/admin/+layout.svelte -->
 <script>
 	export let data;
+	console.log(data.showLayout);
 </script>
 
-{#if data.showLayout && data.showLayout === false}
+{#if data.showLayout === undefined}
 	<div class="bg-white rounded-xl mx-auto mt-10 max-w-[90%] px-10 pb-10 w-[85%] mb-12">
 		<h1 class="text-center pt-10 text-6xl">{data.title}</h1>
 

@@ -33,7 +33,6 @@ export const load = async ({ params, locals }) => {
 			}
 		}
 	});
-	console.log('helloooo', dealsWithContracts);
 	if (dealsWithContracts.length === 0) {
 		return {
 			status: 'no active contracts'

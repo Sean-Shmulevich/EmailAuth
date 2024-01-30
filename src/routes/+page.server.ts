@@ -35,6 +35,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 		user
 	};
 };
+
 // (emailAddress: string, subject: string, content: string)
 export const actions: Actions = {
 	logout: async ({ locals, url }) => {
@@ -49,7 +50,7 @@ export const actions: Actions = {
 		const email = (formData.get('email')?.toString() ?? '').toLowerCase();
 		const subject = formData.get('subject')?.toString() ?? '';
 		const message = formData.get('message')?.toString() ?? '';
-		//TODO change this email to support@dapup.co
+		// TODO change this email to support@dapup.co
 		sendEmail('info@dapup.co', url.origin, `Request from ${email}, Subject: ${subject}`, message);
 	}
 };

@@ -22,20 +22,6 @@ export const load = async ({ locals }) => {
 			}
 		}
 	});
-	const ongoingDealStatus = await prismaClient.userDealStatus.findMany({
-		where: {
-			userId: user.userId,
-			status: 'user-accepted'
-		},
-		include: {
-			deal: {
-				include: {
-					dealImages: true,
-					authUser: true
-				}
-			}
-		}
-	});
 	const contractSubmitted = await prismaClient.userDealStatus.findMany({
 		where: {
 			userId: user.userId,
@@ -67,12 +53,10 @@ export const load = async ({ locals }) => {
 	});
 	// console.log(dealStatus);
 	const newDealProfiles = newDealStatus.map((status) => status.deal);
-	const ongoingDealProfiles = ongoingDealStatus.map((status) => status.deal);
 	const completedDealProfiles = completedDealStatus.map((status) => status.deal);
 	const contractFinalized = contractSubmitted.map((status) => status.deal);
 	return {
 		newDealProfiles,
-		ongoingDealProfiles,
 		contractFinalized,
 		completedDealProfiles,
 		userId: user.userId
@@ -94,28 +78,14 @@ export const actions = {
 		if (!user || user.isBrand || !user.emailVerified || !user.adminVerified) {
 			throw redirect(302, '/');
 		}
-		const dealStatus = await prismaClient.userDealStatus.update({
-			where: {
-				userId_dealId: {
-					dealId: dealId,
-					userId: user.userId
-				}
-			},
-			data: {
-				status: 'user-accepted'
-			}
-		});
-		// sendEmail(
-		// 	userEmail,
-		// 	'A brand is interested in working with you!',
-		// 	`Deal info title: ${deal.title} \n Description: ${deal.shortDescription}`
-		// );
-		if (!dealStatus) {
-			throw fail(400, { msg: 'User not found' });
-		}
-		return {
-			status: 'ok'
-		};
+        //TODO: what is the difference between new and ongoing?
+        // NEW DEAL - user swiped, and brand wants to work with you.
+        // ONGOING DEAL - user has accepted the deal.
+            // Waiting for contract
+            // Contract approved
+            // Ongoing deliverables still
+            // Deliverables completed, awaiting payment (admin checks off)
+        // COMPLETED DEAL - user has completed the deal, and admin has approved payment has been sent.
 	},
 	logout: async ({ locals }) => {
 		const session = await locals.auth.validate();

@@ -19,22 +19,22 @@
 		console.log(data.userId);
 		completedDeals = data.completedDealProfiles;
 		newDeals = data.newDealProfiles;
-		ongoingDeals = data.ongoingDealProfiles;
 		contractFinalized = data.contractFinalized;
 		interestedBrands = newDeals;
 	}
 	let loading = false;
-	$: {
-		if (form?.status === 'ok' && delId !== '' && loading === true) {
-			if (activeButton === 'new') {
-				newDeals = newDeals.filter((deal) => deal.id !== delId);
-				interestedBrands = interestedBrands.filter((deal) => deal.id !== delId);
-			}
-			form = null;
-			loading = false;
-			delId = '';
-		}
-	}
+    //logic for updating the current screen after the button is pressed
+	// $: {
+	// 	if (form?.status === 'ok' && delId !== '' && loading === true) {
+	// 		if (activeButton === 'new') {
+	// 			newDeals = newDeals.filter((deal) => deal.id !== delId);
+	// 			interestedBrands = interestedBrands.filter((deal) => deal.id !== delId);
+	// 		}
+	// 		form = null;
+	// 		loading = false;
+	// 		delId = '';
+	// 	}
+	// }
 
 	let defaultImg = 'https://slimecars.com/cardplaceholder.png';
 </script>
@@ -80,10 +80,18 @@
 		>
 		<button
 			on:click|preventDefault={() => {
+                //ongoing should include "msg-sent-user" and "msg-sent-brand",
+                //ongoing section should only include "msg-sent-user" meaning,
+                //the deal shouldnt move out of "new-deals" until the user has
+                //started messaging about the deal even if the brand has
+                //already started the conversation.
+
+                // it should also include "brand-finalized" which is confusing because it really means "contract-finalized"
+                // and it should also include "deliverables-in-progress"
 				activeButton = 'ongoing';
-				console.log('ongoing deals' + ongoingDeals);
 				ongoingLength = ongoingDeals.length;
-				interestedBrands = [...ongoingDeals, ...contractFinalized];
+				// interestedBrands = [...ongoingDeals, ...contractFinalized];
+				interestedBrands = [...contractFinalized];
 			}}
 			class=" {activeButton === 'ongoing'
 				? 'border-4 border-green-400'
@@ -242,26 +250,18 @@
 						View brand Profile
 					</button>
 					{#if activeButton === 'new'}
-						<form
+						<div
 							class="w-1/3 min-w-fit p-3 whitespace-nowrap border bg-gray-700 rounded-xl border-white"
-							method="POST"
-							use:enhance
-							action="?/agree"
 						>
 							<button
-								on:click={() => {
-									delId = currDeal.id;
-									ongoingDeals.push(currDeal);
-									loading = true;
-								}}
 								name="agree-deal"
 								value={currDeal.id}
 								type="submit"
 								class="w-full h-full"
 							>
-								Agree to offer
+								Message Brand
 							</button>
-						</form>
+						</div>
 					{/if}
 					{#if activeButton === 'ongoing'}
 						<button

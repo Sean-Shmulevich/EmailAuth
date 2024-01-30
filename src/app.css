@@ -2,9 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+
 .ql-toolbar {
 	background: lightgrey;
 }
 body {
 	background: rgb(17 24 39);
+    font-family: anona, sans-serif;
+    font-style: normal;
+    font-weight: 300;
 }

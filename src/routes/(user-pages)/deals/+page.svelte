@@ -16,7 +16,6 @@
 	afterNavigate(() => {
 		window.scrollTo(0, document.body.scrollHeight);
 	});
-	let userSwipeData = [{ dealId: 'uniqueDealID', decision: 'user-accepted' }];
 
 	let currDealIds = [];
 	//TODO this code might break the whole thing

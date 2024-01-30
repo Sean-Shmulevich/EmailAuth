@@ -185,7 +185,7 @@
 	</div>
 	{#each currentDealList as deal}
 		<div
-			class="bg-gray-700 text-white rounded-xl mb-10 w-[80%] lg:w-[40%] flex flex-col shadow-md p-5 mx-auto"
+			class="bg-gray-700 text-white sm:flex-row rounded-xl mb-10 w-[80%] lg:w-[40%] flex flex-col shadow-md p-5 mx-auto"
 		>
 			<div class="bg-gray-200 w-full sm:w-[60%] mx-auto">
 				{#if deal && deal.dealImages && deal.dealImages.length !== 0}

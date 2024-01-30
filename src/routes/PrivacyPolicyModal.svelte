@@ -3,7 +3,7 @@
 </script>
 
 <div
-	class="z-30 top-1/2 left-1/2 transform fixed -translate-x-1/2 -translate-y-1/2 border border-black w-[90%] overflow-y-scroll sm:w-[80%] h-[60vh] rounded-xl bg-white p-10"
+	class="z-30 top-1/2 left-1/2 transform fixed -translate-x-1/2 -translate-y-1/2 border border-black w-[90%] overflow-y-scroll sm:w-[80%] h-[60vh] rounded-xl bg-white text-red-200 p-10"
 >
 	<div class="flex flex-row w-full justify-between">
 		<p class="text-2xl font-bold">Privacy Policy</p>
@@ -67,8 +67,7 @@
 		other numeric codes used to identify a computer or mobile device, operating system, internet service
 		provider, the referring web page, the time, frequency and duration of use, and the page You request.
 		DapUp does not consider this information to be personally identifiable information.
-	</p>
-	<br />
+	</p> <br />
 	<ul>
 		<li>
 			Cookies: A cookie is a small data file placed on the hard drive of a User’s computer. Most

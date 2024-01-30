@@ -41,15 +41,6 @@ export const load = async ({ params, locals }) => {
 			user: true
 		}
 	});
-	const readyUserData = await prismaClient.userDealStatus.findMany({
-		where: {
-			dealId: paramDealId,
-			status: 'user-accepted'
-		},
-		include: {
-			user: true
-		}
-	});
 	const brandFinalizedData = await prismaClient.userDealStatus.findMany({
 		where: {
 			dealId: paramDealId,
@@ -75,14 +66,12 @@ export const load = async ({ params, locals }) => {
 	});
 	const interestedUsers = interestedUsersData.map((userData) => userData.user);
 	const confirmedUsers = confirmedUserData.map((userData) => userData.user);
-	const readyUsers = readyUserData.map((userData) => userData.user);
 	const brandFinalized = brandFinalizedData.map((userData) => userData.user);
 	const completed = completedData.map((userData) => userData.user);
 	return {
 		deal,
 		interestedUsers,
 		confirmedUsers,
-		readyUsers,
 		brandFinalized,
 		completed,
 		dealImage

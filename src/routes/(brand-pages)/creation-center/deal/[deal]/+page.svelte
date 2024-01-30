@@ -195,29 +195,7 @@
 		{/each}
 	</div>
 	<div class="mx-20 mt-10">
-		<h2 class="text-2xl text-white text-center">User Confirmed</h2>
-		<hr class="mt-2" />
-		{#each data.readyUsers as user}
-			<div
-				class="my-5 text-white border border-white rounded-xl bg-gray-800 shadow-md p-4 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between"
-			>
-				<div>
-					<h2 class="text-xl font-bold mb-2">{user.name}</h2>
-					<a class="text-blue-500 underline" href="/user-profile/{user.id}">profile link</a>
-				</div>
-				<button
-					on:click={() => {
-						goto(`/creation-center/view-contract?deal=${currDeal.id}&user=${user.id}`);
-					}}
-					class="p-2 bg-blue-500 text-white rounded">View/Edit deal contract</button
-				>
-			</div>
-		{:else}
-			<p class="mx-auto text-center text-2xl my-10 text-red-500">No confirmed users yet</p>
-		{/each}
-	</div>
-	<div class="mx-20 mt-10">
-		<h2 class="text-2xl text-white text-center">Waiting for confirmation from user</h2>
+		<h2 class="text-2xl text-white text-center">Chosen athletes</h2>
 		<hr class="mt-2" />
 		{#each data.confirmedUsers as user}
 			<div

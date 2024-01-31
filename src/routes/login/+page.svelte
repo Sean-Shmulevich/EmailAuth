@@ -17,7 +17,7 @@
 	{#if form?.message}
 		<p class="error">{form.message}</p>
 	{/if}
-	<a class="text-blue-600 underline" href="/signup">Create an athlete account</a><br />
+	<a class="text-blue-600 underline" href="/athlete-signup">Create an athlete account</a><br />
 	<a class="text-blue-600 underline" href="/brand-signup">Create a brand account</a><br />
 	<a class="underline" href="/password-reset">Forgot password?</a>
 </div>

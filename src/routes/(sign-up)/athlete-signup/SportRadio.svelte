@@ -47,7 +47,7 @@
 		{/each}
 		<div class="h-2 w-full" />
 	</Dropdown>
-	{#if sportPref}
+	{#if sportPref !== 'undefined' && sportPref}
 		<div class="ml-10">{sportPref}</div>
 	{/if}
 </div>

@@ -33,13 +33,13 @@ export const actions: Actions = {
 		// Check for missing fields
 		const missingFields: string[] = [];
 
-		if (!email) missingFields.push('email');
-		if (!name) missingFields.push('name');
+		if (!email) missingFields.push('Email');
+		if (!name) missingFields.push('Name');
 		// if (!phoneNumber) missingFields.push('phone-number');
 		if (!tos) missingFields.push('Agree to our terms of service');
-		if (!uni) missingFields.push('university');
-		if (!sport) missingFields.push('sport-preference');
-		if (!gender) missingFields.push('gender-preference');
+		if (!uni) missingFields.push('University');
+		if (!sport) missingFields.push('Sport preference');
+		if (!gender) missingFields.push('Gender');
 
 		if (missingFields.length > 0) {
 			return fail(400, {

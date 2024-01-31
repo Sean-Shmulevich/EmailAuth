@@ -57,9 +57,9 @@
 		@apply mb-1 w-full text-sm font-medium;
 	}
 	input {
-		@apply my-1 mb-2 rounded border px-2 py-1.5;
+		@apply my-1 mb-2 rounded border-4 px-2 py-1.5;
 	}
 	input[type='checkbox'] {
-		@apply my-1 mb-2 rounded border px-2 py-1.5;
+		@apply my-1 mb-2 rounded border-4 px-2 py-1.5;
 	}
 </style>

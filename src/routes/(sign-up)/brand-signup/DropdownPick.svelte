@@ -52,21 +52,24 @@
 	<div class="h-2 w-full" />
 </Dropdown>
 {#each pickedTypes as input, i}
-	<div
-		class="flex justify-center text-black bg-white border-2 {i === 0 &&
-			'border-green-600'} {i === 1 && 'border-blue-600'} {i === 2 &&
-			'border-red-600'} rounded-lg sm:flex-row my-4"
-	>
-		<div class="flex rounded-xl w-full flex-row">
-			<p class="p-2 text-bold mr-10 text-center">{input}</p>
+	<div class="flex justify-center text-black bg-white w-full sm:flex-row my-4">
+		<p class="p-2">{i + 1}.</p>
+
+		<div
+			class="border-2 rounded-lg w-full flex {i === 0 && 'border-green-600'} {i === 1 &&
+				'border-blue-600'} {i === 2 && 'border-red-600'} "
+		>
+			<div class="flex rounded-xl w-full">
+				<p class="p-2 text-bold mr-10 text-center">{input}</p>
+			</div>
+			<button class="p-2 font-extrabold" on:click|preventDefault={() => deleteInput(input)}>
+				<img
+					class="w-5 min-w-[15px] filter invert"
+					alt="delete deal"
+					src="https://slimecars.com/assets/trash.png"
+				/>
+			</button>
 		</div>
-		<button class="p-2 font-extrabold" on:click|preventDefault={() => deleteInput(input)}>
-			<img
-				class="w-5 min-w-[15px] filter invert"
-				alt="delete deal"
-				src="https://slimecars.com/assets/trash.png"
-			/>
-		</button>
 	</div>
 {/each}
 {#if pickedTypes.length > 0}

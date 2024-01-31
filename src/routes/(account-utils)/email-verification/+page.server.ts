@@ -56,8 +56,6 @@ export const actions: Actions = {
 	validateCode: async ({ locals, url, request }) => {
 		const formData = await request.formData();
 		const tokenData = await formData.get('token');
-		// console.log(params, locals);
-		console.log(tokenData);
 
 		try {
 			//Token verify, what does this return ?
@@ -91,7 +89,6 @@ export const actions: Actions = {
 			});
 		}
 		phoneNumber = phoneNumber.replace(/-/g, '');
-		console.log(phoneNumber);
 		if (lock === 'exist') {
 			return fail(401, {
 				textSent: 'Please wait 1 minute before resending the text'

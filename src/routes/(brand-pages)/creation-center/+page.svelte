@@ -58,16 +58,17 @@
 
 <a
 	title="Create a new Deal"
-	class="absolute transform scale-75 sm:scale-100 -right-4 top-4 sm:top-5 sm:-right-5 p-5"
+	class="fixed bottom-0 right-0 md:m-6 m-3 border-2 flex flex-row-reverse justify-center items-center rounded-full
+	px-5 py-1 bg-green-500
+	"
 	href="/creation-center/brand-create-offer"
 >
 	<img
-		class="w-14 mr-0 transform translate-x-[10px]"
+		class="w-11 ml-3"
 		alt="create deal"
 		src="https://slimecars.com/assets/createDeal.png"
 	/>
-	<p class="hidden sm:block text-white text-center text-xs mr-2">Create Offer</p>
-	<p class="sm:hidden block text-white text-center text-xs -mr-3">Create</p>
+	<p class="text-white uppercase font-bold">Create <span class="hidden sm:inline">Offer</span></p>
 </a>
 {#if showModal}
 	<div
@@ -229,7 +230,7 @@
 					</p>
 					
 						<div class="mt-7">
-							<div class="flex justify-between my-2">
+							<div class="flex justify-between lg:justify-around my-2">
 								<div class="flex items-center">
 								{#if !deal.isCampaign}
 									{#if deal.location !== ''}
@@ -300,7 +301,7 @@
 
 				
 				<button
-						class="border-2 border-green-500 hover:bg-green-700 text-green-500 font-bold p-2 rounded-full uppercase text-sm"
+						class=" bg-green-500 hover:bg-green-700 text-white font-bold px-3 py-2 rounded-lg uppercase text-sm"
 					>
 					<a class="mx-auto" href="{dealLink}{deal.id}">
 						{#if activeButton === 'unpublished'}

@@ -23,7 +23,7 @@
 		interestedBrands = newDeals;
 	}
 	let loading = false;
-    //logic for updating the current screen after the button is pressed
+	//logic for updating the current screen after the button is pressed
 	// $: {
 	// 	if (form?.status === 'ok' && delId !== '' && loading === true) {
 	// 		if (activeButton === 'new') {
@@ -80,14 +80,14 @@
 		>
 		<button
 			on:click|preventDefault={() => {
-                //ongoing should include "msg-sent-user" and "msg-sent-brand",
-                //ongoing section should only include "msg-sent-user" meaning,
-                //the deal shouldnt move out of "new-deals" until the user has
-                //started messaging about the deal even if the brand has
-                //already started the conversation.
+				//ongoing should include "msg-sent-user" and "msg-sent-brand",
+				//ongoing section should only include "msg-sent-user" meaning,
+				//the deal shouldnt move out of "new-deals" until the user has
+				//started messaging about the deal even if the brand has
+				//already started the conversation.
 
-                // it should also include "brand-finalized" which is confusing because it really means "contract-finalized"
-                // and it should also include "deliverables-in-progress"
+				// it should also include "brand-finalized" which is confusing because it really means "contract-finalized"
+				// and it should also include "deliverables-in-progress"
 				activeButton = 'ongoing';
 				ongoingLength = ongoingDeals.length;
 				// interestedBrands = [...ongoingDeals, ...contractFinalized];
@@ -192,15 +192,25 @@
 								<p>Product: {JSON.parse(currDeal.estimatedPayment).product}</p>
 							{/if}
 							{#if JSON.parse(currDeal.estimatedPayment).compSelected !== 'Custom'}
-								<p>Compensation: {JSON.parse(currDeal.estimatedPayment).compSelected}</p>
+								<p>
+									Compensation: {JSON.parse(currDeal.estimatedPayment)
+										.compSelected}
+								</p>
 							{:else}
-								<p>Compensation: {JSON.parse(currDeal.estimatedPayment).customPay}</p>
+								<p>
+									Compensation: {JSON.parse(currDeal.estimatedPayment).customPay}
+								</p>
 							{/if}
 						{:else if JSON.parse(currDeal.estimatedPayment)['pay'] === 'Money'}
 							{#if JSON.parse(currDeal.estimatedPayment).compSelected !== 'Custom'}
-								<p>Compensation: {JSON.parse(currDeal.estimatedPayment).compSelected}</p>
+								<p>
+									Compensation: {JSON.parse(currDeal.estimatedPayment)
+										.compSelected}
+								</p>
 							{:else}
-								<p>Compensation: {JSON.parse(currDeal.estimatedPayment).customPay}</p>
+								<p>
+									Compensation: {JSON.parse(currDeal.estimatedPayment).customPay}
+								</p>
 							{/if}
 						{:else if JSON.parse(currDeal.estimatedPayment)['pay'] === 'Product'}
 							{#if JSON.parse(currDeal.estimatedPayment).product !== ''}
@@ -258,6 +268,11 @@
 								value={currDeal.id}
 								type="submit"
 								class="w-full h-full"
+								on:click={() => {
+									goto(
+										`/deals/view-contract?deal=${currDeal.id}&user=${data.userId}`
+									);
+								}}
 							>
 								Message Brand
 							</button>
@@ -266,7 +281,9 @@
 					{#if activeButton === 'ongoing'}
 						<button
 							on:click={() => {
-								goto(`/deals/view-contract?deal=${currDeal.id}&user=${data.userId}`);
+								goto(
+									`/deals/view-contract?deal=${currDeal.id}&user=${data.userId}`
+								);
 							}}
 							class="p-3 border border-white bg-gray-700 w-1/3 rounded-xl"
 						>
@@ -280,7 +297,7 @@
 						}}
 						class="p-3 border mx-auto border-white bg-gray-700 w-1/3 rounded-xl"
 					>
-						View Contract
+						Message Brand
 					</button>
 				{/if}
 			</div>

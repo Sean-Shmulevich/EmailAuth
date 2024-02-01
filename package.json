@@ -61,6 +61,8 @@
 		"quill": "^1.3.7",
 		"quill-delta": "^5.1.0",
 		"skeleton-elements": "^4.0.1",
+		"socket.io": "^4.7.4",
+		"socket.io-client": "^4.7.4",
 		"svelte-easy-crop": "^2.0.1",
 		"three": "^0.154.0",
 		"twilio": "^4.14.1",

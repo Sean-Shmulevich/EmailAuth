@@ -4,9 +4,35 @@ import { auth, emailVerificationToken } from '$lib/lucia';
 import { sendEmailVerificationEmailBrand } from '$lib/email';
 import { LuciaError } from 'lucia-auth';
 import { Prisma } from '@prisma/client';
+import { GIT_BRANCH } from '$env/static/private';
 
 import type { PageServerLoad, Actions } from './$types';
 import { prismaClient } from '$lib/db';
+
+function validatePassword(pass: string) {
+	const missingProperties = [];
+
+	if (pass.length < 8) {
+		missingProperties.push('Password must be at least 8 characters long');
+		return missingProperties;
+	}
+	if (pass.length > 32) {
+		missingProperties.push('Password can be maximum 32 characters long');
+		return missingProperties;
+	}
+	missingProperties.push('Password must contain');
+	//match a number
+	if (!pass.match('.*\\d.*')) missingProperties.push('a number');
+	//match a lowercase letter
+	if (!pass.match('.*[a-z].*')) missingProperties.push('at least one lowercase letter');
+	//match an uppercase letter
+	if (!pass.match('.*[A-Z].*')) missingProperties.push('at least one uppercase letter');
+	//match a special character
+	if (!pass.match('.*[*.!@#$%^&(){}[]:";\'<>,.?/~`_+-=|\\].*'))
+		missingProperties.push('at least one symbol');
+
+	return missingProperties;
+}
 
 export const load: PageServerLoad = async ({ locals }) => {
 	const { user } = await locals.auth.validateUser();
@@ -21,77 +47,73 @@ export const actions: Actions = {
 		//TODO, capture the 'athlete', 'sportPref', and 'goals' currently nothing is being done with this data.
 		//Location, industry, size and name are all being added to the brandProfile table.
 		const formData = await request.formData();
-		const email = (formData.get('email')?.toString() ?? '').toLowerCase();
-		const tos = formData.get('terms-of-service')?.toString();
-		const name = formData.get('name')?.toString();
-		const location = formData.get('location')?.toString();
-		const industry = formData.get('industry')?.toString();
-		const size = formData.get('size')?.toString();
+		const fields = {
+			email: formData.get('email')?.toString().toLowerCase() ?? '',
+			name: formData.get('name')?.toString() ?? '',
+			location: formData.get('location')?.toString() ?? '',
+			industry: formData.get('industry')?.toString() ?? '',
+			size: formData.get('size')?.toString() ?? '',
+			tos: formData.get('terms-of-service')?.toString() ?? '',
+			athlete: formData.get('athlete')?.toString() ?? '',
+			sportPref: formData.get('sportPref')?.toString() ?? '',
+			goals: formData.get('goals')?.toString() ?? ''
+		};
 
-		const athlete = formData.get('athlete')?.toString();
-		const sportPref = formData.get('sportPref')?.toString();
-		const goals = formData.get('goals')?.toString();
+		const missingFields = new Map<string, string>();
+		const providedFields = new Map<string, string>();
 
-		const missingFields: string[] = [];
+		Object.entries(fields).forEach(([key, value]) => {
+			if (value === '' || value === 'undefined') {
+				missingFields.set(key, 'Missing');
+			} else {
+				providedFields.set(key, value);
+			}
+		});
 
-		if (!name) missingFields.push('Name');
-		if (!email) missingFields.push('Email');
-		// if (!phoneNumber) missingFields.push('phone-number');
-		if (!location) missingFields.push('Location');
-		if (!industry) missingFields.push('Industry');
-		if (!size) missingFields.push('Size');
-		if (!tos) missingFields.push('You must agree to our terms of service');
-
-		if (missingFields.length > 0) {
+		if (missingFields.size > 0) {
 			return fail(400, {
-				message: `Missing fields: ${missingFields.join(', ')}`,
-				email,
-				name,
-				location,
-				industry,
-				size,
-				athlete,
-				sportPref,
-				goals
+				message: `Missing fields: ${Array.from(missingFields.keys()).join(', ')}`,
+				...Object.fromEntries(providedFields)
 			});
 		}
 
-		if (email === null || !emailRegex.test(email)) {
+		if (fields.email === null || !emailRegex.test(fields.email)) {
 			return fail(400, {
 				message: 'Invalid email',
-				email,
-				name,
-				location,
-				industry,
-				size,
-				athlete,
-				sportPref,
-				goals
+				...Object.fromEntries(providedFields)
 			});
 		}
 		const password = formData.get('password');
-		if (password instanceof File || password === null || password.length < 8) {
+		const passwordConfirm = formData.get('confirm-password');
+		if (password instanceof File || password === null) {
 			return fail(400, {
 				message: 'Invalid password',
-				email,
-				name,
-				location,
-				industry,
-				size,
-				athlete,
-				sportPref,
-				goals
+				...Object.fromEntries(providedFields)
+			});
+		}
+		if (password !== passwordConfirm) {
+			return fail(400, {
+				message: 'Passwords do not match',
+				...Object.fromEntries(providedFields)
+			});
+		}
+		const missingProperties = validatePassword(password);
+		// dont validate the password on the test branch.
+		if (GIT_BRANCH !== 'Test' && missingProperties.length > 0) {
+			return fail(400, {
+				message: missingProperties.join(', '),
+				...Object.fromEntries(providedFields)
 			});
 		}
 		try {
 			const user = await auth.createUser({
 				primaryKey: {
 					providerId: 'email',
-					providerUserId: email,
+					providerUserId: fields.email,
 					password
 				},
 				attributes: {
-					email,
+					email: fields.email,
 					name: formData.get('name')?.toString() ?? '',
 					email_verified: false,
 					admin_verified: false,
@@ -122,40 +144,19 @@ export const actions: Actions = {
 			if (e instanceof LuciaError && e.message === 'AUTH_DUPLICATE_KEY_ID') {
 				return fail(400, {
 					message: 'Email is already taken',
-					email,
-					name,
-					location,
-					industry,
-					size,
-					athlete,
-					sportPref,
-					goals
+					...Object.fromEntries(providedFields)
 				});
 			}
 			// duplication error
 			if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === 'P2002') {
 				return fail(400, {
 					message: 'Email is already taken',
-					email,
-					name,
-					location,
-					industry,
-					size,
-					athlete,
-					sportPref,
-					goals
+					...Object.fromEntries(providedFields)
 				});
 			}
 			return fail(500, {
 				message: 'An unknown error occurred',
-				email,
-				name,
-				location,
-				industry,
-				size,
-				athlete,
-				sportPref,
-				goals
+				...Object.fromEntries(providedFields)
 			});
 		}
 	}

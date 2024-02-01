@@ -31,7 +31,7 @@
 	<input class="w-full" id="name" name="name" value={form?.name ?? ''} /><br />
 
 	<label for="university">University</label><br />
-	<input class="w-full" id="university" name="university" value={form?.university ?? ''} /><br />
+	<input class="w-full" id="university" name="university" value={form?.uni ?? ''} /><br />
 
 	<label for="sport">Sport</label><br />
 	<SportRadio bind:sportPref /><br />

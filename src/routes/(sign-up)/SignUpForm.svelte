@@ -1,29 +1,36 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import type { ActionData } from './$types';
-    export let form: ActionData;
-    export let showTOS = false;
-    export let formTitle;
+	export let form: ActionData;
+	export let showTOS = false;
+	export let formTitle;
 
-    //okay threes two design decisions right now
-    // either make a json object to represent which fields are shown for each type of user of this 
-    // or pass in named slots into this component
-    // on the backend though we would need to know what type of form it is?
-    // but we could just keep the back ends local to each one.
-    // builder vs factory pattern
-    // just give this component the slots.
+	//okay threes two design decisions right now
+	// either make a json object to represent which fields are shown for each type of user of this
+	// or pass in named slots into this component
+	// on the backend though we would need to know what type of form it is?
+	// but we could just keep the back ends local to each one.
+	// builder vs factory pattern
+	// just give this component the slots.
+
+	// On the client side I should probably do nothing
+	// Maybe I can show a message if the passwords are different or if they are
+	// too short or something. but better not to handle any of that on the
+	// client side.
 </script>
 
 <div class="rounded-xl bg-white px-10 pb-10 pt-0 -mt-10 max-w-[800px] mx-auto">
-    <h1 class="pt-10">{formTitle}</h1>
+	<h1 class="pt-10">{formTitle}</h1>
 	<form method="post" use:enhance>
-        <slot />
+		<slot />
 
 		<label for="email">Email</label><br />
 		<input class="w-full" id="email" name="email" value={form?.email ?? ''} /><br />
 		<label for="password">Password</label>
 		<p>Password should be at least 8 characters long</p>
 		<input class="w-full" id="password" name="password" type="password" /><br />
+		<label for="confirm-password">Confirm password</label>
+		<input class="w-full" id="confirm-password" name="confirm-password" type="password" /><br />
 
 		<div class="w-full mb-2 align-start">
 			<label

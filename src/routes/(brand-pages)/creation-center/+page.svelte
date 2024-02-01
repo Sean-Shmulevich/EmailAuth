@@ -152,7 +152,9 @@
 {/if}
 
 <div class="text-black">
-	<div class="flex flex-row -mt-5 w-[80%] lg:w-[40%] text-white text-center justify-center mx-auto">
+	<div
+		class="flex flex-row -mt-5 w-[80%] lg:w-[40%] text-white text-center justify-center mx-auto"
+	>
 		<button
 			on:click|preventDefault={() => {
 				currentDealList = publishedDeals;
@@ -211,25 +213,35 @@
 					{:else}
 						<p class="font-bold">Single Event</p>
 					{/if}
-					<p class="text-white break-words text-base">Description: {deal.shortDescription}</p>
+					<p class="text-white break-words text-base">
+						Description: {deal.shortDescription}
+					</p>
 					<div class="mt-4">
 						<div class="flex items-center">
-							<div class="text-sm text-white">Sport Preference: {deal.sportPreference}</div>
-							<div class="ml-3 text-sm text-white">Gender Preference: {deal.genderPreference}</div>
+							<div class="text-sm text-white">
+								Sport Preference: {deal.sportPreference}
+							</div>
+							<div class="ml-3 text-sm text-white">
+								Gender Preference: {deal.genderPreference}
+							</div>
 						</div>
 						<div class="mt-2 flex items-center">
 							{#if !deal.isCampaign}
 								{#if deal.location !== ''}
 									<div class="text-sm text-white">Location: {deal.location}</div>
 								{:else}
-									<div class="text-sm text-white">Location: {deal.inPersonOrVirtual}</div>
+									<div class="text-sm text-white">
+										Location: {deal.inPersonOrVirtual}
+									</div>
 								{/if}
 							{/if}
 						</div>
 
 						{#if !deal.isCampaign}
 							<div class="text-sm text-white">
-								Event type: {deal.eventType !== '' ? deal.eventType : 'no event type'}
+								Event type: {deal.eventType !== ''
+									? deal.eventType
+									: 'no event type'}
 							</div>
 						{/if}
 						<div class="text-sm text-white">
@@ -247,13 +259,17 @@
 								<p>Product: {JSON.parse(deal.estimatedPayment).product}</p>
 							{/if}
 							{#if JSON.parse(deal.estimatedPayment).compSelected !== 'Custom'}
-								<p>Compensation: {JSON.parse(deal.estimatedPayment).compSelected}</p>
+								<p>
+									Compensation: {JSON.parse(deal.estimatedPayment).compSelected}
+								</p>
 							{:else}
 								<p>Compensation: {JSON.parse(deal.estimatedPayment).customPay}</p>
 							{/if}
 						{:else if JSON.parse(deal.estimatedPayment)['pay'] === 'Money'}
 							{#if JSON.parse(deal.estimatedPayment).compSelected !== 'Custom'}
-								<p>Compensation: {JSON.parse(deal.estimatedPayment).compSelected}</p>
+								<p>
+									Compensation: {JSON.parse(deal.estimatedPayment).compSelected}
+								</p>
 							{:else}
 								<p>Compensation: {JSON.parse(deal.estimatedPayment).customPay}</p>
 							{/if}
@@ -307,7 +323,11 @@
 					}}
 					class="ml-auto -mt-14 mr-0 w-fit"
 				>
-					<img class="w-10" alt="delete deal" src="https://slimecars.com/assets/trash.png" />
+					<img
+						class="w-10"
+						alt="delete deal"
+						src="https://slimecars.com/assets/trash.png"
+					/>
 				</button>
 			{/if}
 		</div>

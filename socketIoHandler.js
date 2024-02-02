@@ -1,6 +1,7 @@
 import { Server } from 'socket.io';
 
 export default function injectSocketIO(server) {
+	const nothing = null;
 	const io = new Server(server);
 
 	io.on('connection', (socket) => {

@@ -1,5 +1,6 @@
 <script>
 	import SwipeCard from './SwipeCard.svelte';
+	import DealPage from './DealPage.svelte';
 	export let data;
 
 	let offers = data.nextDeals;
@@ -24,6 +25,7 @@
 			pageNum = 0;
 		}
 	}
+	console.log(offers);
 </script>
 
 {#key refreshCounter}

@@ -4,7 +4,7 @@
 	export let form;
 	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
-	// console.log(data.userDeals);
+	let statusTypes = ['All','Interested','Confirmed']
 	let genderTypes = ['All', 'Male', 'Female'];
 	const sportTypes = [
 		'All',
@@ -33,10 +33,12 @@
 		'Water polo',
 		'Wrestling'
 	];
+	let pickedStatus = 'All'
 	let pickedSport = 'All';
 	let pickedGender = 'All';
 	let open = false;
 	let genderDropdownOpen = false;
+	let statusDropdownOpen = false;
 
 	let currDeal = data.deal;
 	if (currDeal.location === '') {
@@ -46,277 +48,164 @@
 	if (data.dealImage) {
 		dealImg = `/api/s3object/${data.dealImage.id}`;
 	}
-	let filteredUsers = data.interestedUsers;
-	// console.log(currDeal.recommendedDeliverables['set']);
+
+	//let filteredUsers = data.interestedUsers;
+	let filteredUsers = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18, 19,20]
 </script>
-
-<!-- <p class="text-white">{JSON.stringify(data.dealImage)}</p> -->
-<div class=" mb-52 mx-3 sm:mx-20">
-	<div class="w-fit mx-auto bg-gray-800 rounded-xl mt-5 p-5 mb-10 pb-5">
-		<h2 class="text-center text-3xl mb-2 text-white">{currDeal.title}</h2>
-		<hr />
-		<div class="flex flex-col md:flex-row">
-			<img
-				class="object-contain mt-5 rounded-2xl mx-auto sm:mx-[unset] h-[500px] w-full"
-				src={dealImg}
-				alt="deal main {data.dealImage}"
-			/>
-			<div class="text-white mt-5 w-full flex flex-col min-w-[200px]">
-				<div class="border border-white p-5 text-lg grow rounded-xl">
-					{#if !currDeal.isCampaign}
-						<p>Event Type</p>
-						<p class="mb-5">{currDeal.eventType}</p>
-					{/if}
-					<p>Sport Preference</p>
-					<p class="mb-5">{currDeal.sportPreference}</p>
-					<p>Gender Preference: {currDeal.genderPreference}</p>
-					<br />
-					{#if !currDeal.isCampaign && currDeal.location !== ''}
-						<p class="">Location: {currDeal.location}</p>
-					{:else if !currDeal.isCampaign && currDeal.location === ''}
-						<p>Location</p>
-						<p class="">{currDeal.inPersonOrVirtual}</p>
-					{/if}
-					<p class="mt-5">Description: {currDeal.shortDescription}</p>
-				</div>
-				<!-- <p>{currDeal.shortDescription}</p> -->
-				<!-- <p>{currDeal.endDate}</p> -->
-				<!-- <p>{currDeal.publishDate}</p> -->
-				<!-- <p>{currDeal.isCampaign}</p> -->
-				<!-- <p>{currDeal.singleOrMultiple}</p> -->
-				<!-- <p>{currDeal.athleteCount}</p> -->
-				<!-- <p>{currDeal.}</p> -->
-
-				<div class="border border-white p-5 text-lg rounded-xl">
-					{#if currDeal.isCampaign}
-						Start Date: {currDeal.eventDate.toISOString().slice(0, 10)}
-						<br />
-						End Date: {currDeal.endDate.toISOString().slice(0, 10)}
-					{:else}
-						Date: {currDeal.eventDate.toISOString().slice(0, 10)}
-					{/if}
-					<!-- <p>End Date</p>
-				<p class="mb-5">
-					{new Date(currDeal.endDate).toLocaleDateString('en-GB', {
-						day: 'numeric',
-						month: 'short',
-						year: 'numeric'
-					})}
-				</p> -->
-					<p class="mt-5 underline">Compensation</p>
-					{#if JSON.parse(currDeal.estimatedPayment)['pay'] === 'Both'}
-						{#if JSON.parse(currDeal.estimatedPayment).product !== ''}
-							<p>Product: {JSON.parse(currDeal.estimatedPayment).product}</p>
-						{/if}
-						{#if JSON.parse(currDeal.estimatedPayment).compSelected !== 'Custom'}
-							<p>Compensation: {JSON.parse(currDeal.estimatedPayment).compSelected}</p>
-						{:else}
-							<p>Compensation: {JSON.parse(currDeal.estimatedPayment).customPay}</p>
-						{/if}
-					{:else if JSON.parse(currDeal.estimatedPayment)['pay'] === 'Money'}
-						{#if JSON.parse(currDeal.estimatedPayment).compSelected !== 'Custom'}
-							<p>Compensation: {JSON.parse(currDeal.estimatedPayment).compSelected}</p>
-						{:else}
-							<p>Compensation: {JSON.parse(currDeal.estimatedPayment).customPay}</p>
-						{/if}
-					{:else if JSON.parse(currDeal.estimatedPayment)['pay'] === 'Product'}
-						{#if JSON.parse(currDeal.estimatedPayment).product !== ''}
-							<p>Product: {JSON.parse(currDeal.estimatedPayment).product}</p>
-						{/if}
-					{/if}
-				</div>
-			</div>
-		</div>
-		<div class="w-full -mt-5 py-5">
-			<div class="border border-1 rounded-xl text-white p-5">
-				<p class="text-xl">Deliverables</p>
-				<hr class="mb-2" />
-				<ol>
-					{#each currDeal.recommendedDeliverables['set'] as del}
-						<li class="m-5">
-							{del.title}: {del.value}
-						</li>
-					{/each}
-				</ol>
-			</div>
-			<!-- <div class="border border-1 rounded-xl text-white p-5">
-			<p class="text-xl">Goals</p>
-			<hr class="mb-2" />
-			{#each currDeal.goals as goal}
-				<p>{goal}</p>
-			{/each}
-		</div> -->
-		</div>
-	</div>
-	<div class="mx-20 mt-10">
-		<h2 class="text-2xl text-white text-center">Completed Deal</h2>
-		<hr class="mt-2" />
-		{#each data.completed as user}
-			<div
-				class="my-5 text-white border border-white rounded-xl bg-gray-800 shadow-md p-4 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between"
+<div class="my-5 mx-5 md:mx-11 flex flex-col md:flex-row justify-between items-center">
+	<h1 class="text-white text-4xl uppercase font-bold mb-3">Athletes</h1>
+	
+	<div class="flex">
+		<div class="mx-1">
+			<Button class="border border-white float-right "><Chevron>Status: {pickedStatus}</Chevron></Button>
+			<Dropdown
+				bind:open={genderDropdownOpen}
+				placement="bottom"
+				class=" bg-gray-700 w-64 h-32 overflow-y-scroll overflow-x-hidden text-black  text-left whitespace-nowrap text-sm"
 			>
-				<div>
-					<h2 class="text-xl font-bold mb-2">{user.name}</h2>
-					<a class="text-blue-500 underline" href="/user-profile/{user.id}">profile link</a>
-				</div>
-				<button
-					on:click={() => {
-						goto(`/creation-center/view-contract?deal=${currDeal.id}&user=${user.id}`);
-					}}
-					class="p-2 bg-blue-500 text-white rounded">View deal contract</button
-				>
-				<!-- TODO get rid of this here -->
-			</div>
-		{:else}
-			<p class="mx-auto text-center text-2xl my-10 text-red-500">No approved users</p>
-		{/each}
-	</div>
-	<div class="mx-20 mt-10">
-		<h2 class="text-2xl text-white text-center">Contract finalized awaitng payment</h2>
-		<hr class="mt-2" />
-		{#each data.brandFinalized as user}
-			<div
-				class="my-5 text-white border border-white rounded-xl bg-gray-800 shadow-md p-4 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between"
-			>
-				<div>
-					<h2 class="text-xl font-bold mb-2">{user.name}</h2>
-					<a class="text-blue-500 underline" href="/user-profile/{user.id}">profile link</a>
-				</div>
-				<button
-					on:click={() => {
-						goto(`/creation-center/view-contract?deal=${currDeal.id}&user=${user.id}`);
-					}}
-					class="p-2 bg-blue-500 text-white rounded">View deal contract</button
-				>
-				<!-- TODO get rid of this here -->
-			</div>
-		{:else}
-			<p class="mx-auto text-center text-2xl my-10 text-red-500">No approved users</p>
-		{/each}
-	</div>
-	<div class="mx-20 mt-10">
-		<h2 class="text-2xl text-white text-center">Chosen athletes</h2>
-		<hr class="mt-2" />
-		{#each data.confirmedUsers as user}
-			<div
-				class="my-5 text-white border border-white rounded-xl bg-gray-800 shadow-md p-4 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between"
-			>
-				<div>
-					<h2 class="text-xl font-bold mb-2">{user.name}</h2>
-					<a class="text-blue-500 underline" href="/user-profile/{user.id}">profile link</a>
-				</div>
-				<!-- TODO get rid of this here -->
-			</div>
-		{:else}
-			<p class="mx-auto text-center text-2xl my-10 text-red-500">No approved users</p>
-		{/each}
-	</div>
-
-	<!-- show a deal and interesed users-->
-	<div class="mx-20 mt-10">
-		<h2 class="text-2xl text-white text-center">Interested Athtletes</h2>
-		<hr class="mt-2" />
-		<div class="flex mt-4 items-center justify-around">
-			<div>
-				<Button class="border border-white "><Chevron>Filter Sport</Chevron></Button>
-				<Dropdown
-					bind:open
-					placement="top"
-					class=" bg-gray-700 w-64 h-32 overflow-y-scroll overflow-x-hidden text-black  text-left whitespace-nowrap text-sm"
-				>
-					{#each sportTypes as sport}
-						<DropdownItem
-							on:click={() => {
-								open = false;
-								pickedSport = sport;
-								if (pickedSport !== 'All' && pickedGender !== 'All') {
-									filteredUsers = data.interestedUsers.filter(
-										(i) => i.profile.gender === pickedGender && i.profile.sport === pickedSport
-									);
-									filteredUsers = filteredUsers;
-								} else if (pickedSport !== 'All') {
-									filteredUsers = data.interestedUsers.filter(
-										(i) => i.profile.sport === pickedSport
-									);
-									filteredUsers = filteredUsers;
-								} else if (pickedGender !== 'All') {
-									filteredUsers = data.interestedUsers.filter(
-										(i) => i.profile.gender === pickedGender
-									);
-									filteredUsers = filteredUsers;
-								} else {
-									filteredUsers = data.interestedUsers;
-								}
-							}}
-							class="text-white ml-2 mt-2"
-							bind:group={sport}
-							value={sport}>{sport}</DropdownItem
-						>
-					{/each}
-					<div class="h-2 w-full" />
-				</Dropdown>
-				<p class="mx-5 text-white text-bold text-xl">Sport: {pickedSport}</p>
-			</div>
-			<div>
-				<Button class="border border-white float-right "><Chevron>Filter Gender</Chevron></Button>
-				<Dropdown
-					bind:open={genderDropdownOpen}
-					placement="top"
-					class=" bg-gray-700 w-64 h-32 overflow-y-scroll overflow-x-hidden text-black  text-left whitespace-nowrap text-sm"
-				>
-					{#each genderTypes as gender}
-						<DropdownItem
-							on:click={() => {
-								genderDropdownOpen = false;
-								pickedGender = gender;
-								if (pickedSport !== 'All' && pickedGender !== 'All') {
-									filteredUsers = data.interestedUsers.filter(
-										(i) => i.profile.gender === pickedGender && i.profile.sport === pickedSport
-									);
-									filteredUsers = filteredUsers;
-								} else if (pickedSport !== 'All') {
-									filteredUsers = data.interestedUsers.filter(
-										(i) => i.profile.sport === pickedSport
-									);
-									filteredUsers = filteredUsers;
-								} else if (pickedGender !== 'All') {
-									filteredUsers = data.interestedUsers.filter(
-										(i) => i.profile.gender === pickedGender
-									);
-									filteredUsers = filteredUsers;
-								} else {
-									filteredUsers = data.interestedUsers;
-								}
-							}}
-							class="text-white ml-2 mt-2"
-							bind:group={gender}
-							value={gender}>{gender}</DropdownItem
-						>
-					{/each}
-					<div class="h-2 w-full" />
-				</Dropdown>
-				<p class="mx-5 text-white text-bold text-xl">Gender: {pickedGender}</p>
-			</div>
-		</div>
-		{#each filteredUsers as user}
-			<div
-				class="my-5 text-white border border-white rounded-xl bg-gray-800 shadow-md p-4 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between"
-			>
-				<div>
-					<h2 class="text-xl font-bold mb-2">{user.name}</h2>
-					<a class="text-blue-500 underline" href="/user-profile/{user.id}">profile link</a>
-				</div>
-				<form method="post" action="?/pickUser" use:enhance>
-					<input id="userId" name="userId" hidden value={user.id} />
-					<input id="user-email" name="user-email" hidden value={user.email} />
-
-					<button type="submit" class="p-2 bg-blue-500 text-white rounded">
-						Work with this athlete</button
+				{#each genderTypes as gender}
+					<DropdownItem
+						on:click={() => {
+							genderDropdownOpen = false;
+							pickedGender = gender;
+							if (pickedSport !== 'All' && pickedGender !== 'All') {
+								filteredUsers = data.interestedUsers.filter(
+									(i) => i.profile.gender === pickedGender && i.profile.sport === pickedSport
+								);
+								filteredUsers = filteredUsers;
+							} else if (pickedSport !== 'All') {
+								filteredUsers = data.interestedUsers.filter(
+									(i) => i.profile.sport === pickedSport
+								);
+								filteredUsers = filteredUsers;
+							} else if (pickedGender !== 'All') {
+								filteredUsers = data.interestedUsers.filter(
+									(i) => i.profile.gender === pickedGender
+								);
+								filteredUsers = filteredUsers;
+							} else {
+								filteredUsers = data.interestedUsers;
+							}
+						}}
+						class="text-white ml-2 mt-2"
+						bind:group={gender}
+						value={gender}>{gender}</DropdownItem
 					>
-				</form>
+				{/each}
+				<div class="h-2 w-full" />
+			</Dropdown>
+		</div>
+		<div class="mx-1">
+			<Button class="border border-white float-right "><Chevron>Gender: {pickedGender}</Chevron></Button>
+			<Dropdown
+				bind:open={genderDropdownOpen}
+				placement="bottom"
+				class=" bg-gray-700 w-64 h-32 overflow-y-scroll overflow-x-hidden text-black  text-left whitespace-nowrap text-sm"
+			>
+				{#each genderTypes as gender}
+					<DropdownItem
+						on:click={() => {
+							genderDropdownOpen = false;
+							pickedGender = gender;
+							if (pickedSport !== 'All' && pickedGender !== 'All') {
+								filteredUsers = data.interestedUsers.filter(
+									(i) => i.profile.gender === pickedGender && i.profile.sport === pickedSport
+								);
+								filteredUsers = filteredUsers;
+							} else if (pickedSport !== 'All') {
+								filteredUsers = data.interestedUsers.filter(
+									(i) => i.profile.sport === pickedSport
+								);
+								filteredUsers = filteredUsers;
+							} else if (pickedGender !== 'All') {
+								filteredUsers = data.interestedUsers.filter(
+									(i) => i.profile.gender === pickedGender
+								);
+								filteredUsers = filteredUsers;
+							} else {
+								filteredUsers = data.interestedUsers;
+							}
+						}}
+						class="text-white ml-2 mt-2"
+						bind:group={gender}
+						value={gender}>{gender}</DropdownItem
+					>
+				{/each}
+				<div class="h-2 w-full" />
+			</Dropdown>
+		</div>
+		<div class="mx-1">
+			<Button class="border border-white "><Chevron>Sport: {pickedSport}</Chevron></Button>
+			<Dropdown
+			bind:open
+			placement="bottom"
+			class=" bg-gray-700 w-64 h-32 overflow-y-scroll  text-black whitespace-nowrap text-sm z-20"
+		>
+			{#each sportTypes as sport}
+				<DropdownItem
+					on:click={() => {
+						open = false;
+						pickedSport = sport;
+						if (pickedSport !== 'All' && pickedGender !== 'All') {
+							filteredUsers = data.interestedUsers.filter(
+								(i) => i.profile.gender === pickedGender && i.profile.sport === pickedSport
+							);
+							filteredUsers = filteredUsers;
+						} else if (pickedSport !== 'All') {
+							filteredUsers = data.interestedUsers.filter(
+								(i) => i.profile.sport === pickedSport
+							);
+							filteredUsers = filteredUsers;
+						} else if (pickedGender !== 'All') {
+							filteredUsers = data.interestedUsers.filter(
+								(i) => i.profile.gender === pickedGender
+							);
+							filteredUsers = filteredUsers;
+						} else {
+							filteredUsers = data.interestedUsers;
+						}
+					}}
+					class="text-white ml-2 mt-2"
+					bind:group={sport}
+					value={sport}>{sport}</DropdownItem
+				>
+			{/each}
+			<div class="h-2 w-full" />
+		</Dropdown></div>
+	</div>
+</div>
+<div class="m-10 grid grid-cols-2 md:grid-cols-3  xl:grid-cols-4 gap-10">
+	{#each filteredUsers as user}
+			<div class = "border border-white rounded-xl overflow-hidden w-auto p-3 flex flex-col">
+				<div class="relative">
+					<!-- <h1 class="absolute text-yellow-300 font-bold uppercase border-yellow-300 border-solid border-4 rounded-xl right-0 top-0 m-2 p-1">Interested</h1> -->
+					<h1 class="absolute text-green-500 font-bold uppercase border-green-500 border-solid border-4 rounded-xl right-0 top-0 m-2 p-1">Confirmed</h1>
+					<img class="w-[100%] rounded-xl border" 
+					src="https://media.licdn.com/dms/image/D5603AQFHdxROudPQqA/profile-displayphoto-shrink_400_400/0/1706024650924?e=1712793600&v=beta&t=Rt19rMUDfsVYoEGU_TkrRo_6kmGFDm1V54n9hYb7IjQ"
+					/>
+					
+				</div>
+				<div class="mx-2 my-5">
+					<h1 class="text-white font-bold uppercase text-2xl mb-1">Alex</h1>
+					<h1 class="text-gray-400 text-xs uppercase mb-1">University of Arkansas</h1>
+					<h1 class="text-gray-400 text-xs uppercase  mb-1">Soccer</h1>
+				</div>
+				<div class="w-[100%] rounded-md h-12 flex">
+					<button class="w-[100%] rounded-md bg-green-500 h-12 text-white font-bold">
+						<a class="text-white font-bold" href="/user-profile/{user.id}">View Profile</a>
+					</button>
+
+					<!-- {#if data.completed.includes(user) || data.brandFinalized.includes(user)}
+					<button 
+					on:click={() => {
+						goto(`/creation-center/view-contract?deal=${currDeal.id}&user=${user.id}`);
+					}}
+					class="ml-2 w-[100%] bg-blue-500 text-white rounded capitalize font-bold">View contract</button>
+					{/if} -->
+
+				</div>
 			</div>
 		{:else}
 			<p class="mx-auto text-center text-2xl my-10 text-red-500">No interested athletes</p>
 		{/each}
-	</div>
 </div>

@@ -2,6 +2,7 @@ import { prismaClient } from '$lib/db';
 import { sendEmail } from '$lib/email';
 import { fail, redirect } from '@sveltejs/kit';
 import { auth } from '$lib/lucia';
+import { userInfo } from 'os';
 
 let deal;
 
@@ -38,7 +39,11 @@ export const load = async ({ params, locals }) => {
 			status: 'brand-accepted'
 		},
 		include: {
-			user: true
+			user: {
+				include: {
+					profile: true
+				}
+			}
 		}
 	});
 	const brandFinalizedData = await prismaClient.userDealStatus.findMany({
@@ -47,7 +52,11 @@ export const load = async ({ params, locals }) => {
 			status: 'brand-finalized'
 		},
 		include: {
-			user: true
+			user: {
+				include: {
+					profile: true
+				}
+			}
 		}
 	});
 	const completedData = await prismaClient.userDealStatus.findMany({
@@ -56,7 +65,11 @@ export const load = async ({ params, locals }) => {
 			status: 'auth-completed'
 		},
 		include: {
-			user: true
+			user: {
+				include: {
+					profile: true
+				}
+			}
 		}
 	});
 	const dealImage = await prismaClient.dealImages.findFirst({
